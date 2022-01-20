@@ -1,0 +1,114 @@
+\documentclass[12pt,oneside,onecolumn,openany]{book} 
+\usepackage[left=2.5cm,top=3.0cm,right=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{dsfont}
+%\usepackage{subfig}
+\usepackage{appendix}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{mathrsfs}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{epstopdf}
+\usepackage{estilo}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage[font={small,it}]{caption}
+%\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{ragged2e}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\bibliographystyle{ieeetr}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black]{hyperref}
+\usepackage{mathtools}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Large}
+\renewcommand{\baselinestretch}{1.5}
+
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\vi}{\hat{i}}
+\newcommand{\vj}{\hat{j}}
+\newcommand{\vk}{\hat{k}}
+\newcommand{\hth}{\hat{\theta}}
+\newcommand{\hnu}{\hat{\nu}}
+\newcommand{\hph}{\hat{\phi}}
+\newcommand{\ut}{u(\x,\hth,t)}
+\newcommand{\uti}{u_i(\x,\hth,t)}
+\newcommand{\R}{\bar{\mathbf{R}}}
+\newcommand{\id}{\bar{\mathbf{1}}}
+\newcommand{\ide}{\bar{\mathbf{D}}}
+\newcommand{\eg}{\textit{e.g.}~}
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\cf}{\textit{cf.}~}
+
+\newcommand{\ui}{u(x,\theta)}
+\newcommand{\up}{u(x,\theta')}
+\newcommand{\uxi}{u(x,\xi)}
+\newcommand{\uxp}{u(x,\xi')}
+\newcommand{\st}{\mu_t}
+\newcommand{\sa}{\mu_a}
+\newcommand{\sct}{\frac{\mu_s}{2}}
+\newcommand{\uvi}{u(v,\xi,t)}
+\newcommand{\uvp}{u(v,\xi',t)}
+\newcommand{\ord}{\mathcal{O}}
+
+
+
+\hyphenation{ con-si-de-ra-do nor-ma-li-za-cion par-ti-cu-la con-si-de-ra di-fe-ren-cia-les 
+des-cu-bri-mien-to te-ra-pia des-crip-cion ra-dio-te-ra-pia ce-rra-das me-dian-te 
+di-fe-ren-tes de-li-mi-ta-cion ca-rac-te-ris-ti-ca con-fi-gu-ra-cion 
+nues-tro co-rres-pon-dien-tes con-fi-gu-ra-cio-nes le-ve-men-te 
+de-sa-rro-lla-do gri-llas di-fe-ren-cial en-tor-no nu-me-ri-cas e-rror 
+con-ver-gi-da pro-ce-di-mien-to di-fe-ren-cia-ción u-ti-li-zan-do e-rror-es 
+in-te-gran-do trans-por-te dis-cre-tas ca-rac-te-ri-za 
+par-tí-cu-las res-pec-ti-va-men-te de-pen-dien-do mul-ti-di-men-sio-nal 
+mis-mas mé-to-dos pre-via-men-te so-lu-cio-nes com-pa-ra-ción 
+cal-cu-lan-do flu-jos si-mu-la-cio-nes co-e-fi-cien-tes ven-ta-na 
+fun-ción fun-cio-nes mo-no-es-fé-ras com-pues-tos dis-per-sión pro-ba-bi-li-dad 
+par-ti-ci-pan-te re-so-lu-ción al-ta-men-te de-sa-for-tu-na-da-men-te 
+al-go-rit-mos re-a-li-za-das si-mul-tá-nea-men-te 
+com-pa-ra-ción en-fo-ques to-mo-gra-fía re-du-ci-do en-cuen-tra re-du-ci-do 
+en-cuen-tra i-den-ti-fi-ca-ción u-ti-li-za-ción e-lec-tro-mag-né-ti-ca 
+ex-pre-sa ra-dia-ción diag-nos-ti-co dis-per-sa-da}
+
+
+
+\includeonly{titulo,
+resumen,
+introduccion,
+etr,
+inverso,
+conclusion,
+%apendice,
+bibliografia}
+
+
+\begin{document}
+\include{titulo} 
+\renewcommand{\tablename}{Tabla}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{resumen}
+\tableofcontents
+
+\include{introduccion}
+\include{etr}
+\include{inverso}
+\include{conclusion}
+\include{bibliografia} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

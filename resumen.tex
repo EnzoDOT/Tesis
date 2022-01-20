@@ -1,0 +1,45 @@
+\chapter*{}%
+\addcontentsline{toc}{chapter}{Resumen}%
+
+\begin{center}
+\begin{large}
+\textbf{Algorítmos eficientes para la resolución 
+del problema inverso en tomografía óptica}
+\end{large}
+\end{center}
+
+\vspace{1cm}
+En este trabajo se desarrollan   
+algorítmos eficientes para la resolución de los problemas directos 
+e inversos necesarios en la disciplina de tomografía óptica. Para ello, utilizamos la Ecuación de Transporte 
+Radiativo (ETR) como modelo físico de transporte para la radiación 
+en la materia. 
+La ERT es resuelta por medio de algoritmos basados en el Método  
+de Continuación de Fourier en Ordenadas Discretas (FC-DOM, de su sigla en inglés). Estos algorítmos 
+permiten resolver la ERT de forma eficiente y en entornos de máquinas paralelas 
+con escabilidad ideal, como se muestra en esta tésis. 
+
+La identificación de una capa límite, previamente no descripta en la literatura, 
+permite explicar por qué los métodos numéricos existentes para la resolución de la ERT 
+no presentan un alto orden de convergencia. En esta tésis se presenta 
+una teoría que permite identificar dicha capa límite, proveyendo  
+estrategias para su resolución que logran alto órden de convergencia 
+a la ERT, lo cual es demostrado en la sección XX para el caso de una única dimensión espacial.
+
+Para la resolución del problema inverso en tomografía óptica utilizamos el método de minimización 
+de Broyden–Fletcher–Goldfarb–Shanno (BFGS) con uso de memoria reducido 
+(lm-BFGS, de su sigla en inglés), 
+para el cual es necesario el cálculo eficiente del gradiente 
+de la función objetivo involucrada. Para ello, desarrollamos la teoría 
+que permite el cálculo eficiente dicho gradiente  
+mediante la resolución del problema adjunto. 
+
+
+\vspace{1cm}
+\noindent
+Palabras clave: 
+Tomografía óptica,
+Ecuación de transporte radiativo, 
+Espectroscopía del infrarrojo cercano, 
+Propagación de la radiación en la materia,
+Problema inverso.
