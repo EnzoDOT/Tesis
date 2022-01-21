@@ -1,19 +1,4 @@
-@article{Colomer2013,
-abstract = {The Boltzmann Transport Equation is solved on unstructured meshes using the Discrete Ordinates Method. The flux for each ordinate is swept across the computational grid, within a source iteration loop that accounts for the coupling between the different ordinates. In this paper, a spatial domain decomposition strategy is used to divide the work among the available CPUs. The sequential nature of the sweep process makes the parallelization of the overall algorithm the most challenging aspect. Several parallel sweep algorithms, which represent different options of interleaving communications and calculations in the solution process, are analysed. The option of grouping messages by means of buffering is also considered. One of the heuristics proposed consistently stands out as the best option in all the situations analyzed, which include different geometries and different sizes of the ordinate set. With this algorithm, good scalability results have been achieved regarding both weak and strong speedup tests with up to 2560 CPUs. {\textcopyright} 2012 Elsevier Inc.},
-author = {Colomer, G. and Borrell, R. and Trias, F. X. and Rodr{\'{i}}guez, I.},
-doi = {10.1016/j.jcp.2012.07.009},
-file = {:home/enzo/Escritorio/workinprogress/DeltaEddington/colomer2013.pdf:pdf},
-issn = {10902716},
-journal = {Journal of Computational Physics},
-keywords = {Boltzmann Transport Equation,Full sweeps,Parallelization,Spatial domain decomposition},
-number = {1},
-pages = {118--135},
-publisher = {Elsevier Inc.},
-title = {{Parallel algorithms for Sn transport sweeps on unstructured meshes}},
-url = {http://dx.doi.org/10.1016/j.jcp.2012.07.009},
-volume = {232},
-year = {2013}
-}
+
 @article{Boulanger2005,
 abstract = {Indirect optical spectroscopy or tomography, that is, mapping of optical properties in scattering and absorption inside a medium given a set of measurements at the boundaries, is highly dependent on the radiative transfer model used to track radiative energy propagation in semi-transparent materials. In the first part of this study, a numerical tool adapted for treating radiative transfer in the frame of short-pulsed laser beam interaction with non-homogeneous matter has been presented. In this paper, it is intended to show how such numerical tools can undergo inversion through adjoint treatment or reverse differentiation. Adjoint models, as well as reverse differentiation, are used in order to allow an efficient computation of the gradient, in the unknown optical parameters space, of an objective or cost function estimating the residual between data obtained at the boundary and predictions by numerical simulations. This gradient is a crucial indication as to update, through line minimization, the set of internal optical properties of the medium. First, the theoretical background of the inverse treatments, both reverse differentiation and adjoint model, for the transient radiative transfer equation model introduced in Part I is developed. Second, different reconstruction configurations are presented. Time-dependent sampling and time filtering effects of the measurements are addressed. Image reconstructions from simulated data are achieved for material phantoms of simple geometry. {\textcopyright} 2004 Elsveier Ltd. All rights reserved.},
 author = {Boulanger, Joan and Charette, Andr{\'{e}}},
@@ -136,7 +121,7 @@ journal = {Journal of Quantitative Spectroscopy and Radiative Transfer},
 keywords = {Chebyshev polynomials,Critical slab,Linear transport equation},
 number = {1},
 pages = {129--134},
-title = {{TN approximation to neutron transport equation and application to critical slab problem}},
+title = {{$T_N$ approximation to neutron transport equation and application to critical slab problem}},
 volume = {101},
 year = {2006}
 }
@@ -171,7 +156,7 @@ issn = {00295639},
 journal = {Nuclear Science and Engineering},
 number = {1},
 pages = {31--62},
-title = {{Analysis of inherent oscillations in multidimensional SN solutions of the neutron transport equation}},
+title = {{Analysis of inherent oscillations in multidimensional $S_N$ solutions of the neutron transport equation}},
 volume = {124},
 year = {1996}
 }
@@ -274,7 +259,7 @@ keywords = {Lax-Friedrichs,SN transport equation,fast sweeping methods, WENO},
 number = {9},
 pages = {982--990},
 publisher = {Taylor {\&} Francis},
-title = {{High-Order Lax-Friedrichs WENO Fast Sweeping Methods for the SN Neutron Transport Equation}},
+title = {{High-Order Lax-Friedrichs WENO Fast Sweeping Methods for the $S_N$ Neutron Transport Equation}},
 url = {https://doi.org/10.1080/00295639.2019.1582316},
 volume = {193},
 year = {2019}
@@ -2420,7 +2405,7 @@ keywords = {Boltzmann Transport Equation,Full sweeps,Parallelization,Spatial dom
 number = {1},
 pages = {118--135},
 publisher = {Elsevier Inc.},
-title = {{Parallel algorithms for Sn transport sweeps on unstructured meshes}},
+title = {{Parallel algorithms for $S_N$ transport sweeps on unstructured meshes}},
 url = {http://dx.doi.org/10.1016/j.jcp.2012.07.009},
 volume = {232},
 year = {2013}
@@ -2549,6 +2534,64 @@ isbn = { },
 publisher = {Addison-Wesley},
 title = {{Linear Transport Theory}},
 year = {1967}
+}
+
+@book{Nocedal2006,
+address = {New York, USA},
+author = {Nocedal, Jorge and Wright, Stephen J.},
+edition = {Second},
+booktitle = {Springer Series in Operations Research and Financial Engineering},
+doi = {10.1201/b19115-11},
+file = {:home/enzo/Descargas/Numerical Optimization by Jorge Nocedal, Stephen Wright (z-lib.org).pdf:pdf},
+isbn = {9780387303031},
+issn = {21971773},
+publisher = {Springer},
+pages = {1--664},
+title = {{Numerical optimization}},
+year = {2006}
+}
+
+@article{Klose2003QN,
+abstract = {Optical tomography (OT) recovers the cross-sectional distribution of optical parameters inside a highly scattering medium from information contained in measurements that are performed on the boundaries of the medium. The image reconstruction problem in OT can be considered as a large-scale optimization problem, in which an appropriately defined objective function needs to be minimized. In the simplest case, the objective function is the least-square error norm between the measured and the predicted data. In biomedical applications that apply near-infrared light as the probing tool the predictions are obtained from a model of light propagation in tissue. Gradient techniques are commonly used as optimization methods, which employ the gradient of the objective function with respect to the optical parameters to find the minimum. Conjugate gradient (CG) techniques that use information about the first derivative of the objective function have shown some good results in the past. However, this approach is frequently characterized by low convergence rates. To alleviate this problem we have implemented and studied so-called quasi-Newton (QN) methods, which use approximations to the second derivative. The performance of the QN and CG methods are compared by utilizing both synthetic and experimental data.},
+author = {Klose, Alexander D. and Hielscher, Andreas H.},
+doi = {10.1088/0266-5611/19/2/309},
+file = {:home/enzo/Escritorio/Trabajo/tesis/bib/MOBIR/2003{\_}Inverse{\_}Problems{\_}Klose{\_}Quasi{\_}Newton.pdf:pdf},
+issn = {02665611},
+journal = {Inverse Problems},
+number = {2},
+pages = {387--409},
+title = {{Quasi-Newton methods in optical tomographic image reconstruction}},
+volume = {19},
+year = {2003}
+}
+
+@article{Hielscher1999,
+abstract = {Currently available tomographic image reconstruction schemes for optical tomography (OT) are mostly based on the limiting assumptions of small perturbations and a priori knowledge of the optical properties of a reference medium. Furthermore, these algorithms usually require the inversion of large, full, ill-conditioned Jacobian matrixes. In this work a gradient-based iterative image reconstruction (GIIR) method is presented that promises to overcome current limitations. The code consists of three major parts: 1) A finite-difference, time-resolved, diffusion forward model is used to predict detector readings based on the spatial distribution of optical properties; 2) An objective function that describes the difference between predicted and measured data: 3) An updating method that uses the gradient of the objective function in a line minimization scheme to provide subsequent guesses of the spatial distribution of the optical properties for the forward model. The reconstruction of these properties is completed, once a minimum of this objective function is found. After a presentation of the mathematical background, two- and three-dimensional reconstruction of simple heterogeneous media as well as the clinically relevant example of ventricular bleeding in the brain are discussed. Numerical studies suggest that intraventricular hemorrhages can be detected using the GIIR technique, even in the presence of a heterogeneous background.},
+author = {Hielscher, Andreas H. and Klose, Alexander D. and Hanson, Kenneth M.},
+doi = {10.1109/42.764902},
+file = {:home/enzo/Escritorio/Trabajo/tesis/bib/MOBIR/42.764902.pdf:pdf},
+issn = {02780062},
+journal = {IEEE Transactions on Medical Imaging},
+number = {3},
+pages = {262--271},
+pmid = {10363704},
+title = {{Gradient-based iterative image reconstruction scheme for time-resolved optical tomography}},
+volume = {18},
+year = {1999}
+}
+@article{Kim2010,
+abstract = {It is well acknowledged that the equation of radiative transfer (ERT) provides an accurate prediction of light propagation in biological tissues, while the diffusion approximation (DA) is of limited accuracy for the transport regime. However, ERT-based reconstruction codes require much longer computation times as compared to DA-based reconstruction codes. We introduce here a computationally efficient algorithm, called a diffusiontransport hybrid solver, that makes use of the DA- or low-order ERT-based inverse solution as an initial guess for the full ERT-based reconstruction solution. To evaluate the performance of this hybrid method, we present extensive studies involving numerical tissue phantoms and experimental data. As a result, we show that the hybrid method reduces the reconstruction time by a factor of up to 23, depending on the physical character of the problem. {\textcopyright} 2010 World Scientific Publishing Company.},
+author = {Kim, Hyun Keol and Hielscher, Andreas H.},
+doi = {10.1142/S1793545810001143},
+file = {:home/enzo/Escritorio/Trabajo/tesis/bib/MOBIR/s1793545810001143.pdf:pdf},
+issn = {17935458},
+journal = {Journal of Innovative Optical Health Sciences},
+keywords = {Optical tomography,radiative transfer equation,reconstruction time},
+number = {4},
+pages = {293--305},
+title = {{A diffusion-transport hybrid method for accelerating optical tomography}},
+volume = {3},
+year = {2010}
 }
 
 @misc{Arridge1993,
@@ -2711,7 +2754,7 @@ file = {:home/enzo/Escritorio/Trabajo/tesis/bib/slac-pub-5829.pdf:pdf},
 journal = {Trans. Am. Nucl. Soc},
 number = {November},
 pages = {241--242},
-title = {{The early days of the S{\$}{\_}{\{}n{\}}{\$} method}},
+title = {{The early days of the $S_N$ method}},
 volume = {66},
 year = {1992}
 }
