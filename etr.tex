@@ -37,6 +37,7 @@ estrategias para su resolución.
 
 
 \section{La ecuación de transferencia radiativa y su interpretación física}
+\label{sec:ETR}
 
 La ecuación de transferencia radiativa (ETR) es una ecuación de Boltzmann 
 linearizada que modela el transporte de partículas neutras. Esta ecuación establece 
@@ -567,7 +568,7 @@ sumariza en forma de pseudocódigo en el algorítmo~\eqref{algfc}.
 \State \hskip1.0em\textbf{terminar}
 \State \hskip1.0em Evaluar el lado derecho de la ec.~\eqref{eq:RTEAB4}.
 \State \hskip1.0em Imponer condiciones de borde.
-\State \hskip1.0em Intercambiar bordes.
+\State \hskip1.0em Intercambiar bordes no físicos entre subdominios.
 \State \hskip0.75em\textbf{terminar}
 \State \hskip0.5em\textbf{terminar}
 
