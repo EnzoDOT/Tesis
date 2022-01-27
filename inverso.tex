@@ -282,8 +282,8 @@ de contorno
 \begin{equation}
 \begin{split}
 \begin{aligned}
-&\mathcal{T}\big[u\big]=0, \;  (\x,\theta)  \in \Omega\times S^1\\
-&u(\x,\hth,t=0)=0, \;  (\x,\theta)  \in \Omega\times S^1 \\
+&\mathcal{T}\big[u\big]=0, \;  (\x,\hth)  \in \Omega\times S^1\\
+&u(\x,\hth,t=0)=0, \;  (\x,\hth)  \in \Omega\times S^1 \\
 &u(\x,\hth,t)=f(\hth \cdot \hnu) u(\x,\hth_r,t) + q(\x,\hth,t) , \; (\x,\hth) \in \Gamma_-
 \end{aligned}
 \end{split}
@@ -430,7 +430,7 @@ en términos del problema de minimización de la función objetivo
 \end{equation}
 donde, para un dado coeficiente de absorción $a$,
 \begin{equation}\label{ui_of_a}
-  u_i = u_i[a] = u_i[a](\x,\theta,t)
+  u_i = u_i[a] = u_i[a](\x,\hth,t)
 \end{equation}
 denota la solución $u=u_i$ de la ecuación~\eqref{eq:RTEt} con $q=q_i$ 
 (donde se incluyó un detalle creciente de derecha a izquierda en la ecuación~\eqref{eq:FObjpr}
@@ -457,11 +457,11 @@ se define según
     - h[a]}{\varepsilon}.
 \end{equation}
 Puede darse una definición similar para las derivadas parciales de Gateaux 
-de un operador $w = w[a](\x,\theta,t)$ (como, \eg, el operador~\eqref{eq:Toper}, 
-la solución $u = u[a]=u[a](\x,\theta,t)$ a la ecuación~\eqref{eq:RTE},etc.):
+de un operador $w = w[a](\x,\hth,t)$ (como, \eg, el operador~\eqref{eq:Toper}, 
+la solución $u = u[a]=u[a](\x,\hth,t)$ a la ecuación~\eqref{eq:RTEt},etc.):
 \begin{equation}\label{gateaux_part}
-  \frac{\partial w}{\partial a}[a; \delta a ](\x,\theta,t) = \lim_{\varepsilon \to 0} \frac{w[a +\varepsilon \delta a](\x,\theta,t)
-    - w[a](\x,\theta,t)}{\varepsilon}.
+  \frac{\partial w}{\partial a}[a; \delta a ](\x,\hth,t) = \lim_{\varepsilon \to 0} \frac{w[a +\varepsilon \delta a](\x,\hth,t)
+    - w[a](\x,\hth,t)}{\varepsilon}.
 \end{equation}
 En lo que sigue, utilizamos las derivadas de Gateaux para la composición 
 de funcionales y operadores, para los cuales se satisface la regla de la cadena. 
@@ -527,7 +527,7 @@ o, utilizando~\eqref{eq:OpMed} y~\eqref{eq:FObj}, $\frac{d (g_i\circ u_i)}{da}[a
   \sum_{j=1}^{N_d} &\left( G_j\big[u_i[a]\big]-
     \tilde {G}_{j,i} \right) [1-f(\hth \cdot \hnu)]\\ 
    &\times \hth \cdot \hnu w\left( \frac{ |\x-\x_j |}{\sigma_d}
-  \right) \frac{\partial u_i}{\partial a}[a;\delta a](\x,\theta,t)
+  \right) \frac{\partial u_i}{\partial a}[a;\delta a](\x,\hth,t)
   d\theta dS dt.
 \end{aligned}
 \end{split}
@@ -589,29 +589,30 @@ y, por lo tanto, de~\eqref{eq:RTEt}, resulta la relación
 \mathcal{T}\left[ \frac{\partial u_i}{\partial a}\big[a;\delta a\big],a \right]=0
 \label{eq:RRTEdet4}
 \end{equation}
-Esta relación provee, para cada $(\x,\theta,t)$, una ecuación 
+Esta relación provee, para cada $(\x,\hth,t)$, una ecuación 
 lineal para las dos incógnitas $u_i[a]$ y 
 $\frac{\partial u_i}{\partial a}\big[a;\delta a\big]$.
 
+Para eliminar la cantidad $\frac{\partial u_i}{\partial a}[a;\delta a]$ 
+en el lado derecho de la ecuación~\eqref{eq:AdjointMEthod2} 
+sustraemos a ambos lados de dicha identidad una ``combinación lineal 
+con coeficientes apropiados'' $\lambda$  obtenida a partir de la 
+relación~\eqref{eq:RRTEdet4}---o, más precisamente, la integral 
+en $(\x,\theta,t)\in\Omega\times [0,2\pi)\times [0,T]$
+del producto de la relación~\eqref{eq:RRTEdet4} por una función apropiada 
+$\lambda (\x,\hth,t)$. (Más abajo también incorporamos ecuaciones adicionales 
+relacionadas a las condiciones iniciales y de contorno en la ec.~\eqref{eq:RTEt}).
 
-In order to eliminate $\frac{\partial u_i}{\partial a}[a;\delta a]$
-from the right-hand side of~\eqref{eq:AdjointMEthod2} we subtract from
-from both sides of this identity a ``linear combination with suitable
-coefficients'' $\lambda$ of the relation~\eqref{eq:RRTEdet4}---or,
-more precisely, an integral of the product of this relation times a
-suitable function $\lambda (\x,\theta,t)$ over
-$(\x,\theta,t)\in\Omega\times [0,2\pi)\times [0,T]$. (Below we
-incorporate additional equations related to the initial and boundary
-conditions in~\eqref{eq:RTE} as well.) For notational compactness we
-express such integrals in terms of the scalar product notation
+Por simplicidad notacional, expresamos estas integrales en términos 
+del producto escalar 
 \begin{equation}\label{scalar}
   \left\langle v,w \right\rangle= \int_0^T\int_{\Omega}\int_{S^1}
-  v(\x,\theta,t)w(\x,\theta,t) d\theta d\x dt
+  v(\x,\hth,t)w(\x,\hth,t) d\theta d\x dt
 \end{equation}
-for any two functions $v$ and $w$ of the variables
-$(\x,\theta,t)$. Thus, for a given function $\lambda_i =
-\lambda_i[a](\x,\theta,t)$ we obtain from~\eqref{eq:RRTEdet4} the
-equation
+para las funciones $v$ y $w$ de las variables $(\x,\hth,t)$. 
+Para una dada función  $\lambda_i =
+\lambda_i[a](\x,\hth,t)$ obtenemos de~\eqref{eq:RRTEdet4} 
+la ecuación
 \begin{equation}
   \left \langle \lambda_i , 
     \frac{\partial \mathcal{T}}{\partial a}[u_i,a; \delta a]
@@ -620,197 +621,422 @@ equation
   =0,
 \label{eq:RRTEdet5}
 \end{equation}
-which, for a suitably selected function $\lambda_i$ we intend to
-subtract from~\eqref{eq:AdjointMEthod2} to achieve the cancellation of
-the challenging derivative term.
+para la cual, eligiendo una función $\lambda_i$ apropiada, 
+buscamos sustraer este término en la ec.~\eqref{eq:AdjointMEthod2} 
+de forma tal de eliminar el término problemático $\frac{\partial u_i}{\partial a}[a;\delta a]$.
 
-To select the function $\lambda_i$ that attains such cancellation we
-rely on an integration-by-parts calculation to express the second
-summand in~\eqref{eq:RRTEdet5} as an integral of a product of two
-functions, one of which is precisely
-$\frac{\partial u_i}{\partial a}$. Integration by parts of that second
-summand leads to a sum of a ``volumetric'' integral $\mathcal{A}$
-(namely, an integral over $\Omega\times [0,2\pi)\times [0,T]$) plus a
-sum $\mathcal{B} +\mathcal{C}$ of integrals over various portions of
-the boundary of this domain:
+Para elegir la función $\lambda_i$ que cumpla la cancelación deseada, 
+utilizamos integración por partes para expresar el segundo 
+sumando en la ec.~\eqref{eq:RRTEdet5} como una integral del producto 
+de dos funciones, una de las cuales es el término $\frac{\partial u_i}{\partial a}$. 
+La integración por partes de este segundo sumando da como resultado 
+la suma de una integral ``volumétrica'' $\mathcal{A}$ 
+(una integral sobre $\Omega\times [0,2\pi)\times [0,T]$) 
+mas una suma de términos de ``borde'' $\mathcal{B} +\mathcal{C}$:
 \begin{equation}\label{eq:int_parts_termabc}
   \left \langle \lambda_i , \mathcal{T}\left[\frac{\partial
         u_i}{\partial a}\big[a;\delta a\big],a\right] \right \rangle = \mathcal{A} +\mathcal{B} +\mathcal{C}
 \end{equation}
-where
-\begin{flalign}\label{eq:A}
-&\displaystyle \mathcal{A}[a;\delta a]\coloneqq \int_0^T  \int_{\Omega} \int_{S^1} \frac{\partial u_i}{\partial a}[a;\delta a] \Bigg[-\frac{1}
-{c}\frac{\partial \lambda_i}{\partial t} &&
-\\\nonumber
-&- \hth \cdot \nabla \lambda_i+ (a+b)\lambda_i 
+donde
+\begin{flalign}
+\displaystyle \mathcal{A}[a;\delta a]\coloneqq \int_0^T  
+\int_{\Omega} \int_{S^1} \frac{\partial u_i}{\partial a}[a;\delta a] \Bigg[-\frac{1}
+{c}\frac{\partial \lambda_i}{\partial t} 
+- \hth \cdot \nabla \lambda_i+ (a+b)\lambda_i 
 - b\int_{S^1}
 \eta(\hth\cdot\hth ') \lambda_i d\theta'\Bigg] d\theta  d\x dt,&&
+\label{eq:A}
 \end{flalign}
 
 \begin{flalign}
 \mathcal{B}[a;\delta a]\coloneqq\int_{\Omega}\int_{S^1} \left[\frac{\partial u_i}{\partial a}[a;\delta a] \lambda_i\right]_0^T d\theta d\x &&
 \label{eq:B}
 \end{flalign}
-and
+y
 \begin{flalign}
   \displaystyle \mathcal{C}[a;\delta a]\coloneqq\int_0^T
   \oint_{\partial \Omega} \int_{S^1} \hth\cdot \hnu \lambda_i
   \frac{\partial u_i}{\partial a}[a;\delta a] d\theta dS dt.&&
 \label{eq:C}
 \end{flalign}
-Subtracting the linear combination~\eqref{eq:RRTEdet5}
-from~\eqref{eq:AdjointMEthod2} and using~\eqref{eq:int_parts_termabc}-\eqref{eq:C}
-we obtain
+Sustrayendo la combinación linear~\eqref{eq:RRTEdet5} de la ec.~\eqref{eq:AdjointMEthod2}
+ y utilizando las relaciones~\eqref{eq:int_parts_termabc}-\eqref{eq:C} 
+ obtenemos
 \begin{equation}
-\begin{split}
-\begin{aligned}
 \frac{d (g_i\circ u_i)}{da}[a;\delta a] = 
-&\mathcal{G} -\mathcal{A} -\mathcal{B} -\mathcal{C}
-\\&-\left \langle \lambda_i , 
+\mathcal{G} -\mathcal{A} -\mathcal{B} -\mathcal{C}
+-\left \langle \lambda_i , 
 \frac{\partial \mathcal{T}}{\partial a}[u_i,a;\delta a]
  \right \rangle.
-\end{aligned}
-\end{split}
 \label{eq:AdjointMEthodIII}
 \end{equation}
-Clearly, the quantity $\frac{\partial u_i}{\partial a}$
-in~\eqref{eq:AdjointMEthodIII} will be eliminated, as desired, if and
-only if
+Claramente, la cantidad $\frac{\partial u_i}{\partial a}$ 
+en~\eqref{eq:AdjointMEthodIII} resultara eliminada, 
+como es deseado, sí y sólo sí
 \begin{equation}
   \mathcal{A} +\mathcal{B} +\mathcal{C} = \mathcal{G},
 \label{eq:AdjointMEthod4}
 \end{equation}
-since the last term on the right-hand side
-of~\eqref{eq:AdjointMEthodIII} does no contain
-$\frac{\partial u_i}{\partial a}$. Once we select $\lambda_i$ such
-that~\eqref{eq:AdjointMEthod4} is satisfied, and using the Gateaux
-derivative expression
+dado que el último término en el lado derecho de la ec.~\eqref{eq:AdjointMEthodIII} 
+no contiene a $\frac{\partial u_i}{\partial a}$. Una 
+vez elegida la función  $\lambda_i$ tal que se satisface 
+la relación~\eqref{eq:AdjointMEthod4}, y utilizando la derivada de 
+Gateaux
 \begin{equation}
 \begin{split}
 \begin{aligned}
- \frac{\partial \mathcal{T}}{\partial a}[u_i,a;\delta a]=\delta a(\x) u_i[a](\x,\theta,t),
+ \frac{\partial \mathcal{T}}{\partial a}[u_i,a;\delta a]=\delta a(\x) u_i[a](\x,\hth,t),
 \end{aligned}
 \end{split}
 \label{eq:kdeltalgat}
 \end{equation}
-the  expression
+de~\eqref{eq:AdjointMEthodIII} resulta la expresión
 \begin{equation}
 \displaystyle \frac{d (g_i\circ u_i)}{da}[a;\delta a] =
- -\langle \lambda_i[a] , \delta a  u_i[a] \rangle 
+ -\Big \langle \lambda_i[a](\x,\hth,t) , \delta a(\x)  u_i[a](\x,\hth,t) \Big \rangle 
 \label{eq:FDwin2}
 \end{equation}
-for the functional derivative, which does not contain the challenging
-term $\frac{\partial u_i}{\partial a}$, results
-from~\eqref{eq:AdjointMEthodIII}.
+para la derivada funcional, la cual no contiene el término desafiante 
+$\frac{\partial u_i}{\partial a}$.
 
-To obtain the solution $\lambda_i=\lambda_i[a](\x,\theta,t)$ of
-eq.~\eqref{eq:AdjointMEthod4} we note that, in view of the spatial
-integration domains in eqs.~\eqref{eq:AdjointMEthod2}
-and~\eqref{eq:A}-\eqref{eq:C}, eq.~\eqref{eq:AdjointMEthod4} is
-satisfied if and only if (i)~$\mathcal{A}=0$, (ii)~$\mathcal{B}=0$ and
-(iii)~$\mathcal{C}-\mathcal{G}=0$. Equation (i) is satisfied provided
-the term in brackets in the integrand of~\eqref{eq:A}, which will be
-denoted by $\mathcal{T}^*\big[\lambda_i[a],a\big]$ in what follows,
-equals zero. Relation (ii) is satisfied by imposing the appropriate
-``final''condition $\lambda_i(\x,\theta,t=T)=0$, since, in view
-of~\eqref{eq:RTE}, we have $\frac{\partial u_i}{\partial a} = 0$ for
-$t=0$.  In order to fulfill point~(iii), finally, we decompose the
-integral~\eqref{eq:C} into two integrals, $\mathcal{C}_+$ and
-$\mathcal{C}_-$, where integration ranges in the $\theta$ variable are
-restricted to angular domains $\hth\cdot \hnu >0$ and
-$\hth\cdot \hnu <0$, respectively. The integrand in the difference
-$\mathcal{C}_+ -\mathcal{G}$, which is only integrated over the
-angular domain $\hth\cdot \hnu >0$, equals the product of the common
-factor $F = \frac{\partial u_i}{\partial a}\hth\cdot \hnu$ and the
-difference
-$P=\lambda_i-\sum_{j=1}^{N_d} \Big( G_j[u_i]-\tilde{G}_{j,i} \Big)
-\times [1-f(\hth \cdot \hnu)] w\left( \frac{ |\x-\x_j |}{\sigma_d}
-\right)$. To incorporate the summand $\mathcal{C}_-$ under the same
-$\hth\cdot \hnu >0$ integration range, in turn, we first utilize the
-Fresnel boundary condition
-$\frac{\partial u_i}{\partial a}(\x,\theta,t)=f(\hth \cdot \hnu)
-\frac{\partial u_i}{\partial a}(\x,\theta_r,t)$
-($(\x,\theta) \in \Gamma_-$) that results from differentiation of the
-boundary condition in eq.~\eqref{eq:RTE}, and we thus obtain
-\begin{flalign*}
- \mathcal{C}_-[a;\delta a]\coloneqq&\int_0^T \oint_{\partial \Omega}
-\int_{\hth\cdot\hnu<0} \hth \cdot \hnu \lambda_i(\x,\theta,t) f(\hth\cdot\hnu)\\&\times \frac{\partial
-  u_i}{\partial a}[a;\delta a](\x,\theta_r,t) d\theta dS dt.&&
-\end{flalign*}  
-Then,
-incorporating the change of variables
-$\theta=2\theta_{\nu}-\theta_r+\pi$, so that
-$\hth\cdot\hnu = \cos(\theta - \theta_\nu) = -\cos(\theta_r -
-\theta_\nu) = -\hth_r\cdot \hnu$  we obtain
-\begin{flalign*}
- \mathcal{C}_-[a;\delta a]\coloneqq& - \int_0^T \oint_{\partial
-  \Omega} \int_{\hth_r\cdot \hnu>0} \hth_r\cdot \hnu \lambda_i(\x,2\theta_{\nu}-\theta_r+\pi,t) 
-\\&\times f(\hth_r\cdot\hnu) \frac{\partial u_i}{\partial a}[a;\delta
-a](\x,\theta_r,t) d\theta_r dS dt
-&&
-\end{flalign*}  
-Substituting the dummy variable $\theta_r$ by $\theta$ in this
-equation, the angular argument in $\lambda_i$ becomes
-$2\theta_{\nu}-\theta+\pi$ which coincides with $\theta_r$, and, thus,
-calling $Q(\x,\theta_r,t)=f(\hth \cdot \hnu) \lambda_i(\x,\theta_r,t)$
-we obtain
-\begin{flalign*}
- \mathcal{C}_-[a;\delta a]\coloneqq& - \int_0^T \oint_{\partial
-   \Omega} \int_{\hth\cdot \hnu>0} \hth \cdot \hnu Q(\x,\theta_r,t)\\ &
- \times \frac{\partial u_i}{\partial a}[a;\delta
-a](\x,\theta,t) d\theta dS dt.
-&&
-\end{flalign*}
-Combining this result with the term $\mathcal{C}_+-\mathcal{G}$ we
-obtain
-\begin{flalign*}
- (\mathcal{C}-\mathcal{G})[a;\delta a]\coloneqq& \int_0^T \oint_{\partial
-   \Omega} \int_{\hth\cdot \hnu>0} F\times [ P(\x,\theta,t)\\&
- -Q(\x,\theta_r,t)]
- d\theta dS dt,
-&&
-\end{flalign*}
-and, thus, (iii)~is satisfied provided $P-Q=0$.
+Para obtener la solución  $\lambda_i=\lambda_i[a](\x,\hth,t)$ 
+a la ec.~\eqref{eq:AdjointMEthod4} notamos que, en vista 
+de los dominios de integración espacial en las ecuaciones~\eqref{eq:AdjointMEthod2} 
+y ~\eqref{eq:A}-\eqref{eq:C}, la ec.~\eqref{eq:AdjointMEthod4} 
+se satisface sí y sólo sí se cumplen 
+las condiciones (i)~$\mathcal{A}=0$, (ii)~$\mathcal{B}=0$ y
+(iii)~$\mathcal{C}-\mathcal{G}=0$. La condición (i) claramente implica 
+que el término en corchetes para~\eqref{eq:A} se anule:
+\begin{equation}
+-\frac{1}
+{c}\frac{\partial \lambda_i}{\partial t} 
+- \hth \cdot \nabla \lambda_i+ (a+b)\lambda_i 
+- b\int_{S^1}
+\eta(\hth\cdot\hth ') \lambda_i d\theta'=0.
+\label{condA}
+\end{equation}
+En lo que sigue, llamaremos al operador que interviene en esta ecuación $\mathcal{T}^*\big[\lambda_i[a],a\big]$.
 
-In summary, denoting
-$\mathcal{T}^*\big[\lambda_i[a],a\big]=-\frac{1} {c}\frac{\partial
-  \lambda_i} {\partial t}- \hth \cdot \nabla \lambda_i + (a+b)\lambda_i-
-b\int_{S^1}\eta(\hth\cdot\hth ') \lambda_i d\theta'$, we have shown
-that the conditions~(i), (ii) and~(iii) are satisfied provided the
-corresponding ``adjoint'' problem
+Para cumplir la condición (ii) imponemos la condición ``final'' $\lambda_i(\x,\hth,t=T)=0$, 
+dado que en vista de~\eqref{eq:RTEt}, tenemos qué $\frac{\partial u_i}{\partial a} = 0$ 
+para $t=0$. 
+
+El término de borde~(iii), finalmente, requiere 
+descomponer la integral~\eqref{eq:C} en dos integrales
+$\mathcal{C}_-$ y $\mathcal{C}_+$, 
+donde las integrales quedan restringidas a los dominios 
+angulares  $\hth\cdot \hnu<0$ y $\hth\cdot \hnu >0$:
 \begin{equation}
 \begin{split}
 \begin{aligned}
-  &\mathcal{T}^*\big[\lambda_i[a],a\big]=0, \; (\x,\theta)
-  \in \Omega\times [0,2\pi)\\
-  &\lambda_i(\x,\theta,t=T)=0,\; (\x,\theta)
-  \in \Omega\times [0,2\pi),\quad\mbox{and}\\
-  &\lambda_i(\x,\theta,t) = f(\hth \cdot \hnu)
-  \lambda_i(\x,\theta_r,t)+\sum_{j=1}^{N_d} \Big( G_j[u_i] \\&\;\;
+  \displaystyle \mathcal{C}[a;\delta a]&=\mathcal{C}_-[a;\delta a] + \mathcal{C}_+[a;\delta a]
+  \\&=\int_0^T
+  \oint_{\partial \Omega} \left[ \int_{\hth \cdot \hnu<0} \hth\cdot \hnu \lambda_i
+  \frac{\partial u_i}{\partial a}[a;\delta a] d\theta + \int_{\hth \cdot \hnu>0} \hth\cdot \hnu \lambda_i
+  \frac{\partial u_i}{\partial a}[a;\delta a] d\theta  \right] dS dt.
+\end{aligned}
+\end{split}
+\label{eq:C2}
+\end{equation}
+Incorporando la condición de contorno de Fresnel que se obtiene 
+por diferenciación de la ec.~\eqref{eq:RTEt}, 
+$\frac{\partial u_i}{\partial a}(\x,\hth,t)=f(\hth \cdot \hnu)
+\frac{\partial u_i}{\partial a}(\x,\hth_r,t)$ ($(\x,\hth) \in \Gamma_-$)  en el término $\mathcal{C}_-$ 
+tenemos 
+\begin{equation}
+\begin{split}
+\begin{aligned}
+  \displaystyle\mathcal{C}_-[a;\delta a]=\int_0^T
+  \oint_{\partial \Omega} \int_{\hth \cdot \hnu<0} \hth\cdot \hnu \lambda_i(\x,\hth,t)
+  f(\hth \cdot \hnu) \frac{\partial u_i}{\partial a}(\x,\hth_r,t)[a;\delta a] d\theta  dS dt.
+\end{aligned}
+\end{split}
+\label{eq:C2m}
+\end{equation}
+dado que el término $\mathcal{C}-\mathcal{G}=0$ involucra dos integrales 
+en $\hth\cdot \hnu >0$, buscamos llevar la integral $\mathcal{C}_-$ en $\hth\cdot \hnu <0$
+al dominio $\hth\cdot \hnu>0$ mediante el cambio de variable $\hth_r=\R \hth$, 
+con $\R$ la matriz de reflexión definida en la sección~\ref{sec:ETR}, y 
+donde, dado que para la matriz de reflexión $\R=\R^{-1}$, vale qué $\hth=\R\hth_r$:
+\begin{equation}
+\begin{split}
+\begin{aligned}
+  \displaystyle\mathcal{C}_-[a;\delta a]=-\int_0^T
+  \oint_{\partial \Omega} \int_{\hth_r \cdot \hnu>0} \hth_r \cdot \hnu \lambda_i(\x,\R \hth_r,t)
+  f(\R \hth_r \cdot \hnu) \frac{\partial u_i}{\partial a}(\x,\hth_r,t)[a;\delta a] d\theta_r  dS dt.
+\end{aligned}
+\end{split}
+\label{eq:C2m2}
+\end{equation}
+sustituyendo la variable muda $\hth_r$ por $\hth$ y usando nuevamente qué $\hth_r=\R \hth$ 
+y qué $f(\R \hth \cdot \hnu)=f(\hth \cdot \hnu)$:
+\begin{equation}
+\begin{split}
+\begin{aligned}
+  \displaystyle\mathcal{C}_-[a;\delta a]=-\int_0^T
+  \oint_{\partial \Omega} \int_{\hth \cdot \hnu>0} \hth \cdot \hnu \lambda_i(\x,\hth_r,t)
+  f(\hth \cdot \hnu) \frac{\partial u_i}{\partial a}(\x,\hth,t)[a;\delta a] d\theta  dS dt.
+\end{aligned}
+\end{split}
+\label{eq:C2m3}
+\end{equation}
+Finalmente, podemos escribir la condición~(iii) $\mathcal{C}-\mathcal{G}=$ cómo
+\begin{equation}
+\begin{split}
+\begin{aligned}
+  \displaystyle\mathcal{C}-\mathcal{G}=&\int_0^T
+  \oint_{\partial \Omega} \int_{\hth \cdot \hnu>0} \hth \cdot \hnu 
+  \frac{\partial u_i}{\partial a}[a;\delta a] \Bigg[  \lambda_i(\x,\hth,t)
+    -f(\hth \cdot \hnu)  \lambda_i(\x,\hth_r,t)   \\
+    &- \sum_{j=1}^{N_d} \left( G_j\big[u_i[a]\big]-
+    \tilde {G}_{j,i} \right) [1-f(\hth \cdot \hnu)]
+   \times \hth \cdot \hnu w\left( \frac{ |\x-\x_j |}{\sigma_d}
+  \right) 
+   \Bigg] d\theta  dS dt=0.
+\end{aligned}
+\end{split}
+\label{eq:cond3}
+\end{equation}
+la condición~\eqref{eq:cond3} se cumplirá sí y sólo sí 
+\begin{equation}
+\begin{split}
+\begin{aligned}
+  \lambda_i(\x,\hth,t)=&
+    f(\hth \cdot \hnu) \lambda_i(\x,\hth_r,t) \\
+   &+ \sum_{j=1}^{N_d} \left( G_j\big[u_i[a]\big]-
+    \tilde {G}_{j,i} \right) [1-f(\hth \cdot \hnu)]
+   \times \hth \cdot \hnu w\left( \frac{ |\x-\x_j |}{\sigma_d}
+  \right)\; (\x,\hth)\in \Gamma_+.
+\end{aligned}
+\end{split}
+\label{eq:cond4}
+\end{equation}
+
+En suma, llamando $\mathcal{T}^*\big[\lambda_i[a],a\big]=-\frac{1} {c}\frac{\partial
+  \lambda_i} {\partial t}- \hth \cdot \nabla \lambda_i + (a+b)\lambda_i-
+b\int_{S^1}\eta(\hth\cdot\hth ') \lambda_i d\theta'$, hemos 
+demostrado que se cumplirán las condiciones~(i), (ii) y~(iii) sí se eligen 
+los ``coeficientes'' $\lambda_i$ de forma tal que sea solución 
+del problema adjunto
+\begin{equation}
+\begin{split}
+\begin{aligned}
+  &\mathcal{T}^*\big[\lambda_i[a],a\big]=0, \; (\x,\hth)
+  \in \Omega\times S^1\\
+  &\lambda_i(\x,\hth,t=T)=0,\; (\x,\hth)
+  \in \Omega\times S^1,\quad\mbox{y}\\
+  &\lambda_i(\x,\hth,t) = f(\hth \cdot \hnu)
+  \lambda_i(\x,\hth_r,t)+\sum_{j=1}^{N_d} \Big( G_j[u_i] 
   -\tilde {G}_{j,i} \Big) \times [1-f(\hth \cdot \hnu)] w\left( \frac{
-      |\x-\x_j |}{\sigma_d} \right), (\x,\theta) \in \Gamma_+
+      |\x-\x_j |}{\sigma_d} \right), (\x,\hth) \in \Gamma_+
 \end{aligned}
 \end{split}
 \label{eq:AdjointProblem}
 \end{equation}
-hold. Thus, the function $\lambda_i(\x,\theta,t)$ needed in
-eq.~\eqref{eq:FDwin2} can be obtained by solving the \textit{adjoint
-  back transport} problem~\eqref{eq:AdjointProblem} in the time
-interval $T \geq t \geq 0$ with homogeneous final data at time
-$t=T>0$.  Once the function $\lambda_i$ has been obtained the
-component of the functional gradient~\eqref{eq:FDwin2} in the
-direction $\delta a$ can inexpensively be obtained by integration,
-which, in view of~\eqref{scalar}, may be expressed in the form
+Por lo tanto, la función $\lambda_i(\x,\theta,t)$ necesaria en la 
+ec.~\eqref{eq:FDwin2} puede obtenerse resolviendo el \textit{problema 
+de transporte adjunto}~\eqref{eq:AdjointProblem} en el intervalo 
+temporal  $T \geq t \geq 0$, con condición final homogénea a 
+tiempo $t=T>0$. Una vez hallada la función $\lambda_i$ , 
+la componente del gradiente funcional~\eqref{eq:FDwin2} en la 
+dirección $\delta a$ puede obtenerse de forma computacionalmente 
+eficiente por integración, que en vista de la relación~\eqref{scalar}, 
+puede expresarse cómo
 \begin{equation}\label{gradient_fin}
-  \frac{d (g \circ u)}{da}[a;\delta a] =-\int_0^T \int_{\Omega} \int_{S^1} \lambda u \delta
-  a d \theta d\x dt.
+  \frac{d (g \circ u)}{da}[a;\delta a] =-\int_0^T \int_{\Omega} \int_{S^1} \lambda(\x,\hth,t) \delta
+  a(\x) u(\x,\hth,t) d \theta d\x dt.
 \end{equation}
+Este procedimiento será validado, y se evaluará la precisión del método 
+adjunto para el cálculo del gradiente funcional en la sección subsiguiente, 
+mediante comparación con la derivada funcional obtenida por diferencias finitas. 
+
+Si bien nuestra derivación del problema adjunto es independiente de otras, 
+y a saber de los autores, no se ha realizado en la bibliografía una derivación 
+del problema adjunto incluyendo condiciones de borde de Fresnel, 
+en la bibliografía se ha dado una interpretación física al 
+problema~\eqref{eq:AdjointProblem} para el caso de condiciones 
+de contorno de vacío (donde$f(\hth \cdot \hnu)=0$)~\cite{Dorn,Dorn2000}. 
+En dicha interpretación física del problema adjunto, partículas \textit{virtuales} 
+de intensidad dada por las diferencias $G_j[u_i]-\tilde {G}_{j,i} $ 
+entre los registros en los detectores obtenidos en las simulaciones $G_j[u_i]$ para un 
+dado coeficiente $a(\x)$ y los registros de los detectores experimentales $\tilde {G}_{j,i}$ 
+son inyectadas a través de los detectores, y propagadas hacía atrás en el tiempo 
+y en el espacio (notar que tanto el signo de la derivada temporal, 
+como el de las direcciones $\hth$ resulta invertido para el problema adjunto).
+El operador $\mathcal{T}$ y su adjunto $\mathcal{T}^*$ 
+satisfacen la relación
+\begin{equation}
+\left \langle \lambda_i , 
+ \mathcal{T}\left[\frac{\partial u_i}{\partial a}\big[a;\delta a\big]\right] \right \rangle=
+\left \langle \mathcal{T}^* \big[\lambda_i[a],a \big] , 
+ \frac{\partial u_i}{\partial a}\big[a;\delta a\big] \right \rangle.
+\label{eq:RRTEdet6}
+\end{equation}
+siempre que los términos de borde se anulen, dadas las condiciones (i),~(ii) y (iii).
+ \subsection{Verificación numérica de la expresion~\eqref{eq:FDwin2} para la derivada 
+ funcional}
+ \label{sec:gradc}
  
+ En esta sección presentamos verificaciones numéricas para la derivada 
+ funcional~\eqref{eq:FDwin2}, así como una comprobación de la precisión 
+ obtenida para dicha expresión, con $\lambda_i$ obtenida como solución del 
+ problema adjunto~\eqref{eq:AdjointProblem}. Con este fin, 
+ consideramos un problema del tipo~\eqref{eq:RTEt} con condiciones 
+ de borde de Fresnel, que se describe a continuación---y el cual 
+ sirve para ilustrar, en particular, la capacidad de la expresión 
+ para la derivada funcional de producir el gradiente necesario 
+ en los métodos de minimización empleados, para el método adjunto desarrollado en este trabajo (el cual incluye las condiciones de borde de Fresnel). 
+ Para esto, compararemos la derivada funcional obtenida mediante la expresión~\eqref{gradient_fin} con la obtenida por la aproximación 
+ de diferencias finitas
+ \begin{equation}
+  \frac{d (g \circ u)}{da}[a;\delta a]^{FD} \sim
+  \frac{g\big[u[a+\varepsilon \delta a]\big]
+    -g\big[u[a]\big]}{\varepsilon}
+\label{eq:ObjFD}
+\end{equation}
+para una dada dirección $\delta a(\x)$, y un valor apropiado del parámetro $\varepsilon$. 
+Utilizaremos el índice de refracción $n_{\Omega}=1.4$ para el dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$ 
+con $n_s=1$ en el exterior del dominio $\Omega$.  Por simplicidad utilizaremos $\delta a=1$, 
+con coeficientes espaciales de absorción y dispersión constantes $a(\x)=a$ y $b(\x)=b$, 
+y, sin perdida de generalidad, consideramos una única fuente generalizada $q_1 = q$ 
+para ambos métodos, donde el método MB incluye una única fuente láser 
+incidente en $\x_s=(1.5,0.0)$, y el método FMS consiste en la combinación 
+de cuatro fuentes láser, cada una ubicada en el centro del dominio espacial cuadrado 
+$\Omega$, con $\x_{1,s}=(1.5,0.0)$, $\x_{2,s}=(3.0,1.5)$, $\x_{3,s}=(1.5,3.0)$ 
+y  $\x_{4,s}=(0,1.5)$ (en la sección~\ref{sec:forwsim} se darán mas detalles 
+sobre el modelado de las fuentes). En estas pruebas, empleamos un único 
+detector para ambos métodos, con $\x_d=(0.0,0.75)$. Los retardos 
+temporales requeridos por el método FMS se fijan dando un desplazamiento 
+temporal inicial de $50$ps entre fuentes sucesivas, comenzando con la fuente 
+ $\x_{1,s}$ ubicada en $y_{\text{min}}$, y sucediendose el resto de las fuentes 
+ en sentido antihorario, en el orden dado por la sucesión $\x_{1,s}$, $\x_{2,s}$, $\x_{3,s}$ y $\x_{4,s}$. Utilizamos una duración total de $60$ps para cada pulso, y el sistema 
+ fue evolucionado para ambos métodos MB y FMS hasta un tiempo final de $600$ps. 
+ Utilizamos una discretización espacial con $N_x=N_y=200$ puntos espaciales, 
+ $M=32$ direcciones discretas y $T=60000$ pasos temporales, tanto para el 
+ problema directo como el adjunto. 
+ 
+ Consideramos el error relativo
+\begin{equation}
+ e=\displaystyle \frac{\left|\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{Adj}- \frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{FD}\right|}{|\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{Adj}|},
+\label{eq:Errgrad}
+\end{equation}
+para cuantoficar la calidad del método adjunto propuesto, donde
+$\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{Adj}$ y
+$\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{FD}$ denotan 
+las derivadas funcionales obtenidas por el método adjunto y por 
+diferencias finitas, respectivamente; empleamos el valor $\varepsilon=0.0001$ 
+para la aproximación por diferencias finitas~\eqref{eq:ObjFD}.
+\begin{table}[h!]
+\caption{Diferencias obtenidas para las derivadas funcionales}
+\vspace{-0.3cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+$a[1/cm]$ & ~ & $b[1/cm]$ ~ & $g$ ~ & $e_{\text{TS}}$  ~ & $e_{\text{MSS}}$ \\
+\hline
+%\hline
+$0.35$ & ~ & $80$ ~ &$0.9$ ~ & $0.00008$  ~ & $0.00009$ \\
+$0.35$ & ~ & $20$ ~ &$0.0$ ~ & $0.00008$  ~ & $0.00097$ \\
+$0.35$ & ~ & $8.0$ ~ &$0.0$ ~ & $0.00027$  ~ & $0.00016$ \\
+$0.35$ & ~ & $0.1$ ~ &$0.0$ ~ & $0.00009$  ~ & $0.00026$ \\
+\hline
+\end{tabular}
+\label{tab:grads}
+\end{center}
+\end{table}
+La tabla~\eqref{tab:grads} demuestra el acuerdo observado entre los valores 
+de la derivada funcional obtenida por diferencias finitas y por el método adjunto 
+para varios regímenes de transporte, incluyendo diferentes valores 
+del coeficiente de sipersión $b$ y del coeficiente de anisotropía $g$, 
+para ambos métodos MB y FMS. 
+El acuerdo observado en todos los casos es excelente, y sugiere que 
+las grandes ganancias que se obtienen en términos de costo computacional 
+mediante el méotodo adjunto, el cual para el cálculo del gradiente funcional total 
+implica un factor del órden de  $(N_x+1) \times (N_y+1) = 40,401$, 
+no impacta en la presición con la que se determina dicho gradiente.
 
-The correctness and accuracy of the proposed approach for gradient
-evaluation are demonstrated in the following section via comparisons
-with direct finite-difference gradient computations.
+\subsection{Cálculo numérico del gradiente funcional}
+\label{sec:gradc}
+ 
+Los gradientes numéricos utilizados en las secciones siguientes 
+se obtuvieron resolviendo los problemas directos y adjuntos, 
+seguidos del uso de la versión discreta de la ecuación~\eqref{gradient_fin} 
+para un número de perturbaciones $\delta a(\x)$---las cuales son elegidas 
+de forma tal de que provean una variación del coeficiente de absorción $a(\x)$ 
+en cada uno de los puntos del dominio espacial $\Omega$ discretizado $\x_{\ell_1,\ell_2} \in \Omega$ 
+para la discretización $\x_{\ell_1,\ell_2} \in \Omega$ donde 
+$\x_{\ell_1,\ell_2} =(x_{\text{min}}+ [\ell_1-1]\Delta x)\hat x
++(y_{\text{min}}+[\ell_2-1]\Delta y)\hat y$, $\ell_1=1,\ldots,N_x+1$,
+$\ell_2=1,\ldots,N_y+1$. Para la perturbación $\delta a(\x)$ elegimos 
+una función de forma piramidal, la cual es igual a uno en el punto 
+ $\x_{\ell_1,\ell_2} \in \Omega$, y se anula en y más allá 
+ de los primeros vecinos de dicho punto en la grilla discreta. 
+ \begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/piramide.eps}\\
+  \caption{
+Función de forma piramidal utilizada para producir las variaciones 
+en el coeficiente de absorción. Esta función vale uno en el punto $\x_{\ell_1,\ell_2}$ 
+y se anula a partir de los primeros vecinos de la grilla discreta.}
+ \label{fig:esquemainv}
+\end{figure}
+ La función piramidal discretizada es aproximada como un producto 
+ de deltas de Kronecker $\delta a_{\ell_1,\ell_2}=\delta_{r,\ell_1}\times\delta_{s,\ell_2}$.
+ Llamando $\nabla_a g(\x_{\ell_1,\ell_2})$ al valor del gradiente funcional 
+ en la dirección $\delta a_{\ell_1,\ell_2}$, la versión discreta 
+ de la ecuación~\eqref{gradient_fin} resulta
+\begin{equation}
+\nabla_a g(\x_{\ell_1,\ell_2})  \sim -\sum_{m,j}  \lambda_{\ell_1,\ell_2,m,j}u_{\ell_1,\ell_2,m,j} \Delta \theta \Delta x \Delta y \Delta t,
+\label{eq:FDwin22}
+\end{equation}
+donde $\lambda_{\ell_1,\ell_2,m,j}\sim
+\lambda(\x_{\ell_1,\ell_2},\theta_m,t_j)$ y 
+$u_{\ell_1,\ell_2,m,j} \sim u(\x_{\ell_1,\ell_2},\theta_m,t_j)$. 
+Cabe notar que la ecuación~\eqref{eq:FDwin22} representa 
+la derivada funcional para una única dirección $\delta a_{\ell_1,\ell_2}$ 
+correspondiente a la componente $(\ell_1,\ell_2)$ del gradiente funcional discreto, 
+donde el gradiente total discretizado estará dado por las perturbaciones en todas las direcciones posibles
+\begin{equation}
+\nabla_a g(\x)  = \left( \nabla_a g(\x_{1,1}), \nabla_a g(\x_{1,2}), \ldots, \nabla_a g(\x_{N_x+1,N_y+1})   \right).
+\label{eq:grad_total}
+\end{equation}
+En el método adjunto, la evaluación de la ecuación~\eqref{eq:FDwin22} 
+para todas las componentes $(\ell_1,\ell_2)$ del gradiente funcional requiere 
+únicamente la resolución de un problema directo de transporte, y de 
+su correspondiente problema adjunto para cada función generalizada $q=q_i$. 
+En cambio, el uso de la ecuación~\eqref{eq:ObjFD} demanda la resolución de 
+un número mucho más grande de problemas directos, donde debe evaluarse 
+la resolución de $(N_x+1)\times (N_y+1)$ problemas de transporte, uno 
+para cada perturbación del coeficiente $a(\x)$ en el dominio discretizado. 
+Cabe mencionar también que el método adjunto requiere el almacenamiento 
+en memoria de las soluciones completas a los problemas directos y adjunto de transporte 
+para varios pasos temporales para realizar las integrales correspondientes~\eqref{eq:FDwin22}. 
+El algoritmo paralelo propuesto en esta tesis es apropiado para este problema, ya que permite 
+dividir simultáneamente el costo computacional y los requerimientos de memoria 
+en sistemas distribuidos.
+ 
+Como ilustración, en la figura~\ref{fig:gradient} se muestra 
+el gradiente completo $\nabla_a g(\x_{\ell_1,\ell_2})$ para 
+$1\leq \ell_1\leq N_x+1$ y $1\leq \ell_2\leq N_y+1$ 
+para ciertos valores $\tilde G_{j,i}$, con una única fuente y 
+un único detector ubicados en $\x_s=(1.5,0)$ y $\x_d=(1.0,0)$, 
+respectivamente.
 
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/gradient.png}
+  \caption{
+  Gradiente espacial~\eqref{eq:FDwin22} para todas 
+  las direcciones discretas posibles $1\leq \ell_1\leq N_x+1$ y $1\leq \ell_2\leq N_y+1$, 
+  con una única fuente y un único detector ubicados en $\x_s=(1.5,0)$ 
+  y $\x_d=(0,1.0)$ respectivamente. Dado que se utilizaron 
+  datos artificiales, la escala carece de sentido en esta figura, 
+  y por eso no se muestra.}
+ \label{fig:gradient}
+\end{figure} 
+ 
+\section{Datos sintéticos con fuentes lásers pulsadas} 
+\label{sec:sintetic} 
  
 \section{Reconstrucciones numéricas}
 \label{sec:inverseres}

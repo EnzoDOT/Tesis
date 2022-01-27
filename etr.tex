@@ -129,7 +129,8 @@ El término integral en el lado derecho de la ecuación
 puede pensarse como una ``fuente'' para el rayo que se propaga en la dirección $\hth$, 
 la cual modela las contribuciones por dispersión desde todos los rayos $\hth'$ 
 hacía el rayo $\hth$. Dado que trataremos con problemas en dos dimensiones espaciales, 
-esta integral se realiza en el círculo unitario, con $\hth \in S^1$.
+esta integral se realiza en el círculo unitario, con $\hth \in S^1$, 
+donde la integración se realiza simplemente para $\theta \in [0,2\pi)$·
 
 La condición inicial es considerada nula en el marco de esta tésis 
 (segunda línea en la ec.~\eqref{eq:RTE}), ya 
@@ -505,7 +506,7 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
  para el cálculo de la integral colisional. 
  Con el fin de realizar la descomposición del dominio espacial, 
  el dominio $\Omega$ es dividido en subdominios solapados, tales qué 
- $\Omega\subseteq\cup_{s=1}^{N_{c}}\Omega_s$. 
+ $\Omega=\cup_{s=1}^{N_{c}}\Omega_s$. 
  En el interior del dominio discretizado $\Omega$, los subdominios $\Omega_s$ se 
  superponen en cuatro puntos de la grilla numérica. 
  A cada proceso en paralelo se le asigna un subdominio $\Omega_s$, 
@@ -516,17 +517,15 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
  \begin{figure}[h!]
   \centering
   \includegraphics[width=0.6\linewidth]{figuras/all.png}
-  \caption{a) El dominio $\Omega$ es dividido en subdominios de forma qué 
-   $\Omega=\cup_{s=1}^{N_{c}}\Omega_s$.
-   b) Luego, cada subdominio $\Omega_s$ es extendido  
-  en dos puntos (círculos grises), los cuales se superponen con los subdominios vecinos, 
-  de forma qué $\Omega\subseteq\cup_{s=1}^{N_{c}}\Omega_s$. 
+  \caption{a) El dominio $\Omega$ es dividido en subdominios disjuntos $\widetilde{\Omega}_s$ de forma qué 
+   $\Omega=\cup_{s=1}^{N_{c}}\widetilde{\Omega_s}$.
+   b) Cada subdominio $\widetilde{\Omega_s}$ es extendido  
+  en dos puntos (círculos grises) en cada dirección espacial, formando una descomposición en subdominios solapados $\Omega_s$, los cuales se superponen con los subdominios vecinos 
+  de forma qué $\Omega=\cup_{s=1}^{N_{c}}\Omega_s$. 
   En esta región se recibe información de subdominios vecinos.
    c) Intercambio de información en los bordes de los subdominios solapados 
-    $\Omega_s$ y $\Omega_{s-1}$.
-   Exchange of boundaries at limiting edges of the overlapping subdomains $\Omega_s$ and $\Omega_{s-1}$. El 
-   procesador $s$ envía a su vecino $s-1$ la información del tercer y cuarto puntos de la grilla, 
-   y recibe de su vecino los primeros dos puntos en la grilla $s$.}
+    $\Omega_s$ y $\Omega_{s-1}$. El 
+   procesador $s$ envía a su vecino $s-1$ la información del tercer y cuarto puntos de la grilla $s$, y recibe de su vecino los primeros dos puntos.}
  \label{fig:bechange}
 \end{figure}
 
@@ -552,7 +551,7 @@ sumariza en forma de pseudocódigo en el algorítmo~\eqref{algfc}.
 \begin{algorithmic}[1]
 \State  Generar una descomposición de dominio
 \State Asignar un subdominio $\Omega_s$ a cada procesador.
-\State \textbf{para} cada $(x,y) \in \Omega_s$ \textbf{hacer} en paralelo
+\State \textbf{para} cada $\Omega_s$ \textbf{hacer} en paralelo
 \State \hskip0.5em  Dar vectores iniciales para iniciar el esquema de Adams--Bashforth.
 \State \hskip0.5em \textbf{para} cada paso temporal k \textbf{hacer}
 \State \hskip0.75em \textbf{para} Cada dirección $\hth_m$ \textbf{hacer} \emph{}
@@ -643,16 +642,16 @@ Con este fin, resolvemos el problema ETR dado por
 \begin{aligned}
 &\frac{1}{c}\frac{\partial }{\partial t}\ut + \hth \cdot \nabla \ut+a(\x)\ut  \\
 &\quad \quad \quad  \quad \quad \; \;\,  +b(\x)\ut = \int_{S^1}\eta(\hth\cdot\hth ') 
-u(\x,\hat \theta',t) d\theta'+s(\x,\hth,t),  \; (\x,\theta)  \in \Omega\times S^1\\
-&u(\x,\theta,t=0)=u_0, \; (\x,\theta)  \in \Omega\times S^1,  \\
-&u(\x,\theta,t)=u_b, \; (\x,\theta) \in \Gamma_-. \notag
+u(\x,\hat \theta',t) d\theta'+s(\x,\hth,t),  \; (\x,\hth)  \in \Omega\times S^1\\
+&u(\x,\hth,t=0)=u_0, \; (\x,\hth)  \in \Omega\times S^1,  \\
+&u(\x,\hth,t)=u_b, \; (\x,\hth) \in \Gamma_-. \notag
 \end{aligned}
 \end{split}
 \label{eq:RTEdisp}
 \end{equation*}
 para $0\leq t \leq T$. Proponemos la solución manufacturada
 \begin{equation*}
-u^{\text{an}}(\x,\theta,t)=e^{-(x-t)^2-(y-t)^2-\cos(\theta)^2}.
+u^{\text{an}}(\x,\hth,t)=e^{-(x-t)^2-(y-t)^2-\cos(\theta)^2}.
 \label{eq:RTEmansol}
 \end{equation*}
 de donde el término de la fuente $s(\x,\hth,t)$, 
