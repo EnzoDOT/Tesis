@@ -1035,9 +1035,91 @@ respectivamente.
  \label{fig:gradient}
 \end{figure} 
  
-\section{Datos sintéticos con fuentes lásers pulsadas} 
+\section{Datos sintéticos con fuentes láser pulsadas} 
 \label{sec:sintetic} 
+
+En las situaciones realistas en tomografía óptica, tipicamente 
+radiación colimada proveniente de una fuente láser incide en 
+la superficie del dominio en estudio. En esta sección damos 
+algunos detalles para el modelo directo utilizado  
+en las siguientes secciones para la resolución del problema inverso. 
+Modelamos la radiación colimada de las fuentes láser por medio 
+de una función picuda de la variable $\theta$, donde el pico 
+de esta función coincide con la dirección del láser incidente. 
+Resolvemos la ecuación~ \eqref{eq:RTE} con condiciones de Fresnel, 
+utilizando los parámetros $a(\x)=0.1$/cm, $b(\x)=20$/cm, $g=0.8$, 
+$n_{\Omega}=1.4$ y $n_s=1.0$, en un dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$. 
+
+Mostraremos resultados para el método MB, y el método FMS. 
+En el método MB empleamos una única fuente generalizada~\eqref{eq:RTEsources}, 
+con $N_q=N_s=1$, centrada en $\x_{1,1}=(1.5,0)$, apuntando en la dirección 
+normal a la superficie, de forma qué $\theta_{1,1}=\pi/2$, con $\sigma_{\theta}=\pi/4$. 
+En esta configuración, una fuente láser inyecta radiación $y_{\text{min}}$ en la dirección 
+normal a $\partial \Omega$ (Fig.~\ref{fig:photonflux}).
+\begin{figure*}[h!]
+\centering
+  \includegraphics[width=0.325\textwidth]{figuras/sim_t30.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_t100.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_t170.png}
+  \caption{Simulación para el modelo directo MB utilizando 
+  el método FC--DOM en paralelo~\ref{algfc} presentado en 
+  la sección~\ref{subsec:FC-DOM}. En la figura se muestra el 
+  flujo escalar $\Phi(\x,t)$, ec.~\eqref{eq:photondensity} para tres tiempos 
+  diferentes utilizando el método MB con una única fuente generalizada. De 
+  izquierda a derecha se tiene $t=30$ps, 
+$t=100$ps y $t=170$ps, para una fuente láser 
+inyectando radiación en  $\x_s=(1.5,0)$cm.}
+ \label{fig:photonflux}
+\end{figure*}
  
+Para el método FMS, utilizamos una única fuente generalizada, con cuatro 
+fuentes superpuestas, de forma qué $N_q=1$ y $N_s=4$. Cada fuente inyecta 
+radiación en la dirección normal a $\partial \Omega$ a través del 
+centro de las caras, con retardos temporales $\tau=200$ps entre fuentes sucesivas, 
+comenzando con la fuente ubicada en $y_{\text{min}}$, seguida de la fuente 
+en $y_{\text{max}}$, luego la ubicada en $x_{\text{min}}$ y finalmente 
+se enciende la fuente en $y_{\text{max}}$ (Fig.~\ref{fig:photonflux2}).   
+ 
+
+\begin{figure*}[h!]
+\centering
+  \includegraphics[width=0.325\textwidth]{figuras/sim_t30_FMS.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_t230_FMS.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_t430_FMS.png}
+  \caption{Simulación para el modelo directo FMS utilizando 
+  el método FC--DOM en paralelo~\ref{algfc} presentado en 
+  la sección~\ref{subsec:FC-DOM}. En la figura se muestra el 
+  flujo escalar $\Phi(\x,t)$, ec.~\eqref{eq:photondensity} para tres tiempos 
+  diferentes utilizando el método FMS con una única fuente generalizada 
+  que contiene cuatro fuentes láser superpuestas, con tiempos de retraso $\tau=200$ps. De 
+  izquierda a derecha se tiene $t=30$ps, $t=230$ps y $t=430$ps. La última fuente 
+  láser se enciende a $t=600$ps y por eso no se observa en las figuras.}
+ \label{fig:photonflux2}
+\end{figure*}
+
+Para las reconstrucciones numéricas presentadas en la sección siguiente, utilizamos 
+datos ``sintéticos'', esto es, datos generados de manera numérica 
+con el algoritmo FC--DOM, para un dado 
+coeficiente $a(\x)$. Dado que en situaciones realistas se espera 
+que los datos experimentales presenten ruido, agregamos a los 
+datos sintéticos un 10\% de ruido aleatorio a los datos sintéticos simulados 
+utilizados en las reconstrucciones del problema inverso.
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.48\linewidth]{figuras/detread_sweep.eps}
+  \includegraphics[width=0.48\linewidth]{figuras/detread_prop.eps}
+  \caption{Lectura del detector $G[u_1]$ en la ec.~\eqref{eq:OpMed} para 
+  una única fuente generalizada del método MB, y una fuente generalizada con 
+  $N_s=4$ para el métofo FMS, antes y después de agregar un 10\% de ruido aleatorio 
+  a la señal. El detector utilizado se ubicó en  $\x_d=(3.0,2.25)$. Cada fuente 
+  láser individual se ubicó en el centro de las caras del dominio cuadrado. 
+  Como puede observarse, en el método FMS las lecturas de los detectores 
+  aparecen mezcladas. Utilizamos un retraso temporal  $\tau=200$ps entre las fuentes 
+  ubicadas en las diferentes caras.}
+ \label{fig:detread}
+\end{figure}
+
 \section{Reconstrucciones numéricas}
 \label{sec:inverseres}
 

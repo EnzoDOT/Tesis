@@ -531,7 +531,7 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
 
  Cada subdominio cubre un conjunto de puntos  $x_s\in[x_{\text{min},s},x_{\text{max},s}]$ 
  y $y_s\in [y_{\text{min},s},y_{\text{max},s}]$, con los puntos 
- en la grilla dados por $x_s(i)=x_{\min,s}+(i-1)\Delta x$ y $y_s(j)=y_{\min,s}+(j-1)\Delta y$. 
+ en la grilla dados por $x_i=x_{\min,s}+(i-1)\Delta x$ e $y_j=y_{\min,s}+(j-1)\Delta y$. 
  Llamando  $u_{m}^k(x,y_j)=u_{m,j}^k(x)$ a la intensidad específica discretizada,
   donde se fijó $y_j\in y_s$ para cualquier $x\in x_s$, similarmente llamamos $u_{m}^k(x_i,y)=u_{m,i}^k(y)$ 
   para $x_i\in x_s$ fijo para cualquier $y\in y_s$. El final de cada paso temporal, 
@@ -549,10 +549,10 @@ sumariza en forma de pseudocódigo en el algorítmo~\eqref{algfc}.
 \begin{algorithm}
 \caption{FC--DOM en paralelo}\label{algfc}
 \begin{algorithmic}[1]
-\State  Generar una descomposición de dominio
+\State  Generar descomposición de dominio
 \State Asignar un subdominio $\Omega_s$ a cada procesador.
 \State \textbf{para} cada $\Omega_s$ \textbf{hacer} en paralelo
-\State \hskip0.5em  Dar vectores iniciales para iniciar el esquema de Adams--Bashforth.
+\State \hskip0.5em  Asignar vectores iniciales para el esquema de Adams--Bashforth.
 \State \hskip0.5em \textbf{para} cada paso temporal k \textbf{hacer}
 \State \hskip0.75em \textbf{para} Cada dirección $\hth_m$ \textbf{hacer} \emph{}
 \State \hskip1.0em \textbf{para} cada $y_j$ \textbf{hacer} en la dirección $\hat x$
@@ -567,7 +567,7 @@ sumariza en forma de pseudocódigo en el algorítmo~\eqref{algfc}.
 \State \hskip1.0em\textbf{terminar}
 \State \hskip1.0em Evaluar el lado derecho de la ec.~\eqref{eq:RTEAB4}.
 \State \hskip1.0em Imponer condiciones de borde.
-\State \hskip1.0em Intercambiar bordes no físicos entre subdominios.
+\State \hskip1.0em Intercambiar bordes no físicos entre subdominios vecinos.
 \State \hskip0.75em\textbf{terminar}
 \State \hskip0.5em\textbf{terminar}
 
