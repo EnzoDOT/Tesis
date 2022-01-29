@@ -1103,7 +1103,19 @@ con el algoritmo FC--DOM, para un dado
 coeficiente $a(\x)$. Dado que en situaciones realistas se espera 
 que los datos experimentales presenten ruido, agregamos a los 
 datos sintéticos un 10\% de ruido aleatorio a los datos sintéticos simulados 
-utilizados en las reconstrucciones del problema inverso.
+utilizados en las reconstrucciones del problema inverso. 
+
+
+Como puede observarse en la figura~\ref{fig:photonflux2}, para el método 
+MB, dado que cada fuente láser individual es tratada mediante una simulación 
+independiente de las otras fuentes, cada señal originada por los fotones 
+transportados en el medio participante desde el láser hasta los detectores 
+se encuentra desacoplada de la señal de las otras fuentes. En el método 
+FMS, en cambio, las señales de todas las fuentes láser individuales 
+aparece mezclada en los detectores.  El rol de los retardos temporales 
+utilizados en el método FMS es desacopla en algún grado para 
+un dado detector las señales 
+originadas por fuentes láser individuales proveniente desde diferentes lugares.  
 
 \begin{figure}[h!]
 \centering
@@ -1123,4 +1135,99 @@ utilizados en las reconstrucciones del problema inverso.
 \section{Reconstrucciones numéricas}
 \label{sec:inverseres}
 
+En esta sección aplicamos los algoritmos desarrollados 
+en las secciones previas al problema inverso en tomgrafía óptica 
+y presentamos el algoritmo en forma final para la resolución 
+del problema inverso de transporte radiativo. 
 
+Aplicamos el algoritmo para la reconstrucción del coeficiente 
+de absorción, y comparamos los métodos MB y FMS propuesto en este trabajo. 
+Para ello, producimos datos sintéticos de la forma descripta en la sección~
+\ref{sec:sintetic}, donde agregamos un 10\% de ruido aleatorio a los datos obtenidos 
+para los detectores 
+mediante las simulaciones numéricas.
+
+Buscamos el coeficiente de absorción que minimiza la ec.~\eqref{eq:FObjpr}  
+sujeto a las restricciones $a^l \leq a(\x) \leq a^u$, \ie, buscamos 
+el coeficiente $a(x)$ que es solución del problema 
+\begin{equation}
+\begin{split}
+\begin{aligned}
+\text{min}_{a^l \leq a(\x) \leq a^u} \Lambda[a]
+\end{aligned}
+\end{split}
+\label{eq:minprob}
+\end{equation}
+
+Las restricciones impuestas en el proceso de minimización estan dadas 
+por propiedades generales conocidas del coeficiente de absorción ($a^l\ge 0$ 
+es una restricción física que siempre debe cumplirse), y por cierto conocimiento 
+del coeficiente, obtenido previamente por otras técnicas tomográficas. 
+La situación que simulamos es una en la cual se buscan inclusiones sobre 
+cierto ``fondo'' conocido. Esta situación describe, \eg, los excesos de absorción 
+originados por la presencia de hemoglobina oxigenada debido a la presencia de un tumor 
+en el tejido con aplicaciones en el seguimiento y diágnostico de la enfermedad. 
+
+Por este motivo, el mínimo $a^l$ para el coeficiente de absorción vendrá dado 
+por los valores del ``fondo'' del tejido analisado (que se asume conocido \textit{a priori}). 
+El límite superior estará dado por valores típicos del coeficiente de absorción 
+para el tejido que se está examinando, y lo fijaremos en $a^u=1$.
+
+El algoritmo para la solución del problema inverso de transporte radiativo, 
+para un dado número de iteraciones $i_{\text{max}}$, se sumariza en el 
+algorítmo~\ref{algfcinv}.
+\begin{algorithm}
+\caption{Algoritmo para la resolución del problema inverso en paralelo}
+\label{algfcinv}
+\begin{algorithmic}[1]
+\State \textbf{para} las iteraciones $i=1,\ldots,i_{\text{max}}$ \textbf{hacer}
+\State \hskip0.5em \textbf{para} cada fuente generalizada $q_j, j = 1,\ldots,N_q$ \textbf{hacer}
+\State \hskip0.75em Resolver el problema directo por medio del algoritmo~\ref{algfc}
+\State \hskip0.75em Resolver el problema adjunto mediante el algoritmo~\ref{algfc}
+\State \hskip0.5em\textbf{terminar}
+\State \hskip0.5em Construir el gradiente ec.~\eqref{eq:FDwin22}
+\State \hskip0.5em Llamar al algoritmo lm-BFGS-b para actualizar el coeficiente $a^i(\x)$.       
+\State  \textbf{terminar}
+\end{algorithmic}
+\end{algorithm}
+La primera demostración que haremos ilustrará una aplicación potencial 
+de la técnica de tomografía óptica, para el diagnóstico 
+de un paciente para el cual se dispone de una imágen por resonancia magnética (MRI)
+del cuello (fig.~\ref{fig:mriim}). Describimos una situación teniendo 
+en mente la aplicación potencial para el estudio de la evolución de la metastasis 
+en una región específica del cuerpo (el cuello), tiempo después 
+de haber adquirido la imagen MRI. Similarmente, el procedimiento 
+podría utilizarse para seguir la evolución del tratamiento de un tumor en esta región. 
+La portabilidad y el bajo costo de los sistema de tomografía óptica 
+hace que estos dispositivos sean mucho mas accesibles para el diagnóstico 
+que las imagenes obtenidas por sistemas MRI, para monitorear 
+la evolución del tratamiento y el avance de un tumor de forma regular. 
+
+En las referencias~\cite{Fujii2016b,Fujii2016} se realizó un estudio sobre el problema directo de la propagación de la luz en el cuello humano. Aquí presentamos un modelo similar 
+para el cuello humano, y extendemos la idea para el estudio 
+de la convergencia del problema inverso siguiendo las lineas de las referencias~\cite{Fujii2016b,Fujii2016} con la intención de capturar 
+algunas de las características mas importantes del cuello humano, 
+manteniendo una geometría simple. 
+
+Estudiaremos la convergencia por iteración del algoritmo~\ref{algfcinv} 
+para un número variable de fuentes y detectores, para una dada configuración. 
+Para evaluar la convergencia en el proceso de reconstrucción cuantificamos 
+el error en la norma $L^2$ definido como
+\begin{equation}
+\begin{split}
+\begin{aligned}
+E(i)=\sqrt{\frac{\int_{\Omega}(a^t(\x)-a^i(\x))^2  d\x}{\int_{\Omega}a^t(\x) d\x}}
+\end{aligned}
+\end{split}
+\label{eq:errl2}
+\end{equation}
+donde $E(i)$ corresponde al error en la norma $L^2$ para la iteración $i$, 
+donde $a^t(\x)$ es el coeficiente de absorción ``verdadero'', y $a^i(\x)$ 
+es el coeficiente de absorción obtenido por el algorítmo~\ref{algfcinv} 
+en la iteración $i$-ésima. 
+
+Buscaremos la existencia de un tumor en el tejido blando. 
+Los coeficientes de la columna vertebral, la médula espinal, y la traquea 
+se mantendran fijos en el proceso de reconstrucción, con $a^l=a^u=a(\x)$ 
+en estas regiones, con los coeficientes dados para cada tipo de tejido correspondiente, 
+los cuales se presentan en la tabla, y fueron tomados de la referencia~\cite{Fujii2016}
