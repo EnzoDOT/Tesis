@@ -1058,13 +1058,13 @@ En esta configuración, una fuente láser inyecta radiación $y_{\text{min}}$ en
 normal a $\partial \Omega$ (Fig.~\ref{fig:photonflux}).
 \begin{figure*}[h!]
 \centering
-  \includegraphics[width=0.325\textwidth]{figuras/sim_t30.png}
-  \includegraphics[width=0.325\textwidth]{figuras/sim_t100.png}
-  \includegraphics[width=0.325\textwidth]{figuras/sim_t170.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_MB_t30.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_MB_t100.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_MB_t170.png}
   \caption{Simulación para el modelo directo MB utilizando 
   el método FC--DOM en paralelo~\ref{algfc} presentado en 
   la sección~\ref{subsec:FC-DOM}. En la figura se muestra el 
-  flujo escalar $\Phi(\x,t)$, ec.~\eqref{eq:photondensity} para tres tiempos 
+  flujo escalar $\phi(\x,t)$, ec.~\eqref{eq:photondensity} para tres tiempos 
   diferentes utilizando el método MB con una única fuente generalizada. De 
   izquierda a derecha se tiene $t=30$ps, 
 $t=100$ps y $t=170$ps, para una fuente láser 
@@ -1083,17 +1083,27 @@ se enciende la fuente en $y_{\text{max}}$ (Fig.~\ref{fig:photonflux2}).
 
 \begin{figure*}[h!]
 \centering
-  \includegraphics[width=0.325\textwidth]{figuras/sim_t30_FMS.png}
-  \includegraphics[width=0.325\textwidth]{figuras/sim_t230_FMS.png}
-  \includegraphics[width=0.325\textwidth]{figuras/sim_t430_FMS.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t30.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t100.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t170.png}\\
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t230.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t300.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t370.png}\\
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t430.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t500.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t570.png}\\
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t630.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t700.png}
+  \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t770.png}
   \caption{Simulación para el modelo directo FMS utilizando 
   el método FC--DOM en paralelo~\ref{algfc} presentado en 
   la sección~\ref{subsec:FC-DOM}. En la figura se muestra el 
-  flujo escalar $\Phi(\x,t)$, ec.~\eqref{eq:photondensity} para tres tiempos 
+  flujo escalar $\phi(\x,t)=\phi(\x)$, ec.~\eqref{eq:photondensity} para tiempos 
   diferentes utilizando el método FMS con una única fuente generalizada 
   que contiene cuatro fuentes láser superpuestas, con tiempos de retraso $\tau=200$ps. De 
-  izquierda a derecha se tiene $t=30$ps, $t=230$ps y $t=430$ps. La última fuente 
-  láser se enciende a $t=600$ps y por eso no se observa en las figuras.}
+  izquierda a derecha y de arriba hacía abajo, se tiene $t=30$ps, $t=100$ps y $t=170$ps, 
+   $t=230$ps, $t=300$ps y $t=370$ps,  $t=430$ps, $t=500$ps y $t=570$ps, 
+    $t=630$ps, $t=700$ps y $t=770$ps.}
  \label{fig:photonflux2}
 \end{figure*}
 
@@ -1216,13 +1226,13 @@ el error en la norma $L^2$ definido como
 \begin{equation}
 \begin{split}
 \begin{aligned}
-E(i)=\sqrt{\frac{\int_{\Omega}(a^t(\x)-a^i(\x))^2  d\x}{\int_{\Omega}a^t(\x) d\x}}
+E(i)=\sqrt{\frac{\int_{\Omega}(a^v(\x)-a^i(\x))^2  d\x}{\int_{\Omega}a^v(\x) d\x}}
 \end{aligned}
 \end{split}
 \label{eq:errl2}
 \end{equation}
 donde $E(i)$ corresponde al error en la norma $L^2$ para la iteración $i$, 
-donde $a^t(\x)$ es el coeficiente de absorción ``verdadero'', y $a^i(\x)$ 
+donde $a^v(\x)$ es el coeficiente de absorción ``verdadero'', y $a^i(\x)$ 
 es el coeficiente de absorción obtenido por el algorítmo~\ref{algfcinv} 
 en la iteración $i$-ésima. 
 
@@ -1230,4 +1240,55 @@ Buscaremos la existencia de un tumor en el tejido blando.
 Los coeficientes de la columna vertebral, la médula espinal, y la traquea 
 se mantendran fijos en el proceso de reconstrucción, con $a^l=a^u=a(\x)$ 
 en estas regiones, con los coeficientes dados para cada tipo de tejido correspondiente, 
-los cuales se presentan en la tabla, y fueron tomados de la referencia~\cite{Fujii2016}
+los cuales se presentan en la tabla~\ref{tab:cuello}, y fueron tomados de las referencias~\cite{Bashkatov2011,Dehaes2011,Fujii2016}.
+
+\begin{table}[h!]
+\caption{Propiedades ópticas para el modelo de cuello humano}
+\vspace{-0.3cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+Órgano & ~ $a[1/cm]$ & ~ & $b[1/cm]$ ~ & $g$ ~ & ~ & $n_{\Omega}$ \\
+\hline
+%\hline
+Tejido blando & ~$0.3$ & ~ & $80$ ~ &$0.9$ ~  & $1.4$ \\
+Traquea & ~$0.0$ & ~ & $0.0$ ~ &$0.0$ ~ &  $1.0$\\
+Columna vertebral & ~$0.25$ & ~ & $148$ ~ &$0.9$   ~ &  $1.4$ \\
+Médula espinal & ~$0.17$ & ~ & $882$ ~ &$0.9$  ~ &  $1.4$ \\
+\hline
+\end{tabular}
+\label{tab:cuello}
+\end{center}
+\end{table}
+Para simplificar el modelo, tomamos el coeficiente de refraxión 
+de la traquea cómo $n_{\Omega}=1.4$. Esto evita las dificultades 
+encontradas para el modelado de la interfase entre la traquea y el tejido blando, 
+el cual para un modelado mas preciso requiere tener en cuenta la reflexión 
+de Fresnel en esta interfase goemétricamente compleja. Otras simplificaciones 
+adicionales consistieron en no considerar los vasos sanguíneos, y en la 
+simplificación de la geometría del cuello, el cual se tomo como una geometría 
+cuadrada.
+
+Por otra parte, fijamos el valor  $a^l(\x)=a^u(\x)=a_b(\x)$ 
+al valor del fondo en las proximidades de los bordes, para puntos 
+a una distancia menor a $0.5$cm. Este procedimiento genera una mejor 
+convergencia en el problema inverso de reconstrucción, y previene 
+la amplificación de los errores numéricos, originados por la existencia 
+de las capa límite~\cite{Gaggioli2021} discutidas en la sección~\ref{sec:}. 
+La resolución de la capa límite en el problema multidimensional exige de métodos 
+numéricos mas sofisticados que escapan al alcance de esta tesis. 
+
+El valor de fondo para la imagen MRI es tomado como el coeficiente inicial 
+en la iteración del método lm-BFGS-b. 
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.3\linewidth]{figuras/neck_mri.png} 
+  \includegraphics[width=0.48\linewidth]{figuras/neck_i.png} 
+  \caption{A la izquierda se tiene la Imagen de Resonancia Magnética~\cite{CCommons} para el modelo de cuello humano empleado. A la derecha, el coeficiente de absorción 
+  generado a partir de esta imagen, el cual fue utilizado como el coeficiente 
+  inicial en las reconstrucciones del coeficiente de absorción para éste modelo. 
+  Los coeficientes de absorción y dispersión 
+  para los distintos órganos fueron tomados de las referencias\cite{Bashkatov2011,Dehaes2011,Fujii2016}. } 
+ \label{fig:mriim}
+\end{figure}
