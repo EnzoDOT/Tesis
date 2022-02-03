@@ -178,7 +178,7 @@ La dirección de descenso, finalmente, se obtiene de la ecuación~\eqref{eq:dire
 el Hessiano por su aproximación $B^i$
 \begin{equation}
 \mathbf{d}^{i}=-(B^{i})^{-1} \nabla_a g[\mathbf{a}^i]. 
-\label{eq:HBFGS}
+\label{eq:HBFGS2}
 \end{equation}
 
 \subsection{El método de uso de memoria limitada lm-BFGS}
@@ -274,7 +274,7 @@ según
 \end{split}
 \label{eq:Toper}
 \end{equation}
-donde se hizo explícita la dependencia del operador de transporte \mathcal{T} 
+donde se hizo explícita la dependencia del operador de transporte $\mathcal{T}$ 
 con respecto a $\ut$. 
 
 Consideramos el problema ETR de valores iniciales y condiciones 
@@ -317,7 +317,7 @@ así como el modelado de la sensibilidad espacial de los fotodetectores.
   \caption{Grafico de la función ventana $w(v)$~\eqref{eq:sourcelabwind} utilizada 
   para modelar los perfiles temporales y ángular de las fuentes láser, 
   así como la sensibilidad espacial de los fotodetectores.}
- \label{fig:parallelgeom}
+ \label{fig:window}
 \end{figure}
 
 
@@ -445,7 +445,7 @@ y utlizando la ecuación~\eqref{eq:OpMed}, $g_i$ denota la funcional
 \end{equation}
 Para minimizar la función objetivo~\eqref{eq:FObjpr} utilizamos el algorítmo 
 de descenso por gradiente 
-lm-BFGS (ver ref.~\cite{Byrd1995} y secciones~\ref{sec:BFGS} y~\label{sec:lmBFGS}), 
+lm-BFGS (ver ref.~\cite{Byrd1995} y secciones~\ref{sec:BFGS} y~\ref{sec:lmBFGS}), 
 el cual se basa en el uso de la derivada funcional $\frac{d\Lambda}{da} [a;\delta a]$ 
 con respecto al coeficiente de absorción $a = a(\x)$ en la dirección $\delta a$. 
 Aquí notamos $\frac{d}{da}$ a la diferenciación de Gateaux~\cite{Hille1974}: 
@@ -875,7 +875,7 @@ satisfacen la relación
 siempre que los términos de borde se anulen, dadas las condiciones (i),~(ii) y (iii).
  \subsection{Verificación numérica de la expresion~\eqref{eq:FDwin2} para la derivada 
  funcional}
- \label{sec:gradc}
+ \label{sec:gradcver}
  
  En esta sección presentamos verificaciones numéricas para la derivada 
  funcional~\eqref{eq:FDwin2}, así como una comprobación de la precisión 
@@ -978,7 +978,7 @@ una función de forma piramidal, la cual es igual a uno en el punto
 Función de forma piramidal utilizada para producir las variaciones 
 en el coeficiente de absorción. Esta función vale uno en el punto $\x_{\ell_1,\ell_2}$ 
 y se anula a partir de los primeros vecinos de la grilla discreta.}
- \label{fig:esquemainv}
+ \label{fig:priamid}
 \end{figure}
  La función piramidal discretizada es aproximada como un producto 
  de deltas de Kronecker $\delta a_{\ell_1,\ell_2}=\delta_{r,\ell_1}\times\delta_{s,\ell_2}$.
