@@ -445,7 +445,7 @@ y utlizando la ecuación~\eqref{eq:OpMed}, $g_i$ denota la funcional
 \end{equation}
 Para minimizar la función objetivo~\eqref{eq:FObjpr} utilizamos el algorítmo 
 de descenso por gradiente 
-lm-BFGS-b (ver ref.~\cite{Byrd1995} y secciones~\ref{sec:BFGS} y~\label{sec:lmBFGS}), 
+lm-BFGS (ver ref.~\cite{Byrd1995} y secciones~\ref{sec:BFGS} y~\label{sec:lmBFGS}), 
 el cual se basa en el uso de la derivada funcional $\frac{d\Lambda}{da} [a;\delta a]$ 
 con respecto al coeficiente de absorción $a = a(\x)$ en la dirección $\delta a$. 
 Aquí notamos $\frac{d}{da}$ a la diferenciación de Gateaux~\cite{Hille1974}: 
@@ -538,7 +538,7 @@ los gradientes~\eqref{eq:Gradsumq} necesarios para la estrategia
 de minimización en un contexto discreto podrían generarse 
 evaluando y substituyendo en esta ecuación la derivada 
 $\frac{\partial u_i}{\partial a}[a;\delta a]$, para cada $a$ 
-discretizado en el proceso de minimización mediante el algorítmo lm-BFGS-b. 
+discretizado en el proceso de minimización mediante el algorítmo lm-BFGS. 
 Sin embargo, la evaluación de estas derivadas parciales utilizando, 
 por ejemplo, un esquema de diferencias finitas, requiere la evaluación 
 de una solución al problema de transporte~\eqref{eq:RTEt} para 
@@ -1068,7 +1068,8 @@ normal a $\partial \Omega$ (Fig.~\ref{fig:photonflux}).
   diferentes utilizando el método MB con una única fuente generalizada. De 
   izquierda a derecha se tiene $t=30$ps, 
 $t=100$ps y $t=170$ps, para una fuente láser 
-inyectando radiación en  $\x_s=(1.5,0)$cm.}
+inyectando radiación en  $\x_s=(1.5,0)$cm. La figura muestra la evolución 
+temporal de una ``onda de flujo de fotones'' difusos.}
  \label{fig:photonflux}
 \end{figure*}
  
@@ -1142,79 +1143,111 @@ originadas por fuentes láser individuales proveniente desde diferentes lugares.
  \label{fig:detread}
 \end{figure}
 
-\section{Reconstrucciones numéricas}
-\label{sec:inverseres}
+\section{Algoritmo para la resolución del problema inverso}
+\label{sec:inversesolv}
 
-En esta sección aplicamos los algoritmos desarrollados 
-en las secciones previas al problema inverso en tomgrafía óptica 
-y presentamos el algoritmo en forma final para la resolución 
-del problema inverso de transporte radiativo. 
-
-Aplicamos el algoritmo para la reconstrucción del coeficiente 
-de absorción, y comparamos los métodos MB y FMS propuesto en este trabajo. 
-Para ello, producimos datos sintéticos de la forma descripta en la sección~
-\ref{sec:sintetic}, donde agregamos un 10\% de ruido aleatorio a los datos obtenidos 
-para los detectores 
-mediante las simulaciones numéricas.
+Como se indico anteriorment, el algoritmo propuesto en esta tesis para la resolución del 
+problema inverso incorpora, en particular, la estrategia FMS, basada 
+en el uso de fuentes que se aplican en un único problema directo, 
+en lugar de la estrategia MB utilizada previamente en la literatura. 
+En el método MB, por cada fuente láser deben realizarse un par 
+de simulaciones para el problema dirécto y el problema adjunto, 
+para luego combinar los resultados para obtener el gradiente utilizado 
+en el método lm-BFGS. En cambio, en el método FMS propuesto, 
+se construye la función objetivo utilizado una única fuente 
+generalizada que contiene a todas las fuentes láser, de forma tal 
+que se utiliza un único par de simulaciones para los problemas directos 
+y adjuntos, lo cual, como se demuestra en la sección~\ref{sec:inverseres} 
+(de manera cualitativa en las figuras~\ref{fig:itdet} y~\ref{fig:ithead} 
+y de forma cuantitativa en las figuras~\ref{fig:reconst} y~\ref{fig:rechead}) 
+reduce los tiempos de computo para el problema inverso de manera significativa 
+(\eg en un factor de seis en la figura~\ref{fig:ithead}), sin que se 
+produzca un deterioro en la calidad de la imagen obtenida. 
 
 Buscamos el coeficiente de absorción que minimiza la ec.~\eqref{eq:FObjpr}  
-sujeto a las restricciones $a^l \leq a(\x) \leq a^u$, \ie, buscamos 
-el coeficiente $a(x)$ que es solución del problema 
+sujeto a las restricciones $a^l(\x) \leq a(\x) \leq a^u(\x) \forall \x$, \ie, buscamos 
+el coeficiente $a(\x)$ que es solución del problema 
 \begin{equation}
 \begin{split}
 \begin{aligned}
-\text{min}_{a^l \leq a(\x) \leq a^u} \Lambda[a]
+a(\x)=\text{argmin}_{a^l \leq \widetilde a(\x) \leq a^u} \Lambda[a]
 \end{aligned}
 \end{split}
 \label{eq:minprob}
 \end{equation}
 
 Las restricciones impuestas en el proceso de minimización estan dadas 
-por propiedades generales conocidas del coeficiente de absorción ($a^l\ge 0$ 
-es una restricción física que siempre debe cumplirse), y por cierto conocimiento 
-del coeficiente, obtenido previamente por otras técnicas tomográficas. 
-La situación que simulamos es una en la cual se buscan inclusiones sobre 
-cierto ``fondo'' conocido. Esta situación describe, \eg, los excesos de absorción 
-originados por la presencia de hemoglobina oxigenada debido a la presencia de un tumor 
-en el tejido con aplicaciones en el seguimiento y diágnostico de la enfermedad. 
+por propiedades generales conocidas del coeficiente de absorción ($a^l(\x)\ge 0$ 
+es una condición física que siempre debe cumplirse), y por cierto conocimiento 
+del coeficiente, obtenido previamente por otras técnicas tomográficas, lo 
+cual reduce el espacio de soluciones admisibles al problema de minimización~\eqref{eq:minprob}.
 
-Por este motivo, el mínimo $a^l$ para el coeficiente de absorción vendrá dado 
-por los valores del ``fondo'' del tejido analisado (que se asume conocido \textit{a priori}). 
-El límite superior estará dado por valores típicos del coeficiente de absorción 
-para el tejido que se está examinando, y lo fijaremos en $a^u=1$.
+El algoritmo para la resolución del problema inverso~\ref{algfcinv},
+procede de la siguiente manera. A partir de una estimación inicial $a^0(\x)$ para el
+coeficiente de absorción y utilizando las lecturas de los detectores experimentales
+$\widetilde{G}_{j,i}$, con $j=1, \ldots,N_d$ y $i=1,\ldots,N_q$, se resuelven
+los problemas directos y adjuntos~\eqref{eq:RTE}
+y~\eqref{eq:AdjointProblem}, a partir de lo cual se calcula el gradiente 
+funcional~\eqref{eq:FDwin22}. El gradiente funcional 
+se pasa al algoritmo lm-BFGS, que devuelve una actualización para 
+coeficiente de absorción $a^1(\x)$ que reduce las diferencias entre
+las lecturas de los detectores experimentales y los valores para los detectores simulados.
+La iteración de este procedimiento converge, mediánte el método lm-BFGS, al mínimo 
+de la función objetivo~\eqref{eq:FObjpr}.
 
 El algoritmo para la solución del problema inverso de transporte radiativo, 
 para un dado número de iteraciones $i_{\text{max}}$, se sumariza en el 
-algorítmo~\ref{algfcinv}.
+algorítmo~\ref{algfcinv}. En este algoritmo, $C \in \mathbb{R}$ representa un criterio 
+de convergencia preestablecido. El algorítmo se itera mientras el valor 
+de la función objetivo esté por encima de dicho criterio de convergencia.
 \begin{algorithm}
 \caption{Algoritmo para la resolución del problema inverso en paralelo}
 \label{algfcinv}
 \begin{algorithmic}[1]
-\State \textbf{para} las iteraciones $i=1,\ldots,i_{\text{max}}$ \textbf{hacer}
+\State Dar una estimación inicial $a^0(\x)$
+\State \textbf{para} $i=1,\ldots,i_{\text{max}}$ \textbf{hacer}
 \State \hskip0.5em \textbf{para} cada fuente generalizada $q_j, j = 1,\ldots,N_q$ \textbf{hacer}
 \State \hskip0.75em Resolver el problema directo por medio del algoritmo~\ref{algfc}
+\State \hskip0.75em Evaluar ec.~\eqref{eq:FObjpr}, sí $ \Lambda[a] < C $ ir a \ref{al:end}.
 \State \hskip0.75em Resolver el problema adjunto mediante el algoritmo~\ref{algfc}
 \State \hskip0.5em\textbf{terminar}
 \State \hskip0.5em Construir el gradiente ec.~\eqref{eq:FDwin22}
-\State \hskip0.5em Llamar al algoritmo lm-BFGS-b para actualizar el coeficiente $a^i(\x)$.       
-\State  \textbf{terminar}
+\State \hskip0.5em Llamar al algoritmo lm-BFGS para actualizar el coeficiente $a^{i+1}(\x)$.       
+\State \label{al:end} \textbf{terminar} con $a(\x)=a^i(\x)$
 \end{algorithmic}
 \end{algorithm}
+
+
+\section{Reconstrucciones numéricas}
+\label{sec:inverseres}
+En esta sección aplicamos los algoritmos desarrollados 
+en las secciones previas al problema inverso en tomografía óptica. 
+Los problemas inversos en tomografía óptica que consideramos 
+conciernen a configuraciones en las cuales se buscan inclusiones 
+sobre un tejido de ``fondo'' que se asume conocido. Esta situación describe, 
+\eg, los excesos en la absorción de la radiación originados 
+por la presencia de hemoglobina oxígenada en el cerebro, 
+producida por la respuesta hemodinámica debido a la activación 
+de una región determinada del cerebro~\cite{Boas2001,bluestone2001,Arridge1999,Hernandez2020}, 
+para aplicaciones neurocientíficas, 
+o el exceso de hemoglobina oxigenada originada por la presencia de un tumor 
+para aplicaciones en diagnósticos médicos~\cite{Althobaiti2017,Guven2003,Zhu2005,Zhu2010,Fujii2016b}.
+
 La primera demostración que haremos ilustrará una aplicación potencial 
-de la técnica de tomografía óptica, para el diagnóstico 
+de la técnica de tomografía óptica para el diagnóstico 
 de un paciente para el cual se dispone de una imágen por resonancia magnética (MRI)
 del cuello (fig.~\ref{fig:mriim}). Describimos una situación teniendo 
-en mente la aplicación potencial para el estudio de la evolución de la metastasis 
+en mente la aplicación potencial para el estudio de la evolución de la metástasis 
 en una región específica del cuerpo (el cuello), tiempo después 
 de haber adquirido la imagen MRI. Similarmente, el procedimiento 
 podría utilizarse para seguir la evolución del tratamiento de un tumor en esta región. 
 La portabilidad y el bajo costo de los sistema de tomografía óptica 
 hace que estos dispositivos sean mucho mas accesibles para el diagnóstico 
-que las imagenes obtenidas por sistemas MRI, para monitorear 
+que las imágenes obtenidas por sistemas MRI, para monitorear 
 la evolución del tratamiento y el avance de un tumor de forma regular. 
 
-En las referencias~\cite{Fujii2016b,Fujii2016} se realizó un estudio sobre el problema directo de la propagación de la luz en el cuello humano. Aquí presentamos un modelo similar 
-para el cuello humano, y extendemos la idea para el estudio 
+En las referencias~\cite{Fujii2016b,Fujii2016} se realizó un estudio sobre el problema directo de la propagación de la luz en el cuello humano. Aquí presentamos un modelo similar,
+ y extendemos la idea para el estudio 
 de la convergencia del problema inverso siguiendo las lineas de las referencias~\cite{Fujii2016b,Fujii2016} con la intención de capturar 
 algunas de las características mas importantes del cuello humano, 
 manteniendo una geometría simple. 
@@ -1237,8 +1270,8 @@ es el coeficiente de absorción obtenido por el algorítmo~\ref{algfcinv}
 en la iteración $i$-ésima. 
 
 Buscaremos la existencia de un tumor en el tejido blando. 
-Los coeficientes de la columna vertebral, la médula espinal, y la traquea 
-se mantendran fijos en el proceso de reconstrucción, con $a^l=a^u=a(\x)$ 
+Los coeficientes de la columna vertebral, la médula espinal, y la tráquea 
+se mantendrán fijos en el proceso de reconstrucción, con $a^l(\x)=a^u(\x)=a(\x)$ 
 en estas regiones, con los coeficientes dados para cada tipo de tejido correspondiente, 
 los cuales se presentan en la tabla~\ref{tab:cuello}, y fueron tomados de las referencias~\cite{Bashkatov2011,Dehaes2011,Fujii2016}.
 
@@ -1246,13 +1279,12 @@ los cuales se presentan en la tabla~\ref{tab:cuello}, y fueron tomados de las re
 \caption{Propiedades ópticas para el modelo de cuello humano}
 \vspace{-0.3cm}
 \begin{center}
-\begin{tabular}{cccccc}
+\begin{tabular}{ccccccc}
 \hline
-Órgano & ~ $a[1/cm]$ & ~ & $b[1/cm]$ ~ & $g$ ~ & ~ & $n_{\Omega}$ \\
+Órgano & ~ $a[1/cm]$ & ~ & $b[1/cm]$ ~ & $g$ ~ & $n_{\Omega}$ \\
 \hline
-%\hline
 Tejido blando & ~$0.3$ & ~ & $80$ ~ &$0.9$ ~  & $1.4$ \\
-Traquea & ~$0.0$ & ~ & $0.0$ ~ &$0.0$ ~ &  $1.0$\\
+Tráquea & ~$0.0$ & ~ & $0.0$ ~ &$0.0$ ~ &  $1.0$\\
 Columna vertebral & ~$0.25$ & ~ & $148$ ~ &$0.9$   ~ &  $1.4$ \\
 Médula espinal & ~$0.17$ & ~ & $882$ ~ &$0.9$  ~ &  $1.4$ \\
 \hline
@@ -1265,30 +1297,240 @@ de la traquea cómo $n_{\Omega}=1.4$. Esto evita las dificultades
 encontradas para el modelado de la interfase entre la traquea y el tejido blando, 
 el cual para un modelado mas preciso requiere tener en cuenta la reflexión 
 de Fresnel en esta interfase goemétricamente compleja. Otras simplificaciones 
-adicionales consistieron en no considerar los vasos sanguíneos, y en la 
+adicionales utilizadas consistieron en no considerar los vasos sanguíneos, y en la 
 simplificación de la geometría del cuello, el cual se tomo como una geometría 
 cuadrada.
 
-Por otra parte, fijamos el valor  $a^l(\x)=a^u(\x)=a_b(\x)$ 
+Por otra parte, fijamos el valor  $a(\x)=a^l(\x)=a^u(\x)$ 
 al valor del fondo en las proximidades de los bordes, para puntos 
 a una distancia menor a $0.5$cm. Este procedimiento genera una mejor 
-convergencia en el problema inverso de reconstrucción, y previene 
+convergencia en el problema de reconstrucción del coeficiente $a(\x)$, y previene 
 la amplificación de los errores numéricos, originados por la existencia 
-de las capa límite~\cite{Gaggioli2021} discutidas en la sección~\ref{sec:}. 
+de las capa límite~\cite{Gaggioli2021} discutidas en la sección~\ref{sec:blayer}. 
 La resolución de la capa límite en el problema multidimensional exige de métodos 
-numéricos mas sofisticados que escapan al alcance de esta tesis. 
+numéricos más sofisticados que escapan al alcance de esta tesis. 
 
-El valor de fondo para la imagen MRI es tomado como el coeficiente inicial 
-en la iteración del método lm-BFGS-b. 
+Aplicamos el algoritmo para la reconstrucción del coeficiente 
+de absorción, y comparamos los métodos MB y FMS propuesto en este trabajo. 
+Para ello, producimos datos sintéticos de la forma descripta en la sección~
+\ref{sec:sintetic}, donde agregamos un 10\% de ruido aleatorio a los datos obtenidos 
+para los detectores mediante las simulaciones numéricas, de forma de obtener 
+resultados que se acerquen a una situación experimental real.
+
+Como mencionamos anteriormente, la situación que simulamos es una en la cual se buscan inclusiones sobre 
+cierto ``fondo'' conocido. La situación que ilustramos en este primer caso corresponde 
+a los excesos de absorción 
+originados por la presencia de hemoglobina oxigenada debido a la presencia de un tumor 
+en el tejido, lo cual encuentra aplicaciones tanto en el diagnostico de la enfermedad, así 
+como en el seguimiento del tratamiento de la misma.
+
+El mínimo $a^l$ para el coeficiente de absorción vendrá dado 
+por los valores del ``fondo'' del tejido analisado (que se asume conocido \textit{a priori}). 
+El límite superior estará dado por valores típicos del coeficiente de absorción 
+para el tejido que se está examinando, y lo fijaremos en $a^u=1$.
+
+La imagen MRI es tomada como el coeficiente inicial $a^0(\x)$
+para la iniciación de las iteraciones. 
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[width=0.3\linewidth]{figuras/neck_mri.png} 
-  \includegraphics[width=0.48\linewidth]{figuras/neck_i.png} 
-  \caption{A la izquierda se tiene la Imagen de Resonancia Magnética~\cite{CCommons} para el modelo de cuello humano empleado. A la derecha, el coeficiente de absorción 
-  generado a partir de esta imagen, el cual fue utilizado como el coeficiente 
-  inicial en las reconstrucciones del coeficiente de absorción para éste modelo. 
-  Los coeficientes de absorción y dispersión 
-  para los distintos órganos fueron tomados de las referencias\cite{Bashkatov2011,Dehaes2011,Fujii2016}. } 
+  \includegraphics[width=0.25\linewidth]{figuras/neck_mri.png} 
+  \caption{Imagen de Resonancia Magnética~\cite{CCommons} para el modelo de cuello humano empleado. } 
  \label{fig:mriim}
 \end{figure}
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.48\linewidth]{figuras/neck_i.png} 
+  \includegraphics[width=0.48\linewidth]{figuras/neckmss_scatt.png} 
+  \caption{Izquierda: coeficiente de absorción 
+  generado a partir de la imagen~\ref{fig:mriim}, el cual fue utilizado como el coeficiente 
+  inicial $a^0(\x)$ en las reconstrucciones del coeficiente de absorción para éste modelo. 
+  Derecha: coeficiente de dispersión para el modelo de cuello humano.
+  Los coeficientes de absorción y dispersión 
+  para los distintos órganos fueron tomados de las referencias\cite{Bashkatov2011,Dehaes2011,Fujii2016}. } 
+ \label{fig:mriimc}
+\end{figure}
+
+En esta demostración, para el método FMS empleamos una única fuente generalizada 
+la cual contiene multiples fuentes láser. Las diferentes fuentes láser 
+contenidas en esta única fuente generalizada iluminan el borde del dominio $\partial \Omega$ 
+en la dirección normal al mismo, inyectando la radiación que atraviesa 
+el medio participante, sensándolo, y luego es recolectada por los detectores. 
+La configuración que elegimos para la activación de las fuentes es tal 
+que se activan de manera simultánea una fuente por cara. 
+Utilizamos un retraso temporal de $300$ps para fuentes vecinas ubicadas 
+en una misma cara. En detalle, para el caso con 16 fuentes, fijamos 
+$\tau_{1,1}=0$ps para las fuentes simultáneas ubicadas en $\x_1^1=(2.0,0.0)$, 
+$\x_1^2=(10.0,2.0)$, $\x_1^3=(8.0,10.0)$,  $\x_1^4=(0.0,8.0)$, donde utilizamos 
+el supraíndice para indicar las diferentes fuentes láser individuales, y el subíndice 
+para indicar el teimpo de retraso temporal correspondiente $\tau_{k,1}$ (ver la ecuación~\eqref{eq:RTEsources}).
+El resto de las fuentes se configuran de la siguiente manera: 
+$\x_2^1=(4.0,0.0)$, 
+$\x_2^2=(10.0,4.0)$, $\x_2^3=(6.0,10.0)$,  $\x_2^4=(0.0,6.0)$ con $\tau_{2,1}=300$ps, 
+$\x_3^1=(6.0,0.0)$, 
+$\x_3^2=(10.0,6.0)$, $\x_3^3=(4.0,10.0)$,  $\x_3^4=(0.0,4.0)$ con $\tau_{3,1}=600$ps 
+and $\x_4^1=(4.0,0.0)$, 
+$\x_4^2=(10.0,4.0)$, $\x_4^3=(6.0,10.0)$,  $\x_4^4=(0.0,6.0)$ con retraso temporal $\tau_{4,1}=900$ps. 
+
+Este arreglo fue guiado por la idea de utilizar en el métofo FMS como fuentes simultaneas 
+aquellas que están geométricamente más alejadas unas de otras. Debido 
+al decaimiento exponencial en la onda de densidad de fotones difusos (ver fig.~\ref{fig:photonflux}), es esperable que cada fuente láser tenga un efecto despreciable en las lecturas de los detectores cercanos a otras fuentes geométricamente lejanas, 
+aún cuando fueron activadas de manera simultánea. Para dar tiempo suficiente 
+a la relajación de las ondas de fotones producidas por las fuentes activadas 
+de forma más tardía, cada simulación directa en el método FMS fue evolucionada 
+hasta el tiempo final $t_{\text{max}}=1400$ps. Para los casos en los que se utilizaron 
+un número menor de fuentes, la configuración para la activación de las mismas 
+fue similar. Para el método MB, cada simulación directa fue evolucionada hasta el tiempo 
+final $t_{\text{max}}=600$ps, con los detectores y las fuentes ubicados en las mismas 
+posiciones que las utilizadas en el método FMS, y utilizando las mismas grillas numéricas, 
+e igual número de procesadores en cada caso.
+
+\begin{figure*}[h!]
+\centering
+  \includegraphics[width=0.49\textwidth]{figuras/detsSweep.eps}
+  \includegraphics[width=0.49\textwidth]{figuras/detsMSS.eps}
+\\
+    \vspace{0.3cm}
+  \includegraphics[width=0.49\textwidth]{figuras/sourcesSweep.eps}
+  \includegraphics[width=0.49\textwidth]{figuras/sourcesMSS.eps}
+  \caption{Convergencia obtenida para el error en la norma $L^2$ ec.~\eqref{eq:errl2} 
+  del coeficiente de absorción con respecto al número de iteraciones, 
+  para un número variable de detectores (arriba) y de fuentes láser (abajo), para los métodos 
+  MB y FMS. 
+   A la izquierda: 
+  error en la norma $L^2$ ec.~\eqref{eq:errl2} para 100 iteraciones del método MB. 
+  Derecha:error en la norma $L^2$ ec.~\eqref{eq:errl2} para 100 iteraciones del método FMS. 
+  Para las simulaciones en el panel superior se utilizaron 16 fuentes láser. Para 
+  las simulaciones en el panel inferior, se utilizaron 36 detectores.}
+ \label{fig:itdet}
+\end{figure*}
+
+
+Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
+presentan propiedades de convergencia similares para un número variable 
+de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
+el método FMS tomó  $12689$ segundos para llegar a las 100 iteraciones, 
+del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
+dando una aceleración en la reconstrucción por un factor cercano a siete. 
+En la figura además se aprecia que incrementar el número de fuentes y de detectores 
+genera una mejora considerable en la convergencia del problema inverso 
+para un número fijo de iteraciones. El número de fuentes tiene un impacto 
+mayor en las reconstrucciones que el número de detectores. 
+Esto puede entenderse de la siguiente manera, dado que la función de las fuentes 
+es producir los fotones que viajan a través del medio participante para sensarlo 
+y finalmente ser recolectados en los detectores, si bien los detectores son necesarios 
+para conocer la distribución de los fotones en el medio, en el problema adjunto~\eqref{eq:AdjointProblem} 
+son las diferencias $(G_j[u_i]-\widetilde{G}_{j,i})$ los que cumplen el rol de las fuentes, 
+pero la intensidad de estas ``fuentes'' en el problema adjunto dependen de la cantidad 
+de fotones originados en las fuentes láser que inyectan la radiación en el medio participante 
+para llegar luego a los detectores. Puede argumentarse que por esta misma razón, 
+es mas importante la cantidad de fuentes que inyectan radiación en el medio para sensar 
+la totalidad de $\partial \Omega$, que si esas fuentes son simuladas en problemas 
+directos separados, lo cual sugiere que el método FMS es una estrategia 
+de optimización adecuada que permite ganar tiempo de cómputo aprovechando 
+el uso de fuentes simultáneas en único problema directo.
+
+\pagebreak
+En la figura~\ref{fig:reconst} mostramos el coeficiente de absorción verdadero, 
+junto con los coeficientes de absorción obtenidos mediante la resolución del problema 
+inverso empleando las estrategias MB y FMS, con 16 fuentes y 36 detectores 
+para 100 iteraciones del algorítmo~\ref{algfcinv}. Como puede observarse, 
+las reconstrucciones obtenidas por ambos métodos son de similares características. 
+\begin{wrapfigure}{r}{0.48\textwidth}
+%\begin{figure*}[h!]
+\centering
+  \includegraphics[width=0.45\textwidth]{figuras/necktrue.png}\\
+
+  \includegraphics[width=0.45\textwidth]{figuras/necksweep.png}\\
+
+  \includegraphics[width=0.45\textwidth]{figuras/neckmss.png}
+  \caption{De arriba a abajo: coeficiente de absorción verdadero, y
+  coeficientes de absorción obtenidos mediante resolución del problema inverso para 100 iteraciones de los métodos MB y FMS, respectivamente.}
+ \label{fig:reconst}
+%\end{figure*}
+\end{wrapfigure}
+Finalmente, presentaremos una reconstrucción simulando un ``modelo de cabeza''. 
+Para esta demostración, utilizaremos el modelo de cabeza similar 
+a los utilizados en las referencias~\cite{Klose2002,Prieto2017}. 
+Este modelo de cabeza simula la situación típica donde 
+se utiliza tomografía óptica para estudiar la actividad hemodinámica 
+en el cerebro humano, y captura la característica más importante 
+en este contexto, el cual es la región ubicada entre el cráneo y el cerebro, 
+la cual contiene un fluido de baja absorción y baja dispersión, conocido 
+como fluido cerebroespinal. Esta región cumple la función de 
+amortiguar al cerebro ane movimientos bruscos. Además, el fluido cerebroespinal 
+se encarga de transportar nutrientes hacia el cerebro, y de
+eliminar metabolitos.
+Dado que el fluido cerebroespinal presenta coeficientes de absorción y de dispersión 
+despreciables, la ecuación de difusión de fotones no es físicamente preciso para modelar 
+el transporte de fotones en esta región, por lo cual debe emplearse la ecuación de transporte.
+En la referencia~\cite{Prieto2017} se utilizan 16 fuentes, 4 por cara, para 
+un modelo de cabeza similar. 
+\pagebreak
+\clearpage
+
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/l2err.eps}\\
+  \caption{Evolución del error en la norma $L^2$ por iteración ec.~\eqref{eq:errl2} para el coeficiente de absorción, obtenido para el modelo de cabeza humana para los métodos MB y FMS.}
+ \label{fig:ithead}
+\end{figure}
+
+\noindent Aquí emplearemos 32 detectores, con 8 detectores por cara, 
+e igual número de fuentes. 
+Mostramos el coeficiente de absorción después de 50 iteraciones del método MB, 
+e iteramos el método FMS hasta obtener un error de convergencia similar en la norma $L^2$~\eqref{eq:errl2}. En estas reconstrucciones, nuevamente buscamos inclusiones 
+sobre un fondo conocido, el cual es utilizado como estimación inicial $a^0(\x)$. 
+La región del fluido cerebroespinal, así como la región por fuera del mismo, 
+se asumen conocidos (dado que en estas regiones no puede ocurrir la activación cerebral), 
+y se mantienen fijos durante el proceso de recontrucción. Buscamos las inclusiones 
+en la región circular interior, dado que es en esta región donde se encontraría 
+el cerebro en una situación menos idealizada.
+
+Para mostrar que también pueden emplearse otras estrategias de activación, 
+en esta prueba utilizaremos una configuración diferente para la 
+activación de las fuentes en el método FMS. Todas las fuentes ubicadas 
+en una misma cara serán activadas de manera simultánea. En la notación 
+utilizada anteriormente, tendremos $\x_1^1=(1.0,0.0)$, 
+$\x_1^2=(2.0,0.0)$, $\x_1^3=(3.0,0.0)$, $\x_1^4=(4.0,0.0)$, con retardo temporal $\tau_{1,1}=0$ps. Luego 
+$\x_2^1=(1.0,5.0)$, 
+$\x_2^2=(2.0,5.0)$, $\x_2^3=(3.0,5.0)$,  $\x_2^4=(4.0,5.0)$ con $\tau_{2,1}=100$ps, 
+$\x_3^1=(5.0,1.0)$, 
+$\x_3^2=(5.0,2.0)$, $\x_3^3=(5.0,3.0)$,  $\x_3^4=(5.0,4.0)$ con $\tau_{3,1}=400$ps 
+y $\x_4^1=(0.0,1.0)$, 
+$\x_4^2=(0.0,2.0)$, $\x_4^3=(0.0,3.0)$,  $\x_4^4=(0.0,4.0)$ con retardo temporal de $\tau_{4,1}=500$ps.
+\begin{wrapfigure}{r}{0.48\textwidth}
+\centering
+  \includegraphics[width=0.45\textwidth]{figuras/head_true.png}\\
+  \includegraphics[width=0.45\textwidth]{figuras/head_sweep.png}\\
+  \includegraphics[width=0.45\textwidth]{figuras/head_ours.png}
+  \caption{De arriba a abajo: coeficiente de absorción verdadero, y coeficientes de 
+  absorción obtenidos para 50 iteraciones del método MB, y 79 iteraciones del métofo FMS.}
+ \label{fig:rechead}
+\end{wrapfigure}
+En la figura~\ref{fig:ithead} mostramos la evolución del error ec.~\eqref{eq:errl2} 
+para los métodos MB y el método FMS propuesto. En la figura~\ref{fig:rechead} 
+mostramos el coeficiente de absorción verdadero, y los obtenidos al final 
+de la iteración para cada método.
+
+En términos de tiempo computacional, las cincuenta iteraciones del método 
+MB tomaron mas de seis veces que las setenta y nueve iteraciones del 
+método FMS. Si los dos métodos fueran iterados igual número de iteraciones, 
+se obtendrían reconstrucciones similares, con un detrimento en favor 
+del método MB, pero con el método FMS realizando las iteraciones en casi un órden 
+de magnitud más rápido. La calidad de las reconstrucciones han mostrado 
+depender en la discretización numérica utilizada. En particular, 
+si se utilizan menos direcciones discretas, se obtienen 
+reconstrucciones de menor calidad para ambos métodos, 
+posiblemente debido a la aparición del efecto de rayos 
+en el interior de la región de baja absorción y dispersión. 
+
+También es posible emplear otras estrategias de activación en el método 
+FMS. A pesar de que no hemos explorado otras posibilidades, 
+es posible incluir más fuentes generalizadas, con diferentes 
+estrategias de activación cada una de ellas. 
+
+
+
+
