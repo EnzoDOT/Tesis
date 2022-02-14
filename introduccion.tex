@@ -3,8 +3,6 @@
 \rhead{\textit{Introducción}}
 \vspace{0.01\textheight}
 
-
-%\pagebreak
 La ecuación de transporte radiativo (ETR de ahora en adelante) es la forma lineal de la ecuación de transporte de Boltzmann, 
 cuyo dominio de definición es el espacio de las fases. Ésta ecuación modela el transporte 
 de radiación electromagnética en un medio participante ---la radiación en el proceso de transporte 
@@ -12,25 +10,25 @@ interactúa con el medio, siendo absorbida, dispersada y emitida por éste---. L
  general (para las cuales las interacciones mutuas entre las partículas involucradas 
  en el proceso de transporte puede ser despreciada). La importancia del modelado del transporte de 
  partículas neutras (siendo los fotones la partícula involucrada en el proceso de transporte de 
- radiación electromagnética) difícilmente puede ser sobreestimada, ya que dicho modelado encuentra aplicaciones en diversas
+ radiación electromagnética) difícilmente puede ser sobrestimada, ya que dicho modelado encuentra aplicaciones en diversas
  áreas de la ciencia y la tecnología, como lo es el transporte de radiación 
- términca para aplicaciones industriales~\cite{Howell2010, Thynell1998}, la dinámica de 
+ térmica para aplicaciones industriales~\cite{Howell2010, Thynell1998}, la dinámica de 
  gases~\cite{Duderstadt1979}, el transporte de radiación en atmósferas estelares y 
  planetarias~\cite{Qin2015, Dymond1997, Chandrasekhar1960}, el diagnóstico médico de 
  tumores~\cite{Zhu2005, Zhu2010, Fujii2016b}, la planificación y dosificación 
- de radiación en radioterapia~\cite{Vassiliev2010,Bedford2019}, el diagnóstico de artrítis~\cite{Klose2002, Netz2001} 
+ de radiación en radioterapia~\cite{Vassiliev2010,Bedford2019}, el diagnóstico de artritis~\cite{Klose2002, Netz2001} 
  y el modelado de transporte de neutrones para el desarrollo 
  y diseño de reactores nucleares~\cite{Larsen2006, Sanchez1982, Anli2006}, entre otros~\cite {Mishchenko1999, Prasher2003}. 
  En cuanto al transporte de radiación electromagnética, la ETR puede derivarse, bajo ciertas aproximaciones, como un límite asintótico 
- para soluciones de las ecuaciones de Maxwell. La cantidad modelada por la ETR, comunmente denominada 
+ para soluciones de las ecuaciones de Maxwell. La cantidad modelada por la ETR, comúnmente denominada 
  intensidad específica, queda relacionada en dicho límite con el vector de Poynting~\cite{Mishchenko2002, Ripoll2011} 
- en la teoría ondulatoria del electromagnétismo. Los fenómenos ondulatorios como la interferencia y la difracción no son
+ en la teoría ondulatoria del electromagnetismo. Los fenómenos ondulatorios como la interferencia y la difracción no son
  capturado por la ETR, la cual expresa esencialmente la conservación de la
  energía irradiada a escala mesoscópica en el campo electromagnético.
 
  La tomografía óptica es una técnica tomográfica no invasiva en la que
  radiación electromagnética no ionizante es inyectada dentro del tejido en estudio.
- La radiación emergente es detectada mediante fotodectectors 
+ La radiación emergente es detectada mediante fotodectectores 
  ubicados en el contorno del tejido biológico que se está analizando. A
   partir de la luz detectada, el objetivo es la reconstrucción de
  los parámetros ópticos que caracterizan al tejido biológico. Esta técnica 
@@ -41,16 +39,16 @@ interactúa con el medio, siendo absorbida, dispersada y emitida por éste---. L
  La utilización de radiación no 
  ionizante implica que este tipo de radiación no es cancerígena, a diferencia de los rayos-X, 
  por lo cual es una técnica que podría reemplazar a las tomografías 
- computarizadas de rayos--X para el diagnóstico de cáncer de mama, entre otros. 
+ computarizadas de rayos-X para el diagnóstico de cáncer de mama, entre otros. 
  
  La ETR es utilizada 
  en tomografía óptica como
  un modelo para el transporte de fotones en el tejido biológico a una longitud de onda previamente determinada, 
  que típicamente proviene de una fuente láser.
- La ``ventana óptica'' ubicada en el rango de longitudes de onda del espectro electromagnético comprendida entre los 600 a 900 nanometros permite a la radiación en el 
+ La ``ventana óptica'' ubicada en el rango de longitudes de onda del espectro electromagnético comprendida entre los 600 a 900 nanómetros permite a la radiación en el 
  infrarrojo cercano penetrar y sensar varios centímetros en el interior del tejido biológico~\cite{Boas2001}. 
  Para estas longitudes de onda del espectro electromagnético, el tejido humano se comporta 
- como un medio altamente dispersivo. Los fotones viajan através del
+ como un medio altamente dispersivo. Los fotones viajan a través del
  tejido, sufriendo múltiples colisiones de dispersión elástica, describiendo trayectorias 
 aleatorias.
 
@@ -62,26 +60,26 @@ aleatorias.
  la información de la trayectoria de los fotones se pierde, y no puede ser efectivamente explotada,
  lo que da como resultado los bajos niveles de resolución que se obtienen en esta disciplina. 
  Esta es una característica particular de la técnica, que la distingue de la tomografía 
- por rayos--X, donde los fotones sufren poca dispersión y la transformada de 
+ por rayos-X, donde los fotones sufren poca dispersión y la transformada de 
 Radon resulta eficiente para la obtención de las imágenes. A sí mismo, 
  dado que el coeficiente de absorción depende fuertemente en la longitud de onda 
  de la radiación electromagnética utilizada, esta técnica provee alto contraste, 
  ya que dicha longitud de onda se puede ajustar a la longitud de onda de absorción 
  del medio de interés que quiere detectarse, \eg utilizando radiación alrededor de los $650$nm 
- para distinguir hemoglobina oxígenada de la desoxihemoglobina~\cite{Boas2001}. La angiogenesis 
+ para distinguir hemoglobina oxigenada de la desoxihemoglobina~\cite{Boas2001}. La angiogenesis 
  cumple un rol central en el crecimiento de los tumores. Este es 
- el mecanismo mediante el cual las células tumorales generan los vasos sanguineos 
+ el mecanismo mediante el cual las células tumorales generan los vasos sanguíneos 
  necesario para que las células cancerosas se alimenten y se reproduzcan. Por este 
- motivo un caso de particular interés es la detección de la hemoglobina, ya que esta indica la presencia de vasos sanguineos, los cuales pueden ser un indicador de la presencia y del estado de un tumor, para su detección o para moniotoreo y seguimiento en su tratamiento. 
+ motivo un caso de particular interés es la detección de la hemoglobina, ya que esta indica la presencia de vasos sanguíneos, los cuales pueden ser un indicador de la presencia y del estado de un tumor, para su detección o para monitoreo y seguimiento en su tratamiento. 
  Por otra parte, 
  la activación de diferentes regiones del cerebro 
- es acompañada por una respuesta hemodinámica que lleva sangre oxígenada 
+ es acompañada por una respuesta hemodinámica que lleva sangre oxigenada 
  a las mismas. La detección de la hemoglobina 
- oxígenada es por lo tanto un indicador de actividad cerebral, con aplicaciones 
+ oxigenada es por lo tanto un indicador de actividad cerebral, con aplicaciones 
  en neurociencias. 
  
- La reconstruccion de las propiedades de absorción en el tejido humano permiten la identificación de tumores~\cite{Zhu2005, Zhu2010, Fujii2016b},
- la obtención de imagenes funcionales del cerebro~\cite{Boas2001, bluestone2001, Arridge1999}, y la caracterización de los diferentes
+ La reconstrucción de las propiedades de absorción en el tejido humano permiten la identificación de tumores~\cite{Zhu2005, Zhu2010, Fujii2016b},
+ la obtención de imágenes funcionales del cerebro~\cite{Boas2001, bluestone2001, Arridge1999}, y la caracterización de los diferentes
  constituyentes del tejido humano para diagnóstico médico, entre otros. En este trabajo nos enfocamos en
  la reconstrucción del coeficiente de absorción, aunque
  el enfoque propuesto puede ser fácilmente generalizado para la reconstrucción 
@@ -98,13 +96,13 @@ Radon resulta eficiente para la obtención de las imágenes. A sí mismo,
  al Hessiano de la función objetivo (a ser 
  introducida en la sección~\ref{sec:inverso}) para encontrar el mínimo deseado. En las referencias~\cite{Prieto2017,Boulanger2005} 
  el problema inverso en tomografía óptica en dos dimensiones espaciales (2D)
-es presentado, utlizando la ETR dependiente del tiempo, sin considerar las condiciones de contorno de Fresnel. Debido a los altos costos computacionales,
+es presentado, utilizando la ETR dependiente del tiempo, sin considerar las condiciones de contorno de Fresnel. Debido a los altos costos computacionales,
  solo se emplean grillas numéricas de poca resolución,
  haciendo que estos enfoques no sean adecuados para situaciones reales, que pueden requerir
  de soluciones numéricas mejor convergidas, y dominios espaciales más grandes. 
  Los métodos de alto orden
  permiten obtener soluciones precisas de la ETR
- utilizando grillas numéricas mas gruesas, en comparación a métodos de menor orden. Esto impacta en los recursos computacionales requeridos para una precisión dada, en términos de tiempo computacional y exigencias de memoria, que se vuelven prohibitivos muy rápidamente debido a la alta dimensionalidad de la ETR. Los algorítmos propuestos 
+ utilizando grillas numéricas mas gruesas, en comparación a métodos de menor orden. Esto impacta en los recursos computacionales requeridos para una precisión dada, en términos de tiempo computacional y exigencias de memoria, que se vuelven prohibitivos muy rápidamente debido a la alta dimensionalidad de la ETR. Los algoritmos propuestos 
  en este trabajo pueden ser fácilmente extendidos a geometrías de tres dimensiones espaciales (3D). En geometrías 2D, la ETR
  conserva la complejidad matemática de los problemas 3D, 
  exigiendo menor cantidad de recursos computacionales.
@@ -114,13 +112,13 @@ modelo físicamente preciso para el transporte de fotones en el tejido biológic
 \cite{Klose2009, Arridge2009}, pero su aplicabilidad en el contexto de
 los problemas inversos en tomografía óptica se ha visto obstaculizada por el alto costo computacional requerido para su solución. 
 
-El desarrollo de estrategias eficientes y de algorítmos capaces de distribuir el trabajo en máquinas paralelas es particularmente importante para la
+El desarrollo de estrategias eficientes y de algoritmos capaces de distribuir el trabajo en máquinas paralelas es particularmente importante para la
 resolución de los problemas directos e inversos para la ETR en 3D, donde las exigencias 
 de memoria RAM y
 los requisitos computacionales se vuelven prohibitivos muy rápidamente
 debido a la alta dimensionalidad de la ETR, que en problemas 3D
 involucra dos variables direccionales asociadas a las velocidades en 3D (definidas 
-en la esféra unitaria), además de las tres variables espaciales y el tiempo.
+en la esfera unitaria), además de las tres variables espaciales y el tiempo.
 
 En esta tesis se abordan estas dificultades y exigencias computacionales 
 mediante una combinación de tres estrategias principales, (i)~el uso de

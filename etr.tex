@@ -7,10 +7,10 @@ Como mencionamos en la introducción, en este trabajo resolvemos el problema inv
 como un problema de minimización no lineal, basado en un modelo físico para 
 el transporte de fotones. Este modelo para el transporte de los fotones, 
 para el cual empleamos la ecuación de transferencia radiativa, es lo que 
-se denomina el modelo directo. En el modelo directo, los parametros 
- para el problema de transferencia radiativa son conocidos (condicion inicial, condiciones de contorno, 
+se denomina el modelo directo. En el modelo directo, los parámetros 
+ para el problema de transferencia radiativa son conocidos (condición inicial, condiciones de contorno, 
 y parámetros ópticos) y lo que se busca es la solución a la ETR, la cual modela 
-el transporte de los fotones en el medio, y da como resolutado la distribución 
+el transporte de los fotones en el medio, y da como resultado la distribución 
 espacial de los fotones, para cada dirección de propagación a cada instante del tiempo. 
 El problema inverso será abordado mas adelante, 
 y su diferencia principal con el modelo directo es que lo que busca 
@@ -51,7 +51,7 @@ que puede encontrarse en, \eg\cite{Chandrasekhar1960,Lewis1984}. En trabajos
 más recientes se estableció la conexión entre la ETR y las ecuaciones de Maxwell
 ~\cite{Mishchenko1999, Prasher2003}. También puede establecerse 
 la conexión entre la ETR y la ecuación de Boltzmann, 
-en partícular la ETR es una ecuación de Boltzmann linearizada, 
+en particular la ETR es una ecuación de Boltzmann linearizada, 
 donde no interviene el término no lineal por considerarse 
 despreciable, y el cual, físicamente corresponde a las 
 interacciones de las partículas transportadas con ellas mismas~\cite[Cap. 4]{Cercignani1988}. 
@@ -63,7 +63,7 @@ en dos dimensiones espaciales
 \begin{split}
 \begin{aligned}
 &\frac{1}{c}\frac{\partial }{\partial t}\ut + \hth \cdot \nabla \ut+a(\x)\ut  \\
-&\quad \quad \quad  \quad \quad \; \;\,  +b(\x)\ut = \int_{S^1}\eta(\hth\cdot\hth ') 
+&\quad \quad \quad  \quad \quad \; \;\,  +b(\x)\ut = b(\x)\int_{S^1}\eta(\hth\cdot\hth ') 
 u(\x,\hat \theta',t) d\theta'+ s(\x,\hth,t),\;  (\x,\hth)  \in \Omega\times S^1\\
 &u(\x,\hth,t=0)=0, \;  (\x,\hth)  \in \Omega\times S^1\\
 &u(\x,\hth,t)=f(\hnu \cdot \hth) u(\x,\hth_r,t) + q(\x,\hth,t) , \; (\x,\hth) \in \Gamma_-,
@@ -77,12 +77,12 @@ La velocidad media de la luz en el medio participante es \textit{c}
 coeficientes macroscópicos de absorción y dispersión, respectivamente. La función $\eta(\hth\cdot\hth ')$
 se denomina función de fase, y representa la probabilidad de que un fotón 
 viajando en la dirección $\hth$ sea dispersado en la dirección $\hth'$ 
-por interacciones con el medio participante. El tipo de funcion 
-de fase que consideramos en esta tésis posee simetría rotación, 
+por interacciones con el medio participante. El tipo de función 
+de fase que consideramos en esta tesis posee simetría rotación, 
 en el sentido de que la probabilidad de dispersión se mantiene invariante 
 ante rotaciones del sistema de coordenadas, dependiendo solamente 
 del ángulo $\alpha=\arccos(\hth \cdot \hth')$ que se forma entre la dirección 
-del fotón incidente $\hth$ y la dirección del foton emergente $\hth'$ 
+del fotón incidente $\hth$ y la dirección del fotón emergente $\hth'$ 
 en el proceso de dispersión. En particular, utilizaremos como modelo de función de fase la 
 función de Henyey-Greenstein~\cite{Henyey1941}
 \begin{equation}
@@ -112,7 +112,7 @@ modela el transporte de fotones de una única longitud de onda, que es la longit
 de onda de la fuente láser empleada.
 
 Los diferentes términos en la ecuación~\eqref{eq:RTE} poseen 
-diferente singificado físico. El primer término del lado izquierdo de la ecuación simplemente representa la variación temporal  
+diferente significado físico. El primer término del lado izquierdo de la ecuación simplemente representa la variación temporal  
 de la intensidad específica para el rayo que viaja en la dirección $\hth$. 
 El segundo término es un término de advección, que modela la propagación de 
 los fotones en forma de rayos, reminiscentes a la óptica geométrica. Los términos $a(\x)\ut$ y $b(\x)\ut$ modelan la 
@@ -131,7 +131,7 @@ hacía el rayo $\hth$. Dado que trataremos con problemas en dos dimensiones espa
 esta integral se realiza en el círculo unitario, con $\hth \in S^1$, 
 donde la integración se realiza simplemente para $\theta \in [0,2\pi)$·
 
-La condición inicial es considerada nula en el marco de esta tésis 
+La condición inicial es considerada nula en el marco de esta tesis 
 (segunda línea en la ec.~\eqref{eq:RTE}), ya 
 que el medio será iluminado con uno o múltiples pulsos láser, partiendo con las 
 fuentes láser inicialmente apagadas. 
@@ -161,12 +161,12 @@ el ángulo que forma la radiación emergente transmitida en la interfase del med
 crítico de reflexión total interna, respectivamente. Estos últimos se obtienen a partir de la ley de Snell. 
 Para el ángulo de transmisión se cumple $n_{\Omega} \sin(\alpha_i)=n_0 \sin (\alpha_t)$ y el 
 ángulo de reflexión interna total viene dado por $n_{\Omega} \sin(\alpha_c)=n_0$.
-La dirección reflejada $\hth_r=\R \hth$, donde $\R =\id-2\hnu \hnu^T$ es la matrix de reflexión 
+La dirección reflejada $\hth_r=\R \hth$, donde $\R =\id-2\hnu \hnu^T$ es la matriz de reflexión 
 (también conocida como transformación de Householder) con respecto al plano de normal $\hnu$, donde $\id$ 
 es la matriz identidad y $\hnu^T$ 
 indica el vector transpuesto de $\hnu$.   El 
-segundo término en la condición de contorno, $q$, es la fuente, que en el marco de esta tésis 
-modela uno o múltiples lásers iluminando el contorno del dominio espacial $\partial \Omega$. 
+segundo término en la condición de contorno, $q$, es la fuente, que en el marco de esta tesis 
+modela uno o múltiples láser iluminando el contorno del dominio espacial $\partial \Omega$. 
 Las condiciones de contorno se imponen para la radiación entrante 
 al dominio espacial $\Omega$ a través de su contorno $\partial \Omega$. 
 Los conjuntos de direcciones para la radiación entrante ($\Gamma_-$) y saliente ($\Gamma_+$) 
@@ -200,7 +200,7 @@ Utilizando qué
 \label{eq:scdiv}
 \end{equation}
 integrando en la variable angular $\theta$
- la ecuación integrodiferencial en~\eqref{eq:RTE} y utilizando~\eqref{eq:Henyey-Greeinsteinnorm}  se tiene
+ la ecuación integro diferencial en~\eqref{eq:RTE} y utilizando~\eqref{eq:Henyey-Greeinsteinnorm}  se tiene
 \begin{equation}
 \frac{1}{c}\frac{\partial}{\partial t} \phi(\x,t)+\nabla \cdot \vec{ \mathcal{J}}(\x,t)
 +(a(\x)+b(\x)) \phi(\x,t)=b(\x)\phi(\x,t)+\tilde{s}(\x,t)
@@ -220,14 +220,14 @@ viene dada por el aporte de la fuente $\tilde{s}$, menos el flujo de fotones
  a través de la superficie del 
 dominio $\partial \Omega$, menos los fotones que son absorbidos 
 por el medio participante en procesos de absorción pura. 
-A pesar de que no fueron icluidos en este análisis, 
+A pesar de que no fueron incluidos en este análisis, 
 también deben ser consideradas en esta relación de balance global la condición inicial y las 
 condiciones de contorno. Dado que 
 los procesos de dispersión que nos interesan son de tipo elástico, el número 
 de fotones se conserva en dichos procesos colisionales, y por lo tanto 
 estos procesos no intervienen en el balance global~\eqref{eq:RTEfullint}. 
 
-Siendo una ecuación de Boltzmann, la ecucación~\eqref{eq:RTE} 
+Siendo una ecuación de Boltzmann, la ecuación~\eqref{eq:RTE} 
 se encuentra definida en el espacio de las fases, 
 y su solución da información detallada sobre el estado y distribución 
 de los fotones y de su evolución temporal.   Por esta razón, 
@@ -279,7 +279,7 @@ deteriorando la convergencia del algoritmo.
 
 \subsection{Discretización de la variable angular}
 \label{sec:dord}
-Para la discretización en la variable ángular de la ETR empleamos el
+Para la discretización en la variable angular de la ETR empleamos el
 método de ordenadas discretas. Este es un método espectral, 
 originalmente introducido por Chandrasekhar 
 para el estudio de la propagación de la radiación en atmósferas 
@@ -296,7 +296,7 @@ definidas por las abscisas
 de la cuadratura de integración. Esto permite el tratamiento 
 numérico de la integral 
 de dispersión. 
-En nuestro algorítmo explícito para 2D, definimos los cosenos directores de 
+En nuestro algoritmo explícito para 2D, definimos los cosenos directores de 
 estas direcciones discretas utilizando la regla trapezoidal, 
 de donde resultan las direcciones discretas 
 $\hth_m(\theta_m)=(\hth\cdot \hat x,\hth\cdot \hat y)=(\cos(\theta_m),\sin(\theta_m))$.
@@ -306,7 +306,7 @@ para ángulos de $2\pi$ en la variable $\hth$, y siempre que la solución de
 transporte sea lo suficientemente
 suave en la variable $\hth$, el uso de la regla trapezoidal 
 proporciona una regla de cuadratura de convergencia espectral. 
-Las direcciones discretas para la regla trapezoidal se específican 
+Las direcciones discretas para la regla trapezoidal se especifican 
 según
 \begin{equation}
 \theta_m=\frac{2\pi(m-1)}{M}, \; \; m=1,2,\ldots,M.
@@ -331,7 +331,7 @@ para soluciones suaves, siendo $h$ una constante.
 \subsection{Discretización de la variable temporal}
 \label{sec:adamsbashforth}
 Para evolucionar en el tiempo con alta precisión la solución de la ETR,
-empleamos un método de Adams-Bashforth de cuarto órden. Este método ofrece una 
+empleamos un método de Adams-Bashforth de cuarto orden. Este método ofrece una 
 buena relación entre precisión y estabilidad.
 Llamando $u_m^k=u(\x,\hth_m,t^k)$, con $t^{k}=(k-1)\Delta t$ la solución 
 a la ETR 
@@ -346,10 +346,10 @@ donde
 \mathcal{L} ( u_m^k) = b\sum_{m'=1}^{M} w_{m'} p_{m,m'} u_{m'}^k-(b+a)u_m^k-\hth_m \cdot \nabla u_m^k \notag
 \label{eq:RTEAB4L}
 \end{equation}
-con los coeficientes de Adams--Bashforth de cuarto órden $\chi_0=55/44$, 
+con los coeficientes de Adams--Bashforth de cuarto orden $\chi_0=55/44$, 
 $\chi_1=-59/24$, $\chi_2=37/24$ y $\chi_4=-3/8$. 
 En este trabajo, los cuatro pasos temporales iniciales necesarios para inicializar 
-el esquema de Adams--Bashforth de cuarto órden son condierados nulos. Esta configuración es 
+el esquema de Adams--Bashforth de cuarto orden son considerados nulos. Esta configuración es 
 apropiada para 
 el modelo directo en tomografía óptica, dado que utilizaremos pulsos láser 
 que inyectan radiación, con la fuente láser inicialmente apagada. Es posible 
@@ -384,13 +384,13 @@ el cual es un tipo colocación de Fourier que
 puede aplicarse a funciones no periódicas, lo que permite 
 el tratamiento de condiciones de contorno arbitrarias. 
 Este método permite obtener una aproximación de alto 
-órden del gradiente espacial en la ec.~\eqref{eq:RTE} 
+orden del gradiente espacial en la ec.~\eqref{eq:RTE} 
 siempre qué la solución subyacente sea suave.
 
 Partiendo de una función que no es periódica, el método FC produce 
 una función continuada, que convierte a dicha función en periódica. 
 Éste método fue ampliamente descripto en la literatura, y ha sido aplicado 
-a una diversidad de problemas. En esta tésis extendimos el uso de FC 
+a una diversidad de problemas. En esta tesis extendimos el uso de FC 
 para su aplicación en la resolución de la ecuación~\eqref{eq:RTE}.
 
 Para generar la función periódica de, \textit{e.g.} $g(x)=u^k_m(x,y_j)$ para un dado $y_j$, 
@@ -416,7 +416,7 @@ uno de los polinomios ortogonales.
 \item Se generan dos nuevos vectores $\mathbf{g}_l$ y $\mathbf{g}_r$ 
 que expanden las dimensiones de $\mathbf{g}_l'$ y $\mathbf{g}_r'$ a $C+E$, 
 donde $E$ es un número de puntos ``extra'' tal que el número total de puntos 
-$N_p=N+1+C+E$ puede factorizarse en números primos pequeños. Estos 
+$N_p=N+1+C+E$ se puede factorizar en números primos pequeños. Estos 
 vectores se obtienen agregando un número $E$ de puntos nulos 
 en los extremos de la continuación, de donde se tiene 
 $\mathbf{g}_l=[g_{l,N+1}'=0,\ldots,g_{l,N+1+E}=0,\mathbf{g}_l'^T]^T$
@@ -449,7 +449,7 @@ Como ejemplo, en la fig.~(\ref{fig:Continuedg}) se muestra la continuación
 producida para la función $g(x)=12+x^2 - e^{x/3}$ en el intervalo $x\in [0,6]$.
 Utilizamos $N=60$ puntos en la grilla, con $C=25$ puntos de continuación (en círculos), 
 y $d_l=d_r=5$ (diamantes). Eligiendo $E=4$, se obtiene  $N_p = N + 1 + C + E=90$, 
-que puede factorizarse en números primos pequeños 
+que se puede factorizar en números primos pequeños 
 de forma qué $N_p=2\times 3 \times 3 \times 5$. 
 En general, fijamos $N_p$ ajustando el número $E$ de forma tal 
 qué $N_p=\prod_{\gamma=1}^{F} \pi_{\gamma}$, con los factores 
@@ -478,28 +478,28 @@ g_c(x_j)=\sum_{k={-N_p/2}}^{N_p/2}a_k \exp{\left(\frac{2\pi i k}{b} [x_j-x_{\tex
 \label{eq:RTEFCSum}
 \end{equation}
 
-Para reforzar la estabilidad y la robustes del método, empleamos un filtro exponencial 
+Para reforzar la estabilidad y la robustez del método, empleamos un filtro exponencial 
 que atenúa los modos de mayor frecuencia~\cite{Albin2011}:
 \begin{equation}
 \hat{a}_k=a_k \times \exp \left(-\alpha \left|\frac{2k}{N_p}\right|^{2\beta}\right) ,
 \label{eq:FFilter}
 \end{equation}
 donde usamos $\alpha=2$ y $\beta=55$, 
-siendo estos valores apropiados para el esquema de Adams--Bashforth de cuarto órden empleado.
+siendo estos valores apropiados para el esquema de Adams--Bashforth de cuarto orden empleado.
 La derivada se obtiene a partir de la representación de Fourier:
 \begin{equation}
 \displaystyle \frac{d g_c(x_j)}{dx}=\sum_{k={-N_p/2}}^{N_p/2} \frac{2\pi i k}{b} \hat{a}_k \,  
 \exp{\left(\frac{2\pi i k}{b} [x_j-x_{\text{min}}]\right)} ,
 \label{eq:RTEFCSumder}
 \end{equation}
-con el periódo de la función continuada dado por $b=(N_p-1)\Delta x$.
+con el período de la función continuada dado por $b=(N_p-1)\Delta x$.
 
 \subsection{Descomposición de dominio e implementación en paralelo: El método FC--DOM}
 \label{subsec:FC-DOM}
 
 Para afrontar al alto costo computacional asociado a la resolución numérica de la ETR,
 empleamos una estrategia de descomposición del dominio espacial, $\Omega$. 
-Si bien sería posible emplear estrategias similares en la variable ángular, 
+Si bien sería posible emplear estrategias similares en la variable angular, 
 estas estrategias no han mostrado ser eficientes, debido al alto costo
  que conlleva la comunicación de las diferentes direcciones $\hth$ 
  para el cálculo de la integral colisional. 
@@ -510,7 +510,7 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
  superponen en cuatro puntos de la grilla numérica. 
  A cada proceso en paralelo se le asigna un subdominio $\Omega_s$, 
  con $N_{x,s}$ y $N_{y,s}$ puntos en cada dirección espacial, 
- siendo el número total de procesos $N_c$, tipicamente el número 
+ siendo el número total de procesos $N_c$, típicamente el número 
  total de procesadores físicos disponibles.
  
  \begin{figure}[h!]
@@ -539,10 +539,10 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
  para cada proceso, en cada dirección espacial, y para cada punto de la grilla 
  en esa dirección, como se ilustra en la figura fig. (\ref{fig:bechange}).
 
-En suma, el algorítmo que resulta de la combinación del método FC con 
-el método de ordinadas discretas, y el método de propagación temporal, 
-lo denominamos método FC--DOM~\cite{Gaggioli2019}. Este algorítmo se 
-sumariza en forma de pseudocódigo en el algorítmo~\eqref{algfc}.
+En suma, el algoritmo que resulta de la combinación del método FC con 
+el método de direcciones discretas (D.O.M., del inglés discrete ordinates method), y el método de propagación temporal, 
+lo denominamos método FC--DOM~\cite{Gaggioli2019}. Este algoritmo se 
+presenta en forma de pseudocódigo en el algoritmo~\eqref{algfc}.
 
 
 \begin{algorithm}
@@ -582,24 +582,29 @@ problema modelo, utilizando diferentes números de procesadores.
 En esta prueba, se corrió el código implementado en MPI Fortran, 
 y compilado con el compilador intelMPI. Se utilizaron $N=2000$ 
 puntos en cada coordenada espacial, y un total de $M=16$ direcciones 
-discretas, por un total de $T=1000$ pasos temporales. 
+discretas, por un total de $T=1000$ pasos temporales.  
+En todos los casos, el código en paralelo 
+fue ejecutado en varios nodos, en una supercomputadora 
+de 16 nodos, donde cada nodo contiene un procesador
+Intel Xeon E5-2630 v3 at 2.40GHz de 24 núcleos físicos 
+y 128Gb de memoria RAM por nodo. 
 Para evitar irregularidades en la aceleración paralela 
 originadas por la tecnología ``Intel turbo'', la cual 
 opera cuando se utilizan unos pocos procesadores por nodo, 
 y la cual se desactiva gradualmente a medida que se agregan procesadores 
-en una corrida, se presentan los resultados de escaleo 
+en una corrida, se presentan los resultados de escalabilidad 
 con tiempos normalizados con el caso de 16 procesadores 
 en un nodo como referencia. Para tener igual carga en todos los nodos, 
 se utilizaron 16 procesadores por nodos, agregando un nodo 
-estadío del cálculo, hasta completar los 256 procesadores disponibles. 
-Como se observa en la figura, el algorítmo propuesto 
+estadio del cálculo, hasta completar los 256 procesadores disponibles. 
+Como se observa en la figura, el algoritmo propuesto 
 presenta \textit{escalabilidad paralela perfecta} 
 con hasta los 256 procesadores para los que fue probado.
 
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/escalabilidad.eps}
-  \caption{Escalabilidad obtenida para el algorítmo propuesto. 
+  \caption{Escalabilidad obtenida para el algoritmo propuesto. 
   Los tiempos computacionales medidos en diferente cantidad 
   de procesadores fue normalizada con respecto al tiempo computacional 
   en 16 procesadores, $t^*=t/t_{16p}$ para 
@@ -607,7 +612,7 @@ con hasta los 256 procesadores para los que fue probado.
   Con 256 procesadores, la escalabilidad perfecta (en círculos rojos) 
   genera una aceleración en el tiempo de computo en un factor $1/t^*=16$, 
   con respecto al tiempo de computo en 16 procesadores. 
-  La escalabilidad obtenida para el algorítmo propuesto 
+  La escalabilidad obtenida para el algoritmo propuesto 
   (diamantes negros) genera una aceleración $1/t^*=21.872$, dando 
  una eficiencia de $136.7\%$. 
 }
@@ -621,9 +626,9 @@ computacional $t_c$ para el cálculo de las transformadas de Fourier discretas d
 
 \section{Validación}
 
-Dado que los algorítmos y los códigos utilizados fueron desarrollados en 
-esta tésis, se realizaron diferentes pruebas de validación. Estas pruebas, 
-por un lado, tienen como propósito corroborar que los algorítmos 
+Dado que los algoritmos y los códigos utilizados fueron desarrollados en 
+esta tesis, se realizaron diferentes pruebas de validación. Estas pruebas, 
+por un lado, tienen como propósito corroborar que los algoritmos 
 desarrollados presentan la convergencia esperada. 
 
 Por otra parte, se validaron los códigos con resultados experimentales 
@@ -633,7 +638,7 @@ y soluciones analíticas reportadas en la literatura.
 \label{sec:manufacturada}
 
 Para mostrar las propiedades de convergencia del algoritmo propuesto,
-estudamos el error generado en la propagación de un problema manufacturado.
+estudiamos el error generado en la propagación de un problema manufacturado.
 
 Con este fin, resolvemos el problema ETR dado por 
 \begin{equation*}
@@ -654,7 +659,7 @@ u^{\text{an}}(\x,\hth,t)=e^{-(x-t)^2-(y-t)^2-\cos(\theta)^2}.
 \label{eq:RTEmansol}
 \end{equation*}
 de donde el término de la fuente $s(\x,\hth,t)$, 
-la condición incial $u_0(\x,\hth,t)$ y las condiciones 
+la condición inicial $u_0(\x,\hth,t)$ y las condiciones 
 de contorno $u_b(\x,\hth,t)$ en la ecuación~\eqref{eq:RTEdisp} 
 se obtienen, respectivamente, aplicando el operador de transporte, 
 evaluando a tiempo $t=0$ y evaluando en $\Gamma_-$ la solución 
@@ -682,11 +687,11 @@ con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm.
  \begin{subfigure}{
   \includegraphics[width=0.45\textwidth]{figuras/errdm.eps}}
  \end{subfigure}
-  \caption{Convergencia del algorítmo FC--DOM en paralelo 
+  \caption{Convergencia del algoritmo FC--DOM en paralelo 
   para cada una de las variables en la ETR. La figura 
   se muestra en escala logarítmica. Las lineas rectas discontinuas 
-  muestran la pendiente para un órden de convergencia prescripto. 
-  El algorítmo presenta convergencia espectral en la variable angular $\theta$.}
+  muestran la pendiente para un orden de convergencia prescripto. 
+  El algoritmo presenta convergencia espectral en la variable angular $\theta$.}
  \label{fig:convman}
 \end{wrapfigure}
 
@@ -707,7 +712,7 @@ y estudiamos las propiedades de convergencia
 para todas las variables involucradas. La constante 
 $k_{\phi}$ se calcula con 16 dígitos de precisión. 
 La solución numérica es evaluada hasta el tiempo final $T$, 
-y luego se cálcula el error máximo según
+y luego se calcula el error máximo según
 \begin{equation*}
 \varepsilon=\text{max}_{\x \in \Omega} |\phi^{\text{num}}(\x,T) -\phi^{\text{an}}(\x,T)|.
 \label{eq:maximumerror}
@@ -718,7 +723,7 @@ de cada una de las variables discretizadas en la ETR,
 Al comparar el término del error para una grilla de una dada variable, 
 el resto de las grillas numéricas permanecen fijas en un valor prescripto.
 
-El alto orden de convergencia del algorítmo FC--DOM en paralelo 
+El alto orden de convergencia del algoritmo FC--DOM en paralelo 
 para la solución manufacturada propuesta se muestra en la figura~(\ref{fig:convman}). 
 Esta convergencia es la esperada para 
 los órdenes de convergencia de las aproximaciones 
@@ -729,9 +734,9 @@ en cada una de las variables involucradas.
 \subsection{Comparación con resultados experimentales}
 \label{sec:resexp}
 
-En esta sección comparamos los resultados producidos por el algorítmo FC--DOM 
+En esta sección comparamos los resultados producidos por el algoritmo FC--DOM 
 con resultados experimentales obtenidos para varios 
-fantomas similes al tejido humano, realizados por en Klose \textit{et al.}~\cite{Klose2002}. 
+fantomas símiles al tejido humano, realizados por en Klose \textit{et al.}~\cite{Klose2002}. 
 En las mediciones reportadas en dicha referencia, 
 se utilizan fantomas compuestos de resina epoxy y tinta, 
 con una concentración de monoesféras de dióxido de silicio ($\text{SiO}_2$). 
@@ -811,7 +816,7 @@ puede ser valiosa en otro tipo de experimentos, se pierde rápidamente luego de 
 atraviesan una distancia de algunos caminos libre medio dentro del fantoma. 
 
 Se resuelve la ETR para un número de pasos temporales, 
-hasta que la solución alcanza, numericamente, el comportamiento 
+hasta que la solución alcanza, numéricamente, el comportamiento 
 asintótico~\cite{Bruno2010}, para el cual $\lim_{t\to \infty} \frac{\partial u}{\partial t}=0$, 
 y luego se evalúa el operador de la ecuación~\eqref{eq:photoncurrentsal} 
 para la posición de los detectores.
@@ -865,21 +870,21 @@ correspondiente a las tres posiciones de la fuente láser $\x_s$.
   obtenido en la simulación para el fantoma homogéneo. 
   Las tres figuras muestran los resultados obtenidos 
   para las fuentes ubicadas en A (izquierda), B (centro) y C (derecha). 
-  Debido al decaímiento exponencial inherente a la solución, la figura se presenta en escala logarítmica para apreciar los detalles.}
+  Debido al decaimiento exponencial inherente a la solución, la figura se presenta en escala logarítmica para apreciar los detalles.}
 \label{fig:ph1timef}
 \end{figure}
 Como puede apreciarse en la figura, el flujo escalar para el caso A 
-es simétrico con respecto al eje vértical situado en la posición 
+es simétrico con respecto al eje vertical situado en la posición 
 de la fuente, pero el sistema pierde esta propiedad cuando la 
 posición de la fuente se ubica más cerca de los bordes, 
 dando lugar a reflexiones en el borde que afectan la intensidad 
 de la luz con una dependencia angular particular.
 
 El flujo de fotones que llegan a los detectores, ubicados en el borde $\partial \Omega$ 
-del dominio, se obtuvo mediánte la ecuación~\eqref{eq:photoncurrentsal}. 
+del dominio, se obtuvo mediante la ecuación~\eqref{eq:photoncurrentsal}. 
 Los resultados se muestran en la figura~(\ref{fig:fluxph1}), 
 para los 28 detectores ubicados en el borde a lo largo del eje $x$ (izquierda) 
-y para los 28 detectors en la dirección $y$ a la derecha. 
+y para los 28 detectores en la dirección $y$ a la derecha. 
 Se observa un acuerdo excelente entre los resultados simulados (lineas) 
 y los datos experimentales (en símbolos).  El máximo 
 flujo de fotones salientes $\mathcal{J}_+$ en los experimentos B, 
@@ -926,11 +931,11 @@ deben ser evitadas. De otra forma, el fenómeno de Gibbs deterioraría
 la precisión de los cálculos. Por esta razón, implementamos una aproximación 
 suave a los coeficientes, haciendo uso de la función ventana introducida 
 por Bruno \textit{et al}.~\cite{Bruno2014a} en otro contexto. 
-Esta funcion ventana provee una transición suave hacia la región de 
+Esta función ventana provee una transición suave hacia la región de 
 vacío, previniendo el surgimiento de las oscilaciones debido al 
 fenómeno de Gibbs. 
 En la figura~(\ref{fig:scattcoef}), se muestra una representación de los 
-parámetros ópticos utilizados para el fantoma inhomogeneo, 
+parámetros ópticos utilizados para el fantoma inhomogéneo, 
 donde puede observarse la transición suave a la inhomogeneidad 
 en forma de anillo.
  \begin{figure}[h!]
@@ -997,7 +1002,7 @@ que sirve como prueba para lo que se denomina el fenómeno
 de rayos.
 
 El fenómeno de rayos se origina debido a la discretización 
-de la variable ángular $\hth$. Debido a dicha discretización, 
+de la variable angular $\hth$. Debido a dicha discretización, 
 las direcciones posibles para la propagación de los fotones 
 se encuentra limitada a las $M$ direcciones dadas para la cuadratura 
 numérica, $\hth_m$. Cuando existen fuentes localizadas, 
@@ -1044,7 +1049,7 @@ el operador diferencial en las variables espaciales de la ETR, independientement
 de la discretización angular. Otras estrategias deben ser consideradas 
 para solucionar el fenómeno de rayos cuando es necesario. Debido 
 a que el tejido biológico es altamente dispersivo, en general 
-en tomografía óptica el medio aprticipante presenta alta dispersión, 
+en tomografía óptica el medio participante presenta alta dispersión, 
 por lo cual el fenómeno de rayos no suele ser un problema (aún 
 en presencia de regiones de vacío, cuando se encuentran rodeadas de un 
 medio altamente dispersivo).
@@ -1053,10 +1058,10 @@ medio altamente dispersivo).
 
 En esta sección validamos nuestros métodos computacionales 
 dependientes del tiempo calculando el flujo escalar, 
-y comparandolo con la solución analítica dada por Paasschens~\cite{Paasschens1997} 
+y comparándolo con la solución analítica dada por Paasschens~\cite{Paasschens1997} 
 para una fuente puntual en un medio infinito. 
-En el problema presentado por Paaschens, un medio bidimensional infinito, 
-isotrópico y homogeneo es iluminado por una fuente puntual isotrópica
+En el problema presentado por Paasschens, un medio bidimensional infinito, 
+isotrópico y homogéneo es iluminado por una fuente puntual isotrópica
 ubicada en el origen de coordenadas $s(\x,\hth,t)=\delta(\x)\delta(t)$.
 
 La solución para este problema es
@@ -1083,7 +1088,7 @@ por los fotones que no han sufrido dispersión, y que arriban al punto
 a una distancia $r$ de la fuente en un tiempo $t=r/c$.
 
 En el caso de medios altamente dispersivos, este término resulta rápidamente atenuado 
-a unos pocos milimetros de la fuente. Para las simulaciones numéricas 
+a unos pocos milímetros de la fuente. Para las simulaciones numéricas 
 empleamos condiciones de borde de vacío, en las cuales el flujo 
 entrando a través de la superficie del dominio $\partial \Omega$ es nulo 
 \begin{equation}
@@ -1096,7 +1101,7 @@ la función delta de Dirac de la fuente es aproximada con una función Gaussiana
 
 Además, comparamos los resultados numéricos obtenidos por el método FC--DOM (FC)
 con una aproximación al gradiente espacial obtenido por el método ''upwind´´ 
-de diferencias finitas de tercer órden (FD) utilizado en \cite{Fujii2014}. 
+de diferencias finitas de tercer orden (FD) utilizado en \cite{Fujii2014}. 
 En la figura~ \ref{fig:analytic1} se muestran los resultados obtenidos por ambos métodos 
 junto con la solución analítica. En ambos casos el acuerdo es excelente.
 
@@ -1176,7 +1181,7 @@ es suave, y no presenta gradientes significativos en ninguna de sus variables.
 Los teoremas de convergencia para los métodos numéricos exigen, en general,  
 ciertas condiciones de regularidad de las soluciones subyacentes que se intentan aproximar. Cuando las soluciones, 
 o sus derivadas, no son continuas, los métodos no presentaran el órden 
-de convergencia deseado. El órden de convergencia de los métodos numéricos 
+de convergencia deseado. El orden de convergencia de los métodos numéricos 
 depende, en general, de la regularidad de la solución y sus derivadas. En particular, en esta sección estudiaremos 
 una estructura de capa límite~\cite{Gaggioli2021} que existe de forma casi ubicua en las soluciones 
 a la ecuación ETR, que no había sido previamente detallada en la bibliografía, 
@@ -1205,7 +1210,7 @@ Si bien el desarrollo de métodos numéricos de alto órden de
 convergencia para la ecuación de transporte en problemas más 
 generales de varias dimensiones para los casos más generales 
 escapa al alcance de esta tesis, nuestro trabajo 
-sienta los cimientos para el desarrolo de métodos numéricos 
+sienta los cimientos para el desarrollo de métodos numéricos 
 altamente eficiente, como lo demostraremos para el caso 
 de una dimensión espacial en el dominio temporal. El desarrollo 
 de métodos numéricos eficientes de las mismas características para los casos 
@@ -1233,7 +1238,7 @@ en problemas unidimensionales de transporte~\cite[Cap. 4]{Case1967},
 no ha sido correctamente descripta previamente en la literatura. 
 Los problemas numéricos que surgen al intentar resolver 
 numéricamente la ETR son materia de una basta investigación 
-y discusión en la lieteratura~\cite{Case1967,Lewis1984,Petrovic1996,Bal2001,Hunter2015} 
+y discusión en la literatura~\cite{Case1967,Lewis1984,Petrovic1996,Bal2001,Hunter2015} 
 que se mantiene vigente. 
 
 Esta estructura de capa límite presenta transiciones abruptas 
@@ -1254,7 +1259,7 @@ dependiendo de la naturaleza del problema.
 La ecuación ETR independiente del tiempo, en una dimensión espacial 
 modela el transporte en una geometría plano paralela descripta en la 
 figura~\ref{fig:parallelgeom}. Por simplicidad, consideramos 
-el caso isotropico, con condiciones de borde de Fresnel
+el caso isotrópico, con condiciones de borde de Fresnel
 \begin{equation}
 \begin{split}
   &\xi \frac{\partial}{\partial x}\uxi+\mu_t(x)\uxi=   \frac{\mu_s(x)}{2} \int_{-1}^{1}\uxp d\xi' +q(x,\xi),\\
@@ -1311,8 +1316,8 @@ en la solución $u(x,\xi)$ mediante la relación
 \end{equation}
 El argumento puede extenderse a problemas en dos y tres dimensiones, 
 incluyendo el dominio temporal y dominios generales curvos. En tales casos, 
-la capa límit presenta gradientes que no están acotados 
-en la próximidad de los bordes en direcciones paralelas a estos 
+la capa límite presenta gradientes que no están acotados 
+en la proximidad de los bordes en direcciones paralelas a estos 
 (situación que a escalas apropiadas se corresponde con la geometría 
 de la fig.~\ref{fig:parallelgeom} para $\theta \to \pi/2$). 
 
@@ -1390,7 +1395,7 @@ decrece como $32V/15\pi j (2\ell+1-j)^j$ siempre que la derivada
 $j \leq 2\ell$ esté acotada por la constante $V$. 
 Introduciendo el cambio de variable  $\xi'=r^p$ en la integral 
 de la ecuación~\eqref{eq:transp1d}, buscamos una cota $V$ 
-para la derivada $j$--esima del integrando. 
+para la derivada $j$--ésima del integrando. 
 Utilizando la versión integrada de la ecuación~\eqref{eq:transp1d}, 
 similar a~\eqref{eq:intf}, combinando dos términos exponenciales, 
 y utilizando el hecho de que para un entero no negativo $k$ 
@@ -1403,7 +1408,7 @@ encontramos qué
 \end{split}
 \label{eq:boundedder}
 \end{equation*}
-para alguna cosntante $W$; llamando $V = W r^{p-j-1}$  
+para alguna constante $W$; llamando $V = W r^{p-j-1}$  
 se obtiene la cota deseada, la cual es {\em uniforme 
 para todos los valores relevantes de $x$ y $r$ } (siempre qué 
 $p \ge j+1$). Los 
@@ -1415,7 +1420,7 @@ dividiendo la integral en el punto de capa límite $\xi=0$ se tiene
 \int_{0}^{1} u(x,\xi) d\xi \sim \sum_{i=1}^{M/2} w_i u(x,\xi_i),
 \label{eq:MartensenKussmaul}
 \end{equation}
-donde, llamando $r_i$ y $w_i^{GL}$ a las abscissas y pesos de la 
+donde, llamando $r_i$ y $w_i^{GL}$ a las abscisas y pesos de la 
 cuadratura de Gauss--Legendre en el intervalo $[0,1]$, 
 definimos $\xi_i=r_i^p$ y $w_i= p \times r_i^{p-1} \times w_i^{GL}/2$. 
 Las abscisas y los pesos correspondientes a los valores negativos 
@@ -1585,13 +1590,13 @@ En las referencias~\cite{Larsen1987,Petrovic1996} se atribuye
 este fenómeno numérico a condiciones de borde anisotrópicas, capas límite no difusivas y/o 
 a un alto coeficiente de absorción. En esta tesis 
 se demuestra la existencia de estas capa límite incluso para el 
-caso de condiciones de borde isotropicas, y para todos los valores 
+caso de condiciones de borde isotrópicas, y para todos los valores 
 de los coeficientes de absorción y dispersión, con una interpretación 
 diferente a la reportada en la literatura. En particular, 
 nuestra contribución demuestra de forma explícita la existencia 
 de capas límite exponenciales, originadas por la imposición 
 de las condiciones de borde en conjunto con valores de  $\xi$ 
-pequeños, lo cual no fue considerado en las dicusiones previas.
+pequeños, lo cual no fue considerado en las discusiones previas.
 
 Por ejemplo, la referencia~\cite{Larsen1987} trata un problema 
 difusivo de transporte (el Problema~1 en dicha referencia) 
@@ -1616,12 +1621,12 @@ como an la ecuación~\eqref{eq:transp1d} con $\mu_s=\mu_t=1000$,
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/layerlar.pdf}
-  \caption{Solution $u(x,\xi_{15})$ of Eq.~\eqref{eq:transp1d} with 
-$\mu_t=\mu_s=1000$, $q=0.1$ and $\xi_{\text{15}} \simeq 10^{-3}$, showing 
-the oscillations originated in the DD scheme due to the large slopes 
-at the boundary layer. 
-$N=400$ discrete points are used in the spatial variable for the FC method, 
-and $N=10000$ for the DD method.}
+  \caption{Solución $u(x,\xi_{15})$ de la ec.~\eqref{eq:transp1d} 
+  con $\mu_t=\mu_s=1000$, $q=0.1$ y $\xi_{\text{15}} \simeq 10^{-3}$
+  donde pueden apreciarse las oscilaciones espurias originadas 
+  por el esquema DD debido a las pendientes pronunciadas originadas 
+  en la capa límite. Se utilizaron $N=400$ para la variable espacial 
+  en el método FC, y  $N=10000$ para el método DD.}
  \label{fig:DDlayer}
 \end{figure}
 En la figura se muestran las soluciones obtenidas por ambos esquemas 
@@ -1682,4 +1687,3 @@ capaces de hacerlo, de relevancia e impacto en varias disciplinas tecnológicas
 y científicas. 
 
 
-%\section{Consecuencias numéricas de la capa límite en dos dimensiones espaciales}
