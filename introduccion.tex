@@ -141,7 +141,7 @@ La estrategia de paralelización propuesta presenta una serie de
 ventajas. A diferencia de otros algoritmos reportados en la literatura, el enfoque
 presentado en este trabajo es altamente eficiente independientemente de
 el número de fuentes empleadas (\cf \cite{Hielscher2004}).
-Estrategias de computo en paralelo basadas en arquítecturas de GPU~\cite {Doulgerakis2017} han mostrado ser apropiadas para aplicaciones de tomografía óptica basadas en la aproximación de difusión. Desafortunadamente, 
+Estrategias de computo en paralelo basadas en arquitecturas de GPU~\cite {Doulgerakis2017} han mostrado ser apropiadas para aplicaciones de tomografía óptica basadas en la aproximación de difusión. Desafortunadamente, 
 la aproximación de difusión no es físicamente precisa en un amplio rango de situaciones,
 y, debido a las altas exigencias en memoria de almacenamiento requerida para 
 la resolución del problema inverso ---el cual exige guardar en memoria soluciones completas 
@@ -150,7 +150,7 @@ directo y el problema adjunto--- la utilización de GPUs en este contexto no par
 Cabe mencionar que el uso de GPUs es una estrategia valida para reconstrucciones 
 basadas en métodos estocásticos de Monte Carlo. Pero estos métodos son intrínsecamente 
 altamente ineficientes. En la 
-referencia~\cite{Coelho2014} se realiza una revisión de algorítmos propuestos en la literatura 
+referencia~\cite{Coelho2014} se realiza una revisión de algoritmos propuestos en la literatura 
 para la paralelización de la ETR. Todas las estrategias de paralelización muestran una eficiencia significativamente por debajo de la ideal, con excepción de la ref.~\cite {Colomer2013}, la cual presenta una estrategia de paralelización 
 por encima de la ideal, pero
 la aplicabilidad del método está restringida a medios no absorbentes y no dispersantes, 
@@ -161,7 +161,7 @@ para los coeficientes de absorción y dispersión empleados, el número de fuent
 medio de la paralelización propuesta para el método FC-DOM (ver sec.~\ref{subsec:FC-DOM} fig.~\ref{fig:scala}). En la referencia~\cite [p. 153]{Fujii2014} 
 se informa un tiempo de cálculo de 44,3 horas para la resolución de la ETR de un problema modelo 
 en 2D por medio un único procesador. La solución del mismo problema utilizando 
-los mismos parametros y la misma resolución de la grilla numérica, corriendo en 64 procesadores, se obtiene mediante la estrategia de paralelización del algorítmo FC-DOM propuesto en menos de treinta minutos.
+los mismos parámetros y la misma resolución de la grilla numérica, corriendo en 64 procesadores, se obtiene mediante la estrategia de paralelización del algoritmo FC-DOM propuesto en menos de treinta minutos.
 
 Como se mencionó anteriormente, una reducción adicional significativa en el
 el tiempo de cálculo requerido para la solución del problema inverso es
@@ -171,5 +171,5 @@ de soluciones ETR directas y adjuntas requeridas.
 En esta tesis se demuestra la aceleración por un factor de seis, 
 para la precisión en la reconstrucción del problema inverso,
 relativo al tiempo requerido por el ``método de barrido'' 
-encontrado ubicuamente en tomografía óptica.
+utilizado de manera ubicua en tomografía óptica.
 
