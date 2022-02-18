@@ -95,8 +95,8 @@ donde $g \in [-1,1]$ caracteriza la anisotropía en los procesos de dispersión:
 los fotones emergen del proceso de dispersión en la dirección (opuesta) de 
 incidencia. En el caso de dispersión isotrópica, 
 donde los fotones emergen de los eventos de colisión con igual probabilidad 
-en cualquier dirección se tiene $ g = 0 $. Además, esta función de fase 
-está normalizada, de forma tal qué
+en cualquier dirección se tiene $ g = 0 $. En general se exige que la función de fase 
+esté normalizada, de forma tal qué
 \begin{equation}
 \int_{S^1}\eta(\hth\cdot\hth') d\theta=1
 \label{eq:Henyey-Greeinsteinnorm}
@@ -540,7 +540,7 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
  en esa dirección, como se ilustra en la figura fig. (\ref{fig:bechange}).
 
 En suma, el algoritmo que resulta de la combinación del método FC con 
-el método de direcciones discretas (D.O.M., del inglés discrete ordinates method), y el método de propagación temporal, 
+el método de ordenadas discretas (D.O.M., del inglés discrete ordinates method), y el método de propagación temporal, 
 lo denominamos método FC--DOM~\cite{Gaggioli2019}. Este algoritmo se 
 presenta en forma de pseudocódigo en el algoritmo~\eqref{algfc}.
 
@@ -999,7 +999,10 @@ de ordenadas discretas~\cite{Lewis1984}.
 Para esto, comparamos los resultados FC--DOM con un caso 
 de referencia ampliamente utilizado en transferencia radiativa, 
 que sirve como prueba para lo que se denomina el fenómeno 
-de rayos.
+de rayos. Este problema esta diseñado para el estudio del fenómeno de rayos, 
+el cual se manifiesta esencialmente en medios de baja dispersión. 
+Como veremos, dadas las dimensiones de este problema, 
+los fotones no llegarán a sufrir suficientes eventos de colisión para mitigar este fenómeno numérico, por lo cual el fenómeno de rayos podrá ser analizado.
 
 El fenómeno de rayos se origina debido a la discretización 
 de la variable angular $\hth$. Debido a dicha discretización, 
@@ -1009,12 +1012,12 @@ numérica, $\hth_m$. Cuando existen fuentes localizadas,
 se originan variaciones rápidas en la intensidad específica 
 cerca de las fuentes. El flujo esta restringido a propagarse 
 en las direcciones discretas, dando origen a oscilaciones 
-espurias, conocidas como efecto de rayos.
+espurias, conocidas como efecto de rayos. 
 
 Reproducimos el caso reportado por Crosbie y Schrenker~\cite{Crosbie1984}, 
 el cual proporciona flujos considerados exactos~\cite{Ramankutty1997,tagnekamdem2015}, 
 utilizando el método FC--DOM descripto anteriormente, para soluciones independientes 
-del tiempo obtenidas por relajación del caso dependiente del tiempo.
+del tiempo obtenidas por relajación del caso dependiente del tiempo. 
 
 Consideramos un dominio bidimensional cuadrado, de lado unitario, 
 el cual contiene un medio puramente dispersivo (sin absorción) 
