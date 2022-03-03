@@ -1,0 +1,430 @@
+\begin{thebibliography}{10}
+
+\bibitem{Howell2010}
+J.~R. Howell, R.~Siegel, and M.~P. Meng{\"{u}}{\c{c}}, {\em {Thermal Radiation
+  Heat Transfer}}.
+\newblock CRC Press, 5th~ed., 2011.
+
+\bibitem{Thynell1998}
+S.~T. Thynell, ``{Discrete-ordinates method in radiative heat transfer},'' {\em
+  International Journal of Engineering Science}, vol.~36, no.~12-14,
+  pp.~1651--1675, 1998.
+
+\bibitem{Duderstadt1979}
+J.~J. Duderstadt and W.~R. Martin, {\em {Transport theory}}.
+\newblock 1979.
+
+\bibitem{Qin2015}
+J.~Qin, J.~J. Makela, F.~Kamalabadi, and R.~R. Meier, ``{Radiative transfer
+  modeling of the OI 135.6 nm emission in the nighttime ionosphere},'' {\em
+  Journal of Geophysical Research A: Space Physics}, vol.~120, no.~11,
+  pp.~10116--10135, 2015.
+
+\bibitem{Dymond1997}
+K.~F. Dymond, S.~E. Thonnard, R.~P. McCoy, and R.~J. Thomas, ``{An optical
+  remote sensing technique for determining nighttime F region electron
+  density},'' {\em Radio Science}, vol.~32, no.~5, pp.~1985--1996, 1997.
+
+\bibitem{Chandrasekhar1960}
+S.~Chandrasekhar, {\em {Radiative Transfer}}.
+\newblock London, UK: Dover, first~ed., 1960.
+
+\bibitem{Zhu2005}
+Q.~Zhu, S.~H. Kurtzman, P.~Hegde, S.~Tannenbaum, M.~Kane, M.~Huang, N.~G. Chen,
+  B.~Jagjivan, and K.~Zarfos, ``{Utilizing optical tomography with ultrasound
+  localization to image heterogeneous hemoglobin distribution in large breast
+  cancers},'' {\em Neoplasia}, vol.~7, no.~3, pp.~263--270, 2005.
+
+\bibitem{Zhu2010}
+Q.~Zhu, P.~U. Hegde, A.~Ricci, M.~Kane, E.~B. Cronin, Y.~Ardeshirpour, C.~Xu,
+  A.~Aguirre, S.~H. Kurtzman, P.~J. Deckers, and S.~H. Tannenbaum,
+  ``{Early-stage invasive breast cancers: Potential role of optical tomography
+  with US localization in assisting diagnosis},'' {\em Radiology}, vol.~256,
+  no.~2, pp.~367--378, 2010.
+
+\bibitem{Fujii2016b}
+H.~Fujii, Y.~Yamada, K.~Kobayashi, M.~Watanabe, , and Y.~Hoshi, ``{Modeling of
+  light propagation in the human neck for diagnoses of thyroid cancers by
+  diffuse optical tomography},'' {\em International Journal for Numerical
+  Methods in Biomedical Engineering}, vol.~33, no.~5, p.~e2826, 2016.
+
+\bibitem{Vassiliev2010}
+O.~N. Vassiliev, T.~A. Wareing, J.~McGhee, G.~Failla, M.~R. Salehpour, and
+  F.~Mourtada, ``{Validation of a new grid-based Boltzmann equation solver for
+  dose calculation in radiotherapy with photon beams},'' {\em Physics in
+  Medicine and Biology}, vol.~55, no.~3, pp.~581--598, 2010.
+
+\bibitem{Bedford2019}
+J.~L. Bedford, ``{Calculation of absorbed dose in radiotherapy by solution of
+  the linear Boltzmann transport equations},'' {\em Physics in Medicine and
+  Biology}, vol.~64, no.~2, 2019.
+
+\bibitem{Klose2002}
+A.~D. Klose, U.~Netz, J.~Beuthan, and A.~H. Hielscher, ``{Optical tomography
+  using the time-independent equation of radiative transfer — Part 1: forward
+  model},'' {\em Journal of Quantitative Spectroscopy and Radiative Transfer},
+  vol.~72, no.~5, pp.~691--713, 2002.
+
+\bibitem{Netz2001}
+U.~Netz, J.~Beuthan, and H.~J. Cappius, ``{Imaging of Rheumatoid Arthritis in
+  Finger Joints ...},'' vol.~16, pp.~306--310, 2001.
+
+\bibitem{Larsen2006}
+E.~W. Larsen, ``{An Overview of Neutron Transport Problems and Simulation
+  Techniques},'' in {\em Computational Methods in Transport} (F.~Graziani,
+  ed.), (Berlin, Heidelberg), pp.~513--534, Springer Berlin Heidelberg, 2006.
+
+\bibitem{Sanchez1982}
+R.~Sanchez and N.~J. McCormick, ``{A Review of Neutron Transport
+  Approximations},'' {\em Nuclear Science and Engineering}, vol.~80, no.~4,
+  pp.~481--535, 1982.
+
+\bibitem{Anli2006}
+F.~Anli, F.~Yaşa, S.~G{\"{u}}ng{\"{o}}r, and H.~{\"{O}}zt{\"{u}}rk, ``{$T_N$
+  approximation to neutron transport equation and application to critical slab
+  problem},'' {\em Journal of Quantitative Spectroscopy and Radiative
+  Transfer}, vol.~101, no.~1, pp.~129--134, 2006.
+
+\bibitem{Mishchenko1999}
+E.~G. Mishchenko and C.~W.~J. Beenakker, ``{Radiative transfer theory for
+  vacuum fluctuations},'' {\em Physical Review Letters}, vol.~83, no.~26,
+  pp.~5475--5478, 1999.
+
+\bibitem{Prasher2003}
+R.~Prasher, ``{Generalized equation of phonon radiative transport},'' {\em
+  Applied Physics Letters}, vol.~83, no.~1, pp.~48--50, 2003.
+
+\bibitem{Mishchenko2002}
+M.~I. Mishchenko, ``{Vector radiative transfer equation for arbitrarily shaped
+  and arbitrarily oriented particles: a microphysical derivation from
+  statistical electromagnetics},'' {\em Applied Optics}, vol.~41, no.~33,
+  p.~7114, 2002.
+
+\bibitem{Ripoll2011}
+J.~Ripoll, ``{Derivation of the scalar radiative transfer equation from energy
+  conservation of Maxwell's equations in the far field},'' {\em Journal of the
+  Optical Society of America A}, vol.~28, no.~8, p.~1765, 2011.
+
+\bibitem{Boas2001}
+D.~Boas, D.~Brooks, E.~Miller, C.~Dimarzio, M.~Kilmer, R.~Gaudette, and
+  Q.~Zhang, ``{Imaging the Body with Diffuse Optical Tomography},'' {\em IEEE
+  Signal Processing Magazine}, vol.~18, no.~6, pp.~57--75, 2001.
+
+\bibitem{bluestone2001}
+A.~Bluestone, G.~Abdoulaev, C.~Schmitz, R.~Barbour, and A.~Hielscher,
+  ``{Three-dimensional optical tomography of hemodynamics in the human
+  head.},'' {\em Optics express}, vol.~9, no.~6, pp.~272--286, 2001.
+
+\bibitem{Arridge1999}
+S.~R. Arridge, ``{Optical Tomography in medical imaging},'' {\em Inverse
+  Problems}, vol.~15, pp.~R41----R93, 1999.
+
+\bibitem{Klose2005}
+A.~D. Klose, V.~Ntziachristos, and A.~H. Hielscher, ``{The inverse source
+  problem based on the radiative transfer equation in optical molecular
+  imaging},'' {\em Journal of Computational Physics}, vol.~202, no.~1,
+  pp.~323--345, 2005.
+
+\bibitem{Klose2010}
+A.~D. Klose, ``{The forward and inverse problem in tissue optics based on the
+  radiative transfer equation: A brief review},'' {\em Journal of Quantitative
+  Spectroscopy and Radiative Transfer}, vol.~111, no.~11, pp.~1852--1853, 2010.
+
+\bibitem{Ren2010}
+K.~Ren, ``{Recent developments in numerical techniques for transport-based
+  medical imaging methods},'' {\em Communications in Computational Physics},
+  vol.~8, no.~1, pp.~1--50, 2010.
+
+\bibitem{Ren2006}
+K.~Ren, G.~Bal, and A.~H. Hielscher, ``{Frequency Domain Optical Tomography
+  Based on the Equation of Radiative Transfer},'' vol.~28, no.~4,
+  pp.~1463--1489, 2006.
+
+\bibitem{Prieto2017}
+K.~Prieto and O.~Dorn, ``{Sparsity and level set regularization for diffuse
+  optical tomography using a transport model in 2D},'' {\em Inverse Problems},
+  vol.~33, no.~1, 2017.
+
+\bibitem{Byrd1995}
+R.~H. Byrd, P.~Lu, J.~Nocedal, and C.~Zhu, ``{A Limited Memory Algorithm for
+  Bound Constrained Optimization},'' {\em SIAM Journal on Scientific
+  Computing}, vol.~16, no.~5, pp.~1190--1208, 1995.
+
+\bibitem{Boulanger2005}
+J.~Boulanger and A.~Charette, ``{Numerical developments for short-pulsed Near
+  Infra-Red laser spectroscopy. Part II: Inverse treatment},'' {\em Journal of
+  Quantitative Spectroscopy and Radiative Transfer}, vol.~91, no.~3,
+  pp.~297--318, 2005.
+
+\bibitem{Klose2009}
+A.~D. Klose, ``{Radiative transfer of luminescence light in biological
+  tissue},'' in {\em Light Scattering Reviews 4}, pp.~293--345, Springer Praxis
+  Books, 2009.
+
+\bibitem{Arridge2009}
+S.~R. Arridge and J.~C. Schotland, ``{Optical tomography: Forward and inverse
+  problems},'' {\em Inverse Problems}, vol.~25, no.~12, 2009.
+
+\bibitem{Gaggioli2019}
+E.~L. Gaggioli, O.~P. Bruno, and D.~M. Mitnik, ``{Light transport with the
+  equation of radiative transfer: The Fourier Continuation – Discrete
+  Ordinates (FC–DOM) Method},'' {\em Journal of Quantitative Spectroscopy and
+  Radiative Transfer}, vol.~236, 2019.
+
+\bibitem{Hielscher2004}
+A.~H. Hielscher and S.~Bartel, ``{Parallel programming of gradient-based
+  iterative image reconstruction schemes for optical tomography},'' {\em
+  Computer Methods and Programs in Biomedicine}, vol.~73, no.~2, pp.~101--113,
+  2004.
+
+\bibitem{Doulgerakis2017}
+M.~Doulgerakis, A.~Eggebrecht, S.~Wojtkiewicz, J.~Culver, and H.~Dehghani,
+  ``{Toward real-time diffuse optical tomography: accelerating light
+  propagation modeling employing parallel computing on GPU and CPU},'' {\em
+  Journal of Biomedical Optics}, vol.~22, no.~12, p.~1, 2017.
+
+\bibitem{Coelho2014}
+P.~J. Coelho, ``{Advances in the discrete ordinates and finite volume methods
+  for the solution of radiative heat transfer problems in participating
+  media},'' {\em Journal of Quantitative Spectroscopy and Radiative Transfer},
+  vol.~145, pp.~121--146, 2014.
+
+\bibitem{Colomer2013}
+G.~Colomer, R.~Borrell, F.~X. Trias, and I.~Rodr{\'{i}}guez, ``{Parallel
+  algorithms for $S_N$ transport sweeps on unstructured meshes},'' {\em Journal
+  of Computational Physics}, vol.~232, no.~1, pp.~118--135, 2013.
+
+\bibitem{Fujii2014}
+H.~Fujii, S.~Okawa, Y.~Yamada, and Y.~Hoshi, ``{Hybrid model of light
+  propagation in random media based on the time-dependent radiative transfer
+  and diffusion equations},'' {\em Journal of Quantitative Spectroscopy and
+  Radiative Transfer}, vol.~147, pp.~145--154, 2014.
+
+\bibitem{Lewis1984}
+E.~E. Lewis, , and W.~F. Miller, {\em {Computational Methods of Neutron
+  Transport}}.
+\newblock Hoboken, USA: John Wiley \& Sons, first~ed., 1984.
+
+\bibitem{Cercignani1988}
+C.~Cercignani, {\em {The Boltzmann Equation and Its Applications}}, vol.~67.
+\newblock New York: Springer-Verlag, 1988.
+
+\bibitem{Henyey1941}
+L.~G. Henyey and J.~L. Greenstein, ``{Diffuse radiation in the galaxy},'' {\em
+  The Astrophysical Journal}, vol.~93, pp.~70--83, 1941.
+
+\bibitem{Born1999}
+M.~Born and E.~Wolf, {\em {Principles of Optics}}.
+\newblock Cambridge University Press, 1999.
+
+\bibitem{Lathrop1992}
+K.~Lathrop, ``{The early days of the $S_N$ method},'' {\em Trans. Am. Nucl.
+  Soc}, vol.~66, no.~November, pp.~241--242, 1992.
+
+\bibitem{Bruno2016}
+O.~P. Bruno and M.~Cubillos, ``{Higher-order in time "quasi-unconditionally
+  stable" ADI solvers for the compressible Navier-Stokes equations in 2D and 3D
+  curvilinear domains},'' {\em Journal of Computational Physics}, vol.~307,
+  pp.~476--495, 2016.
+
+\bibitem{Albin2011}
+N.~Albin and O.~P. Bruno, ``{A spectral FC solver for the compressible
+  Navier-Stokes equations in general domains I: Explicit time-stepping},'' {\em
+  Journal of Computational Physics}, vol.~230, no.~16, pp.~6248--6270, 2011.
+
+\bibitem{Bruno2010}
+O.~P. Bruno and M.~Lyon, ``{High-order unconditionally stable FC-AD solvers for
+  general smooth domains I. Basic elements},'' {\em Journal of Computational
+  Physics}, vol.~229, no.~6, pp.~2009--2033, 2010.
+
+\bibitem{Bruno2014a}
+O.~P. Bruno and B.~Delourme, ``{Rapidly convergent two-dimensional
+  quasi-periodic Green function throughout the spectrum-including Wood
+  anomalies},'' {\em Journal of Computational Physics}, vol.~262, pp.~262--290,
+  2014.
+
+\bibitem{Bal2006}
+G.~Bal, ``{Radiative transfer equations with varying refractive index: a
+  mathematical perspective},'' {\em Journal of the Optical Society of America
+  A}, vol.~23, no.~7, p.~1639, 2006.
+
+\bibitem{Fujii2016}
+H.~Fujii, S.~Okawa, K.~Nadamoto, E.~Okada, Y.~Yamada, Y.~Hoshi, and
+  M.~Watanabe, ``{Numerical modeling of photon migration in human neck based on
+  the radiative transport equation},'' {\em Journal of Applied Nonlinear
+  Dynamics}, vol.~5, no.~1, pp.~117--125, 2016.
+
+\bibitem{Crosbie1984}
+A.~L. Crosbie and R.~G. Schrenker, ``{Radiative transfer in a two-dimensional
+  rectangular medium exposed to diffuse radiation},'' {\em Journal of
+  Quantitative Spectroscopy and Radiative Transfer}, vol.~31, no.~4,
+  pp.~339--372, 1984.
+
+\bibitem{Ramankutty1997}
+M.~A. Ramankutty and A.~L. Crosbie, ``{Modified discrete ordinates solution of
+  radiative transfer in two-dimensional rectangular enclosures},'' {\em Journal
+  of Quantitative Spectroscopy and Radiative Transfer}, vol.~57, no.~1,
+  pp.~107--140, 1997.
+
+\bibitem{tagnekamdem2015}
+H.~Thierry and T.~Kamdem, ``{Ray Effects Elimination in Discrete Ordinates and
+  Finite Volume Methods},'' {\em Journal of Thermophysics and Heat Transfer},
+  vol.~29, no.~2, pp.~306--318, 2014.
+
+\bibitem{Paasschens1997}
+J.~C.~J. Paasschens, ``{Solution of the time-dependent Boltzmann equation},''
+  {\em Physical Review E - Statistical Physics, Plasmas, Fluids, and Related
+  Interdisciplinary Topics}, vol.~56, no.~1, pp.~1135--1141, 1997.
+
+\bibitem{Gaggioli2021}
+E.~L. Gaggioli, D.~M. Mitnik, and O.~P. Bruno, ``{Skin effect in neutron
+  transport theory},'' {\em Physical Review E}, vol.~104, no.~3,
+  pp.~L032801--1--L032801--6, 2021.
+
+\bibitem{Bruno2019}
+O.~P. Bruno, M.~Cubillos, and E.~Jimenez, ``{Higher-order implicit-explicit
+  multi-domain compressible Navier-Stokes solvers},'' {\em Journal of
+  Computational Physics}, vol.~391, pp.~322--346, 2019.
+
+\bibitem{Case1967}
+K.~M. Case and Z.~P. F, ``{Linear Transport Theory},'' 1967.
+
+\bibitem{Petrovic1996}
+B.~G. Petrovi{\'{c}} and A.~Haghighat, ``{Analysis of inherent oscillations in
+  multidimensional $S_N$ solutions of the neutron transport equation},'' {\em
+  Nuclear Science and Engineering}, vol.~124, no.~1, pp.~31--62, 1996.
+
+\bibitem{Hunter2015}
+B.~Hunter and Z.~Guo, ``{Numerical smearing, ray effect, and angular false
+  scattering in radiation transfer computation},'' {\em International Journal
+  of Heat and Mass Transfer}, vol.~81, pp.~63--74, 2015.
+
+\bibitem{Barichello2016}
+L.~B. Barichello, A.~Tres, C.~B. Picoloto, and Y.~Y. Azmy, ``{Recent Studies on
+  the Asymptotic Convergence of the Spatial Discretization for Two-Dimensional
+  Discrete Ordinates Solutions},'' {\em Journal of Computational and
+  Theoretical Transport}, vol.~45, no.~4, pp.~299--313, 2016.
+
+\bibitem{Hu2020}
+X.~Hu and Y.~Y. Azmy, ``{Asymptotic convergence of the angular discretization
+  error in the scalar flux computed from the particle transport equation with
+  the method of discrete ordinates},'' {\em Annals of Nuclear Energy},
+  vol.~138, p.~107199, 2020.
+
+\bibitem{Bal2001}
+G.~Bal, ``{Fourier analysis of diamond discretization in particle transport},''
+  {\em Calcolo}, vol.~38, no.~3, pp.~141--172, 2001.
+
+\bibitem{Bender1999}
+C.~M. Bender and S.~A. Orszag, {\em {Advanced Mathematical Methods for
+  Scientists and Engineers I}}.
+\newblock 1999.
+
+\bibitem{Rocheleau2020}
+J.~Rocheleau, ``{An Analytical Nodal Discrete Ordinates Solution to the
+  Transport Equation in Cartesian Geometry},'' Master's thesis, 2020.
+
+\bibitem{Wang2019}
+D.~Wang and T.~Byambaakhuu, ``{High-Order Lax-Friedrichs WENO Fast Sweeping
+  Methods for the $S_N$ Neutron Transport Equation},'' {\em Nuclear Science and
+  Engineering}, vol.~193, no.~9, pp.~982--990, 2019.
+
+\bibitem{Harel2020}
+R.~Harel, S.~Burov, and S.~I. Heizler, ``{Asymptotic PN Approximation in
+  Radiative Transfer Problems},'' {\em Journal of Computational and Theoretical
+  Transport}, vol.~0, no.~0, pp.~1--17, 2020.
+
+\bibitem{Chai1993}
+J.~C. Chai, H.~O. Lee, and P.~S. V, ``{Ray effect and false scattering in the
+  discrete ordinates method},'' {\em Numerical Heat Transfer, Part B:
+  Fundamentals}, vol.~24, no.~4, pp.~373--389, 1993.
+
+\bibitem{Trefethen2008}
+L.~N. Trefethen, ``{Is Gauss quadrature better than Clenshaw-Curtis?},'' {\em
+  SIAM Review}, vol.~50, no.~1, pp.~67--87, 2008.
+
+\bibitem{Larsen1987}
+E.~W. Larsen, , J.~E. Morel, and W.~F. Miller, ``{Asymptotic solutions of
+  numerical transport problems in optically thick, diffusive regimes},'' {\em
+  Journal of Computational Physics}, vol.~67, no.~1, pp.~283--324, 1987.
+
+\bibitem{Althobaiti2017}
+M.~Althobaiti, H.~Vavadi, and Q.~Zhu, ``{Diffuse optical tomography
+  reconstruction method using ultrasound images as prior for regularization
+  matrix},'' {\em Journal of Biomedical Optics}, vol.~22, no.~2, p.~026002,
+  2017.
+
+\bibitem{Guven2003}
+M.~Guven, B.~Yazici, X.~Intes, and B.~Chance, ``{Diffuse optical tomography
+  with a priori anatomical information},'' {\em Optical Tomography and
+  Spectroscopy of Tissue V}, vol.~4955, p.~634, 2003.
+
+\bibitem{Hielscher1999}
+A.~H. Hielscher, A.~D. Klose, and K.~M. Hanson, ``{Gradient-based iterative
+  image reconstruction scheme for time-resolved optical tomography},'' {\em
+  IEEE Transactions on Medical Imaging}, vol.~18, no.~3, pp.~262--271, 1999.
+
+\bibitem{Kim2010}
+H.~K. Kim and A.~H. Hielscher, ``{A diffusion-transport hybrid method for
+  accelerating optical tomography},'' {\em Journal of Innovative Optical Health
+  Sciences}, vol.~3, no.~4, pp.~293--305, 2010.
+
+\bibitem{Nocedal2006}
+J.~Nocedal and S.~J. Wright, {\em {Numerical optimization}}.
+\newblock New York, USA: Springer, second~ed., 2006.
+
+\bibitem{Klose2003QN}
+A.~D. Klose and A.~H. Hielscher, ``{Quasi-Newton methods in optical tomographic
+  image reconstruction},'' {\em Inverse Problems}, vol.~19, no.~2,
+  pp.~387--409, 2003.
+
+\bibitem{Bruno2014}
+O.~P. Bruno and A.~Prieto, ``{Spatially dispersionless, unconditionally stable
+  FC-AD solvers for variable-coefficient PDEs},'' {\em Journal of Scientific
+  Computing}, vol.~58, no.~2, pp.~331--366, 2014.
+
+\bibitem{Dorn}
+O.~Dorn, ``{A transport – backtransport method for optical tomography},''
+  {\em Inverse Problems}, vol.~14, pp.~1107--1130, 1998.
+
+\bibitem{Hille1974}
+E.~Hille and R.~Phillips, {\em {Functional analysis and semi-groups}}.
+\newblock Rhode Island, USA: American Mathematical Society, first~ed., 1957.
+
+\bibitem{Dorn2000}
+O.~Dorn, ``{Scattering and absorption transport sensitivity functions for
+  optical tomography},'' {\em Optics Express}, vol.~7, no.~13, p.~492, 2000.
+
+\bibitem{Bashkatov2011}
+A.~N. Bashkatov, E.~A. Genina, and V.~V. Tuchin, ``{Optical properties of skin,
+  subcutaneous, and muscle tissues: A review},'' {\em Journal of Innovative
+  Optical Health Sciences}, vol.~4, no.~1, pp.~9--38, 2011.
+
+\bibitem{Dehaes2011}
+M.~Dehaes, L.~Gagnon, F.~Lesage, M.~P{\'{e}}l{\'{e}}grini-Issac, A.~Vignaud,
+  R.~Valabr{\`{e}}gue, R.~Grebe, F.~Wallois, and H.~Benali, ``{Quantitative
+  investigation of the effect of the extra-cerebral vasculature in diffuse
+  optical imaging: a simulation study},'' {\em Biomedical Optics Express},
+  vol.~2, no.~3, p.~680, 2011.
+
+\bibitem{CCommons}
+``{Case courtesy of RMH Core Conditions, Radiopaedia.org, rID: 26271.},''
+
+\bibitem{Larsen1974}
+E.~W. Larsen and J.~B. Keller, ``{Asymptotic solution of neutron transport
+  problems for small mean free paths},'' {\em Journal of Mathematical Physics},
+  vol.~15, no.~1, pp.~75--81, 1974.
+
+\bibitem{Sansone1991}
+G.~Sansone, {\em {Orthogonal Functions}}.
+\newblock New York, USA: Dover Publications, first~ed., 1991.
+
+\bibitem{Ishimaru1978}
+A.~Ishimaru, {\em {Wave Propagation and Scattering in Random Media}}, vol.~1.
+\newblock New York, USA: Academic Press, 1978.
+
+\bibitem{Modest2013}
+M.~F. Modest, {\em {Radiative Heat Transfer}}.
+\newblock third~ed., 2013.
+
+\end{thebibliography}

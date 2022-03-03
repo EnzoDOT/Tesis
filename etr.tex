@@ -93,7 +93,7 @@ función de Henyey-Greenstein~\cite{Henyey1941}
 donde $g \in [-1,1]$ caracteriza la anisotropía en los procesos de dispersión: 
  un valor de $g=1$ ($g=-1$) caracteriza una distribución de probabilidad donde todos
 los fotones emergen del proceso de dispersión en la dirección (opuesta) de 
-incidencia. En el caso de dispersión isotrópica, 
+incidencia. En el caso de dispersión isótropa, 
 donde los fotones emergen de los eventos de colisión con igual probabilidad 
 en cualquier dirección se tiene $ g = 0 $. En general se exige que la función de fase 
 esté normalizada, de forma tal qué
@@ -203,20 +203,20 @@ integrando en la variable angular $\theta$
  la ecuación integro diferencial en~\eqref{eq:RTE} y utilizando~\eqref{eq:Henyey-Greeinsteinnorm}  se tiene
 \begin{equation}
 \frac{1}{c}\frac{\partial}{\partial t} \phi(\x,t)+\nabla \cdot \vec{ \mathcal{J}}(\x,t)
-+(a(\x)+b(\x)) \phi(\x,t)=b(\x)\phi(\x,t)+\tilde{s}(\x,t)
++(a(\x)+b(\x)) \phi(\x,t)=b(\x)\phi(\x,t)+s_0(\x,t)
 \label{eq:RTEscflux}
 \end{equation}
-donde $\tilde{s}=\int_{S^1}s(\x,\hth,t)d\theta$. Integrando la 
+donde $s_0=\int_{S^1}s(\x,\hth,t)d\theta$. Integrando la 
 ecuación~\eqref{eq:RTEscflux} en el dominio espacial, utilizando el teorema de la divergencia
 y reordenando los términos se llega a la siguiente ecuación de balance
 \begin{equation}
 \frac{1}{c}\frac{\partial}{\partial t} \int_{\Omega}\phi(\x,t)d\x = 
-\int_{\Omega}\tilde{s}(\x,t)d\x- \oint_{\partial \Omega} \vec{ \mathcal{J}}(\x,t)\cdot \hnu dS-\int_{\Omega}a(\x)\phi(\x,t)d\x,
+\int_{\Omega}s_0(\x,t)d\x- \oint_{\partial \Omega} \vec{ \mathcal{J}}(\x,t)\cdot \hnu dS-\int_{\Omega}a(\x)\phi(\x,t)d\x,
 \label{eq:RTEfullint}
 \end{equation}
 la cual expresa la conservación global de la radiación en el volumen $\Omega$, 
 donde la variación temporal en el número total de fotones 
-viene dada por el aporte de la fuente $\tilde{s}$, menos el flujo de fotones
+viene dada por el aporte de la fuente $s_0$, menos el flujo de fotones
  a través de la superficie del 
 dominio $\partial \Omega$, menos los fotones que son absorbidos 
 por el medio participante en procesos de absorción pura. 
@@ -671,12 +671,7 @@ $\Omega=\{ \x \in [x_{\text{min}},x_{\text{max}}]\times [y_{\text{min}},y_{\text
 donde $x_{\text{min}}=y_{\text{min}}=0$cm, $x_{\text{max}}=y_{\text{max}}=3$cm, 
 y evolucionamos la solución hasta el tiempo final $T=3$ps. Utilizamos 
 una descomposición de dominio de 8 subdominios para 
-poder realizar estas pruebas en una PC de escritorio. 
-El coeficiente de dispersión en el medio considerado es isotrópico, 
-con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
-
-\pagebreak
-
+poder
 \begin{wrapfigure}{r}{0.45\textwidth}
  \begin{subfigure}{
   \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
@@ -694,7 +689,9 @@ con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm.
   El algoritmo presenta convergencia espectral en la variable angular $\theta$.}
  \label{fig:convman}
 \end{wrapfigure}
-
+ realizar estas pruebas en una PC de escritorio. 
+El coeficiente de dispersión en el medio considerado es isótropo, 
+con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
 Evaluamos el error máximo obtenido en todo el dominio 
 comparando el flujo escalar dado por la ecuación~\eqref{eq:photondensity} 
 obtenido numéricamente comparado con el flujo escalar analítico
@@ -729,7 +726,7 @@ Esta convergencia es la esperada para
 los órdenes de convergencia de las aproximaciones 
 numéricas empleadas 
 en cada una de las variables involucradas. 
-\pagebreak
+\pagebreak 
 \clearpage
 \subsection{Comparación con resultados experimentales}
 \label{sec:resexp}
@@ -1021,7 +1018,7 @@ del tiempo obtenidas por relajación del caso dependiente del tiempo.
 
 Consideramos un dominio bidimensional cuadrado, de lado unitario, 
 el cual contiene un medio puramente dispersivo (sin absorción) 
-con $b(\x)=1$. La dispersión considerada es isotrópica ($g=0$). 
+con $b(\x)=1$. La dispersión considerada es isótropa ($g=0$). 
 La radiación incide de manera uniforme sobre la superficie inferior del medio. 
 El resto de los bordes presentan condiciones de contorno de vacío ($n_{\Omega}=n_{s}$ 
 de donde $f(\hth \cdot \hnu)=0$). El observable considerado es la componente en $y$ de la corriente de fotones~\eqref{eq:photoncurrent} $\mathcal{J}_y(x,y=1)$. En la figura~(\ref{fig:fluxph3}) 
@@ -1064,7 +1061,7 @@ dependientes del tiempo calculando el flujo escalar,
 y comparándolo con la solución analítica dada por Paasschens~\cite{Paasschens1997} 
 para una fuente puntual en un medio infinito. 
 En el problema presentado por Paasschens, un medio bidimensional infinito, 
-isotrópico y homogéneo es iluminado por una fuente puntual isotrópica
+isótropo y homogéneo es iluminado por una fuente puntual isótropa
 ubicada en el origen de coordenadas $s(\x,\hth,t)=\delta(\x)\delta(t)$.
 
 La solución para este problema es
@@ -1262,7 +1259,7 @@ dependiendo de la naturaleza del problema.
 La ecuación ETR independiente del tiempo, en una dimensión espacial 
 modela el transporte en una geometría plano paralela descripta en la 
 figura~\ref{fig:parallelgeom}. Por simplicidad, consideramos 
-el caso isotrópico, con condiciones de borde de Fresnel
+el caso isótropo, con condiciones de borde de Fresnel
 \begin{equation}
 \begin{split}
   &\xi \frac{\partial}{\partial x}\uxi+\mu_t(x)\uxi=   \frac{\mu_s(x)}{2} \int_{-1}^{1}\uxp d\xi' +q(x,\xi),\\
@@ -1479,15 +1476,6 @@ esquema implícito BDF (backward differentiation formula) de evolución temporal
 Para evitar el alto costo en la inversión de matrices grandes a 
 cada paso temporal, el término 
 colisional se obtiene por extrapolación polinomial. La versión discreta 
-de la ecuación~\eqref{eq:transptd} resulta
-\begin{equation}
-\begin{aligned}
- \left[ \id + \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  u^{n+1}_j  = 
-\sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
- \sum_{i=1}^{M} w_i \tilde{u}_i^{n+1} + \beta\Delta t q^{n+1},
-\end{aligned}
-\label{eq:transptd1disc}
-\end{equation}
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
   \vspace{2mm}
@@ -1501,6 +1489,15 @@ de la ecuación~\eqref{eq:transptd} resulta
   como se determinó el error.}
  \label{fig:conv}
 \end{wrapfigure}
+de la ecuación~\eqref{eq:transptd} resulta\looseness=-1
+\begin{equation*}
+\begin{aligned}
+ \left[ \id &+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  u^{n+1}_j  = \\
+&\sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
+ \sum_{i=1}^{M} w_i \tilde{u}_i^{n+1} + \beta\Delta t q^{n+1},
+\end{aligned}
+\label{eq:transptd1disc}
+\end{equation*}
 donde $u^{n+1}_j=u(v,\xi_j,t^{n+1})$, $t^{n+1}=n\Delta t$, con $\alpha_k$ y $\beta$ 
 los coeficientes BDF de tercer orden, con $s=3$. El término extrapolado 
 a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa {3 \choose \kappa+1} u_j^{n-\kappa}$. Nuevamente, 
@@ -1526,9 +1523,6 @@ Debido a que las diferentes
     entre sí, para la figura (c) 
     el error fue calculado utilizando el flujo escalar, con  
 $E(\Delta v, M,\Delta t)=\text{max}_x |\sum_{i=1}^M w_i u(x,\xi_i)-\phi^{\text{c}}(x)|$.
-
-\pagebreak
-\clearpage
 
 A continuación, utilizaremos el algoritmo propuesto para 
 explorar y demostrar el carácter de las estructuras de capa límite 
@@ -1590,10 +1584,10 @@ meramente por un fenómeno numérico que
 surge al resolver la ecuación de transporte 
 empleando el esquema de diferencias finitas de Diamante (DD)~\cite{Larsen1987,Petrovic1996,Bal2001}.
 En las referencias~\cite{Larsen1987,Petrovic1996} se atribuye 
-este fenómeno numérico a condiciones de borde anisotrópicas, capas límite no difusivas y/o 
+este fenómeno numérico a condiciones de borde anisótropas, capas límite no difusivas y/o 
 a un alto coeficiente de absorción. En esta tesis 
 se demuestra la existencia de estas capa límite incluso para el 
-caso de condiciones de borde isotrópicas, y para todos los valores 
+caso de condiciones de borde isótropas, y para todos los valores 
 de los coeficientes de absorción y dispersión, con una interpretación 
 diferente a la reportada en la literatura. En particular, 
 nuestra contribución demuestra de forma explícita la existencia 
@@ -1606,10 +1600,10 @@ difusivo de transporte (el Problema~1 en dicha referencia)
 el cual, luego de reescalear las constantes, puede formularse 
 como an la ecuación~\eqref{eq:transp1d} con $\mu_s=\mu_t=1000$,
  $q=0.1$ y $\mathcal{R}(\xi)=0$. Este es un problema 
- puramente difusivo, con condiciones de borde isotrópicas, 
+ puramente difusivo, con condiciones de borde isótropas, 
  sobre la que dicha referencia afirma~\cite[pp. 317]{Larsen1987} 
  ``...dado que el término de orden dominante en la expansión asintótica 
- de la ecuación de transporte analítica es isotrópico, 
+ de la ecuación de transporte analítica es isótropo, 
  este término no posee una capa límite para este problema''. 
  En contraste, la figura~\ref{fig:DDlayer} muestra que 
  las capa límite estan presentes en este problema, aunque 
