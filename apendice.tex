@@ -122,7 +122,6 @@ la ecuación~\eqref{eq:RTEjflux} puede reescribirse como
 \label{eq:RTEjfluxf}
 \end{equation}
 donde el coeficiente de dispersión reducido viene dado por $b'(\x)=(1-g)b(\x)$.
-Hasta este punto no hemos realizado ninguna aproximación.
 
 Adicionalmente, tenemos de la ec.~\eqref{eq:RTEscflux} para el flujo escalar, la cual derivamos en la 
 sección~\ref{sec:ETR} para el caso 2D, que reescribimos aquí considerando un domino $\Omega \in \mathbb{R}^3$
@@ -133,10 +132,10 @@ sección~\ref{sec:ETR} para el caso 2D, que reescribimos aquí considerando un d
 \end{equation}
 Como se mencionó anteriormente, esta ecuación representa la conservación 
 de los fotones para cada punto espacial $\x \in \Omega$, independientemente 
-de la dirección. 
+de la dirección. Hasta este punto no hemos realizado ninguna aproximación.
 
 El enfoque utilizado con mayor frecuencia en la literatura de tomografía óptica para la derivación de la aproximación de difusión se basa 
-en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$, volviendola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vió en la sección~\ref{sec:blayer} esto no será cierto en la próximidad de los bordes. Esto invita la expansión en armónicos esféricos, de la forma 
+en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vió en la sección~\ref{sec:blayer} esto no será cierto en la próximidad de los bordes. Esto invita la expansión en armónicos esféricos, de la forma 
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -146,7 +145,10 @@ u_{l,m}(\x,t)&=\int_{0}^{2\pi} d\varphi \int_0^{\pi} d\tilde{\theta} \sin (\tild
 \end{split}
 \label{eq:PN}
 \end{equation}
-donde $Y_{l,m}(\theta,\varphi)$ representa al armónico esférico de grado $l$ y orden $m$~\cite{Sansone1991}. La relación~\eqref{eq:PN} valdrá, en general, para $N \rightarrow \infty$.
+donde $Y_{l,m}(\theta,\varphi)$ representa al armónico esférico de grado $l$ y orden $m$~\cite{Sansone1991}. La relación~\eqref{eq:PN} valdrá, en general, para $N \rightarrow \infty$. Cuando, debido a la alta dispersión, la función $u(\x,\hth,t)$ 
+varíe suavemente en la variable $\hth$, un truncamiento con un valor 
+finito de $N$ en la ec.~\eqref{eq:PN} brindará una buena aparoximación 
+a la solución de la ETR.
 Reemplazando esta propuesta en la ecuación ETR lleva a un sistema de ecuaciones acopladas, cuyo primer órden, bajo ciertas aproximaciones, da como resultado la ecuación de difusión. También puede obtenerse la aproximación de difusión considerando las ecuaciones~\eqref{eq:RTEjfluxf} y ~\eqref{eq:RTEscfluxap}. Si bien se espera que, debido a la dispersión, la intensidad específica sea una función isótropa, la dependencia angular no puede ser constante, ya que en tal caso 
 no podría haber flujo neto de radiación~\cite{Ishimaru1978}. Por esta razón consideraremos la expansión~\eqref{eq:PN} con $N=1$. 
 Es fácil mostrar qué
@@ -193,11 +195,10 @@ resultados en la ecuación~\eqref{eq:RTEjfluxf}
 \end{split}
 \label{eq:RTEjfluxf3}
 \end{equation}
-Además, considerando que la difusión ocurre a escalas 
-temporales mucho mas pequeñas que las escalas temporales 
-consideradas (\ie, el tiempo que le toma a los fotones en recorrer 
-el camino libre medio ocurre en escalas temporales pequeñas), se 
-tiene qué $\frac{1}{c}\frac{\partial}{\partial t}\sim 0$, de donde de 
+Además, considerando que el tiempo que le toma a los fotones en recorrer 
+el camino libre medio ocurre en escalas temporales mucho 
+mas pequeñas que las consideradas, se 
+tiene qué $\frac{1}{c}\frac{\partial}{\partial t} \jc \sim 0$, de donde de 
 la ec.~\eqref{eq:RTEjfluxf3} se llega a la Ley de Fick
 \begin{equation}
 \begin{split}
