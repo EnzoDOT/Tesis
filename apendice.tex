@@ -54,7 +54,7 @@ borde que son tratadas en la literatura, y que no detallaremos aquí. Cabe desta
 
 Existen otras formas de derivar la ecuación de difusión para los fotones. 
 Si se multiplica la versión 3D de la ETR  por la variable angular $\hth$, y se integra 
-sobre esa misma variable, se tiene 
+sobre esa misma variable, se tiene
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -65,12 +65,18 @@ sobre esa misma variable, se tiene
 \end{split}
 \label{eq:RTEjflux}
 \end{equation}
-donde $s_1(\x,t)$ viene dado por el primer momento de la fuente
+donde $s_1(\x,t)$ viene dado por el primer momento de la fuente, y utilizamos 
+la versión 3D de la corriente de fotones (ec.~\eqref{eq:photoncurrent})
 \begin{equation}
-s_1(\x,t)=\int_{S^2} \hth s(\x,\hth,t) d\theta,
+\begin{split}
+\begin{aligned}
+s_1(\x,t)&=\int_{S^2} \hth s(\x,\hth,t) d\theta,\\
+ \jc&=\int_{S^2} \hth \ut d\theta,
 \label{eq:RTEsflux1}
+\end{aligned}
+\end{split}
 \end{equation}
-y, considerando el caso mas general de tres dimensiones espaciales, integramos en la esfera unitaria $S^2$ donde quedan definidas todas las direcciones posibles de propagación en 3D. 
+donde considerando el caso mas general de tres dimensiones espaciales, integramos en la esfera unitaria $S^2$ donde quedan definidas todas las direcciones posibles de propagación en 3D. 
 Utilizando la identidad $\hth= \hth'(\hth\cdot \hth') + \hth' \times(\hth \times \hth')$ reescribimos la integral
 \begin{equation}
 \begin{split}
@@ -229,3 +235,10 @@ que incluyen la utilización de bordes extrapolados~\cite{Arridge2009,Haskell199
 no se discute el tratamiento adecuado de las capas límite discutidas en la sección~\ref{sec:blayer}. Dado que en tomografía óptica las fuentes y los detectores 
 se ubican en el contorno del dominio a analizar, es esperable que una aproximación 
 que no es apropiada en estas regiones tenga un impacto negativo significativo en las reconstrucciones obtenidas en problema inverso basado en la ecuación~\eqref{eq:difusion}. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{El algoritmo FC(Gram)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{ap:ecdiff}
+
