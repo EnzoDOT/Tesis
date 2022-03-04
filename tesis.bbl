@@ -427,6 +427,12 @@ A.~Ishimaru, {\em {Wave Propagation and Scattering in Random Media}}, vol.~1.
 M.~F. Modest, {\em {Radiative Heat Transfer}}.
 \newblock third~ed., 2013.
 
+\bibitem{Hielscher1998}
+A.~H. Hielscher, R.~E. Alcouffe, and R.~L. Barbour, ``{Comparison of
+  finite-difference transport and diffusion calculations for photon migration
+  in homogeneous and heterogeneous tissues},'' {\em Physics in Medicine and
+  Biology}, vol.~43, no.~5, pp.~1285--1302, 1998.
+
 \bibitem{Haskell1994}
 R.~C. Haskell, L.~O. Svaasand, T.-T. Tsay, H.~M. College, M.~S. Mcadams, T.-C.
   Feng, B.~J. Tromberg, and L.~. Svaasand, ``{Boundary Conditions for the
