@@ -42,7 +42,7 @@ será válida en el interior del dominio $\Omega$, y lejos de fuentes no isótro
 
 Existen diferentes formas 
 de llegar a la ecuación de difusión. Una de ellas se basa en  una expansión perturbativa~\cite{Larsen1974,Larsen1987,Arridge2009}, 
-donde se exige que la dispersión sea dominante. En partícular, se exige qué $b(\x) \gg a(\x)$, 
+donde se exige que la dispersión sea dominante. En particular, se exige qué $b(\x) \gg a(\x)$, 
 y que el camino libre medio de dispersión, definido como $l_b=b(\x)^{-1}$, cumpla $l_b\ll \mathcal{L}$, 
 donde $\mathcal{L}$ denota una distancia característica del problema en consideración. 
 Este último requerimiento, físicamente implica que para las distancias del problema (donde $\mathcal{L}$ 
@@ -50,7 +50,7 @@ podría ser por ejemplo, la dimensión de los lados de los dominios $\Omega$ con
 reescaleadas $a(\x) \rightarrow \varepsilon a(\x)$, $b(\x) \rightarrow \frac{b(\x)}{\varepsilon}$, $s(\x,\hth,t)\rightarrow  \varepsilon s(\x,\hth,t)$ y $t\rightarrow \frac{b(\x)}{\varepsilon}$, con $\varepsilon \ll 1$. Estas variables  expresan físicamente que la dispersión es el fenómeno dominante para las 
 escalas espaciales y temporales consideradas. Reemplazando en la ec.~\eqref{eq:RTE} estas variables, junto con la expansión perturbativa $\ut=u_0(\x,\hth,t)+\varepsilon u_1(\x,\hth,t)+\varepsilon^2 u_2(\x,\hth,t)+\ldots$ e igualando los términos del mismo orden en $\varepsilon$ 
 hasta el orden cuadrático, se obtiene la ecuación de difusión. Deben realizarse consideraciones especiales con respecto a las condiciones de 
-borde que son tratadas en la literatura, y que no detallaremos aquí. Cabe destacar que en la proximidad de los bordes, las partículas no habran realizado suficientes colisiones para entrar en el régimen difusivo, por lo cual, nuevamente el análisis detallado vale en el interior del dominio espacial $\Omega$. 
+borde que son tratadas en la literatura, y que no detallaremos aquí. Cabe destacar que en la proximidad de los bordes, las partículas no habrán realizado suficientes colisiones para entrar en el régimen difusivo, por lo cual, nuevamente el análisis detallado vale en el interior del dominio espacial $\Omega$. 
 
 Existen otras formas de derivar la ecuación de difusión para los fotones. 
 Si se multiplica la versión 3D de la ETR  por la variable angular $\hth$, y se integra 
@@ -59,7 +59,7 @@ sobre esa misma variable, se tiene
 \begin{split}
 \begin{aligned}
 \frac{1}{c}\frac{\partial}{\partial t} \jc+\int_{S^2} d\theta \nabla & \ut \cdot \hth \hth 
-+(a(\x)+b(\x))\jc=\\
++[a(\x)+b(\x)]\jc=\\
 &b(\x)\int_{S^2} \hth d\theta \int_{S^2} \eta(\hth \cdot \hth')  u(\x,\hth',t) d\theta' + s_1(\x,t),
 \end{aligned}
 \end{split}
@@ -118,7 +118,7 @@ la ecuación~\eqref{eq:RTEjflux} puede reescribirse como
 \begin{equation}
 \begin{split}
 \begin{aligned}
-\frac{1}{c}\frac{\partial}{\partial t} \jc+\nabla \cdot \bar{\mathcal{J}}_2(\x,t)+(a(\x)+b'(\x))\jc=s_1(\x,t),
+\frac{1}{c}\frac{\partial}{\partial t} \jc+\nabla \cdot \bar{\mathcal{J}}_2(\x,t)+[a(\x)+b'(\x)]\jc=s_1(\x,t),
 \end{aligned}
 \end{split}
 \label{eq:RTEjfluxf}
@@ -137,7 +137,7 @@ de los fotones para cada punto espacial $\x \in \Omega$, independientemente
 de la dirección. Hasta este punto no hemos realizado ninguna aproximación.
 
 El enfoque utilizado con mayor frecuencia en la literatura de tomografía óptica para la derivación de la aproximación de difusión se basa 
-en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vió en la sección~\ref{sec:blayer} esto no será cierto en la proximidad de los bordes. Esto invita la expansión en armónicos esféricos, de la forma 
+en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vio en la sección~\ref{sec:blayer} esto no será cierto en la proximidad de los bordes. Lejos de los bordes, la variación suave de $\ut$ en $\hth$ para problemas difusivos invita a realizar la expansión en armónicos esféricos
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -149,9 +149,9 @@ u_{l,m}(\x,t)&=\int_{0}^{2\pi} d\varphi \int_0^{\pi} d\tilde{\theta} \sin (\tild
 \end{equation}
 donde $Y_{l,m}(\theta,\varphi)$ representa al armónico esférico de grado $l$ y orden $m$~\cite{Sansone1991}. La relación~\eqref{eq:PN} valdrá, en general, para $N \rightarrow \infty$. Cuando, debido a la alta dispersión, la función $u(\x,\hth,t)$ 
 varíe suavemente en la variable $\hth$, un truncamiento con un valor 
-finito de $N$ en la ec.~\eqref{eq:PN} brindará una buena aparoximación 
+finito de $N$ en la ec.~\eqref{eq:PN} brindará una buena aproximación 
 a la solución de la ETR.
-Reemplazando esta propuesta en la ecuación ETR lleva a un sistema de ecuaciones acopladas, cuyo primer órden, bajo ciertas aproximaciones, da como resultado la ecuación de difusión. También puede obtenerse la aproximación de difusión considerando las ecuaciones~\eqref{eq:RTEjfluxf} y ~\eqref{eq:RTEscfluxap}. Si bien se espera que, debido a la dispersión, la intensidad específica sea una función isótropa, la dependencia angular no puede ser constante, ya que en tal caso 
+Reemplazando esta propuesta en la ecuación ETR lleva a un sistema de ecuaciones acopladas, cuyo primer orden, bajo ciertas aproximaciones, da como resultado la ecuación de difusión. También puede obtenerse la aproximación de difusión considerando las ecuaciones~\eqref{eq:RTEjfluxf} y ~\eqref{eq:RTEscfluxap}. Si bien se espera que, debido a la dispersión, la intensidad específica sea una función isótropa, la dependencia angular no puede ser constante, ya que en tal caso 
 no podría haber flujo neto de radiación~\cite[cap. 9, p. 176]{Ishimaru1978}. Por esta razón consideraremos la expansión~\eqref{eq:PN} con $N=1$. 
 Es fácil mostrar qué
 \begin{equation}
@@ -178,8 +178,8 @@ Reemplazando~\eqref{eq:PN3} en~\eqref{eq:RTEjflux2} tenemos
 \label{eq:RTEjflux22}
 \end{equation}
 Dado que la corriente $\jc$ no depende de la variable $\hth$, las integrales que 
-constituyen los elementos del tensor de segundo orden $\bar{\mathcal{J}}_2(\x,t)$ estan formadas 
-por productos de potencias de funciones trigonométricas que pueden ser evaluadas facilmente. 
+constituyen los elementos del tensor de segundo orden $\bar{\mathcal{J}}_2(\x,t)$ están formadas 
+por productos de potencias de funciones trigonométricas que pueden ser evaluadas fácilmente. 
 Es fácil verificar que la integral en el segundo término del lado derecho de la ecuación~\eqref{eq:RTEjflux22} se anula, y qué~\cite[cap. 17, p. 544]{Modest2013}
 \begin{equation}
 \int_{S^2} \hth \hth d\theta=\frac{4\pi}{3} \id,
@@ -190,28 +190,30 @@ de donde se tiene
 \nabla \cdot \bar{\mathcal{J}}_2(\x,t)=\frac{1}{3}\nabla \phi(\x,t).
 \label{eq:RTEjflux23}
 \end{equation}
-Asumiendo que la fuente $s(\x,\hth,t)$ es isótropa, se tendrá $s_1(\x,t)\sim 0$. Reemplazando estos resultados en la ecuación~\eqref{eq:RTEjfluxf}
+Asumiendo que la fuente $s(\x,\hth,t)$ es isótropa, se tendrá $s_1(\x,t)\simeq 0$. Reemplazando estos resultados en la ecuación~\eqref{eq:RTEjfluxf}
 \begin{equation}
 \begin{split}
 \begin{aligned}
-\frac{1}{c}\frac{\partial}{\partial t} \jc+\frac{1}{3}\nabla  \phi(\x,t) +(a(\x)+b'(\x))\jc=0,
+\frac{1}{c}\frac{\partial}{\partial t} \jc+\frac{1}{3}\nabla  \phi(\x,t) +[a(\x)+b'(\x)]\jc=0,
 \end{aligned}
 \end{split}
 \label{eq:RTEjfluxf3}
 \end{equation}
 Además, considerando que el tiempo que le toma a los fotones en recorrer 
 el camino libre medio ocurre en escalas temporales mucho 
-mas pequeñas que las consideradas, se 
-tiene qué $\frac{1}{c}\frac{\partial}{\partial t} \jc \sim 0$, de donde de 
+mas pequeñas que las consideradas para las variaciones temporales de $\jc$, se 
+tiene qué $\frac{1}{c}\frac{\partial}{\partial t} \jc \simeq 0$, de donde de 
 la ec.~\eqref{eq:RTEjfluxf3} se llega a la Ley de Fick
 \begin{equation}
 \begin{split}
 \begin{aligned}
-\jc=-\frac{1}{3(a(\x)+b'(\x))} \nabla  \phi(\x,t) .
+\jc=-\frac{1}{3[a(\x)+b'(\x)]} \nabla  \phi(\x,t) .
 \end{aligned}
 \end{split}
 \label{eq:Fick}
 \end{equation}
+donde el signo negativo expresa que el flujo de fotones se da desde regiones 
+de mayor densidad (o ``concentración'') hacia regiones de menor densidad de fotones. 
 Definiendo el coeficiente de difusión $D(\x)=\frac{1}{3[a(\x)+b'(\x)]}$, y reemplazando 
 este último resultado en la ecuación~\eqref{eq:RTEscfluxap}, se 
 llega finalmente a la ecuación de difusión para la densidad de fotones
@@ -226,4 +228,4 @@ de los bordes. Se han desarrollado diferentes teorías para el tratamiento de lo
 que incluyen la utilización de bordes extrapolados~\cite{Arridge2009,Haskell1994,Arridge1999,Xu2002}. En general, en la bibliografía 
 no se discute el tratamiento adecuado de las capas límite discutidas en la sección~\ref{sec:blayer}. Dado que en tomografía óptica las fuentes y los detectores 
 se ubican en el contorno del dominio a analizar, es esperable que una aproximación 
-que no es apropiada en estas regiones tenga un impacto significativo en las reconstrucciones del problema inverso. 
+que no es apropiada en estas regiones tenga un impacto negativo significativo en las reconstrucciones obtenidas en problema inverso basado en la ecuación~\eqref{eq:difusion}. 
