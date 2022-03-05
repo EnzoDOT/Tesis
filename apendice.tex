@@ -11,13 +11,16 @@
 El modelo físico mas utilizado para el modelado del transporte de fotones en el 
 tejido biológico se basa en la utilización de la aproximación de 
 difusión a la ETR~\eqref{eq:RTE}. La razón por la cual este modelo es más utilizado 
-que la ecuación de transporte radiativo, es que permite obtener valores 
-aproximados para el flujo de fotones, resolviendo un problema matemáticamente 
+que la ecuación de transporte radiativo (la cual 
+provee un modelo físicamente preciso para el transporte de los fotones a escala mesoscópica, 
+siendo la aproximación de difusión sólo una aproximación a esta última), es que 
+por un lado, el tejido biológico es un medio 
+altamente dispersivo donde en ciertas circunstancias la ecuación de difusión para los fotones permite obtener valores aproximados para el flujo de fotones, resolviendo un problema matemáticamente 
 más simple (la ecuación de difusión), y con un costo computacional 
 considerablemente menor que el que exige la resolución de la ETR. 
 Si se considera el problema ETR dependiente del tiempo 
-en tres dimensiones espaciales, 
-este posee 6 variables independientes, donde a las tres variables espaciales $\x=(x,y,z)$, 
+en tres dimensiones espaciales, la solución a este problema 
+posee 6 variables independientes, donde a las tres variables espaciales $\x=(x,y,z)$, 
 deben agregarse las direcciones de propagación en la esfera unitaria $S^2$, las 
 cuales para ser determinadas, exigen de dos variables direccionales, con $\hth=\hth(\theta,\varphi)=\cos(\varphi)\sin(\theta)\hat x+\sin(\varphi)\sin(\theta)\hat y+\cos(\theta) \hat z$, y adicionalmente se tiene la variable temporal $t$. En 3D, utilizaremos 
 la integración de ángulo sólido, con el elemento diferencial definido según 
@@ -47,7 +50,7 @@ y que el camino libre medio de dispersión, definido como $l_b=b(\x)^{-1}$, cump
 donde $\mathcal{L}$ denota una distancia característica del problema en consideración. 
 Este último requerimiento, físicamente implica que para las distancias del problema (donde $\mathcal{L}$ 
 podría ser por ejemplo, la dimensión de los lados de los dominios $\Omega$ considerados anteriormente) las partículas realizarán un número muy grande de colisiones, entrando, por lo tanto, en el régimen difusivo. La expansión perturbativa se realiza utilizando las variables 
-reescaleadas $a(\x) \rightarrow \varepsilon a(\x)$, $b(\x) \rightarrow \frac{b(\x)}{\varepsilon}$, $s(\x,\hth,t)\rightarrow  \varepsilon s(\x,\hth,t)$ y $t\rightarrow \frac{b(\x)}{\varepsilon}$, con $\varepsilon \ll 1$. Estas variables  expresan físicamente que la dispersión es el fenómeno dominante para las 
+reescaleadas $a(\x) \rightarrow \varepsilon a(\x)$, $b(\x) \rightarrow \frac{b(\x)}{\varepsilon}$, $s(\x,\hth,t)\rightarrow  \varepsilon s(\x,\hth,t)$ y $t\rightarrow \frac{t}{\varepsilon}$, con $\varepsilon \ll 1$. Estas variables  expresan físicamente que la dispersión es el fenómeno dominante para las 
 escalas espaciales y temporales consideradas. Reemplazando en la ec.~\eqref{eq:RTE} estas variables, junto con la expansión perturbativa $\ut=u_0(\x,\hth,t)+\varepsilon u_1(\x,\hth,t)+\varepsilon^2 u_2(\x,\hth,t)+\ldots$ e igualando los términos del mismo orden en $\varepsilon$ 
 hasta el orden cuadrático, se obtiene la ecuación de difusión. Deben realizarse consideraciones especiales con respecto a las condiciones de 
 borde que son tratadas en la literatura, y que no detallaremos aquí. Cabe destacar que en la proximidad de los bordes, las partículas no habrán realizado suficientes colisiones para entrar en el régimen difusivo, por lo cual, nuevamente el análisis detallado vale en el interior del dominio espacial $\Omega$. 
