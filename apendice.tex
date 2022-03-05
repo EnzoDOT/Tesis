@@ -19,10 +19,10 @@ altamente dispersivo donde en ciertas circunstancias la ecuación de difusión p
 más simple (la ecuación de difusión), y con un costo computacional 
 considerablemente menor que el que exige la resolución de la ETR. 
 Si se considera el problema ETR dependiente del tiempo 
-en tres dimensiones espaciales, la solución a este problema 
+en tres dimensiones espaciales, la solución a este problema, $\ut=u(x,y,z,\tilde{\theta},\varphi,t)$  
 posee 6 variables independientes, donde a las tres variables espaciales $\x=(x,y,z)$, 
 deben agregarse las direcciones de propagación en la esfera unitaria $S^2$, las 
-cuales para ser determinadas, exigen de dos variables direccionales, con $\hth=\hth(\theta,\varphi)=\cos(\varphi)\sin(\theta)\hat x+\sin(\varphi)\sin(\theta)\hat y+\cos(\theta) \hat z$, y adicionalmente se tiene la variable temporal $t$. En 3D, utilizaremos 
+cuales para ser determinadas, exigen de dos variables direccionales, con $\hth=\hth(\theta,\varphi)=\cos(\varphi)\sin(\tilde{\theta})\hat x+\sin(\varphi)\sin(\tilde{\theta})\hat y+\cos(\tilde{\theta}) \hat z$, y adicionalmente se tiene la variable temporal $t$. En 3D, utilizaremos 
 la integración de ángulo sólido, con el elemento diferencial definido según 
 $d\theta= d\varphi \sin(\tilde{\theta}) d\tilde{\theta}$, 
 donde ahora utilizamos la variable $\tilde{\theta}$ para la integración en el angulo polar, 
