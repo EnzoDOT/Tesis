@@ -2,7 +2,7 @@
 \usepackage[left=2.5cm,top=3.0cm,right=2.5cm,bottom=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{titlesec}
+%\usepackage{titlesec}
 \usepackage{amssymb}
 \usepackage{bbm}
 \usepackage{amsmath}
@@ -17,7 +17,7 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 \usepackage{epstopdf}
-\usepackage{estilo}
+%\usepackage{estilo}
 \usepackage{cite}
 \usepackage{caption}
 \usepackage[font={small,it}]{caption}
@@ -36,9 +36,32 @@
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black]{hyperref}
 \usepackage{mathtools}
 
-\titleformat{\chapter}[display]
-  {\normalfont\bfseries}{}{0pt}{\Large}
+%\newcommand{\hsp}{\hspace{20pt}}
+%\titleformat{\chapter}[display]
+%  {\normalfont\bfseries}{}{0pt}{\Large}
 \renewcommand{\baselinestretch}{1.5}
+
+
+
+\usepackage{titlesec, blindtext, color}
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Large\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Large\bfseries}
+
+
+%\renewcommand{\bibname}{}
+\renewcommand\contentsname{\'Indice}                %\newcommand\contentsname{Contents}
+\renewcommand\listfigurename{\'Indice de Figuras}   %\newcommand\listfigurename{List of Figures}
+\renewcommand\listtablename{\'Indice de tablas}     %\newcommand\listtablename{List of Tables}
+%\renewcommand\bibname{Bibliograf\'{\i}a}            %\newcommand\bibname{Bibliography}
+%aparece en ARTICLE                                  \renewcommand\refname{Referencias}
+\renewcommand\indexname{\'Indice general}                   %\newcommand\indexname{Index}
+\renewcommand\figurename{Figura}                    %\newcommand\figurename{Figure}
+\renewcommand\tablename{Tabla}                      %\newcommand\tablename{Table}
+\renewcommand\partname{Parte}                       %\newcommand\partname{Part}
+\renewcommand\chaptername{Cap\'{\i}tulo}            %\newcommand\chaptername{Chapter}
+\renewcommand\appendixname{Ap\'endice}    
+\renewcommand{\bibname}{}
 
 \newcommand{\x}{\mathbf{x}}
 \newcommand{\vi}{\hat{i}}
@@ -110,6 +133,7 @@ bibliografia}
 \include{etr}
 \include{inverso}
 \include{conclusion}
+\appendix
 \include{apendice} 
 \include{bibliografia} 
 

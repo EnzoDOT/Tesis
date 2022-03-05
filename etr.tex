@@ -1,8 +1,7 @@
 \chapter{El modelo directo}
 \lhead{\thepage}
-\rhead{\textit{El modelo directo}} \\
-
-
+\rhead{\textit{El modelo directo}} 
+\pagebreak
 Como mencionamos en la introducción, en este trabajo resolvemos el problema inverso 
 como un problema de minimización no lineal, basado en un modelo físico para 
 el transporte de fotones. Este modelo para el transporte de los fotones, 
@@ -543,9 +542,7 @@ En suma, el algoritmo que resulta de la combinación del método FC con
 el método de ordenadas discretas (D.O.M., del inglés discrete ordinates method), y el método de propagación temporal, 
 lo denominamos método FC--DOM~\cite{Gaggioli2019}. Este algoritmo se 
 presenta en forma de pseudocódigo en el algoritmo~\eqref{algfc}.
-
-
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{FC--DOM en paralelo}\label{algfc}
 \begin{algorithmic}[1]
 \State  Generar descomposición de dominio
@@ -569,11 +566,9 @@ presenta en forma de pseudocódigo en el algoritmo~\eqref{algfc}.
 \State \hskip1.0em Intercambiar bordes no físicos entre subdominios vecinos.
 \State \hskip0.75em\textbf{terminar}
 \State \hskip0.5em\textbf{terminar}
-
 \State  \textbf{terminar}
 \end{algorithmic}
 \end{algorithm}
-
 
 En la fig. (\ref{fig:scala}) se muestran los tiempos computacionales 
 normalizados obtenidos 
@@ -665,13 +660,15 @@ se obtienen, respectivamente, aplicando el operador de transporte,
 evaluando a tiempo $t=0$ y evaluando en $\Gamma_-$ la solución 
 propuesta~\eqref{eq:RTEmansol}.
 
-
 Resolvemos el problema~\eqref{eq:RTEdisp} en un dominio cuadrado 
 $\Omega=\{ \x \in [x_{\text{min}},x_{\text{max}}]\times [y_{\text{min}},y_{\text{max}}] \}$
 donde $x_{\text{min}}=y_{\text{min}}=0$cm, $x_{\text{max}}=y_{\text{max}}=3$cm, 
 y evolucionamos la solución hasta el tiempo final $T=3$ps. Utilizamos 
 una descomposición de dominio de 8 subdominios para 
-poder
+poder realizar estas pruebas en una PC de escritorio. 
+El coeficiente de dispersión en el medio considerado es isótropo, 
+con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
+\pagebreak
 \begin{wrapfigure}{r}{0.45\textwidth}
  \begin{subfigure}{
   \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
@@ -689,9 +686,6 @@ poder
   El algoritmo presenta convergencia espectral en la variable angular $\theta$.}
  \label{fig:convman}
 \end{wrapfigure}
- realizar estas pruebas en una PC de escritorio. 
-El coeficiente de dispersión en el medio considerado es isótropo, 
-con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
 Evaluamos el error máximo obtenido en todo el dominio 
 comparando el flujo escalar dado por la ecuación~\eqref{eq:photondensity} 
 obtenido numéricamente comparado con el flujo escalar analítico
@@ -1476,23 +1470,11 @@ esquema implícito BDF (backward differentiation formula) de evolución temporal
 Para evitar el alto costo en la inversión de matrices grandes a 
 cada paso temporal, el término 
 colisional se obtiene por extrapolación polinomial. La versión discreta 
-\begin{wrapfigure}{r}{0.45\textwidth}
-  \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
-  \vspace{2mm}
-  \includegraphics[width=0.45\textwidth]{figuras/errdx.pdf}\\
-  \vspace{2mm}
-  \includegraphics[width=0.45\textwidth]{figuras/xiconv.pdf}
-  \caption{En círculos 
-  se muestra el error obtenido en diferentes grillas numericas para el algoritmo 
-  propuesto. Las lineas 
-  de diamantes indican el órden de convergencia. En el texto se detalla 
-  como se determinó el error.}
- \label{fig:conv}
-\end{wrapfigure}
 de la ecuación~\eqref{eq:transptd} resulta\looseness=-1
 \begin{equation*}
 \begin{aligned}
- \left[ \id &+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  u^{n+1}_j  = \\
+ \left[ \id \right. & \left.+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  
+ u^{n+1}_j  = \\
 &\sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
  \sum_{i=1}^{M} w_i \tilde{u}_i^{n+1} + \beta\Delta t q^{n+1},
 \end{aligned}
@@ -1504,7 +1486,20 @@ a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa 
 $\id$ es el operador identidad, mientras qué $\ide$ representa al operador 
 de diferenciación espectral obtenido mediante el método de continuación de Fourier. Este procedimiento resulta en una versión implícita 
 del método FC--DOM. 
-%\pagebreak
+\pagebreak
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
+  \vspace{2mm}
+  \includegraphics[width=0.45\textwidth]{figuras/errdx.pdf}\\
+  \vspace{2mm}
+  \includegraphics[width=0.45\textwidth]{figuras/xiconv.pdf}
+  \caption{En círculos 
+  se muestra el error obtenido en diferentes grillas numéricas para el algoritmo 
+  propuesto. Las lineas 
+  de diamantes indican el orden de convergencia. En el texto se detalla 
+  como se determinó el error.}
+ \label{fig:conv}
+\end{wrapfigure}
 
 La fig.~\eqref{fig:conv} demuestra las excelentes propiedades de convergencia 
 obtenidas mediante el algoritmo propuesto con $\mu_s=\mu_a=q=1$. Dado 
