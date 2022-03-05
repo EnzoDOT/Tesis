@@ -46,7 +46,7 @@ será válida en el interior del dominio $\Omega$, y lejos de fuentes no isótro
 Existen diferentes formas 
 de llegar a la ecuación de difusión. Una de ellas se basa en  una expansión perturbativa~\cite{Larsen1974,Larsen1987,Arridge2009}, 
 donde se exige que la dispersión sea dominante. En particular, se exige qué $b(\x) \gg a(\x)$, 
-y que el camino libre medio de dispersión, definido como $l_b=b(\x)^{-1}$, cumpla $l_b\ll \mathcal{L}$, 
+y que el camino libre medio de dispersión, definido como $\ell_b=b(\x)^{-1}$, cumpla $\ell_b\ll \mathcal{L}$, 
 donde $\mathcal{L}$ denota una distancia característica del problema en consideración. 
 Este último requerimiento, físicamente implica que para las distancias del problema (donde $\mathcal{L}$ 
 podría ser por ejemplo, la dimensión de los lados de los dominios $\Omega$ considerados anteriormente) las partículas realizarán un número muy grande de colisiones, entrando, por lo tanto, en el régimen difusivo. La expansión perturbativa se realiza utilizando las variables 
@@ -80,7 +80,7 @@ s_1(\x,t)&=\int_{S^2} \hth s(\x,\hth,t) d\theta,\\
 \end{split}
 \end{equation}
 donde considerando el caso mas general de tres dimensiones espaciales, integramos en la esfera unitaria $S^2$ donde quedan definidas todas las direcciones posibles de propagación en 3D. 
-Utilizando la identidad $\hth= \hth'(\hth\cdot \hth') + \hth' \times(\hth \times \hth')$ reescribimos la integral
+Utilizando la identidad $\hth= \hth'(\hth\cdot \hth') + \hth' \times(\hth \times \hth')$ reescribimos la primer integral en el lado derecho de la ecuación~\eqref{eq:RTEjflux} como
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -92,7 +92,7 @@ Utilizando la identidad $\hth= \hth'(\hth\cdot \hth') + \hth' \times(\hth \times
 \label{eq:RTEjint}
 \end{equation}
 Debido a que la función de fase sólo depende del ángulo entre 
-la dirección incidente y la dirección en la que el fotón es dispersado ($\alpha=\hth \cdot \hth'$), la última integral se anula, de forma qué 
+la dirección incidente y la dirección en la que el fotón es dispersado ($\alpha=\hth \cdot \hth'$), la última integral en~\eqref{eq:RTEjint} se anula
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -102,7 +102,7 @@ la dirección incidente y la dirección en la que el fotón es dispersado ($\alp
 \label{eq:RTEjint2}
 \end{equation}
 Reordenando los términos, y usando qué
-el factor de anisotropía viene dado por 
+el factor de anisotropía para la función de Henyey-Greenstein, $\eta(\hth \cdot \hth')$ viene dado por 
 \begin{equation}
 g=\int_{S^2} \hth \cdot \hth' \eta(\hth \cdot \hth') d\theta,
 \label{eq:gnorm}
@@ -123,7 +123,7 @@ Llamando al segundo momento de $\ut$
 \bar{\mathcal{J}}_2(\x,t)=\int_{S^2} \hth \hth \ut d\theta,
 \label{eq:RTEjflux2}
 \end{equation}
-la ecuación~\eqref{eq:RTEjflux} puede reescribirse como
+y la ecuación~\eqref{eq:RTEjflux} puede reescribirse como
 \begin{equation}
 \begin{split}
 \begin{aligned}
