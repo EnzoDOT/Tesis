@@ -1471,6 +1471,19 @@ Para evitar el alto costo en la inversión de matrices grandes a
 cada paso temporal, el término 
 colisional se obtiene por extrapolación polinomial. La versión discreta 
 de la ecuación~\eqref{eq:transptd} resulta\looseness=-1
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
+  \vspace{2mm}
+  \includegraphics[width=0.45\textwidth]{figuras/errdx.pdf}\\
+  \vspace{2mm}
+  \includegraphics[width=0.45\textwidth]{figuras/xiconv.pdf}
+  \caption{En círculos 
+  se muestra el error obtenido en diferentes grillas numéricas para el algoritmo 
+  propuesto. Las lineas 
+  de diamantes indican el orden de convergencia. En el texto se detalla 
+  como se determinó el error.}
+ \label{fig:conv}
+\end{wrapfigure}
 \begin{equation*}
 \begin{aligned}
  \left[ \id \right. & \left.+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  
@@ -1486,20 +1499,7 @@ a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa 
 $\id$ es el operador identidad, mientras qué $\ide$ representa al operador 
 de diferenciación espectral obtenido mediante el método de continuación de Fourier. Este procedimiento resulta en una versión implícita 
 del método FC--DOM. 
-\pagebreak
-\begin{wrapfigure}{r}{0.45\textwidth}
-  \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
-  \vspace{2mm}
-  \includegraphics[width=0.45\textwidth]{figuras/errdx.pdf}\\
-  \vspace{2mm}
-  \includegraphics[width=0.45\textwidth]{figuras/xiconv.pdf}
-  \caption{En círculos 
-  se muestra el error obtenido en diferentes grillas numéricas para el algoritmo 
-  propuesto. Las lineas 
-  de diamantes indican el orden de convergencia. En el texto se detalla 
-  como se determinó el error.}
- \label{fig:conv}
-\end{wrapfigure}
+
 
 La fig.~\eqref{fig:conv} demuestra las excelentes propiedades de convergencia 
 obtenidas mediante el algoritmo propuesto con $\mu_s=\mu_a=q=1$. Dado 
