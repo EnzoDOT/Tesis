@@ -79,7 +79,9 @@ s_1(\x,t)&=\int_{S^2} \hth s(\x,\hth,t) d\theta,\\
 \end{split}
 \end{equation}
 donde considerando el caso mas general de tres dimensiones espaciales, integramos en la esfera unitaria $S^2$ donde quedan definidas todas las direcciones posibles de propagación en 3D. 
-Utilizando la identidad $\hth= \hth'(\hth\cdot \hth') + \hth' \times(\hth \times \hth')$ reescribimos la primer integral en el lado derecho de la ecuación~\eqref{eq:RTEjflux} como
+De la formula de Lagrange para el producto de tres vectores $\vec{v_1} \times \vec{v_2} \times \vec{v_3}=(\vec{v_1}\cdot \vec{v_3}) \vec{v_2}-(\vec{v_1} \cdot \vec{v_2}) \vec{v_3}$ 
+se tiene qué  $\hth= \hth'(\hth\cdot \hth') + \hth' \times(\hth \times \hth')$.
+Utilizando la ultima identidad reescribimos la primer integral en el lado derecho de la ecuación~\eqref{eq:RTEjflux} como
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -145,7 +147,7 @@ de los fotones para cada punto espacial $\x \in \Omega$, independientemente
 de la dirección. Hasta este punto no hemos realizado ninguna aproximación.
 
 El enfoque utilizado con mayor frecuencia en la literatura de tomografía óptica para la derivación de la aproximación de difusión se basa 
-en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vio en la sección~\ref{sec:blayer} esto no será cierto en la proximidad de los bordes. Lejos de los bordes, la variación suave de $\ut$ en $\hth$ para problemas difusivos invita a realizar la expansión en armónicos esféricos
+en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009,Wang2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vio en la sección~\ref{sec:blayer} esto no será cierto en la proximidad de los bordes. Lejos de los bordes, la variación suave de $\ut$ en $\hth$ para problemas difusivos invita a realizar la expansión en armónicos esféricos
 \begin{equation}
 \begin{split}
 \begin{aligned}
