@@ -144,7 +144,9 @@ sección~\ref{sec:ETR} para el caso 2D, que reescribimos aquí considerando un d
 \end{equation}
 Como se mencionó anteriormente, esta ecuación representa la conservación 
 de los fotones para cada punto espacial $\x \in \Omega$, independientemente 
-de la dirección. Hasta este punto no hemos realizado ninguna aproximación.
+de la dirección. Hasta este punto no hemos realizado ninguna aproximación. 
+Si en la ec.~\eqref{eq:RTEscfluxap} logramos eliminar $\jc$, tendremos una ecuación diferencial 
+para el flujo escalar $\phi(\x,t)$. Buscaremos eliminar $\jc$ aplicando algunas aproximaciones en la ec.~\eqref{eq:RTEjfluxf} que nos permitan obtener una relación entre $\jc$ y $\phi(\x,t)$.
 
 El enfoque utilizado con mayor frecuencia en la literatura de tomografía óptica para la derivación de la aproximación de difusión se basa 
 en la denominada aproximación $P_N$ de la ETR~\cite{Arridge2009,Wang2009}. Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente como función de la variable angular $\hth$. En general, como se vio en la sección~\ref{sec:blayer} esto no será cierto en la proximidad de los bordes. Lejos de los bordes, la variación suave de $\ut$ en $\hth$ para problemas difusivos invita a realizar la expansión en armónicos esféricos
@@ -157,7 +159,7 @@ u_{l,m}(\x,t)&=\int_{0}^{2\pi} d\varphi \int_0^{\pi} d\tilde{\theta} \sin (\tild
 \end{split}
 \label{eq:PN}
 \end{equation}
-donde $Y_{l,m}(\theta,\varphi)$ representa al armónico esférico de grado $l$ y orden $m$~\cite{Sansone1991}. La relación~\eqref{eq:PN} valdrá, en general, para $N \rightarrow \infty$. Cuando, debido a la alta dispersión, la función $u(\x,\hth,t)$ 
+donde $Y_{l,m}(\tilde{\theta},\varphi)$ representa al armónico esférico de grado $l$ y orden $m$~\cite{Sansone1991}. La relación~\eqref{eq:PN} valdrá, en general, para $N \rightarrow \infty$. Cuando, debido a la alta dispersión, la función $u(\x,\hth,t)$ 
 varíe suavemente en la variable $\hth$, un truncamiento con un valor 
 finito de $N$ en la ec.~\eqref{eq:PN} brindará una buena aproximación 
 a la solución de la ETR.
@@ -254,10 +256,164 @@ que no es apropiada en estas regiones tenga un impacto negativo significativo en
 \chapter{El algoritmo FC(Gram)}
 \label{ap:fcgram}
 
+En la sección~\ref{sec:fcmethod} presentamos la estrategia de discretización 
+para el tratamiento numérico de las derivadas espaciales en la ETR~\eqref{eq:RTE}. 
+Como se mencionó en dicha sección, el algoritmo utilizado se basa 
+en la generación de continuaciones de las funciones involucradas, 
+que convierten dichas funciones no periódicas en funciones periódicas 
+en un intervalo extendido. Para ello, se utilizan proyecciones en una base 
+de polinomios Gram. En esta sección damos algunos detalles 
+adicionales para la generación de dichas bases de polinomios, y sus continuaciones a cero.
 
+Dada una función $f(x)$ definida en una grilla discreta, $f:[0,1]\rightarrow \mathbb{R}$, 
+con $f_j=f(x_j)$, $x_j=(j-1)/N,\;j=1,2,\ldots,N+1$, el método de continuación de 
+Fourier genera una función continuada $f_c(x)$, la cual es periódica, posee 
+derivadas suaves en el intervalo extendido $f_c: [0,b] \rightarrow \mathbb{R}$, con $f_{c,j}=f_c(x_j)$, $x_j=(j-1)/N,\;i=1,2,\ldots,N_p$, con 
+$N_p=N+C+1$~\cite{Albin2011,Amlani2016}.
 
+Esta función continuada es tal que su representación de Fourier (con $i$ la unidad imaginaria)
+\begin{equation}
+f_c(x)=\sum_{k=-N_p/2}^{N_p/2} a_k \exp\left( \frac{2\pi i k x}{b} \right),
+\label{eq:fccont1}
+\end{equation}
+no presenta el fenómeno de Gibbs, de forma que las derivadas espaciales de $f(x)$ 
+pueden calcularse eficientemente y con alta precisión a partir de la representación~\eqref{eq:fccont1} mediante uso de la transformada rápida de Fourier.
+\begin{equation}
+\frac{df}{dx}(x)\simeq \frac{df_c}{dx}(x)=\sum_{k=-N_p/2}^{N_p/2} \frac{2\pi i k x}{b} a_k \exp\left( \frac{2\pi i k x}{b} \right),
+\label{eq:fccont2}
+\end{equation}
+y donde se cumple qué la función continuada es igual a la función original en el intervalo $x\in[0,1]$, con $f_c(x_j)=f(x_j)\,j=1,\ldots,N+1$,
 
+Para obtener la continuación de Fourier $f_c$ de la función $f$ de manera computacionalmente eficiente, el método FC(Gram) utiliza únicamente información de unos pocos puntos en los bordes de $f$. 
+El algoritmo procede mediante la proyección en polinomios Gram de los puntos de los extremos 
+a derecha $\{x_{N+1-d_r},x_{N-d_r},\ldots, x_{N+1} \}$ y a izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$, $h=\frac{\delta}{d-1}$ y $x_j=(j-1)h$, ($j=1,...,d$).
+La continuación a derecha es generada mediante la proyección en una dada base de polinomios 
+a derecha $\mathcal{B}_r$, y la continuación a izquierda se produce mediante la proyección 
+en polinomios de la base $\mathcal{B}_{\ell}$. 
+La proyección en los polinomios $p_r \in \mathcal{B}_r$ genera una continuación que 
+aproxima a la función $f$ en el intervalo $[1-\delta_r,1]$ y que se vuelve cero de 
+forma suave en $x\ge b$, con $\delta_r=(d_r-1)h$. Para la continuación a izquierda, se considera 
+la extensión periódica de $f$, con $f(x_j+b)=f(x_j)$, y similarmente, la proyección 
+en dichos polinomios genera una aproximación a la función original en el intervalo $[b,b+\delta_{\ell}]$ ($\delta_{\ell}=(d_l-1)h$) la cual se vuelve suavemente en el intervalo $x\leq 1$. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+En esta tesis utilizamos $d_{\ell}=d_r=d=5$, de donde $\delta_r=\delta_{\ell}$. 
+Consideramos el espacio de polinomios $P_d$ de grado $<d$ definidos en el intervalo $[0,\delta]$, con $\delta>0$ un número pequeño.
+
+Para $g,h\in P_d$, $P_d=\{p_1,p_2,...,p_{d-1}\}$
+
+\begin{equation}
+\langle g,h\rangle =\sum_{j=1}^{d}g(x_j)h(x_j),
+\label{eq:dotpd}
+\end{equation}
+define un producto escalar.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Como ejemplo mostraremos la construcción de la base 
+de polinomios utilizada para la proyección y continuación a cero 
+a la izquierda de la función $f$. El tratamiento para las continuaciones a derecha 
+es análogo. Definimos la matriz de Vandermonde
+ \begin{equation}
+\bar{P}=
+\begin{bmatrix}
+    1  & x_{1} & x_{1}^2 & \dots  & x_{1}^{d-1} \\
+    1  & x_{2} & x_{2}^2 & \dots  & x_{2}^{d-1} \\
+    \vdots  & \vdots & \ddots & \vdots \\
+    1 & x_{d} & x_{d}^2 & \dots  & x_{d}^{d-1}
+\end{bmatrix},
+\label{eq:Vandermonde}
+\end{equation}
+con $\bar{P}\in\mathbb{R}^{d \times d}$. 
+Dada la descomposición $\bar{P}=\bar{Q}\bar{R}$, con $\bar{Q}^T\bar{Q}= \id$ y $\bar{R}$ una matriz triangular superior, los vectores columna 
+de la matriz $\bar{Q}$ satisfacen la relación de ortogonalidad con respecto al producto escalar 
+(\ref{eq:dotpd}) 
+\begin{equation*}
+\displaystyle \langle q_i,q_k \rangle = \sum_{j=1}^{d}q_{i,j}q_{j,k}=\sum_{j=1}^{d}q_i(x_j)q_k(x_j)=\vec{q}_i^T\vec{q}_k=\delta_{i,k} ,
+\end{equation*}
+con $\delta_{i,k}$ la delta de 
+Kronecker. 
+La matriz $\bar{Q}$ contiene los polinomios Gram en sus columnas
+\begin{equation}
+\bar{Q}=
+\begin{bmatrix}
+    q_1(x_1) & q_2(x_1) & \dots  & q_{d}(x_1) \\
+    q_1(x_2) & q_2(x_2) & \dots  & q_{d}(x_2) \\
+    \vdots &  \vdots & \ddots & \vdots \\
+    q_1(x_{d}) & q_2(x_{d}) & \dots  &q_{d}(x_{d})
+\end{bmatrix}=[\vec{q}_1,\vec{q}_2,...,\vec{q}_{d}],
+\label{eq:VandermondeQR}
+\end{equation}
+
+Si se considera a la matriz $\bar{P}$ como $\bar{P}=[\vec{p}_1,\vec{p}_2,...,\vec{p}_{d}]$ con $\vec{p}_i=[p_i(x_1),p_i(x_2),...,p_i(x_{d})]^T$, la base de polinomios $P_d$ podrá expresarse en la base de los polinomios ortogonales $\vec{q_i}$ como $\displaystyle \vec{p}_i=\sum_{j=1}^{i}r_{j,i}\vec{q}_j$. La matriz $\bar{R}$ contiene los coeficientes de esta expansión.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\unappendix
+Las columnas de la matriz $\bar{Q}$ son los valores de los polinomios ortogonales 
+con respecto al producto escalar discreto~\eqref{eq:dotpd}.
+Adicionalmente, se sobremuestrea la matriz $\bar{P}$, de forma qué 
+$\bar{P} \in \mathbb{R}^{(N_s(d-1)+1)\times d}$, 
+con la matriz de Vandermonde evaluada en la grilla numérica refinada $h'=h/N_s$. Los polinomios 
+ortonormales sobremuestreados se obtienen de las columnas de $\bar{Q}^s$, con 
+\begin{equation}
+\bar{Q}^s=\bar{P}^s \bar{R}^{-1}
+\label{eq:qsob}
+\end{equation}
+donde $\bar{R}$ se la matriz triangular superior que se obtiene 
+mediante ortogonalización de la matriz $\bar{P}$ sin sobremuestreo. Dado 
+que el problema de ortogonalización de la matriz de Vandermonde~\eqref{eq:Vandermonde} 
+esta mal condicionado, la descomposición QR debe realizarse con alta precisión 
+numérica (256 dígitos). 
+
+El proceso de continuación puede expresarse mediante el operador de continuación $\bar{A}$
+\begin{equation}
+\vec{f}_c= 
+\begin{bmatrix}
+    \id \\
+    \bar{A}  \\
+\end{bmatrix}
+\vec{f}=
+\begin{bmatrix}
+    \vec{f}\\
+    \bar{A} \vec{f}  \\
+\end{bmatrix}
+,
+\label{eq:FCopA}
+\end{equation}
+donde la matriz $\bar{A}$ es el operador que al aplicarse sobre 
+el vector $\vec{f}$ de valores discretos de la función $f$ 
+genera las continuaciones a cero a derecha y a izquierda, cuya suma 
+da la extensión periódica de la función continuada
+\begin{equation}
+    \bar{A}  \vec{f} = \bar{A}_{\ell} \bar{Q}_{\ell}  \vec{f}_{\ell} 
++\bar{A}_{r} \bar{Q}_{r}  \vec{f}_{r}.
+\label{eq:Acont}
+\end{equation}
+donde $\vec{f}_{\ell}=(f_1,f_2,\ldots,f_d)$, 
+ $\vec{f}_{r}=(f_{N+1-d},f_{N-d},\ldots,f_{N+1})$ 
+ son los valores de la función discreta utilizados para producir las continuaciones, $\bar{Q}_{\ell} $ y $\bar{Q}_{r}$ son las matrices obtenidas por factorización 
+QR de los polinomios de Vandermonde correspondientes, y donde las matrices $\bar{A}_{\ell}$ 
+y $\bar{A}_{r}$ generan las transiciones a cero a izquierda y derecha respectivamente, en el intervalo de continuación, 
+y se obtienen de resolver un problema de minimización mediante descomposición en valores singulares (SVD)
+para el polinomio trigonométrico interpolante en la grilla numérica sobresampleada 
+que coincide con los polinomios Gram en los $d$ puntos de la función $f$, y 
+que se anula en la región de continuación (para mas detalles, ver~\cite{Amlani2016}) 
+
+Cabe destacar que este procedimiento debe realizarse una única vez 
+para evaluar los elementos de las matrices $A_{\ell}$ $Q_{\ell}$, $A_{r}$ y $Q_{r}$. 
+Estas matrices son precalculadas luego ser aplicadas intensivamente a cualquier 
+función discreta $\vec{f}$ según la ec.~\eqref{eq:FCopA}.
+
+%\begin{equation}
+%\text{argmin}_{\vec{a}=(a_{-M},\ldots,a_M)} \left | \left|\bar{B}^s \vec{a}-
+%\begin{bmatrix}
+%    \vec{q_j}^s(x)\\
+%    \vec{0} \\
+%\end{bmatrix}
+%\right|\right|_2,
+%\label{eq:SVD}
+%\end{equation}
+%donde el vector $\vec{a}$ contiene los coeficientes del polinomio trigonométrico interpolante 
+%de $f$ en la grilla numérica sobremuestreada, la matriz $\bar{B}^s$ se obtiene 
+%de evaluar la función~\eqref{} en los puntos $I_{\text{c}}$, $ \vec{q_j}^s(x)$ son las columnas 
+%de la matriz $\bar{Q}^s$ en la ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vector nulo de dimensión $(Z-1)\times N_s +1$
+
