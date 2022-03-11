@@ -464,8 +464,10 @@ Como se vio en la sección~\ref{sec:blayer}, las soluciones de la ETR presentan
 estructuras de capa límite tanto en las variables espaciales como en la variable angular, $\xi$. 
 En esa sección se vio que la introducción de un cambio de variable logarítmico (otros cambios 
 de variable también son posibles) generan una densidad de puntos espaciales en la cercanía 
-del borde de forma que la capa límite puede ser resuelta apropiadamente con dicho cambio de variable. Adicionalmente, para que la integral colisional sea correctamente 
-resuelta, se propuso el cambio de variable $\xi'=r^n$. 
+del borde de forma que la capa límite puede ser resuelta apropiadamente en 
+la variable espacial. Adicionalmente, dicho cambio 
+de variable genera puntos extremadamente cercanos al borde. Para que la integral colisional sea correctamente 
+resuelta en las proximidades del borde, se propuso el cambio de variable $\xi'=r^n$. 
 Esta sección provee una demostración matemática de que la combinación del cambio 
 de variable espacial, en conjunto con el cambio de variable $\xi'=r^n$ utilizado 
 en la sección~\ref{sec:blayer} regulariza las derivadas 
@@ -497,7 +499,8 @@ u_0(x,r^n)& =\frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u_0(0,r^n) +  r^n\frac{q(0
 \end{split}
 \label{eq:ecss2}
 \end{equation}
-Considerando el integrando del término colisional, necesitamos calcular
+Considerando el integrando del término colisional con el cambio de variable $\xi=r^n$, necesitamos mostrar que las derivadas de dicho integrando 
+estarán acotadas bajo el cambio de variable, para lo cual debemos calcular
 \begin{equation}
 \begin{split}
 \frac{d }{dr} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d }{dr} \Bigg\{ 
@@ -574,7 +577,8 @@ Luego
 \end{split}
 \label{eq:bounding}
 \end{equation}
-Llamamos 
+Para todos los problemas físicamente admisible, sabemos que la 
+integral $\phi(y)$ estará acotada, donde existirá
 \begin{equation}
 M=\text{max}~\phi(y),
 \end{equation}
