@@ -1,0 +1,43 @@
+\pagestyle{empty}
+\chapter*{}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\begin{center}
+\begin{large}
+\textbf{Efficient algorithms for optical tomography applications}
+\end{large}
+\end{center}
+
+\vspace{1cm}
+In this work we develop efficient algorithms for the resolution 
+of the direct and inverse problems in optical tomography. 
+To this end, we utilize the Radiative Transfer Equation (RTE) 
+as a physical model for the transport of photons in matter. 
+
+The RTE is solved by means of algorithms based on the Fourier 
+Continuation Method in conjunction with the Discrete Ordinates method (FC-DOM method).
+These algorithms allows to solve the RTE in an efficient manner on parallel 
+machines with ideal scalability, as it is shown in this thesis.
+
+We also present an identification and characterization of boundary layer structures 
+in the solutions of the RTE, providing a strategy for its resolution. 
+The 
+boundary layer theory provided strategies for the numerical resolution 
+of the RTE with high order convergence in all the variables involved, 
+as demonstrated in section~\ref{sec:blayer} in one spatial dimension.
+
+For the inverse problem resolution in optical tomography, 
+we employ the quasi-Newton Broyden–Fletcher–Goldfarb–Shanno method, 
+with limited use of memory (lm-BFGS). An adjoint problem methodology 
+is developed, which allows the efficient evaluation of the objective 
+function involved, including Fresnel boundary conditions.
+
+
+\vspace{1cm}
+\noindent
+Key words: 
+Optical tomography,
+Radiative transfer equation, 
+Near infrared spectroscopy, 
+Radiatition transport through matter,
+Inverse problem.

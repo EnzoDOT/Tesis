@@ -448,4 +448,9 @@ M.~Xu, W.~Cai, M.~Lax, and R.~R. Alfano, ``{Photon migration in turbid media
   using a cumulant approximation to radiative transfer},'' {\em Physical Review
   E}, vol.~65, no.~6, pp.~1--10, 2002.
 
+\bibitem{Amlani2016}
+F.~Amlani and O.~P. Bruno, ``{An FC-based spectral solver for elastodynamic
+  problems in general three-dimensional domains},'' {\em Journal of
+  Computational Physics}, vol.~307, pp.~333--354, 2016.
+
 \end{thebibliography}

@@ -1,38 +1,39 @@
+\pagestyle{empty}
 \chapter*{}
 \addcontentsline{toc}{chapter}{Resumen}
 
 \begin{center}
 \begin{large}
-\textbf{Algoritmos eficientes para la resolución 
-del problema inverso en tomografía óptica}
+\textbf{Algoritmos eficientes para aplicaciones en tomografía óptica}
 \end{large}
 \end{center}
 
 \vspace{1cm}
-En este trabajo se desarrollan   
+En este trabajo desarrollamos    
 algoritmos eficientes para la resolución de los problemas directos 
 e inversos necesarios en la disciplina de tomografía óptica. Para ello, utilizamos la Ecuación de Transporte 
 Radiativo (ETR) como modelo físico de transporte para la radiación 
 en la materia. 
+
 La ETR es resuelta por medio de algoritmos basados en el Método  
 de Continuación de Fourier en Ordenadas Discretas (FC-DOM, de su sigla en inglés). Estos algoritmos 
 permiten resolver la ERT de forma eficiente y en entornos de máquinas paralelas 
 con escalabilidad ideal, como se muestra en esta tesis. 
 
-La identificación de una capa límite, previamente no descripta en la literatura, 
-permite explicar por qué los métodos numéricos existentes para la resolución de la ERT 
-no presentan un alto orden de convergencia. En esta tesis se presenta 
-una teoría que permite identificar dicha capa límite, proveyendo  
-estrategias para su resolución que logran alto orden de convergencia 
-a la ERT, lo cual es demostrado en la sección~\ref{sec:blayer} para el caso de una única dimensión espacial.
+Adicionalmente, presentamos una identificación y caracterización de estructuras 
+de capa límite existentes en las soluciones de la ETR, en conjunto con un método para su resolución. La teoría 
+de capa límite presentada provee estrategias para la solución de la ETR 
+que dan como resultado un 
+alto orden de convergencia en todas las variables involucradas,
+como se demuestra en la sección~\ref{sec:blayer} para el caso de una única dimensión espacial.
 
 Para la resolución del problema inverso en tomografía óptica utilizamos el método de minimización 
 de Broyden–Fletcher–Goldfarb–Shanno (BFGS) con uso de memoria reducido 
-(lm-BFGS, de su sigla en inglés), 
-para el cual es necesario el cálculo eficiente del gradiente 
-de la función objetivo involucrada. Para ello, desarrollamos la teoría 
-que permite el cálculo eficiente de dicho gradiente  
-mediante la resolución del problema adjunto. 
+(lm-BFGS, de su sigla en inglés). 
+Se desarrolla una metodología que mediante la resolución del 
+problema adjunto de transporte permite el cálculo eficiente del gradiente 
+funcional de la función objetivo, incluyendo el caso de condiciones de bordes 
+de Fresnel.
 
 
 \vspace{1cm}

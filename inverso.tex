@@ -1,3 +1,4 @@
+\pagestyle{fancy}
 \chapter{El problema inverso}
 \lhead{\thepage}
 \rhead{\textit{El problema inverso}} 
@@ -111,8 +112,8 @@ dominio espacial $\Omega$
 discretizado, con $\alpha^i$ el largo del paso de Newton (que lo consideraremos 
 en general $\alpha^i=1$), y $\mathbf{d}^i(\x)$ 
 la dirección de descenso. En el caso del método de Newton (o {\em steepest descent}), la dirección de 
-descenso vendrá dada por el gradiente $\mathbf{d}^i=-\nabla_a $ de la función objetivo $g$ (que será definida posteriormente). 
-En el contexto de esta tesis emplearemos el método lm-BFGS, ya que este método a 
+descenso vendrá dada por el gradiente $\mathbf{d}^i=-\nabla_a g$ de la función objetivo $g$ (que será definida posteriormente). 
+En el contexto de esta tesis emplearemos el método lm-BFGS, ya que este método ha 
 mostrado ser eficiente en el contexto de tomografía óptica~\cite{Klose2003QN,Ren2006,
 Prieto2017}. 
 
@@ -140,7 +141,7 @@ Exigiendo que se anule la derivada de $m(\mathbf{d^i})$, se llega la dirección 
 \end{equation}
 El principal obstaculo para la aplicación de la dirección de Newton es la 
 necesidad de calcular la inversa del Hessiano de la función objetivo, $\nabla_a^2 g^i$, 
-lo cual en tomografía óptica, debido a la alta dimensionalidad de la ETR, puede 
+cálculo que en tomografía óptica, debido a la alta dimensionalidad de la ETR, puede 
 resultar extremadamente costoso. 
 
 Por este motivo, el método BFGS implementa una aproximación del Hessiano de la función objetivo (mas concretamente, 
@@ -502,7 +503,7 @@ de donde resulta
     0} \frac{h\big[w[a]+\varepsilon \frac{\partial w}{\partial a}[a;
     \delta a ]\big]-h\big[w[a]\big]}{\varepsilon},
 \]
-y, por lo tanto, claramente, el lado derecho de~\eqref{eq:chain} $\blacksquare$.
+y, por lo tanto, claramente, el lado derecho de~\eqref{eq:chain}.  $\blacksquare$
 
 La derivada funcional de la función objetivo~\eqref{eq:FObjpr} viene 
 dada por
@@ -1535,5 +1536,5 @@ FMS. A pesar de que no hemos explorado otras posibilidades,
 es posible incluir más fuentes generalizadas, con diferentes 
 estrategias de activación para cada una de ellas. 
 
-
+\pagestyle{empty}
 

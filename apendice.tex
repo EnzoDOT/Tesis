@@ -1,4 +1,4 @@
-%\appendix
+\pagestyle{fancy}
 \chapter*{Apéndice}
 \lhead{\thepage}
 \rhead{\textit{Apéndice}}
@@ -36,7 +36,11 @@ transporte, se exige que $b(\x)\gg a(\x)$. Cabe destacar que esta aproximación
 es valida en el interior del dominio. Cerca de los bordes, como vimos en la sección~\ref{sec:blayer}, existirán capas límite exponenciales. 
 En particular, en las cercanías del borde del dominio, la intensidad específica no será isótropa, 
 aún si las condiciones de borde y las fuentes consideradas lo son (ver fig.~\ref{fig:ansol} 
-en la sección~\ref{sec:blayer}, y la discusión allí dada). Tampoco será válida esta 
+en la sección~\ref{sec:blayer}, y la discusión allí dada), 
+debido a que para las direcciones salientes, la intensidad específica 
+presentara valores en cierta medida ``arbitrarios'', mientras que 
+para las direcciones entrantes la intensidad específica debe satisfacer 
+las condiciones de borde impuestas. Tampoco será válida esta 
 aproximación en la cercanía de fuentes colimadas, que presenten variaciones no lineales en la variable 
 direccional $\hth$. Por este motivo, si bien no haremos las consideraciones correspondientes 
 en detalle, debe tenerse en cuenta que la aproximación de difusión que discutiremos, 
@@ -93,7 +97,7 @@ Utilizando la ultima identidad reescribimos la primer integral en el lado derech
 \label{eq:RTEjint}
 \end{equation}
 Debido a que la función de fase sólo depende del ángulo entre 
-la dirección incidente y la dirección en la que el fotón es dispersado ($\alpha=\hth \cdot \hth'$), la última integral en~\eqref{eq:RTEjint} se anula
+la dirección incidente y la dirección en la que el fotón es dispersado ($\cos(\alpha)=\hth \cdot \hth'$), la última integral en~\eqref{eq:RTEjint} se anula
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -262,13 +266,13 @@ Como se mencionó en dicha sección, el algoritmo utilizado se basa
 en la generación de continuaciones de las funciones involucradas, 
 que convierten dichas funciones no periódicas en funciones periódicas 
 en un intervalo extendido. Para ello, se utilizan proyecciones en una base 
-de polinomios Gram. En esta sección damos algunos detalles 
+de polinomios Gram con continuaciones a cero~\cite{Amlani2016}. En esta sección damos algunos detalles 
 adicionales para la generación de dichas bases de polinomios, y sus continuaciones a cero.
 
 Dada una función $f(x)$ definida en una grilla discreta, $f:[0,1]\rightarrow \mathbb{R}$, 
 con $f_j=f(x_j)$, $x_j=(j-1)/N,\;j=1,2,\ldots,N+1$, el método de continuación de 
 Fourier genera una función continuada $f_c(x)$, la cual es periódica, posee 
-derivadas suaves en el intervalo extendido $f_c: [0,b] \rightarrow \mathbb{R}$, con $f_{c,j}=f_c(x_j)$, $x_j=(j-1)/N,\;i=1,2,\ldots,N_p$, con 
+derivadas suaves en el intervalo extendido $f_c: [0,b] \rightarrow \mathbb{R}$, con $f_{c,j}=f_c(x_j)$, $x_j=(j-1)/N,\;j=1,2,\ldots,N_p$, con 
 $N_p=N+C+1$~\cite{Albin2011,Amlani2016}.
 
 Esta función continuada es tal que su representación de Fourier (con $i$ la unidad imaginaria)
@@ -277,16 +281,16 @@ f_c(x)=\sum_{k=-N_p/2}^{N_p/2} a_k \exp\left( \frac{2\pi i k x}{b} \right),
 \label{eq:fccont1}
 \end{equation}
 no presenta el fenómeno de Gibbs, de forma que las derivadas espaciales de $f(x)$ 
-pueden calcularse eficientemente y con alta precisión a partir de la representación~\eqref{eq:fccont1} mediante uso de la transformada rápida de Fourier.
+pueden calcularse eficientemente y con alta precisión a partir de la representación~\eqref{eq:fccont1} mediante uso de la transformada rápida de Fourier
 \begin{equation}
 \frac{df}{dx}(x)\simeq \frac{df_c}{dx}(x)=\sum_{k=-N_p/2}^{N_p/2} \frac{2\pi i k x}{b} a_k \exp\left( \frac{2\pi i k x}{b} \right),
 \label{eq:fccont2}
 \end{equation}
-y donde se cumple qué la función continuada es igual a la función original en el intervalo $x\in[0,1]$, con $f_c(x_j)=f(x_j)\,j=1,\ldots,N+1$,
+y donde se cumple qué la función continuada es igual a la función original en el intervalo $x\in[0,1]$, con $f_c(x_j)=f(x_j)$, $j=1,\ldots,N+1$.
 
 Para obtener la continuación de Fourier $f_c$ de la función $f$ de manera computacionalmente eficiente, el método FC(Gram) utiliza únicamente información de unos pocos puntos en los bordes de $f$. 
 El algoritmo procede mediante la proyección en polinomios Gram de los puntos de los extremos 
-a derecha $\{x_{N+1-d_r},x_{N-d_r},\ldots, x_{N+1} \}$ y a izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$, $h=\frac{\delta}{d-1}$ y $x_j=(j-1)h$, ($j=1,...,d$).
+a derecha $\{x_{N+1-d_r},x_{N-d_r},\ldots, x_{N+1} \}$ y a izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$.
 La continuación a derecha es generada mediante la proyección en una dada base de polinomios 
 a derecha $\mathcal{B}_r$, y la continuación a izquierda se produce mediante la proyección 
 en polinomios de la base $\mathcal{B}_{\ell}$. 
@@ -294,9 +298,15 @@ La proyección en los polinomios $p_r \in \mathcal{B}_r$ genera una continuació
 aproxima a la función $f$ en el intervalo $[1-\delta_r,1]$ y que se vuelve cero de 
 forma suave en $x\ge b$, con $\delta_r=(d_r-1)h$. Para la continuación a izquierda, se considera 
 la extensión periódica de $f$, con $f(x_j+b)=f(x_j)$, y similarmente, la proyección 
-en dichos polinomios genera una aproximación a la función original en el intervalo $[b,b+\delta_{\ell}]$ ($\delta_{\ell}=(d_l-1)h$) la cual se vuelve suavemente en el intervalo $x\leq 1$. 
+en dichos polinomios genera una aproximación a la función original en el intervalo $[b,b+\delta_{\ell}]$ ($\delta_{\ell}=(d_l-1)h$) la cual se anula suavemente en el intervalo $x\leq 1$ (donde el 
+intervalo $[b,b+\delta_{\ell}]$ corresponde a la continuación periódica de la función original $f$, con $f(x_1)=f(x_1+b),f(x_2)=f(x_2+b),\ldots, f(x_{d_{\ell}})=f(x_{d_{\ell}}+b)$). 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-En esta tesis utilizamos $d_{\ell}=d_r=d=5$, de donde $\delta_r=\delta_{\ell}$. 
+
+En esta tesis utilizamos $d_{\ell}=d_r=d=5$, de donde $\delta_r=\delta_{\ell}$.  
+Como ejemplo mostraremos la construcción de la base 
+de polinomios utilizada para la proyección y continuación a cero 
+a la izquierda de la función $f$. El tratamiento para las continuaciones a derecha 
+es análogo.
 Consideramos el espacio de polinomios $P_d$ de grado $<d$ definidos en el intervalo $[0,\delta]$, con $\delta>0$ un número pequeño.
 
 Para $g,h\in P_d$, $P_d=\{p_1,p_2,...,p_{d-1}\}$
@@ -305,14 +315,10 @@ Para $g,h\in P_d$, $P_d=\{p_1,p_2,...,p_{d-1}\}$
 \langle g,h\rangle =\sum_{j=1}^{d}g(x_j)h(x_j),
 \label{eq:dotpd}
 \end{equation}
-define un producto escalar.
+define un producto escalar en la grilla discreta $x_1,x_2,\ldots,x_d$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Como ejemplo mostraremos la construcción de la base 
-de polinomios utilizada para la proyección y continuación a cero 
-a la izquierda de la función $f$. El tratamiento para las continuaciones a derecha 
-es análogo. Definimos la matriz de Vandermonde
+ Definimos la matriz de Vandermonde
  \begin{equation}
 \bar{P}=
 \begin{bmatrix}
@@ -348,11 +354,12 @@ Si se considera a la matriz $\bar{P}$ como $\bar{P}=[\vec{p}_1,\vec{p}_2,...,\ve
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Las columnas de la matriz $\bar{Q}$ son los valores de los polinomios ortogonales 
+Las columnas de la matriz $\bar{Q}$ son los valores de los polinomios Gram ortogonales 
 con respecto al producto escalar discreto~\eqref{eq:dotpd}.
 Adicionalmente, se sobremuestrea la matriz $\bar{P}$, de forma qué 
-$\bar{P} \in \mathbb{R}^{(N_s(d-1)+1)\times d}$, 
-con la matriz de Vandermonde evaluada en la grilla numérica refinada $h'=h/N_s$. Los polinomios 
+$\bar{P}^s \in \mathbb{R}^{(N_s(d-1)+1)\times d}$, 
+con la matriz de Vandermonde evaluada en la grilla numérica refinada $h'=h/N_s$. 
+Los polinomios 
 ortonormales sobremuestreados se obtienen de las columnas de $\bar{Q}^s$, con 
 \begin{equation}
 \bar{Q}^s=\bar{P}^s \bar{R}^{-1}
@@ -361,8 +368,8 @@ ortonormales sobremuestreados se obtienen de las columnas de $\bar{Q}^s$, con
 donde $\bar{R}$ se la matriz triangular superior que se obtiene 
 mediante ortogonalización de la matriz $\bar{P}$ sin sobremuestreo. Dado 
 que el problema de ortogonalización de la matriz de Vandermonde~\eqref{eq:Vandermonde} 
-esta mal condicionado, la descomposición QR debe realizarse con alta precisión 
-numérica (256 dígitos). 
+esta mal condicionado, la descomposición QR se realiza con alta precisión 
+numérica (256 dígitos) mediante el método de ortogonalización de Gram-Schmidt.
 
 El proceso de continuación puede expresarse mediante el operador de continuación $\bar{A}$
 \begin{equation}
@@ -382,7 +389,7 @@ El proceso de continuación puede expresarse mediante el operador de continuaci�
 donde la matriz $\bar{A}$ es el operador que al aplicarse sobre 
 el vector $\vec{f}$ de valores discretos de la función $f$ 
 genera las continuaciones a cero a derecha y a izquierda, cuya suma 
-da la extensión periódica de lafunción continuada
+da la extensión periódica de la función continuada
 \begin{equation}
     \bar{A}  \vec{f} = \bar{A}_{\ell} \bar{Q}_{\ell}  \vec{f}_{\ell} 
 +\bar{A}_{r} \bar{Q}_{r}  \vec{f}_{r}.
@@ -393,27 +400,271 @@ donde $\vec{f}_{\ell}=(f_1,f_2,\ldots,f_d)$,
  son los valores de la función discreta utilizados para producir las continuaciones, $\bar{Q}_{\ell} $ y $\bar{Q}_{r}$ son las matrices obtenidas por factorización 
 QR de los polinomios de Vandermonde correspondientes, y donde las matrices $\bar{A}_{\ell}$ 
 y $\bar{A}_{r}$ generan las transiciones a cero a izquierda y derecha respectivamente, en el intervalo de continuación, 
-y se obtienen de resolver un problema de minimización mediante descomposición en valores singulares (SVD)
+y se obtienen de resolver un problema de minimización 
 para el polinomio trigonométrico interpolante en la grilla numérica sobresampleada 
 que coincide con los polinomios Gram en los $d$ puntos de la función $f$, y 
-que se anula en la región de continuación (para mas detalles, ver~\cite{Amlani2016}) 
+que se anula en la región de continuación
+\begin{equation}
+f(x)=\sum_{k=-M}^{M} a_k e^{\frac{2\pi i k x}{(d+C+Z+E-1)h}},
+\label{eq:fccontint}
+\end{equation}
+donde $d$, $C$, $Z$ y $E$ representan los $d$ puntos de ajuste (para las continuaciones a izquierda, los puntos $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$) de la función original, 
+los $C$ puntos de continuación, $Z$ puntos donde se exige que la función se anule, $E$ 
+puntos extra que permiten realizar continuaciones de longitud prescripta 
+y $M=(d+C+Z+E)/2$ (para mas detalles, ver~\cite{Amlani2016}).
 
-Cabe destacar que este procedimiento debe realizarse una única vez 
-para evaluar los elementos de las matrices $A_{\ell}$ $Q_{\ell}$, $A_{r}$ y $Q_{r}$. 
-Estas matrices son precalculadas luego ser aplicadas intensivamente a cualquier 
-función discreta $\vec{f}$ según la ec.~\eqref{eq:FCopA}.
+La ecuación~\eqref{eq:fccontint} puede escribirse
+\begin{equation*}
+f(x)=\bar{B}^s \vec{a}=
+\begin{bmatrix}
+    e^{\frac{-\pi M x_1}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)\pi  x_1}{(d+C+Z+E-1)h}} & \dots & 
+    e^{\frac{2\pi k x_1}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M \pi  x_1}{(d+C+Z+E-1)h}} \\
+    e^{\frac{-\pi M x_2}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)\pi  x_2}{(d+C+Z+E-1)h}}  & \dots & 
+    e^{\frac{2\pi k x_2}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M \pi  x_2}{(d+C+Z+E-1)h}} \\
+    \vdots  & \vdots & \ddots & \vdots \\
+    e^{\frac{-\pi M x_j}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)\pi  x_j}{(d+C+Z+E-1)h}}  & \dots & 
+    e^{\frac{2\pi k x_j}{(d+C+Z+E-1)h}}  & \dots & e^{\frac{M \pi  x_j}{(d+C+Z+E-1)h}} \\
+    \vdots  & \vdots & \ddots & \vdots \\
+\end{bmatrix}
+\begin{bmatrix}
+    a_{-M/2}\\
+    \vdots\\
+    a_k\\
+    \vdots\\
+    a_{M/2} \\
+\end{bmatrix},
+\label{eq:fccontint2}
+\end{equation*}
+con $\vec{a}=(a_{-M/2},\ldots,a_{M/2})^T$. 
+Luego, buscamos los coeficientes $\vec{a}$ que son solución de 
+\begin{equation}
+\text{argmin}_{\vec{a}=(a_{-M},\ldots,a_M)} \left | \left|\bar{B}^s \vec{a}-
+\begin{bmatrix}
+    \vec{q_j}^s(x)\\
+    \vec{0} \\
+\end{bmatrix}
+\right|\right|_2,
+\label{eq:SVD}
+\end{equation}
+la matriz $\bar{B}^s$ se obtiene 
+de evaluar la función~\eqref{eq:fccontint} en los $d$ puntos de ajuste, y en los $Z$ puntos donde se fuerzan los polinomios a anularse, $ \vec{q_j}^s(x)$ son las columnas 
+de la matriz $\bar{Q}^s$ en la ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vector nulo de dimensión $(Z-1)\times N_s +1$. Los coeficientes de Fourier que minimizan la relación~\eqref{eq:SVD} se encuentran mediante descomposición en valores singulares (SVD). 
+Las matrices $A_{\ell}$ y $A_r$ se obtienen, finalmente, de evaluar la relación~\eqref{eq:fccontint} con los coeficientes que resuelven~\eqref{eq:SVD} 
+para todo el intervalo $[0,(d+C+Z+E-1)h]$.
 
-%\begin{equation}
-%\text{argmin}_{\vec{a}=(a_{-M},\ldots,a_M)} \left | \left|\bar{B}^s \vec{a}-
-%\begin{bmatrix}
-%    \vec{q_j}^s(x)\\
-%    \vec{0} \\
-%\end{bmatrix}
-%\right|\right|_2,
-%\label{eq:SVD}
-%\end{equation}
-%donde el vector $\vec{a}$ contiene los coeficientes del polinomio trigonométrico interpolante 
-%de $f$ en la grilla numérica sobremuestreada, la matriz $\bar{B}^s$ se obtiene 
-%de evaluar la función~\eqref{} en los puntos $I_{\text{c}}$, $ \vec{q_j}^s(x)$ son las columnas 
-%de la matriz $\bar{Q}^s$ en la ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vector nulo de dimensión $(Z-1)\times N_s +1$
+
+Cabe destacar que este procedimiento  solo se usa para obtener un pequeño archivo de parámetros 
+(el cual contiene los elementos de las matrices $A_{\ell}$ $Q_{\ell}$, $A_{r}$ y $Q_{r}$), que se incorpora como parte integrante de la subrutina FC, y subsiguientemente se utiliza para la aplicación de la rutina en la expansión de cualquier función discreta $f$---de acuerdo a la ec.~\eqref{eq:FCopA}.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Resolución de capa límite}
+\label{ap:demcv}
+Como se vio en la sección~\ref{sec:blayer}, las soluciones de la ETR presentan 
+estructuras de capa límite tanto en las variables espaciales como en la variable angular, $\xi$. 
+En esa sección se vio que la introducción de un cambio de variable logarítmico (otros cambios 
+de variable también son posibles) generan una densidad de puntos espaciales en la cercanía 
+del borde de forma que la capa límite puede ser resuelta apropiadamente con dicho cambio de variable. Adicionalmente, para que la integral colisional sea correctamente 
+resuelta, se propuso el cambio de variable $\xi'=r^n$. 
+Esta sección provee una demostración matemática de que la combinación del cambio 
+de variable espacial, en conjunto con el cambio de variable $\xi'=r^n$ utilizado 
+en la sección~\ref{sec:blayer} regulariza las derivadas 
+del integrando en $\int_0^1 u_0(x,\xi)d\xi' = \int_0^1  u_0(x,r^n) r^{n-1} dr$ (la demostración 
+para la integral complementaria  $\int_{-1}^0 u_0(x,\xi)d\xi'$ es análoga). 
+
+Partimos de la solución asintótica para la capa límite~\eqref{eq:intf}
+\begin{equation}
+u_0(x,\xi) = \frac{e^{-\mu_t(0)x/\xi}}{\xi} \left(\xi u(0,\xi) + \int_0^{x} e^{\mu_t(0)\frac{y}{\xi}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' +q(0,\xi) \right] dy\right)
+\label{eq:ecss}
+\end{equation}
+y reescribimos
+\begin{equation}
+u_0(x,r^n) = \frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u(0,r^n) + \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' +q(0,r^n) \right] dy\right).
+\label{eq:ecsscv}
+\end{equation}
+Usamos
+\begin{equation*}
+\begin{split}
+\int_0^{x} e^{\mu_t(0)\frac{y}{r^n}}q(0,\xi)dy=r^n\frac{q(0,\xi)}{\mu_t(0)}(e^{\mu_t(0)x/r^n}-1).
+\end{split}
+\raisetag{50pt}
+\label{eq:boundedder2}
+\end{equation*}
+Y reescribimos
+\begin{equation}
+\begin{split}
+u_0(x,r^n)& =\frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u(0,r^n) +  r^n\frac{q(0,\xi)}{\mu_t(0)}(e^{\mu_t(0)x/r^n}-1) + \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' \right] dy\right).
+\end{split}
+\label{eq:ecss2}
+\end{equation}
+Vamos a calcular
+\begin{equation}
+\begin{split}
+\frac{d }{dr} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d }{dr} \Bigg\{ 
+u(0,r^n) e^{-\mu_t(0)x/r^n}r^{n-1} + \frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)r^{n-1}  \Bigg.\\
+&+r^{-1}e^{-\mu_t(0)x/r^n}  \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' \right] dy \Bigg. \Bigg\}\\
+\end{split}
+\label{eq:boundedder}
+\end{equation}
+Llamamos $\phi(y)=\int_{-1}^1 u_0(y,\xi')d\xi'$:
+\begin{equation}
+\begin{split}
+\frac{d }{dr} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d }{dr} \Bigg\{ 
+u(0,r^n) e^{-\mu_t(0)x/r^n}r^{n-1} + \frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)r^{n-1}  \Bigg.\\
+&+ \frac{\mu_s(0)}{2} \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \Bigg. \Bigg\}
+\end{split}
+\label{eq:boundedder2}
+\end{equation}
+Por otra parte, tenemos las derivadas:
+\begin{equation}
+\begin{split}
+\xi(r)=&r^n,\\
+\frac{d }{dr}\xi'(r)=&nr^{n-1},\\
+\frac{d }{dr} r^{n-1}=&(n-1)r^{n-2},\\
+\frac{d }{dr} e^{-\mu_t(0)x/r^n}=&\frac{\mu_t(0)nx}{r^{n+1}}e^{-\mu_t(0)x/r^n},\\
+\frac{d }{dr} u(0,r^n)=&\frac{\partial u(0,\xi(r))}{\partial \xi}nr^{n-1},\\
+\frac{d }{dr}\left[\frac{q(0,r^n)}{\mu_t(0)}(1-e^{-\mu_t(0)x/r^n}) \right]=&
+\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{n-1} (1-e^{-\mu_t(0)x/r^n})-q(0,r^n)\frac{nx}{r^{n+1}}e^{-\mu_t(0)x/r^n}\\
+\frac{d }{dr}\left( \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \right) =& \int_0^{x} \frac{d }{dr}\left(  \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \right) \phi(y) dy\\
+=&\int_0^{x} \frac{1}{r^2} \left(-n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}
+- e^{\mu_t(0)\frac{(y-x)}{r^n}}\right)  \phi(y) dy
+\end{split}
+\label{eq:derivadas}
+\end{equation}
+De las derivadas en~\eqref{eq:derivadas} tenemos
+\begin{equation}
+\begin{split}
+\frac{d }{dr} \left[ 
+u(0,r^n)r^{n-1}e^{-\mu_t(0)x/r^n} \right]=
+n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}&e^{-\mu_t(0)x/r^n} + (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\\&+ u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}
+\end{split}
+\label{eq:derivadas2}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+\frac{d }{dr} \left[ r^{n-1}\frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)
+\right]=&
+ (n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1-e^{-\mu_t(0)x/r^n} \right)\\ 
+ &+\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1-e^{-\mu_t(0)x/r^n})\\&-q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}
+\end{split}
+\label{eq:derivadas3}
+\end{equation}
+Introduciendo en \eqref{eq:boundedder2} las relaciones auxiliares en \eqref{eq:derivadas} a \eqref{eq:derivadas3} se llega a
+\begin{equation}
+\begin{split}
+\frac{d }{dr} & \left( u_0(x,r^n) r^{n-1} \right)=
+n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n} - (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\\
+&+u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}+ (n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1-e^{-\mu_t(0)x/r^n} \right)\\
+&+\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1-e^{-\mu_t(0)x/r^n})-q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\\
+&+\frac{\mu_s(0)}{2} \int_0^{x} \frac{1}{r^2} \left(-n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}
+- e^{\mu_t(0)\frac{(y-x)}{r^n}}\right)  \phi(y) dy
+\end{split}
+\label{eq:boundedder3}
+\end{equation}
+Luego
+\begin{equation}
+\begin{split}
+ \Bigg| \frac{d }{dr}& \left( u_0(x,r^n) r^{n-1} \right) \Bigg| \leq 
+ \Bigg| n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg|\\
+&+\Bigg| (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg|u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
+& + \Bigg|(n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1+e^{-\mu_t(0)x/r^n} \right)\Bigg|+
+\Bigg|\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1+e^{-\mu_t(0)x/r^n})\Bigg|\\&+\Bigg|q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|+\Bigg| \frac{\mu_s(0)}{2} \int_0^{x} \frac{1}{r^2} \left(-n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}
+- e^{\mu_t(0)\frac{(y-x)}{r^n}}\right)  \phi(y) dy \Bigg|
+\end{split}
+\label{eq:bounding}
+\end{equation}
+Llamamos 
+\begin{equation}
+M=\text{max}{\phi(y)},
+\end{equation}
+y dado qué $\phi(y)\leq M$, tenemos
+\begin{equation}
+\begin{split}
+ \Bigg| \frac{d }{dr}& \left( u_0(x,r^n) r^{n-1} \right) \Bigg| \leq 
+ \Bigg| n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg|\\
+&+\Bigg| (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg|u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
+& + \Bigg|(n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1+e^{-\mu_t(0)x/r^n} \right)\Bigg|+
+\Bigg|\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1+e^{-\mu_t(0)x/r^n})\Bigg|\\&+\Bigg|q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|+\frac{\mu_s(0)}{2}\frac{M}{r^2}  \int_0^{x} \Bigg| n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}\Bigg| dy 
++ \frac{\mu_s(0)}{2} \frac{M}{r^2} \int_0^{x} \Bigg| e^{\mu_t(0)\frac{(y-x)}{r^n}} \Bigg| dy 
+\end{split}
+\label{eq:bounding2}
+\end{equation}
+Usamos el cambio de variable $\mu_t(0)(y-x)/r^n=-t$, $dy=r^n dt/\mu_t(0)$ para tener
+\begin{equation}
+\begin{split}
+\frac{M}{r^2}  \int_0^{x} \Bigg| n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}\Bigg| dy=&\frac{M r^n}{\mu_t(0) r^2}  \int_0^{\mu_t(0)x/r^n} | te^{-t} |dt \\
+\frac{M}{r^2} \int_0^{x} \Bigg| e^{\mu_t(0)\frac{(y-x)}{r^n}} \Bigg| dy 
+=&\frac{M r^n}{\mu_t(0) r^2}  \int_0^{\mu_t(0) x/r^n} |e^{-t}|dt \\
+\end{split}
+\label{eq:bounding2aux}
+\end{equation}
+Y resulta
+\begin{equation}
+\begin{split}
+ \Bigg| \frac{d }{dr}& \left( u_0(x,r^n) r^{n-1} \right) \Bigg| \leq 
+ \Bigg| n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg| (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg|\\
+& +\Bigg|u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
+& + \Bigg|(n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1+e^{-\mu_t(0)x/r^n} \right)\Bigg|+
+\Bigg|\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1+e^{-\mu_t(0)x/r^n})\Bigg|\\&+\Bigg|q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|+\frac{\mu_s(0)}{2}\frac{M r^n}{\mu_t(0) r^2}  \int_0^{\mu_t(0)x/r^n} | te^{-t} |dt 
++ \frac{\mu_s(0)}{2} \frac{M r^n}{\mu_t(0)r^2}  \int_0^{\mu_t(0)x/r^n} |e^{-t}|dt
+\end{split}
+\label{eq:bounding2}
+\end{equation}
+Donde todos los términos están acotados para $n\geq 2$.
+
+Vamos a probar la cota para la derivada $j$-esima. Se prueba por inducción. 
+
+Reescribimos \eqref{eq:boundedder2} como
+\begin{equation}
+\begin{split}
+\frac{d^j }{dr^j} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d^j }{dr^j} \Bigg\{ 
+\left[u(0,r^n) + \frac{q(0,r^n)}{\mu_t(0)}e^{\mu_t(0)x/r^n}-\frac{q(0,r^n)}{\mu_t(0)} \right]r^{n-1}e^{-\mu_t(0)x/r^n}   \Bigg.\\
+&+ \frac{\mu_s(0)}{2} \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \Bigg. \Bigg\}\\
+&=\frac{d^j }{dr^j} \Bigg\{ 
+\left[u(0,r^n) -\frac{q(0,r^n)}{\mu_t(0)} \right]r^{n-1}e^{-\mu_t(0)x/r^n} + \frac{q(0,r^n)}{\mu_t(0)}r^{n-1}   \Bigg.\\
+&+ \frac{\mu_s(0)}{2} \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \Bigg. \Bigg\}\\
+\end{split}
+\label{eq:boundedder3}
+\end{equation}
+Para el último término usamos
+\begin{equation}
+\begin{split}
+\frac{d^j }{dr^j} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r}=&  \frac{1}{r^{j+1}}\sum_{l=1}^j c_l \left( \mu_t(0)\frac{(y-x)}{r^n} \right)^l e^{\mu_t(0)\frac{(y-x)}{r^n}}
+\end{split}
+\label{eq:derivadasj}
+\end{equation}
+Es fácil probar que vale para $j=1$, luego vemos que vale para $j$, 
+y finalmente derivando para $j$ vemos que entonces se cumple para $j+1$.
+Tenemos
+\begin{equation}
+\begin{split}
+\frac{d^j }{dr^j}\left( \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \right) =& \int_0^{x} \frac{d^j }{dr^j}\left(  \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \right) \phi(y) dy\\
+=&\int_0^{x} \phi(y)  \frac{1}{r^{j+1}}\sum_{l=1}^j c_l \left( \mu_t(0)\frac{(y-x)}{r^n} \right)^l e^{\mu_t(0)\frac{(y-x)}{r^n}}dy\\
+=&\int_0^{\mu_t(0)x/r^n} \phi\left(x-\frac{r^n}{\mu_t(0)}\right)  \frac{\mu_t(0) r^n}{r^{j+1}}\sum_{l=1}^j c_l \left( -t \right)^l e^{-t}dt
+\end{split}
+\label{eq:derivadasj2}
+\end{equation}
+Este término estará acotado para $n\ge j+1$ (para cualquier entero no negativo $k$ 
+la integral $\int_0^\infty t^k e^{-t} dt$ es acotada).
+
+Para los términos que quedan, debemos utilizar una combinación de la regla generalizada 
+para la derivada del 
+del producto de funciones, en conjunto con la fórmula de Faà di Bruno 
+para las derivadas de las funciones compuestas. Pero se ve claramente que, de entre estos términos, el término 
+que va a determinar la relación asintótica para $r \to 0$ es el que surge de 
+tomar la derivada $j$-ésima para $r^{n-1}$ en el producto $\frac{q(0,r^n)}{\mu_t(0)}r^{n-1}$, ya que los otros términos están multiplicados por exponenciales negativas 
+que van a cancelar cualquier $r^{-p}$ que pueda surgir. 
+
+Dado qué 
+\begin{equation}
+\begin{split}
+\frac{d^j }{dr^j} r^{n-1}= \prod_{i=1}^j (n-i)r^{n-j-1}.
+\end{split}
+\label{eq:derivadasj3}
+\end{equation}
+de donde claramente el término dominante estará acotado siempre que 
+$n\ge j+1$. $\blacksquare$
+
+\pagestyle{empty}
 
