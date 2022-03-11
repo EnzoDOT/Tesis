@@ -474,12 +474,12 @@ para la integral complementaria  $\int_{-1}^0 u_0(x,\xi)d\xi'$ es análoga).
 
 Partimos de la solución asintótica para la capa límite~\eqref{eq:intf}
 \begin{equation}
-u_0(x,\xi) = \frac{e^{-\mu_t(0)x/\xi}}{\xi} \left(\xi u(0,\xi) + \int_0^{x} e^{\mu_t(0)\frac{y}{\xi}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' +q(0,\xi) \right] dy\right)
+u_0(x,\xi) = \frac{e^{-\mu_t(0)x/\xi}}{\xi} \left(\xi u_0(0,\xi) + \int_0^{x} e^{\mu_t(0)\frac{y}{\xi}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' +q(0,\xi) \right] dy\right)
 \label{eq:ecss}
 \end{equation}
 y reescribimos
 \begin{equation}
-u_0(x,r^n) = \frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u(0,r^n) + \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' +q(0,r^n) \right] dy\right).
+u_0(x,r^n) = \frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u_0(0,r^n) + \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' +q(0,r^n) \right] dy\right).
 \label{eq:ecsscv}
 \end{equation}
 Usamos
@@ -493,24 +493,24 @@ Usamos
 Y reescribimos
 \begin{equation}
 \begin{split}
-u_0(x,r^n)& =\frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u(0,r^n) +  r^n\frac{q(0,\xi)}{\mu_t(0)}(e^{\mu_t(0)x/r^n}-1) + \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' \right] dy\right).
+u_0(x,r^n)& =\frac{e^{-\mu_t(0)x/r^n}}{r^n} \left(r^n u_0(0,r^n) +  r^n\frac{q(0,\xi)}{\mu_t(0)}(e^{\mu_t(0)x/r^n}-1) + \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' \right] dy\right).
 \end{split}
 \label{eq:ecss2}
 \end{equation}
-Vamos a calcular
+Considerando el integrando del término colisional, necesitamos calcular
 \begin{equation}
 \begin{split}
 \frac{d }{dr} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d }{dr} \Bigg\{ 
-u(0,r^n) e^{-\mu_t(0)x/r^n}r^{n-1} + \frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)r^{n-1}  \Bigg.\\
+u_0(0,r^n) e^{-\mu_t(0)x/r^n}r^{n-1} + \frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)r^{n-1}  \Bigg.\\
 &+r^{-1}e^{-\mu_t(0)x/r^n}  \int_0^{x} e^{\mu_t(0)\frac{y}{r^n}} \left[ \frac{\mu_s(0)}{2} \int_{-1}^1 u_0(y,\xi')d\xi' \right] dy \Bigg. \Bigg\}\\
 \end{split}
 \label{eq:boundedder}
 \end{equation}
-Llamamos $\phi(y)=\int_{-1}^1 u_0(y,\xi')d\xi'$:
+Llamamos $\phi(y)=\int_{-1}^1 u_0(y,\xi')d\xi'$ al término colisional
 \begin{equation}
 \begin{split}
 \frac{d }{dr} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d }{dr} \Bigg\{ 
-u(0,r^n) e^{-\mu_t(0)x/r^n}r^{n-1} + \frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)r^{n-1}  \Bigg.\\
+u_0(0,r^n) e^{-\mu_t(0)x/r^n}r^{n-1} + \frac{q(0,r^n)}{\mu_t(0)}\left(1-e^{-\mu_t(0)x/r^n}\right)r^{n-1}  \Bigg.\\
 &+ \frac{\mu_s(0)}{2} \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \Bigg. \Bigg\}
 \end{split}
 \label{eq:boundedder2}
@@ -522,7 +522,7 @@ Por otra parte, tenemos las derivadas:
 \frac{d }{dr}\xi'(r)=&nr^{n-1},\\
 \frac{d }{dr} r^{n-1}=&(n-1)r^{n-2},\\
 \frac{d }{dr} e^{-\mu_t(0)x/r^n}=&\frac{\mu_t(0)nx}{r^{n+1}}e^{-\mu_t(0)x/r^n},\\
-\frac{d }{dr} u(0,r^n)=&\frac{\partial u(0,\xi(r))}{\partial \xi}nr^{n-1},\\
+\frac{d }{dr} u_0(0,r^n)=&\frac{\partial u_0(0,\xi(r))}{\partial \xi}nr^{n-1},\\
 \frac{d }{dr}\left[\frac{q(0,r^n)}{\mu_t(0)}(1-e^{-\mu_t(0)x/r^n}) \right]=&
 \frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{n-1} (1-e^{-\mu_t(0)x/r^n})-q(0,r^n)\frac{nx}{r^{n+1}}e^{-\mu_t(0)x/r^n}\\
 \frac{d }{dr}\left( \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \right) =& \int_0^{x} \frac{d }{dr}\left(  \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \right) \phi(y) dy\\
@@ -535,8 +535,8 @@ De las derivadas en~\eqref{eq:derivadas} tenemos
 \begin{equation}
 \begin{split}
 \frac{d }{dr} \left[ 
-u(0,r^n)r^{n-1}e^{-\mu_t(0)x/r^n} \right]=
-n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}&e^{-\mu_t(0)x/r^n} + (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\\&+ u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}
+u_0(0,r^n)r^{n-1}e^{-\mu_t(0)x/r^n} \right]=
+n\frac{\partial u_0(0,\xi(r))}{\partial \xi}r^{2n-2}&e^{-\mu_t(0)x/r^n} + (n-1) r^{n-2}u_0(0,r^n)e^{-\mu_t(0)x/r^n}\\&+ u_0(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}
 \end{split}
 \label{eq:derivadas2}
 \end{equation}
@@ -554,8 +554,8 @@ Introduciendo en \eqref{eq:boundedder2} las relaciones auxiliares en \eqref{eq:d
 \begin{equation}
 \begin{split}
 \frac{d }{dr} & \left( u_0(x,r^n) r^{n-1} \right)=
-n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n} - (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\\
-&+u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}+ (n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1-e^{-\mu_t(0)x/r^n} \right)\\
+n\frac{\partial u_0(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n} - (n-1) r^{n-2}u_0(0,r^n)e^{-\mu_t(0)x/r^n}\\
+&+u_0(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}+ (n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1-e^{-\mu_t(0)x/r^n} \right)\\
 &+\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1-e^{-\mu_t(0)x/r^n})-q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\\
 &+\frac{\mu_s(0)}{2} \int_0^{x} \frac{1}{r^2} \left(-n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}
 - e^{\mu_t(0)\frac{(y-x)}{r^n}}\right)  \phi(y) dy
@@ -566,8 +566,8 @@ Luego
 \begin{equation}
 \begin{split}
  \Bigg| \frac{d }{dr}& \left( u_0(x,r^n) r^{n-1} \right) \Bigg| \leq 
- \Bigg| n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg|\\
-&+\Bigg| (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg|u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
+ \Bigg| n\frac{\partial u_0(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg|\\
+&+\Bigg| (n-1) r^{n-2}u_0(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg|u_0(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
 & + \Bigg|(n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1+e^{-\mu_t(0)x/r^n} \right)\Bigg|+
 \Bigg|\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1+e^{-\mu_t(0)x/r^n})\Bigg|\\&+\Bigg|q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|+\Bigg| \frac{\mu_s(0)}{2} \int_0^{x} \frac{1}{r^2} \left(-n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}
 - e^{\mu_t(0)\frac{(y-x)}{r^n}}\right)  \phi(y) dy \Bigg|
@@ -576,14 +576,14 @@ Luego
 \end{equation}
 Llamamos 
 \begin{equation}
-M=\text{max}{\phi(y)},
+M=\text{max}~\phi(y),
 \end{equation}
 y dado qué $\phi(y)\leq M$, tenemos
 \begin{equation}
 \begin{split}
  \Bigg| \frac{d }{dr}& \left( u_0(x,r^n) r^{n-1} \right) \Bigg| \leq 
- \Bigg| n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg|\\
-&+\Bigg| (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg|u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
+ \Bigg| n\frac{\partial u_0(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg|\\
+&+\Bigg| (n-1) r^{n-2}u_0(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg|u_0(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
 & + \Bigg|(n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1+e^{-\mu_t(0)x/r^n} \right)\Bigg|+
 \Bigg|\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1+e^{-\mu_t(0)x/r^n})\Bigg|\\&+\Bigg|q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|+\frac{\mu_s(0)}{2}\frac{M}{r^2}  \int_0^{x} \Bigg| n(y-x) \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r^n}\Bigg| dy 
 + \frac{\mu_s(0)}{2} \frac{M}{r^2} \int_0^{x} \Bigg| e^{\mu_t(0)\frac{(y-x)}{r^n}} \Bigg| dy 
@@ -603,8 +603,8 @@ Y resulta
 \begin{equation}
 \begin{split}
  \Bigg| \frac{d }{dr}& \left( u_0(x,r^n) r^{n-1} \right) \Bigg| \leq 
- \Bigg| n\frac{\partial u(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg| (n-1) r^{n-2}u(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg|\\
-& +\Bigg|u(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
+ \Bigg| n\frac{\partial u_0(0,\xi(r))}{\partial \xi}r^{2n-2}e^{-\mu_t(0)x/r^n}\Bigg| +\Bigg| (n-1) r^{n-2}u_0(0,r^n)e^{-\mu_t(0)x/r^n}\Bigg|\\
+& +\Bigg|u_0(0,r^n)\frac{\mu_t(0)nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|\\
 & + \Bigg|(n-1)r^{n-2}\frac{q(0,r^n)}{\mu_t(0)} \left( 1+e^{-\mu_t(0)x/r^n} \right)\Bigg|+
 \Bigg|\frac{1}{\mu_t(0)}\frac{\partial q(0,\xi(r))}{\partial \xi} nr^{2n-2} (1+e^{-\mu_t(0)x/r^n})\Bigg|\\&+\Bigg|q(0,r^n)\frac{nx}{r^{2}}e^{-\mu_t(0)x/r^n}\Bigg|+\frac{\mu_s(0)}{2}\frac{M r^n}{\mu_t(0) r^2}  \int_0^{\mu_t(0)x/r^n} | te^{-t} |dt 
 + \frac{\mu_s(0)}{2} \frac{M r^n}{\mu_t(0)r^2}  \int_0^{\mu_t(0)x/r^n} |e^{-t}|dt
@@ -619,10 +619,10 @@ Reescribimos \eqref{eq:boundedder2} como
 \begin{equation}
 \begin{split}
 \frac{d^j }{dr^j} \left( u_0(x,r^n) r^{n-1} \right)=&\frac{d^j }{dr^j} \Bigg\{ 
-\left[u(0,r^n) + \frac{q(0,r^n)}{\mu_t(0)}e^{\mu_t(0)x/r^n}-\frac{q(0,r^n)}{\mu_t(0)} \right]r^{n-1}e^{-\mu_t(0)x/r^n}   \Bigg.\\
+\left[u_0(0,r^n) + \frac{q(0,r^n)}{\mu_t(0)}e^{\mu_t(0)x/r^n}-\frac{q(0,r^n)}{\mu_t(0)} \right]r^{n-1}e^{-\mu_t(0)x/r^n}   \Bigg.\\
 &+ \frac{\mu_s(0)}{2} \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \Bigg. \Bigg\}\\
 &=\frac{d^j }{dr^j} \Bigg\{ 
-\left[u(0,r^n) -\frac{q(0,r^n)}{\mu_t(0)} \right]r^{n-1}e^{-\mu_t(0)x/r^n} + \frac{q(0,r^n)}{\mu_t(0)}r^{n-1}   \Bigg.\\
+\left[u_0(0,r^n) -\frac{q(0,r^n)}{\mu_t(0)} \right]r^{n-1}e^{-\mu_t(0)x/r^n} + \frac{q(0,r^n)}{\mu_t(0)}r^{n-1}   \Bigg.\\
 &+ \frac{\mu_s(0)}{2} \int_0^{x} \frac{e^{\mu_t(0)\frac{(y-x)}{r^n}}}{r} \phi(y) dy \Bigg. \Bigg\}\\
 \end{split}
 \label{eq:boundedder3}
