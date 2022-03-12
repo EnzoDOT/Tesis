@@ -1409,13 +1409,27 @@ e igual número de procesadores en cada caso.
  \label{fig:itdet}
 \end{figure*}
 
+\pagebreak 
+\begin{wrapfigure}{r}{0.48\textwidth}
+%\begin{figure*}[h!]
+\centering
+  \includegraphics[width=0.45\textwidth]{figuras/necktrue.png}\\
 
+  \includegraphics[width=0.45\textwidth]{figuras/necksweep.png}\\
+
+  \includegraphics[width=0.45\textwidth]{figuras/neckmss.png}
+  \caption{De arriba a abajo: coeficiente de absorción verdadero, y
+  coeficientes de absorción obtenidos mediante resolución del problema inverso para 100 iteraciones de los métodos MB y FMS, respectivamente.}
+ \label{fig:reconst}
+%\end{figure*}
+\end{wrapfigure}
 Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
 presentan propiedades de convergencia similares para un número variable 
 de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
 el método FMS tomó  $12689$ segundos para llegar a las 100 iteraciones, 
 del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
 dando una aceleración en la reconstrucción por un factor cercano a siete. 
+
 En la figura además se aprecia que incrementar el número de fuentes y de detectores 
 genera una mejora considerable en la convergencia del problema inverso 
 para un número fijo de iteraciones. El número de fuentes tiene un impacto 
@@ -1434,26 +1448,18 @@ directos separados, lo cual sugiere que el método FMS es una estrategia
 de optimización adecuada que permite ganar tiempo de cómputo aprovechando 
 el uso de fuentes simultáneas en único problema directo.
 
-\pagebreak
-\begin{wrapfigure}{r}{0.48\textwidth}
-%\begin{figure*}[h!]
-\centering
-  \includegraphics[width=0.45\textwidth]{figuras/necktrue.png}\\
 
-  \includegraphics[width=0.45\textwidth]{figuras/necksweep.png}\\
-
-  \includegraphics[width=0.45\textwidth]{figuras/neckmss.png}
-  \caption{De arriba a abajo: coeficiente de absorción verdadero, y
-  coeficientes de absorción obtenidos mediante resolución del problema inverso para 100 iteraciones de los métodos MB y FMS, respectivamente.}
- \label{fig:reconst}
-%\end{figure*}
-\end{wrapfigure}
 En la figura~\ref{fig:reconst} mostramos el coeficiente de absorción verdadero, 
 junto con los coeficientes de absorción obtenidos mediante la resolución del problema 
 inverso empleando las estrategias MB y FMS, con 16 fuentes y 36 detectores 
 para 100 iteraciones del algoritmo~\ref{algfcinv}. Como puede observarse, 
 las reconstrucciones obtenidas por ambos métodos son de similares características. 
-
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/l2err.eps}\\
+  \caption{Evolución del error en la norma $L^2$ por iteración ec.~\eqref{eq:errl2} para el coeficiente de absorción, obtenido para el modelo de cabeza humana para los métodos MB y FMS.}
+ \label{fig:ithead}
+\end{figure}
 Finalmente, presentaremos una reconstrucción simulando un ``modelo de cabeza''. 
 Para esta demostración, utilizaremos el modelo de cabeza similar 
 a los utilizados en las referencias~\cite{Klose2002,Prieto2017}. 
@@ -1466,22 +1472,22 @@ como fluido cerebroespinal. Esta región cumple la función de
 amortiguar al cerebro ane movimientos bruscos. Además, el fluido cerebroespinal 
 se encarga de transportar nutrientes hacia el cerebro, y de
 eliminar metabolitos.
+\begin{wrapfigure}{r}{0.48\textwidth}
+\centering
+  \includegraphics[width=0.45\textwidth]{figuras/head_true.png}\\
+  \includegraphics[width=0.45\textwidth]{figuras/head_sweep.png}\\
+  \includegraphics[width=0.45\textwidth]{figuras/head_ours.png}
+  \caption{De arriba a abajo: coeficiente de absorción verdadero, y coeficientes de 
+  absorción obtenidos para 50 iteraciones del método MB, y 79 iteraciones del métofo FMS.}
+ \label{fig:rechead}
+\end{wrapfigure}
 Dado que el fluido cerebroespinal presenta coeficientes de absorción y de dispersión 
 despreciables, la ecuación de difusión de fotones no es físicamente preciso para modelar 
 el transporte de fotones en esta región, por lo cual debe emplearse la ecuación de transporte.
 En la referencia~\cite{Prieto2017} se utilizan 16 fuentes, 4 por cara, para 
 un modelo de cabeza similar. 
-%\pagebreak
-%\clearpage
 
-\begin{figure}[h!]
-\centering
-  \includegraphics[width=0.5\linewidth]{figuras/l2err.eps}\\
-  \caption{Evolución del error en la norma $L^2$ por iteración ec.~\eqref{eq:errl2} para el coeficiente de absorción, obtenido para el modelo de cabeza humana para los métodos MB y FMS.}
- \label{fig:ithead}
-\end{figure}
-
-\noindent Aquí emplearemos 32 detectores, con 8 detectores por cara, 
+ Aquí emplearemos 32 detectores, con 8 detectores por cara, 
 e igual número de fuentes. 
 Mostramos el coeficiente de absorción después de 50 iteraciones del método MB, 
 e iteramos el método FMS hasta obtener un error de convergencia similar en la norma $L^2$~\eqref{eq:errl2}. En estas reconstrucciones, nuevamente buscamos inclusiones 
@@ -1498,15 +1504,7 @@ activación de las fuentes en el método FMS. Todas las fuentes ubicadas
 en una misma cara serán activadas de manera simultánea. En la notación 
 utilizada anteriormente, tendremos $\x_1^1=(1.0,0.0)$, 
 $\x_1^2=(2.0,0.0)$, $\x_1^3=(3.0,0.0)$, $\x_1^4=(4.0,0.0)$, con retardo temporal $\tau_{1,1}=0$ps. \looseness=-1
-\begin{wrapfigure}{r}{0.48\textwidth}
-\centering
-  \includegraphics[width=0.45\textwidth]{figuras/head_true.png}\\
-  \includegraphics[width=0.45\textwidth]{figuras/head_sweep.png}\\
-  \includegraphics[width=0.45\textwidth]{figuras/head_ours.png}
-  \caption{De arriba a abajo: coeficiente de absorción verdadero, y coeficientes de 
-  absorción obtenidos para 50 iteraciones del método MB, y 79 iteraciones del métofo FMS.}
- \label{fig:rechead}
-\end{wrapfigure}
+
 Luego 
 $\x_2^1=(1.0,5.0)$, 
 $\x_2^2=(2.0,5.0)$, $\x_2^3=(3.0,5.0)$,  $\x_2^4=(4.0,5.0)$ con $\tau_{2,1}=100$ps, 
