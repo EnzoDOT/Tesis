@@ -3,61 +3,57 @@
 \lhead{\thepage}
 \rhead{\textit{El modelo directo}} 
 \pagebreak
-Como mencionamos en la introducción, en este trabajo resolvemos el problema inverso 
-como un problema de minimización no lineal, basado en un modelo físico para 
-el transporte de fotones. Este modelo para el transporte de los fotones, 
-para el cual empleamos la ecuación de transferencia radiativa, es lo que 
-se denomina el modelo directo. En el modelo directo, los parámetros 
- para el problema de transferencia radiativa son conocidos (condición inicial, condiciones de contorno, 
-y parámetros ópticos) y lo que se busca es la solución a la ETR, la cual modela 
+Como mencionamos en la introducción, en este trabajo resolvemos el problema {\bf inverso} 
+en tomografía óptica como un problema de minimización no lineal. 
+En primer lugar, se debe resolver el problema {\bf directo}, 
+el cual provee un modelo 
+ físico para el transporte de fotones en la materia. En este problema, los parámetros 
+son conocidos (condición inicial, condiciones de contorno, 
+y parámetros ópticos) y lo que se busca es la solución a la ecuación de transporte radiativo (ETR), la cual modela 
 el transporte de los fotones en el medio, y da como resultado la distribución 
 espacial de los fotones, para cada dirección de propagación a cada instante del tiempo. 
-El problema inverso será abordado mas adelante, 
-y su diferencia principal con el modelo directo es que lo que busca 
-determinarse no es la distribución de fotones, si no un parámetro óptico en la ETR 
-que permite caracterizar el medio donde se produce el transporte de los fotones, 
-para lo cual se cuenta con ciertas ``mediciones'' experimentales.
+El problema inverso será abordado en la sección~\ref{sec:inverso}. 
+La diferencia principal con el modelo directo es que lo que se busca 
+determinar no es la distribución de fotones, sino un parámetro óptico 
+que permita caracterizar el medio. Para ello, en general, se cuenta con ciertas mediciones experimentales.
 
-En esta sección presentamos el modelo directo, \ie, 
-la ETR que utilizaremos 
-en la resolución del problema inverso en la sección~\ref{sec:inverso}, 
-junto con los métodos numéricos desarrollados para su resolución. 
-Además, dado que los códigos y algoritmos para la resolución de la ETR 
+En esta sección presentamos el modelo directo, 
+la ecuación de transporte y los métodos numéricos utilizados para su resolución. 
+Dado que los códigos y algoritmos empleados 
 fueron desarrollados en el marco de esta tesis, presentaremos 
 comparaciones de los resultados numéricos obtenidos con soluciones manufacturadas, 
-mediciones experimentales y soluciones analíticas, con el fin de validar estos códigos.  
+mediciones experimentales y soluciones analíticas, con el fin de validarlos.
 
-Así mismo, se presentan algunas características, propias de las soluciones 
-a la ETR. En el marco de esta tesis se desarrollo una descripción detallada 
-de la existencia de capas límite en las soluciones a la ETR que 
-presenta desafíos numéricos. Abordaremos esta cuestión también en detalle, 
-así como las consecuencias numéricas de dicha capa límite, y 
-estrategias para su resolución. 
+Del análisis del problema directo, hemos encontrado características inherentes 
+a las soluciones de la ETR, en particular, la existencia de capas límites exponenciales.
+En la sección~\ref{sec:blayer} se aborda este problema en detalle, 
+junto con el desarrollo de estrategias numéricas propuestas para su correcta 
+resolución. 
 
 
 \section{La ecuación de transferencia radiativa y su interpretación física}
 \label{sec:ETR}
 
-La ecuación de transferencia radiativa (ETR) es una ecuación de Boltzmann 
+La ecuación de transferencia radiativa es una ecuación de Boltzmann 
 linearizada que modela el transporte de partículas neutras. Esta ecuación establece 
 la conservación de la energía en forma de  
 radiación electromagnética al atravesar la materia. La radiación 
 interactúa con el medio, el cual absorbe, dispersa, y en el caso 
-general puede también emitir radiación electromagnética. 
+general, emite radiación electromagnética. 
 
 Originalmente, esta ecuación fue derivada mediante 
 consideraciones para la conservación de la energía. Tal es el enfoque 
 que puede encontrarse en, \eg\cite{Chandrasekhar1960,Lewis1984}. En trabajos 
 más recientes se estableció la conexión entre la ETR y las ecuaciones de Maxwell
 ~\cite{Mishchenko1999, Prasher2003}. También puede establecerse 
-la conexión entre la ETR y la ecuación de Boltzmann, 
+la relación entre la ETR y la ecuación de Boltzmann, 
 en particular la ETR es una ecuación de Boltzmann linearizada, 
-donde no interviene el término no lineal por considerarse 
-despreciable, y el cual, físicamente corresponde a las 
+donde no interviene el término no lineal, que corresponde a las 
 interacciones de las partículas transportadas con ellas mismas~\cite[Cap. 4]{Cercignani1988}. 
-En el contexto de este trabajo utilizaremos la ETR como modelo para el transporte 
-de fotones en un medio participante. Para ello consideramos el problema ETR dependiente 
-del tiempo para $0\leq t\leq T$, con condiciones de contorno y valores iniciales 
+Para el caso de partículas neutras, como los fotones, dicho término puede considerarse despreciable. 
+En el contexto de este trabajo utilizaremos el modelo directo para el transporte 
+de fotones en un medio participante (\eg tejido biológico). Para ello consideramos el problema ETR dependiente 
+del tiempo para $0\leq t\leq T$, con condiciones de contorno de Fresnel, y valores iniciales nulos, 
 en dos dimensiones espaciales 
 \begin{equation}
 \begin{split}
@@ -84,35 +80,34 @@ ante rotaciones del sistema de coordenadas, dependiendo solamente
 del ángulo $\alpha=\arccos(\hth \cdot \hth')$ que se forma entre la dirección 
 del fotón incidente $\hth$ y la dirección del fotón emergente $\hth'$ 
 en el proceso de dispersión. En particular, utilizaremos como modelo de función de fase la 
-función de Henyey-Greenstein~\cite{Henyey1941}
+función de Henyey--Greenstein~\cite{Henyey1941}
 \begin{equation}
 \eta(\hth\cdot\hth')=\frac{1}{2\pi} 
-\frac{1-g^2}{(1+g^2-2g \, \hth \cdot \hth')^{3/2}}
+\frac{1-g^2}{(1+g^2-2g \, \hth \cdot \hth')^{3/2}} \,,
 \label{eq:Henyey-Greeinstein}
 \end{equation}
 donde $g \in [-1,1]$ caracteriza la anisotropía en los procesos de dispersión: 
- un valor de $g=1$ ($g=-1$) caracteriza una distribución de probabilidad donde todos
-los fotones emergen del proceso de dispersión en la dirección (opuesta) de 
+ un valor de $g=1$ ($g=-1$) implica una distribución de probabilidad donde todos
+los fotones emergen en la misma (opuesta) dirección de 
 incidencia. En el caso de dispersión isótropa, 
 donde los fotones emergen de los eventos de colisión con igual probabilidad 
-en cualquier dirección se tiene $ g = 0 $. En general se exige que la función de fase 
-esté normalizada, de forma tal qué
+en cualquier dirección, se tiene $ g = 0 $. En general se exige que la función de fase 
+esté normalizada, de forma tal que
 \begin{equation}
-\int_{S^1}\eta(\hth\cdot\hth') d\theta=1
+\int_{S^1}\eta(\hth\cdot\hth') d\theta=1 \,,
 \label{eq:Henyey-Greeinsteinnorm}
 \end{equation}
 lo cual, físicamente, expresa la conservación de la energía en las colisiones 
 de dispersión, consideradas de tipo elástico. El término $ s(\x,\hth,t)$ 
 modela una fuente ubicada en el interior del dominio, y en tomografía óptica 
-lo consideraremos nulo (ya que la radiación incide a través de la frontera $\partial \Omega$), 
+se considera nulo (ya que la radiación incide a través de la frontera $\partial \Omega$), 
 a menos que se indique explícitamente lo contrario. 
 
 La ecuación~\eqref{eq:RTE} 
-modela el transporte de fotones de una única longitud de onda, que es la longitud 
+modela el transporte de fotones para una única longitud de onda, que es la longitud 
 de onda de la fuente láser empleada.
-
-Los diferentes términos en la ecuación~\eqref{eq:RTE} poseen 
-diferente significado físico. El primer término del lado izquierdo de la ecuación simplemente representa la variación temporal  
+Los distintos términos en la ecuación~\eqref{eq:RTE} poseen 
+diferentes significados físicos. El primer término del lado izquierdo, representa la variación temporal  
 de la intensidad específica para el rayo que viaja en la dirección $\hth$. 
 El segundo término es un término de advección, que modela la propagación de 
 los fotones en forma de rayos, reminiscentes a la óptica geométrica. Los términos $a(\x)\ut$ y $b(\x)\ut$ modelan la 
@@ -129,21 +124,20 @@ puede pensarse como una ``fuente'' para el rayo que se propaga en la dirección 
 la cual modela las contribuciones por dispersión desde todos los rayos $\hth'$ 
 hacía el rayo $\hth$. Dado que trataremos con problemas en dos dimensiones espaciales, 
 esta integral se realiza en el círculo unitario, con $\hth \in S^1$, 
-donde la integración se realiza simplemente para $\theta \in [0,2\pi)$·
+para $\theta \in [0,2\pi)$.
 
-La condición inicial es considerada nula en el marco de esta tesis 
+En tomografía óptica, la condición inicial generalmente se considera nula 
 (segunda línea en la ec.~\eqref{eq:RTE}), ya 
 que el medio será iluminado con uno o múltiples pulsos láser, partiendo con las 
-fuentes láser inicialmente apagadas. 
-
-Las condiciones de contorno empleadas se denominan condiciones de contorno de Fresnel. 
-El término de Fresnel en la condición de contorno, $f(\hnu \cdot \hth) u(\x,\hth_r,t)$, 
-donde $\hnu$ indica la normal saliente al contorno $\partial \Omega$ del dominio espacial 
-$\Omega$, 
+fuentes inicialmente apagadas. 
+También se emplean, generalmente, las condiciones de contorno de Fresnel. 
+El término de Fresnel, $f(\hnu \cdot \hth) u(\x,\hth_r,t)$, 
 modela la reflexión de la radiación electromagnética 
-en la interfase del dominio donde se modela el transporte de la radiación 
-con el medio circundante debido a las diferencias 
-en los índices de refracción. El coeficiente de Fresnel para luz no polarizada viene dado por~\cite{Born1999}
+en la interfase del dominio  debido a las diferencias en los índices de refracción 
+con el medio circundante, 
+donde $\hnu$ indica la normal saliente al contorno $\partial \Omega$ del dominio espacial 
+$\Omega$. 
+El coeficiente de Fresnel para luz no polarizada viene dado por~\cite{Born1999}
 \begin{equation}
 f(\hth \cdot \hnu) =
      \begin{cases}
@@ -154,19 +148,19 @@ f(\hth \cdot \hnu) =
       1  & \text{sí} \, \alpha_i \ge \alpha_c, \\
      \end{cases}
 \end{equation}
-donde $n_\Omega$ y $n_0$ indican los índices de refracción en el interior 
-del dominio espacial $\Omega$ y en el exterior del mismo. El ángulo $\alpha_i=\arccos(\hth \cdot \hnu)$ 
-se mide con respecto a la normal del plano de reflexión, siendo $\alpha_t$ y $\alpha_c$ 
-el ángulo que forma la radiación emergente transmitida en la interfase del medio, y el ángulo 
-crítico de reflexión total interna, respectivamente. Estos últimos se obtienen a partir de la ley de Snell. 
-Para el ángulo de transmisión se cumple $n_{\Omega} \sin(\alpha_i)=n_0 \sin (\alpha_t)$ y el 
-ángulo de reflexión interna total viene dado por $n_{\Omega} \sin(\alpha_c)=n_0$.
+donde $n_\Omega$ indica  el índice de refracción en el interior 
+del dominio espacial $\Omega$, y $n_0$ el índice correspondiente al exterior del dominio. El ángulo $\alpha_i=\arccos(\hth \cdot \hnu)$ 
+se mide con respecto a la normal del plano de reflexión, siendo $\alpha_t$ 
+el ángulo que forma la radiación emergente transmitida en la interfase del medio, y $\alpha_c$ el ángulo 
+crítico de reflexión total interna. Estos últimos se obtienen a partir de la ley de Snell. 
+Para el ángulo de transmisión se cumple, en general, $n_{\Omega} \sin(\alpha_i)=n_0 \sin (\alpha_t)$ y para el  
+ángulo de reflexión total interna $n_{\Omega} \sin(\alpha_c)=n_0$.
 La dirección reflejada $\hth_r=\R \hth$, donde $\R =\id-2\hnu \hnu^T$ es la matriz de reflexión 
 (también conocida como transformación de Householder) con respecto al plano de normal $\hnu$, donde $\id$ 
 es la matriz identidad y $\hnu^T$ 
 indica el vector transpuesto de $\hnu$.   El 
 segundo término en la condición de contorno, $q$, es la fuente, que en el marco de esta tesis 
-modela uno o múltiples láser iluminando el contorno del dominio espacial $\partial \Omega$. 
+modela uno o múltiples lásers que iluminan el contorno del dominio espacial $\partial \Omega$. 
 Las condiciones de contorno se imponen para la radiación entrante 
 al dominio espacial $\Omega$ a través de su contorno $\partial \Omega$. 
 Los conjuntos de direcciones para la radiación entrante ($\Gamma_-$) y saliente ($\Gamma_+$) 
@@ -178,7 +172,7 @@ que se especifique lo contrario.
 
 A partir de la intensidad específica $\ut$ pueden definirse magnitudes derivadas. 
 Una de ellas es la densidad total de fotones 
-en el punto $\x$ a tiempo $t$. Esta magnitud es la que se modela, por ejemplo
+en el punto $\x$ a tiempo $t$. Esta magnitud es la que se modela, por ejemplo, 
 en la aproximación de difusión (ver apéndice~\ref{ap:ecdiff}), y es cuantificada por el flujo escalar
 \begin{equation}
   \phi(\x,t)=\int_{S^1} u(\x,\hth,t) d\theta.
@@ -194,13 +188,13 @@ el producto escalar $\vec{ \mathcal{J}}(\x,t) \cdot \hnu$
 cuantifica el flujo neto de fotones atravesando el plano de normal $ \hnu$ 
 en el punto $\x$ a tiempo $t$.
 
-Utilizando qué
+Utilizando
 \begin{equation}
 \hth \cdot \nabla \ut=\nabla \cdot [\hth \ut],
 \label{eq:scdiv}
 \end{equation}
-integrando en la variable angular $\theta$
- la ecuación integro diferencial en~\eqref{eq:RTE} y utilizando~\eqref{eq:Henyey-Greeinsteinnorm}  se tiene
+e integrando en la variable angular $\theta$
+ la ecuación integro--diferencial~\eqref{eq:RTE}, y utilizando~\eqref{eq:Henyey-Greeinsteinnorm}  se obtiene
 \begin{equation}
 \frac{1}{c}\frac{\partial}{\partial t} \phi(\x,t)+\nabla \cdot \vec{ \mathcal{J}}(\x,t)
 +(a(\x)+b(\x)) \phi(\x,t)=b(\x)\phi(\x,t)+s_0(\x,t)
@@ -208,43 +202,41 @@ integrando en la variable angular $\theta$
 \end{equation}
 donde $s_0=\int_{S^1}s(\x,\hth,t)d\theta$. Integrando la 
 ecuación~\eqref{eq:RTEscflux} en el dominio espacial, utilizando el teorema de la divergencia
-y reordenando los términos se llega a la siguiente ecuación de balance
+y reordenando los términos, se llega a la siguiente ecuación de balance
 \begin{equation}
 \frac{1}{c}\frac{\partial}{\partial t} \int_{\Omega}\phi(\x,t)d\x = 
 \int_{\Omega}s_0(\x,t)d\x- \oint_{\partial \Omega} \vec{ \mathcal{J}}(\x,t)\cdot \hnu dS-\int_{\Omega}a(\x)\phi(\x,t)d\x,
 \label{eq:RTEfullint}
 \end{equation}
 la cual expresa la conservación global de la radiación en el volumen $\Omega$, 
-donde la variación temporal en el número total de fotones 
-viene dada por el aporte de la fuente $s_0$, menos el flujo de fotones
+donde la variación temporal del número total de fotones 
+viene dada por el aporte de la fuente $s_0$, menos el flujo de fotones salientes 
  a través de la superficie del 
-dominio $\partial \Omega$, menos los fotones que son absorbidos 
-por el medio participante en procesos de absorción pura. 
-A pesar de que no fueron incluidos en este análisis, 
-también deben ser consideradas en esta relación de balance global la condición inicial y las 
-condiciones de contorno. Dado que 
-los procesos de dispersión que nos interesan son de tipo elástico, el número 
-de fotones se conserva en dichos procesos colisionales, y por lo tanto 
-estos procesos no intervienen en el balance global~\eqref{eq:RTEfullint}. 
+dominio $\partial \Omega$, menos los fotones absorbidos 
+por el medio participante. 
+Dado que en 
+las interacciones de dispersión consideradas son de tipo elásticas, el número 
+de fotones se conserva en estos procesos, y por lo tanto, los terminos asociados 
+al coeficiente de dispersión $b(\x)$ no intervienen en el balance global~\eqref{eq:RTEfullint}. 
 
-Siendo una ecuación de Boltzmann, la ecuación~\eqref{eq:RTE} 
+Siendo~\eqref{eq:RTE} una ecuación de Boltzmann, 
 se encuentra definida en el espacio de las fases, 
-y su solución da información detallada sobre el estado y distribución 
-de los fotones y de su evolución temporal.   Por esta razón, 
-el problema de transferencia radiativa es un problema multidimensional, 
+y su solución proporciona información detallada sobre el estado y distribución 
+de los fotones y de su evolución temporal. Por esta razón, 
+el problema de transferencia radiativa es multidimensional, 
 que involucra las variables espaciales $\x$, y las variables angulares 
 $\hth$, asociadas a las velocidades de los fotones. 
-Debido a la alta dimensión de la ec.~\eqref{eq:RTE}, su resolución numérica 
-puede ser altamente costosa, especialmente cuando se considera el caso de 
+Debido a la alta dimensionalidad de la ec.~\eqref{eq:RTE}, su resolución numérica 
+puede resultar altamente costosa, especialmente cuando se consideran 
 tres dimensiones espaciales. En tal caso, debe agregarse a las dimensiones 
-espaciales y al tiempo la discretización de la variable angular, 
+espaciales y al tiempo, la discretización de la variable angular, 
 que en dicho caso queda definida en la esfera unitaria $S^2$. 
-Se tienen en total, en tres dimensiones, las tres variables espaciales, 
-dos variables asociadas a las direcciones, y la variable temporal, haciendo 
-a un total de 6 variables, lo cual representa un serio desafío 
-aún para los métodos numéricos más eficientes. 
+En tres dimensiones, a las tres variables espaciales, se suman 
+dos variables asociadas a las direcciones, y una variable temporal, 
+constituyendo un serio desafío numérico,  
+aún para los métodos más eficientes. 
 Por este motivo, en esta tesis nos restringimos a casos de 
-simetría 2D, donde, debido a la simetría, el 
+simetría 2D, donde el 
 problema puede tratarse en de dos dimensiones espaciales, 
 con una única variable angular, $\hth(\theta)$.
 
@@ -253,60 +245,48 @@ con una única variable angular, $\hth(\theta)$.
 \label{sec:nummet}
 
 El tratamiento numérico de la ETR dependiente del tiempo
-requiere una discretización de todas las variables en el espacio de fases,
- es decir, sus variables espaciales, direccionales y temporal. En
-En esta sección describimos un algoritmo para generar una 
-aproximación discreta a la solución de la ETR sobre una 
-grilla numérica discreta del 
-espacio de fases, la cual proporciona una alta precisión numérica 
-para soluciones suaves. El algoritmo propuesto 
-de descomposición de dominio presenta además una eficiencia 
-de escalabilidad \textit{ideal} 
-que fue demostrada con hasta 256 procesadores. 
-
-Cabe destacar que para tener alta precisión numérica, 
+requiere de una discretización de todas las variables en el espacio de fases,
+ es decir, sus variables espaciales, direccionales y temporal. 
+En esta sección describimos un algoritmo que proporciona 
+soluciones con alta precisión numérica. La estrategia 
+de paralelización mediante  
+la descomposición de dominio presenta, además, una eficiencia 
+de escalabilidad \textit{ideal}, demostrada con hasta 256 procesadores. 
+Cabe destacar que para lograr alta precisión numérica, 
 deben exigirse ciertas condiciones de regularidad 
 en la solución numérica, y en los coeficientes 
-de la ETR. Además, siempre que hayan variaciones 
-rápidas en la solución, estas deben ser correctamente 
-resueltas por la grilla numérica utilizada. De 
-otra forma, aún siendo la solución subyacente 
-a la ETR suave, en la aproximación discreta, 
-las variaciones rápidas que no sean resueltas 
-por una cantidad suficiente de puntos, se manifestaran 
-en el error de aproximación como una discontinuidad, 
-deteriorando la convergencia del algoritmo. 
+de la ETR. En casos de variaciones abruptas, 
+las grillas numéricas empleadas deben ser 
+lo suficientemente densas como para resolverlas. 
+ De lo contrario, surgirán errores de aproximación 
+ relacionados al orden de diferenciabilidad de la solución,
+ que limitarán el order de convergencia. 
 
 \subsection{Discretización de la variable angular}
 \label{sec:dord}
-Para la discretización en la variable angular de la ETR empleamos el
+Para la discretización de la variable angular empleamos el
 método de ordenadas discretas. Este es un método espectral, 
 originalmente introducido por Chandrasekhar 
 para el estudio de la propagación de la radiación en atmósferas 
-estelares y planetarias~\cite{Chandrasekhar1960}, 
-y que luego fue extendido para el estudio 
-del transporte de neutrones en geometrías generales 
+estelares y planetarias~\cite{Chandrasekhar1960}. 
+Posteriormente fue extendido para el estudio 
+del transporte de neutrones en geometrías generales, 
 para aplicaciones en el desarrollo de reactores nucleares  
-por Carlson \textit{et al.}~\cite{Lathrop1992}. 
-
-Este método permite el tratamiento de la integral colisional por medio de una 
-cuadratura numérica. Para ello, se fijan 
-un conjunto de $M$ direcciones discretas 
-definidas por las abscisas 
-de la cuadratura de integración. Esto permite el tratamiento 
-numérico de la integral 
-de dispersión. 
-En nuestro algoritmo explícito para 2D, definimos los cosenos directores de 
-estas direcciones discretas utilizando la regla trapezoidal, 
+por Carlson~\textit{et al.}~\cite{Lathrop1992}. 
+Este método permite el tratamiento del término colisional por medio de una 
+integración numérica, en las cuales las $M$ direcciones discretas 
+quedan definidas por las abscisas de la cuadratura.
+En nuestro algoritmo explícito para 2D, definimos los cosenos directores 
+utilizando la regla trapezoidal, 
 de donde resultan las direcciones discretas 
 $\hth_m(\theta_m)=(\hth\cdot \hat x,\hth\cdot \hat y)=(\cos(\theta_m),\sin(\theta_m))$.
 
 Dado que la intensidad específica $\ut$ posee simetría rotacional
 para ángulos de $2\pi$ en la variable $\hth$, y siempre que la solución de 
 transporte sea lo suficientemente
-suave en la variable $\hth$, el uso de la regla trapezoidal 
-proporciona una regla de cuadratura de convergencia espectral. 
-Las direcciones discretas para la regla trapezoidal se especifican 
+suave, el uso de la regla trapezoidal 
+proporciona aproximaciones con convergencia espectral. 
+Las direcciones discretas se especifican 
 según
 \begin{equation}
 \theta_m=\frac{2\pi(m-1)}{M}, \; \; m=1,2,\ldots,M.
@@ -325,17 +305,16 @@ ecuación~\eqref{eq:RTE} en el dominio de la velocidad resulta
 p_{m,m'} \, u_{m'}+\mathcal{O}(e^{-hM}) =0, \; \; m=1,2,\ldots,M.
 \label{eq:RTEdom}
 \end{equation*}
-donde el término exponencial expresa el error en la cuadratura 
-de integración esperado para la convergencia exponencial, que se dará 
-para soluciones suaves, siendo $h$ una constante.
+siendo $h$ una constante y donde el término exponencial expresa el tipo de convergencia.
+
 \subsection{Discretización de la variable temporal}
 \label{sec:adamsbashforth}
-Para evolucionar en el tiempo con alta precisión la solución de la ETR,
-empleamos un método de Adams-Bashforth de cuarto orden. Este método ofrece una 
+La evolución temporal se realiza empleando el método de Adams--Bashforth de cuarto orden, 
+que ofrece una 
 buena relación entre precisión y estabilidad.
-Llamando $u_m^k=u(\x,\hth_m,t^k)$, con $t^{k}=(k-1)\Delta t$ la solución 
-a la ETR 
-dependiente del tiempo se obtiene a partir de la condición inicial utilizando
+Llamando $u_m^k=u(\x,\hth_m,t^k)$, con $t^{k}=(k-1)\Delta t$ a la solución 
+de la ETR 
+dependiente del tiempo, se propaga temporalmente utilizando
 \begin{equation}
 u_m^{k+1} =  u_m^k + c\Delta t \sum_{\ell=0}^3 \chi_{\ell} \mathcal{L} ( u^{k-\ell}_m)  
 +\mathcal{O}(\Delta t^4)+\mathcal{O}(e^{-hM})
@@ -346,53 +325,41 @@ donde
 \mathcal{L} ( u_m^k) = b\sum_{m'=1}^{M} w_{m'} p_{m,m'} u_{m'}^k-(b+a)u_m^k-\hth_m \cdot \nabla u_m^k \notag
 \label{eq:RTEAB4L}
 \end{equation}
-con los coeficientes de Adams--Bashforth de cuarto orden $\chi_0=55/44$, 
+con los coeficientes $\chi_0=55/44$, 
 $\chi_1=-59/24$, $\chi_2=37/24$ y $\chi_4=-3/8$. 
-En este trabajo, los cuatro pasos temporales iniciales necesarios para inicializar 
-el esquema de Adams--Bashforth de cuarto orden son considerados nulos. Esta configuración es 
+Nuestro esquema permite emplear condiciones iniciales arbitrarias, tal como se muestra para  
+la solución de las ecuaciones de Navier--Stokes en la Sección 5 de la ref.~\cite{Bruno2016}.
+En nuestro trabajo, los cuatro pasos temporales iniciales necesarios para inicializar 
+el esquema son considerados nulos. Esta configuración es 
 apropiada para 
 el modelo directo en tomografía óptica, dado que utilizaremos pulsos láser 
-que inyectan radiación, con la fuente láser inicialmente apagada. Es posible 
-emplear condiciones iniciales arbitrarias, tal como se muestra en 
-la solución de las ecuaciones de Navier-Stokes en la Sección 5 de la ref.~\cite{Bruno2016}.
+que inyectan radiación, con las fuentes inicialmente apagadas. 
 
-\subsection{Discretización de la variable espacial: el método FC}
+\subsection{Discretización de la variable espacial: el método de Continuación de Fourier (FC)}
 \label{sec:fcmethod}
+Para la discretización espacial, desarrollamos la implementación 
+del método de Continuación de Fourier (FC)~\cite{Lyon2010,Albin2011,Amlani2016}.  
+Partiendo de una función que no es periódica, el método FC produce 
+una función continuada, que la convierte en periódica. 
+El método FC es un tipo de colocación de Fourier que permite 
+el tratamiento de condiciones de contorno arbitrarias, con 
+convergencia de tipo espectral.
+Éste método ha sido aplicado 
+a la resolución de las ecuaciones de Navier--Stokes~\cite{Cubillos2019}, la ecuación de difusión~\cite{Bruno}, 
+y la ecuación de onda~\cite{}, entre otras~\cite{Fontana}. En esta tesis extendimos su uso  
+para la resolución de la ecuación~\eqref{eq:RTE}~\cite{Gaggioli2019}.
 
-En el dominio espacial utilizamos una grilla uniforme, 
-de tamaño $\Delta x$ en la dirección $\hat x$, y
-de tamaño $\Delta y$ en la dirección $\hat y$. 
-Para obtener una aproximación espectral a la solución, 
-utilizamos el método de Continuación de Fourier (FC). 
-
-Describiremos el método FC en la dirección $\hat x$. 
-Análogamente se aplica en la dirección $\hat y$. 
-Partimos de la grilla numérica
-
+Describiremos brevemente el método FC (para mayor detalle, ver apéndice~\ref{ap:fcgram}). 
+Utilizamos una grilla uniforme en la dirección $\hat x$., 
+de tamaño $\Delta x$ (análogamente en la dirección $\hat y$)
 \begin{equation*}
 \begin{aligned}
-%\begin{split}
-\Delta x &=\frac{x_{\text{max}}-x_{\text{min}}}{N} = \frac{x_{N+1} - x_1}{N} ,\\
+\Delta x &=\frac{x_{\text{max}}-x_{\text{min}}}{N} = \frac{x_{N+1} - x_1}{N} ,
 x_i &=x_{\mathrm{min}}+(i-1)\Delta x
-%\end{split}
 \end{aligned}
 \end{equation*} 
 
-Aproximaremos el gradiente espacial que aparece 
-en la ecuación~\eqref{eq:RTE} mediante el método FC~\cite{Albin2011,Gaggioli2019}, 
-el cual es un tipo colocación de Fourier que 
-puede aplicarse a funciones no periódicas, lo que permite 
-el tratamiento de condiciones de contorno arbitrarias. 
-Este método permite obtener una aproximación de alto 
-orden del gradiente espacial en la ec.~\eqref{eq:RTE} 
-siempre qué la solución subyacente sea suave.
-
-Partiendo de una función que no es periódica, el método FC produce 
-una función continuada, que convierte a dicha función en periódica. 
-Éste método fue ampliamente descripto en la literatura, y ha sido aplicado 
-a una diversidad de problemas. En esta tesis extendimos el uso de FC 
-para su aplicación en la resolución de la ecuación~\eqref{eq:RTE}.
-
+Aproximaremos el gradiente espacial mediante el método FC.
 Para generar la función periódica de, \textit{e.g.} $g(x)=u^k_m(x,y_j)$ para un dado $y_j$, 
 consideramos dos vectores 
 que son generados a partir de la función discretizada 
@@ -414,9 +381,9 @@ g_{r,N+1-d_r+C}'=0]^T$ de cada
 uno de los polinomios ortogonales.
 
 \item Se generan dos nuevos vectores $\mathbf{g}_l$ y $\mathbf{g}_r$ 
-que expanden las dimensiones de $\mathbf{g}_l'$ y $\mathbf{g}_r'$ a $C+E$, 
-donde $E$ es un número de puntos ``extra'' tal que el número total de puntos 
-$N_p=N+1+C+E$ se puede factorizar en números primos pequeños. Estos 
+que expanden las dimensiones de $\mathbf{g}_l'$ y $\mathbf{g}_r'$ a $C+E$. 
+$E$ es un número de puntos ``extra'' tal que el número total de puntos 
+$N_p=N+1+C+E$ se pueda factorizar en números primos pequeños. Estos 
 vectores se obtienen agregando un número $E$ de puntos nulos 
 en los extremos de la continuación, de donde se tiene 
 $\mathbf{g}_l=[g_{l,N+1}'=0,\ldots,g_{l,N+1+E}=0,\mathbf{g}_l'^T]^T$
@@ -440,7 +407,6 @@ de $N+1$ elementos dados por la función original discretizada.
 El tercer paso permite la utilización eficiente de la Transformada Rápida de Fourier
 (FFT, del inglés Fast Fourier Transform), independientemente del número de puntos 
 utilizados en la grilla.  
-
 Si $g(x)$ es una función suave, con derivadas continuas, el 
 procedimiento de continuación detallado genera una función suave 
 y periódica tal qué $\mathbf{g}_{c,i}=\mathbf{g}_i$ para $i=1,2,\ldots,N+1$.
@@ -449,13 +415,10 @@ Como ejemplo, en la fig.~(\ref{fig:Continuedg}) se muestra la continuación
 producida para la función $g(x)=12+x^2 - e^{x/3}$ en el intervalo $x\in [0,6]$.
 Utilizamos $N=60$ puntos en la grilla, con $C=25$ puntos de continuación (en círculos), 
 y $d_l=d_r=5$ (diamantes). Eligiendo $E=4$, se obtiene  $N_p = N + 1 + C + E=90$, 
-que se puede factorizar en números primos pequeños 
-de forma qué $N_p=2\times 3 \times 3 \times 5$. 
+que se puede factorizar en números primos pequeños ($N_p=2\times 3 \times 3 \times 5$). 
 En general, fijamos $N_p$ ajustando el número $E$ de forma tal 
 qué $N_p=\prod_{\gamma=1}^{F} \pi_{\gamma}$, con los factores 
 primos pequeños cumpliendo $\pi_1\leq\pi_2\leq \ldots \leq \pi_{F} \leq 5$. 
-Esto permite la utilización de las transformadas de Fourier 
-de forma eficiente.
 
 \begin{figure}[h!]
 \centering
