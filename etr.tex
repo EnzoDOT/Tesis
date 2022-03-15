@@ -460,18 +460,19 @@ con el período de la función continuada dado por $b=(N_p-1)\Delta x$.
 \subsection{Descomposición de dominio e implementación en paralelo: El método FC--DOM}
 \label{subsec:FC-DOM}
 
-Para afrontar al alto costo computacional asociado a la resolución numérica de la ETR,
-empleamos una estrategia de descomposición del dominio espacial, $\Omega$. 
-Si bien sería posible emplear estrategias similares en la variable angular, 
-estas estrategias no han mostrado ser eficientes, debido al alto costo
- que conlleva la comunicación de las diferentes direcciones $\hth$ 
- para el cálculo de la integral colisional. 
- Con el fin de realizar la descomposición del dominio espacial, 
- el dominio $\Omega$ es dividido en subdominios solapados, tales qué 
+Para afrontar el alto costo computacional asociado a la resolución numérica de la ETR,
+empleamos una estrategia de descomposición del dominio espacial $\Omega$, 
+que permite su implementación en sistemas de computación en paralelo. 
+%Si bien sería posible emplear estrategias similares en la variable angular, 
+%estas estrategias no han mostrado ser eficientes, debido al alto costo
+% que conlleva la comunicación de las diferentes direcciones $\hth$ 
+% para el cálculo de la integral colisional. 
+ Con este fin, 
+ el dominio es dividido en subdominios solapados, tales que 
  $\Omega=\cup_{s=1}^{N_{c}}\Omega_s$. 
  En el interior del dominio discretizado $\Omega$, los subdominios $\Omega_s$ se 
  superponen en cuatro puntos de la grilla numérica. 
- A cada proceso en paralelo se le asigna un subdominio $\Omega_s$, 
+ La paralelización consiste en asignar a cada proceso un subdominio $\Omega_s$
  con $N_{x,s}$ y $N_{y,s}$ puntos en cada dirección espacial, 
  siendo el número total de procesos $N_c$, típicamente el número 
  total de procesadores físicos disponibles.
@@ -479,33 +480,35 @@ estas estrategias no han mostrado ser eficientes, debido al alto costo
  \begin{figure}[h!]
   \centering
   \includegraphics[width=0.6\linewidth]{figuras/all.png}
-  \caption{a) El dominio $\Omega$ es dividido en subdominios disjuntos $\widetilde{\Omega}_s$ de forma qué 
-   $\Omega=\cup_{s=1}^{N_{c}}\widetilde{\Omega_s}$.
-   b) Cada subdominio $\widetilde{\Omega_s}$ es extendido  
-  en dos puntos (círculos grises) en cada dirección espacial, formando una descomposición en subdominios solapados $\Omega_s$, los cuales se superponen con los subdominios vecinos 
-  de forma qué $\Omega=\cup_{s=1}^{N_{c}}\Omega_s$. 
+  \caption{a) El dominio $\Omega$ es dividido en subdominios disjuntos $\widetilde{\Omega}_s$ de modo que 
+   $\Omega=\cup_{s=1}^{N_{c}}\widetilde{\Omega}_s$.
+   b) Cada subdominio $\widetilde{\Omega}_s$ es extendido  
+  en dos puntos (círculos grises) en cada dirección espacial, formando una descomposición en 
+  subdominios solapados $\Omega_s$, los cuales se superponen con los subdominios vecinos 
+  de forma que $\Omega=\cup_{s=1}^{N_{c}}\Omega_s$. 
   En esta región se recibe información de subdominios vecinos.
    c) Intercambio de información en los bordes de los subdominios solapados 
     $\Omega_s$ y $\Omega_{s-1}$. El 
-   procesador $s$ envía a su vecino $s-1$ la información del tercer y cuarto puntos de la grilla $s$, y recibe de su vecino los primeros dos puntos.}
+   procesador $s$ envía a su vecino $s-1$ la información del tercer y cuarto punto de la grilla $s$, y 
+   recibe de su vecino los primeros dos puntos.}
  \label{fig:bechange}
 \end{figure}
 
- Cada subdominio cubre un conjunto de puntos  $x_s\in[x_{\text{min},s},x_{\text{max},s}]$ 
+ Cada subdominio contiene un conjunto de puntos  $x_s\in[x_{\text{min},s},x_{\text{max},s}]$ 
  y $y_s\in [y_{\text{min},s},y_{\text{max},s}]$, con los puntos 
  en la grilla dados por $x_i=x_{\min,s}+(i-1)\Delta x$ e $y_j=y_{\min,s}+(j-1)\Delta y$. 
- Llamando  $u_{m}^k(x,y_j)=u_{m,j}^k(x)$ a la intensidad específica discretizada,
-  donde se fijó $y_j\in y_s$ para cualquier $x\in x_s$, similarmente llamamos $u_{m}^k(x_i,y)=u_{m,i}^k(y)$ 
-  para $x_i\in x_s$ fijo para cualquier $y\in y_s$. El final de cada paso temporal, 
- se realiza el intercambio de puntos entre subdominios vecinos. 
- Este intercambio de puntos se realiza para todos los bordes que no son físicos, 
+ Definimos  $u_{m}^k(x,y_j)\equiv u_{m,j}^k(x)$ la intensidad específica discretizada a tiempo $t^k$, 
+ en la dirección $\hth_m$,
+  donde se fijó $y_j\in y_s$ para cualquier $x\in x_s$. 
+  Similarmente definimos $u_{m}^k(x_i,y)\equiv u_{m,i}^k(y)$. Al final de cada paso temporal, 
+ se realiza el intercambio de puntos entre subdominios vecinos para todos los bordes que no son físicos (bordes 
+ originados por la partición), 
  para cada proceso, en cada dirección espacial, y para cada punto de la grilla 
- en esa dirección, como se ilustra en la figura fig. (\ref{fig:bechange}).
+ en esa dirección, como se ilustra en la Figura (\ref{fig:bechange}).
 
 En suma, el algoritmo que resulta de la combinación del método FC con 
 el método de ordenadas discretas (D.O.M., del inglés discrete ordinates method), y el método de propagación temporal, 
-lo denominamos método FC--DOM~\cite{Gaggioli2019}. Este algoritmo se 
-presenta en forma de pseudocódigo en el algoritmo~\eqref{algfc}.
+lo denominamos método FC--DOM~\cite{Gaggioli2019}. El pseudocódigo se presenta en el algoritmo~\eqref{algfc}.
 \begin{algorithm}[H]
 \caption{FC--DOM en paralelo}\label{algfc}
 \begin{algorithmic}[1]
@@ -533,72 +536,51 @@ presenta en forma de pseudocódigo en el algoritmo~\eqref{algfc}.
 \State  \textbf{terminar}
 \end{algorithmic}
 \end{algorithm}
-
-En la fig. (\ref{fig:scala}) se muestran los tiempos computacionales 
-normalizados obtenidos 
-para el algoritmo~\eqref{algfc} propuesto, para un 
-problema modelo, utilizando diferentes números de procesadores. 
-En esta prueba, se corrió el código implementado en MPI Fortran, 
-y compilado con el compilador intelMPI. Se utilizaron $N=2000$ 
-puntos en cada coordenada espacial, y un total de $M=16$ direcciones 
-discretas, por un total de $T=1000$ pasos temporales.  
-En todos los casos, el código en paralelo 
-fue ejecutado en varios nodos, en una supercomputadora 
-de 16 nodos, donde cada nodo contiene un procesador
-Intel Xeon E5-2630 v3 at 2.40GHz de 24 núcleos físicos 
-y 128Gb de memoria RAM por nodo. 
-Para evitar irregularidades en la aceleración paralela 
-originadas por la tecnología ``Intel turbo'', la cual 
-opera cuando se utilizan unos pocos procesadores por nodo, 
-y la cual se desactiva gradualmente a medida que se agregan procesadores 
-en una corrida, se presentan los resultados de escalabilidad 
-con tiempos normalizados con el caso de 16 procesadores 
-en un nodo como referencia. Para tener igual carga en todos los nodos, 
-se utilizaron 16 procesadores por nodos, agregando un nodo 
-estadio del cálculo, hasta completar los 256 procesadores disponibles. 
-Como se observa en la figura, el algoritmo propuesto 
-presenta \textit{escalabilidad paralela perfecta} 
-con hasta los 256 procesadores para los que fue probado.
-
+Para realizar un estudio de escalabilidad proponemos un problema típico, 
+con  $N=2000$ puntos en cada coordenada espacial $M=16$ direcciones, 
+y $T=1000$ pasos temporales. 
+Se utilizó un cluster con procesadores Intel Xeon E5-2630 v3 at 2.40GHz de 24 núcleos físicos 
+y 128Gb de memoria RAM por nodo. Esta máquina implementa la tecnología ``Intel turbo'', 
+que acelera el desempeño del procesador dependiendo de la carga de trabajo y el entorno operativo. 
+Para realizar un análisis correcto de escalabilidad, y balancear apropiadamente 
+la carga de los nodos, utilizamos 16 procesadores por nodo, 
+comparando los tiempos computacionales entre 1 y 16 nodos. 
+En la Figura \ref{fig:scala} se observan los tiempos de cómputo 
+normalizados $t^*=t/t_{16}$ con respecto al tiempo de cómputo 
+en 16 procesadores. 
+Como se observa, el algoritmo 
+propuesto presenta \textit{escalabilidad paralela perfecta} 
+hasta los 256 procesadores para los que fue probado. 
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/escalabilidad.eps}
-  \caption{Escalabilidad obtenida para el algoritmo propuesto. 
-  Los tiempos computacionales medidos en diferente cantidad 
-  de procesadores fue normalizada con respecto al tiempo computacional 
-  en 16 procesadores, $t^*=t/t_{16p}$ para 
-  el problema modelo detallado en el texto. 
-  Con 256 procesadores, la escalabilidad perfecta (en círculos rojos) 
-  genera una aceleración en el tiempo de computo en un factor $1/t^*=16$, 
-  con respecto al tiempo de computo en 16 procesadores. 
-  La escalabilidad obtenida para el algoritmo propuesto 
-  (diamantes negros) genera una aceleración $1/t^*=21.872$, dando 
- una eficiencia de $136.7\%$. 
-}
+  \caption{Estudio de escalabilidad para problema modelo. 
+  Círculos rojos: escalabilidad perfecta, para 256 procesadores $1/t^*=16$. 
+  Diamantes negros: Escalabilidad obtenida, $1/t^*=21.872$, dando 
+ una eficiencia de $136.7\%$.}
  \label{fig:scala}
 \end{figure}
 
-La razón por la cual la escalabilidad obtenida es supralineal se detalla 
-en la sección 6 de la referencia~\cite{Albin2011} en el contexto de las ecuaciones de 
-Navier-Stokes, y se debe, esencialmente, a que el costo 
-computacional $t_c$ para el cálculo de las transformadas de Fourier discretas de $N$ puntos es $t_c=\mathcal{O}(N\log(N))$.
+La razón por la cual la escalabilidad obtenida es supralineal se 
+desarrolla ampliamente en el trabajo de Albin y Bruno~\cite{Albin2011}
+(sección 6). Esencialmente, esto se debe a que el 
+las transformaciones FFT 
+poseen una complejidad computacional $\mathcal{O}(N\log(N))$.
 
 \section{Validación}
 
-Dado que los algoritmos y los códigos utilizados fueron desarrollados en 
-esta tesis, se realizaron diferentes pruebas de validación. Estas pruebas, 
-por un lado, tienen como propósito corroborar que los algoritmos 
-desarrollados presentan la convergencia esperada. 
-
-Por otra parte, se validaron los códigos con resultados experimentales 
-y soluciones analíticas reportadas en la literatura.
+Dado que los algoritmos y los códigos utilizados han sido desarrollados 
+originalmente en este trabajo, ha sido necesario realizar exhaustivas 
+pruebas de convergencia y validación. Para ello, 
+hemos corroborado nuestros resultados tanto con valores experimentales 
+como con soluciones analíticas reportadas en la literatura.
 
 \subsection{Convergencia de soluciones manufacturadas}
 \label{sec:manufacturada}
 
 Para mostrar las propiedades de convergencia del algoritmo propuesto,
-estudiamos el error generado en la propagación de un problema manufacturado.
-
+estudiamos un problema manufacturado, analizando el error generado en la propagación de 
+la solución.
 Con este fin, resolvemos el problema ETR dado por 
 \begin{equation*}
 \begin{split}
@@ -612,47 +594,32 @@ u(\x,\hat \theta',t) d\theta'+s(\x,\hth,t),  \; (\x,\hth)  \in \Omega\times S^1\
 \end{split}
 \label{eq:RTEdisp}
 \end{equation*}
-para $0\leq t \leq T$. Proponemos la solución manufacturada
+para $0\leq t \leq T$. 
+
+Proponemos la solución manufacturada
 \begin{equation*}
 u^{\text{an}}(\x,\hth,t)=e^{-(x-t)^2-(y-t)^2-\cos(\theta)^2}.
 \label{eq:RTEmansol}
 \end{equation*}
-de donde el término de la fuente $s(\x,\hth,t)$, 
+donde el término de la fuente $s(\x,\hth,t)$, 
 la condición inicial $u_0(\x,\hth,t)$ y las condiciones 
 de contorno $u_b(\x,\hth,t)$ en la ecuación~\eqref{eq:RTEdisp} 
 se obtienen, respectivamente, aplicando el operador de transporte, 
-evaluando a tiempo $t=0$ y evaluando en $\Gamma_-$ la solución 
+evaluando a tiempo $t=0$ y en $\Gamma_-$ la solución manufacturada 
 propuesta~\eqref{eq:RTEmansol}.
-
 Resolvemos el problema~\eqref{eq:RTEdisp} en un dominio cuadrado 
 $\Omega=\{ \x \in [x_{\text{min}},x_{\text{max}}]\times [y_{\text{min}},y_{\text{max}}] \}$
-donde $x_{\text{min}}=y_{\text{min}}=0$cm, $x_{\text{max}}=y_{\text{max}}=3$cm, 
-y evolucionamos la solución hasta el tiempo final $T=3$ps. Utilizamos 
-una descomposición de dominio de 8 subdominios para 
+donde $x_{\text{min}}=y_{\text{min}}=0$ cm, $x_{\text{max}}=y_{\text{max}}=3$ cm, 
+y evolucionamos la solución hasta el tiempo final $T=3$ ps. Utilizamos 
+una descomposición de 8 subdominios para 
 poder realizar estas pruebas en una PC de escritorio. 
 El coeficiente de dispersión en el medio considerado es isótropo, 
 con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
-\pagebreak
-\begin{wrapfigure}{r}{0.45\textwidth}
- \begin{subfigure}{
-  \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
- \end{subfigure}
- \begin{subfigure}{
-  \includegraphics[width=0.45\textwidth]{figuras/errdx.eps}}
- \end{subfigure}
- \begin{subfigure}{
-  \includegraphics[width=0.45\textwidth]{figuras/errdm.eps}}
- \end{subfigure}
-  \caption{Convergencia del algoritmo FC--DOM en paralelo 
-  para cada una de las variables en la ETR. La figura 
-  se muestra en escala logarítmica. Las lineas rectas discontinuas 
-  muestran la pendiente para un orden de convergencia prescripto. 
-  El algoritmo presenta convergencia espectral en la variable angular $\theta$.}
- \label{fig:convman}
-\end{wrapfigure}
+%\pagebreak
+
 Evaluamos el error máximo obtenido en todo el dominio 
 comparando el flujo escalar dado por la ecuación~\eqref{eq:photondensity} 
-obtenido numéricamente comparado con el flujo escalar analítico
+obtenido numéricamente comparado con el obtenido analíticamente
 \begin{equation*}
 \begin{split}
 \begin{aligned}
@@ -676,118 +643,69 @@ El error numérico es en general una función
 de cada una de las variables discretizadas en la ETR, 
 \ie~$\varepsilon=\varepsilon(\Delta \x, \Delta \theta, \Delta t)$. 
 Al comparar el término del error para una grilla de una dada variable, 
-el resto de las grillas numéricas permanecen fijas en un valor prescripto.
+el resto de los parámentros de discretización permanecen fijos.
+\begin{wrapfigure}{r}{0.45\textwidth}
+ \begin{subfigure}{
+  \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
+ \end{subfigure}
+ \begin{subfigure}{
+  \includegraphics[width=0.45\textwidth]{figuras/errdx.eps}}
+ \end{subfigure}
+ \begin{subfigure}{
+  \includegraphics[width=0.45\textwidth]{figuras/errdm.eps}}
+ \end{subfigure}
+  \caption{Convergencia del algoritmo FC--DOM en paralelo 
+  para cada una de las variables en la ETR. Las líneas rectas discontinuas 
+  muestran la pendiente para un orden de convergencia prescripto. }
+ \label{fig:convman}
+\end{wrapfigure}
 
 El alto orden de convergencia del algoritmo FC--DOM en paralelo 
 para la solución manufacturada propuesta se muestra en la figura~(\ref{fig:convman}). 
-Esta convergencia es la esperada para 
-los órdenes de convergencia de las aproximaciones 
-numéricas empleadas 
-en cada una de las variables involucradas. 
-\pagebreak 
-\clearpage
+Esta convergencia es la esperada dadas las aproximaciones 
+numéricas empleadas.
+%\pagebreak 
+%\clearpage
 \subsection{Comparación con resultados experimentales}
 \label{sec:resexp}
 
 En esta sección comparamos los resultados producidos por el algoritmo FC--DOM 
 con resultados experimentales obtenidos para varios 
-fantomas símiles al tejido humano, realizados por en Klose \textit{et al.}~\cite{Klose2002}. 
+medios similares al tejido humano, realizados por Klose \textit{et al.}~\cite{Klose2002}. 
 En las mediciones reportadas en dicha referencia, 
 se utilizan fantomas compuestos de resina epoxy y tinta, 
 con una concentración de monoesféras de dióxido de silicio ($\text{SiO}_2$). 
 La tinta permite ajustar la absorción óptica del fantoma, 
-mientras que las monoesféras de silicio permiten ajustar las propiedades 
-dispersivas de éste. Las propiedades ópticas del medio (los coeficiente de absorción $a(\x)$
+mientras que las monoesféras de silicio determinan su dispersión. 
+Las propiedades ópticas del medio (los coeficiente de absorción $a(\x)$
 y dispersión $b(\x)$ y el 
-factor de anisotropía $g$) fueron determinadas mediante simulaciones de Monte-Carlo, 
-y utilizando la técnica de esfera integradora, así como soluciones analíticas 
-utilizando la aproximación de difusión, y la teoría para 
-la dispersión de ondas electromagnéticas de Mie. 
-Dado que nuestro método resuelve la ETR, y no la aproximación mediante 
-la ecuación de difusión para los fotones 
-(la cual es válida lejos de las fuentes, y en medios de alta dispersión y 
-baja absorción), podemos considerar fantomas que poseen 
-regiones donde hay baja absorción y dispersión, como puede ser el fluido cerebroespinal 
-en la cabeza, o la traquea en un cuello humano en situaciones mas realistas. 
-El arreglo experimental de Klose \textit{et al.} posee 
-simetría 2D, de forma tal que es apropiado para nuestro tratamiento. 
+factor de anisotropía $g$) han sido determinadas por Klose \textit{et al.} mediante 
+diferentes métodos independientes. Estos incluyen simulaciones de Monte--Carlo, 
+la técnica de esfera integradora, aproximación de difusión, y teoría de 
+dispersión de Mie para ondas electromagnéticas. 
 
-Analizaremos dos arreglos experimentales diferentes.
- En el primero, simulamos un cubo homogéneo, de propiedades ópticas dadas.
- En el segundo experimento, la geometría del fantoma también 
+La aproximación de difusión, ampliamente utilizada en tomografía óptica para el 
+modelado de transporte de fotones en el tejido biológico, 
+es válida para medios de alta dispersión,  
+baja absorción y en regiones alejadas de las fuentes.
+Dado que nuestro método resuelve el problema ETR completo, podemos considerar adecuadamente 
+medios con baja absorción y dispersión, como puede ser el fluido cerebroespinal 
+en la cabeza, o la traquea en un cuello humano. 
+
+Analizaremos dos arreglos experimentales diferentes propuestos por Klose~\textit{et al.}. 
+Estos poseen simetría 2D, apropiada para nuestro tratamiento. 
+ En el primer experimento, se simula un cubo homogéneo, de propiedades ópticas dadas en 
+ la Tabla~\ref{tab:tabopt}.
+ En el segundo, la geometría del fantoma también 
  es cubica, pero contiene una inhomogeneidad en forma 
  de anillo cilíndrico, con agua en su interior. Esta inhomogeneidad 
  es similar a la que se encuentra en 
  el fluido cerebroespinal, y el fantoma constituye un modelo 
  simple para una cabeza humana. En ambos experimentos,
 los fantomas fueron iluminados con luz láser en el 
-infrarrojo ($\lambda = 678$ nm), en tres posiciones a lo largo del eje $x$. Se detecto la luz emergente 
-en dos de las caras de los fantomas, como se muestra en la figura~(\ref{fig:phantom})
+infrarrojo ($\lambda = 678$ nm), en tres posiciones a lo largo del eje $x$. Se detectó la luz emergente 
+en dos de las caras de los fantomas, como se muestra en la figura~(\ref{fig:phantom}).
 
-\begin{figure}[h!]
-\centering
-  \includegraphics[width=0.4\linewidth]{figuras/phantom.eps}
-   \caption{Arreglo experimental de Klose \textit{et al.}~\cite{Klose2002}. 
-   Las flechas apuntando hacia fantoma (A, B y C)  
-   muestran las tres posiciones diferentes en las que se inyectó 
-   la luz láser. Las flechas salientes muestran las posiciones de los detectores 
-   con las que se midió la radiación saliente.}
- \label{fig:phantom}
-\end{figure}
-
-El método de continuación de Fourier extiende 
-la intensidad específica en el borde del dominio, 
-permitiendo el tratamiento de condiciones de borde generales y no periódicas, 
-previniendo el surgimiento del fenómeno de Gibbs debido a la no periodicidad 
-de la función. La fuente $q(\x,\hth,t)$ y los parámetros ópticos 
-también pueden dar origen al fenómeno de Gibbs si no son 
-tratados correctamente. Por esta razón, las funciones que utilizaremos 
-en el modelado de este problema serán funciones suaves. Todas las discontinuidades pueden
-ser tratadas, dando aproximaciones arbitrariamente precisas 
-mediante la utilización de funciones suaves que presentan 
-variaciones rápidas en la región de discontinuidad (en conjunto 
-con discretizaciones capaces de resolver dichas variaciones).
-
-Dado que nuestro algoritmo resuelve el problema ETR dependiente del tiempo, 
-y que los resultados experimentales reportados por Klose \textit{et al.} 
-son independientes del tiempo, evaluaremos la corriente de fotones saliente 
-\begin{equation}
- \vec{ \mathcal{J}}_+(\x,t)=\int_{\Gamma_+} [1-f(\hth \cdot \hnu)] \hth \cdot \hnu u(\x,\hth,t) d\theta,
-\label{eq:photoncurrentsal}
-\end{equation}
-utilizando una función sigmoidea para el perfil temporal, $T(t)$,
-la cual inicialmente es cero, y suavemente da una transición 
-a uno, dando la solución independiente del tiempo a un tiempo asintótico. 
-La fuente láser vendrá modelada por la función
-\begin{equation}
-q(\x,\hth,t)=T(t)\exp \left(  -\frac{|\x-\x_s|^2}{2\sigma^2} \right)  \, ,
-\label{eq:sourceGauss}
-\end{equation}
-donde el valor de $\sigma=0.1$cm es el reportado para el experimento y $\x_s$ 
-representa la posición del láser. 
-Dado que el medio es altamente dispersivo, toda la información 
-direccional de la fuente, la cual 
-puede ser valiosa en otro tipo de experimentos, se pierde rápidamente luego de que los fotones 
-atraviesan una distancia de algunos caminos libre medio dentro del fantoma. 
-
-Se resuelve la ETR para un número de pasos temporales, 
-hasta que la solución alcanza, numéricamente, el comportamiento 
-asintótico~\cite{Bruno2010}, para el cual $\lim_{t\to \infty} \frac{\partial u}{\partial t}=0$, 
-y luego se evalúa el operador de la ecuación~\eqref{eq:photoncurrentsal} 
-para la posición de los detectores.
-Una vez  calculada la corriente de fotones salientes, se
-se realiza una normalización para ubicar la lectura 
-de los resultados experimentales (reportados en escala arbitraria) 
-en la misma escala de las lecturas obtenidas por el método FC--DOM. 
-Para las detecciones a lo largo del eje $x$ se normalizó 
-con respecto al máximo valor de cada curva. 
- Las lecturas de los detectores sobre el eje $y$ 
- se normalizaron ajustando el punto en la grilla numérica 
- que se encontró mas cerca de la posición reportada 
- para alguno de los detectores. 
- 
- En la tabla~\ref{tab:tabopt} se muestran las propiedades ópticas 
- de los fantomas utilizados.
  
  \begin{table}[h!]
 \caption{Propiedades ópticas de los fantomas}
@@ -804,15 +722,78 @@ $\mu_s$ $[cm^{-1}]$ ~~~~~~~~ & $\mu_a$ $[cm^{-1}]$ & ~~~~~~~~ $g$  ~~~~~~~~ & $n
 \end{center}
 \end{table}
 
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.4\linewidth]{figuras/phantom.eps}
+   \caption{Arreglo experimental de Klose \textit{et al.}~\cite{Klose2002}. 
+   Las flechas apuntando hacia el fantoma (A, B y C)  
+   muestran las tres posiciones diferentes en las que se inyectó 
+   la luz láser. Las flechas salientes muestran las posiciones de los detectores 
+   con las que se midió la radiación saliente.}
+ \label{fig:phantom}
+\end{figure}
+
+El método de continuación de Fourier extiende 
+la intensidad específica en el borde del dominio, 
+permitiendo el tratamiento de condiciones de borde generales y no periódicas.  
+Esto previene el surgimiento del fenómeno de Gibbs debido a la no periodicidad 
+de la función. La fuente $q(\x,\hth,t)$ y los parámetros ópticos 
+también pueden dar origen al fenómeno de Gibbs si no son 
+tratados correctamente. Los problemas numéricos que surgen 
+debido a discontinuidades son resueltos mediante aproximaciones arbitrariamente precisas 
+introduciendo funciones suaves que presentan 
+variaciones rápidas en la región de discontinuidad (en conjunto 
+con discretizaciones capaces de resolver dichas variaciones).
+
+Dado que nuestro algoritmo resuelve el problema ETR dependiente del tiempo, 
+y que los resultados experimentales reportados por Klose \textit{et al.} 
+son independientes del tiempo, evaluaremos la corriente de fotones saliente 
+\begin{equation}
+ \vec{ \mathcal{J}}_+(\x,t)=\int_{\Gamma_+} [1-f(\hth \cdot \hnu)] \hth \cdot \hnu u(\x,\hth,t) d\theta,
+\label{eq:photoncurrentsal}
+\end{equation}
+utilizando una función sigmoidea para el perfil temporal, $T(t)$, 
+que adquiere suavemente valores partiendo desde cero 
+hasta uno. La solución independiente del tiempo 
+se adquiere a un tiempo asintótico.
+La fuente láser se modela por la función
+\begin{equation}
+q(\x,\hth,t)=T(t)\exp \left(  -\frac{|\x-\x_s|^2}{2\sigma^2} \right)  \, ,
+\label{eq:sourceGauss}
+\end{equation}
+donde el valor de $\sigma=0.1$ cm es el reportado para el experimento y $\x_s$ 
+representa la posición del láser. La información direccional de la fuente 
+puede ser muy valiosa en diversos tipos de experimentos. 
+En el caso particular que analizamos, el medio es altamente dispersivo. Por lo tanto, los 
+fotones pierden rápidamente esta información 
+luego de atravesar una corta distancia (del orden del camino libre medio).
+
+Se resuelve la ETR para un número de pasos temporales, 
+hasta que la solución alcanza, numéricamente, el comportamiento 
+asintótico~\cite{Bruno2010}, para el cual $\lim_{t\to \infty} \frac{\partial u}{\partial t}=0$. 
+Luego se evalúa el operador de la ecuación~\eqref{eq:photoncurrentsal} 
+en las regiones de la superficie en $\partial \Omega$ 
+donde se ubican los detectores.
+Una vez  calculada la corriente de fotones salientes, se
+se realiza una normalización para ubicar la lectura 
+de los resultados experimentales (reportados en escala arbitraria) 
+en la misma escala que las obtenidas por el método FC--DOM. 
+Para las detecciones a lo largo del eje $x$ se normalizó 
+con respecto al máximo valor de cada curva. 
+ Las lecturas de los detectores sobre el eje $y$ 
+ se normalizaron ajustando el punto en la grilla numérica 
+ que se encontró mas cerca de la posición reportada 
+ para alguno de los detectores. 
+ 
 \subsubsection{Fantoma homogéneo}
 
 El primer arreglo experimental reportado por~\cite{Klose2002} 
 se basa en un fantoma homogéneo con los parámetros ópticos 
 dados en la tabla~\ref{tab:tabopt}. El fantoma posee un tamaño  
-de $3$cm a lo largo de los ejes $x$ e $y$. La posición del láser 
-   $\x_s$ es, para los tres casos considerados $A=(1.5,0)$ cm, $B=(0.9,0)$cm
+de $3$ cm a lo largo de los ejes $x$ e $y$. La posición del láser 
+   $\x_s$ es, para los tres casos considerados $A=(1.5,0)$ cm, $B=(0.9,0)$ cm
     y $C=(0.3,0)$ cm. En la figura~(\ref{fig:ph1timef}) se muestra 
-el flujo escalar~\eqref{eq:photondensity} para el arreglo experimental, 
+el flujo escalar~\eqref{eq:photondensity} 
 correspondiente a las tres posiciones de la fuente láser $\x_s$. 
 
 \begin{figure}[h!]
@@ -825,35 +806,36 @@ correspondiente a las tres posiciones de la fuente láser $\x_s$.
   obtenido en la simulación para el fantoma homogéneo. 
   Las tres figuras muestran los resultados obtenidos 
   para las fuentes ubicadas en A (izquierda), B (centro) y C (derecha). 
-  Debido al decaimiento exponencial inherente a la solución, la figura se presenta en escala logarítmica para apreciar los detalles.}
+  Debido al decaimiento exponencial inherente a la solución, 
+  la figura se presenta en escala logarítmica para apreciar los detalles.}
 \label{fig:ph1timef}
 \end{figure}
 Como puede apreciarse en la figura, el flujo escalar para el caso A 
 es simétrico con respecto al eje vertical situado en la posición 
 de la fuente, pero el sistema pierde esta propiedad cuando la 
 posición de la fuente se ubica más cerca de los bordes, 
-dando lugar a reflexiones en el borde que afectan la intensidad 
+dando lugar a reflexiones que afectan la intensidad 
 de la luz con una dependencia angular particular.
 
 El flujo de fotones que llegan a los detectores, ubicados en el borde $\partial \Omega$ 
 del dominio, se obtuvo mediante la ecuación~\eqref{eq:photoncurrentsal}. 
-Los resultados se muestran en la figura~(\ref{fig:fluxph1}), 
+Los resultados se muestran en la Figura~(\ref{fig:fluxph1}), 
 para los 28 detectores ubicados en el borde a lo largo del eje $x$ (izquierda) 
 y para los 28 detectores en la dirección $y$ a la derecha. 
-Se observa un acuerdo excelente entre los resultados simulados (lineas) 
+Se observa un acuerdo excelente entre los resultados simulados (líneas) 
 y los datos experimentales (en símbolos).  El máximo 
 flujo de fotones salientes $\mathcal{J}_+$ en los experimentos B, 
 y particularmente en el C, se encuentran desviados con respecto a la posición 
-de la fuente láser. Esto puede explicarse si se considera la radiación 
+de la fuente láser. Esto puede explicarse considerando la radiación 
 que está siendo reflejada y que escapa a través de la superficie de la izquierda. 
 A medida que la fuente se acerca más al borde, el ángulo de incidencia de la 
 radiación con respecto a la normal de la superficie aumenta. Por lo tanto, 
 más radiación resulta reflejada desde puntos cercanos a la superficie, 
-los cuales se propagan hacia la derecha en el interior del medio participante, 
+propagandose hacia el interior del medio participante, 
 contribuyendo al máximo. También se espera que la contribución de fotones dispersados 
 por el medio desde la región a la derecha sea relativamente mayor 
-que la radiación dispersada desde la región izquierda, ya que la radiación 
-dispersada en esta última tiende a escapar por el borde de la izquierda. 
+que desde la izquierda, ya que la radiación 
+dispersada en esta última tiende a escapar por el borde. 
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.48\linewidth]{figuras/kloseph1x.eps}
@@ -870,25 +852,22 @@ en el marco de la teoría ETR independiente del tiempo.
 
 \subsubsection{Fantoma inhomogéneo}
 
-El segundo fantoma, el cual contiene una región de ``vacío'' en forma de anillo, 
-rellena de agua de diámetro $d=2,8$cm, en donde el coeficiente de absorción 
+El segundo fantoma contiene una región de ``vacío'' en forma de anillo, 
+rellena de agua, de diámetro $d=2,8$ cm, en donde el coeficiente de absorción 
 y dispersión están dados por $\mu_a=\mu_s=0$. En el resto del medio, 
 se consideran los parámetros ópticos de la tabla~\ref{tab:tabopt}
-
-Las dimensiones de este fantoma a lo largo del eje $x$ e $y$ es de $4$cm.
+Las dimensiones de este fantoma a lo largo del eje $x$ e $y$ es de $4$ cm.
 Se realizaron simulaciones para tres experimentos, de acuerdo a las posiciones 
 $\x_s$ de la fuente $A=(2.0,0)$ cm, $B=(1.2,0)$ cm, 
 y $C=(0.4,0)$ cm.
-
-Para evitar el deterioro dela convergencia del método por discontinuidades 
-en los coeficientes, las discontinuidades en los parámetros ópticos del medio 
+Para evitar el deterioro de la convergencia del método, las discontinuidades
+ en los parámetros ópticos del medio 
 deben ser evitadas. De otra forma, el fenómeno de Gibbs deterioraría 
 la precisión de los cálculos. Por esta razón, implementamos una aproximación 
 suave a los coeficientes, haciendo uso de la función ventana introducida 
 por Bruno \textit{et al}.~\cite{Bruno2014a} en otro contexto. 
-Esta función ventana provee una transición suave hacia la región de 
-vacío, previniendo el surgimiento de las oscilaciones debido al 
-fenómeno de Gibbs. 
+Esta función provee una transición suave hacia la región de 
+vacío.
 En la figura~(\ref{fig:scattcoef}), se muestra una representación de los 
 parámetros ópticos utilizados para el fantoma inhomogéneo, 
 donde puede observarse la transición suave a la inhomogeneidad 
@@ -896,12 +875,11 @@ en forma de anillo.
  \begin{figure}[h!]
 \centering
   \includegraphics[width=0.35\linewidth]{figuras/sigs.eps}
-  \caption{Coeficiente de dispersión para el fantoma inhomogeneo, c
-  on región de vacío en forma de anillo. Dentro de esta región, 
-  los parámetros ópticos dan una transición a  $\mu_a=\mu_s=0$.}
+  \caption{Coeficiente de dispersión para el fantoma inhomogeneo, 
+  con región de vacío en forma de anillo donde  $\mu_a=\mu_s=0$.}
  \label{fig:scattcoef}
 \end{figure}
-El flujo escalar para el fantoma inhomogeneo se muestra en la fig.~(\ref{fig:ph2timef}). 
+El flujo escalar para el fantoma inhomogéneo se muestra en la Fig.~(\ref{fig:ph2timef}). 
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.32\linewidth]{figuras/ph2A.eps}
@@ -911,23 +889,22 @@ El flujo escalar para el fantoma inhomogeneo se muestra en la fig.~(\ref{fig:ph2
   obtenido en las simulaciones para el fantoma inhomogéneo. A (izquierda), B (centro) y C (derecha).}
  \label{fig:ph2timef}
 \end{figure}
-Estos resultados muestran características similares a los cálculos 
-para el fantoma homogéneo, donde se destaca el efecto de la región de vacío. 
-En esta región, los fotones viajan libremente, característica 
-no puede ser capturada mediante la aproximación de difusión.
-
-El flujo de fotones llegando a los 38 detectores ubicados en la frontera del 
+Estos resultados muestran claramente el efecto de la región de vacío. 
+En esta región, los fotones viajan libremente. Esta característica 
+implica que este problema no puede ser correctamente resuelto 
+mediante la aproximación de difusión.
+El flujo de fotones que llegan a los 38 detectores ubicados en la frontera del 
 dominio se muestra en la figura~(\ref{fig:fluxph2}). 
 Se observa un buen acuerdo entre teoría y experimento, aunque 
 con mayores desviaciones respecto al caso del fantoma homogéneo. 
-Estas desviaciones pueden explicarse en el hecho de que 
+Estas desviaciones pueden explicarse por el hecho de que 
 en nuestras simulaciones no estamos teniendo en cuenta la reflexión 
-de Fresnel que ocurre en la interface del anillo cilíndico, 
+de Fresnel que ocurre en la interface del anillo cilíndrico, 
 lo cual requeriría de un tratamiento especial~\cite{Bal2006}. 
 
 La presencia de regiones de vacío, como la que se encuentra en el 
 fluido cerebroespinal en la cabeza, o entre órganos en el cuerpo 
---el fluido sinovial en las artículaciones~\cite{Netz2001}, 
+--el fluido sinovial en las articulaciones~\cite{Netz2001}, 
 o la traquea en el cuello humano~\cite{Fujii2016}--, 
 requiere del uso de la ETR como modelo físico, ya que la 
 aproximación de difusión de fotones no es apropiada en este régimen de transporte. 
@@ -937,80 +914,75 @@ aproximación de difusión de fotones no es apropiada en este régimen de transp
   \includegraphics[width=0.48\linewidth]{figuras/ph2y.eps}
   \caption{Radiación transmitida medida por Klose~\cite{Klose2002} (símbolos),
   y radiación obtenida mediante las simulaciones FC--DOM, para 
-  el fantoma inhomogéneo (en líneas).}
+  el fantoma inhomogéneo (líneas).}
  \label{fig:fluxph2}
 \end{figure}
-Este experimento, como el previo, también fue simulado por Klose {\it et al.} 
-\cite{Klose2002} mediante uso de diferencias finitas utilizando la ETR 
+Tanto este experimento como el previo, han sido simulados por Klose {\it et al.} 
+\cite{Klose2002} mediante el uso de diferencias finitas, utilizando la ETR 
 independiente del tiempo.
 
 \subsection{El fenómeno de rayos}
 \label{subsec:rayeff}
 En esta sección presentamos el último caso independiente del tiempo 
-que trataremos en esta tésis, que concierne a un 
-fenómeno númerico importante en la literatura 
-de aproximaciones numéricas a la ETR mediante el método 
-de ordenadas discretas~\cite{Lewis1984}. 
-Para esto, comparamos los resultados FC--DOM con un caso 
-de referencia ampliamente utilizado en transferencia radiativa, 
-que sirve como prueba para lo que se denomina el fenómeno 
-de rayos. Este problema esta diseñado para el estudio del fenómeno de rayos, 
+que trataremos en esta tesis. Este concierne a un 
+fenómeno importante que surge en las aproximaciones numéricas 
+que utilizan métodos de ordenadas discretas para resolver la ETR~\cite{Lewis1984}. 
+Se trata del fenómeno de rayos, 
 el cual se manifiesta esencialmente en medios de baja dispersión. 
-Como veremos, dadas las dimensiones de este problema, 
-los fotones no llegarán a sufrir suficientes eventos de colisión para mitigar este fenómeno numérico, por lo cual el fenómeno de rayos podrá ser analizado.
-
 El fenómeno de rayos se origina debido a la discretización 
 de la variable angular $\hth$. Debido a dicha discretización, 
 las direcciones posibles para la propagación de los fotones 
-se encuentra limitada a las $M$ direcciones dadas para la cuadratura 
-numérica, $\hth_m$. Cuando existen fuentes localizadas, 
+se encuentra limitada. Cuando existen fuentes localizadas, 
 se originan variaciones rápidas en la intensidad específica 
-cerca de las fuentes. El flujo esta restringido a propagarse 
+cerca de estas. La propagación del flujo queda restringida 
 en las direcciones discretas, dando origen a oscilaciones 
 espurias, conocidas como efecto de rayos. 
 
-Reproducimos el caso reportado por Crosbie y Schrenker~\cite{Crosbie1984}, 
+Analizamos un problema  
+de referencia ampliamente utilizado, 
+diseñado específicamente para estudiar este efecto numérico.
+Dadas las dimensiones del mismo, 
+los fotones no llegarán a sufrir suficientes eventos de colisión.
+Reproducimos 
+el caso reportado por Crosbie y Schrenker~\cite{Crosbie1984}, 
 el cual proporciona flujos considerados exactos~\cite{Ramankutty1997,tagnekamdem2015}, 
-utilizando el método FC--DOM descripto anteriormente, para soluciones independientes 
+utilizando el método FC--DOM para soluciones independientes 
 del tiempo obtenidas por relajación del caso dependiente del tiempo. 
 
 Consideramos un dominio bidimensional cuadrado, de lado unitario, 
-el cual contiene un medio puramente dispersivo (sin absorción) 
+que contiene un medio puramente dispersivo (sin absorción) 
 con $b(\x)=1$. La dispersión considerada es isótropa ($g=0$). 
 La radiación incide de manera uniforme sobre la superficie inferior del medio. 
 El resto de los bordes presentan condiciones de contorno de vacío ($n_{\Omega}=n_{s}$ 
-de donde $f(\hth \cdot \hnu)=0$). El observable considerado es la componente en $y$ de la corriente de fotones~\eqref{eq:photoncurrent} $\mathcal{J}_y(x,y=1)$. En la figura~(\ref{fig:fluxph3}) 
-se presentan los resultados obtenidos (en lineas), y los valores de referencia (en símbolos). 
-Se observa que el efecto de rayos se presenta para esta prueba para discretizaciones 
+de donde $f(\hth \cdot \hnu)=0$). El observable considerado es la componente en
+ $y$ de la corriente de fotones~\eqref{eq:photoncurrent} $\mathcal{J}_y(x,y=1)$. En la Figura~(\ref{fig:fluxph3}) 
+se presentan los resultados obtenidos (líneas), y los valores de referencia (símbolos). 
+Se observa que el efecto de rayos se manifiesta en discretizaciones 
 relativamente gruesas de la variable angular, y disminuye al aumentar 
-el número de direcciones. Debido a que el fenómeno de rayos se origina 
-por la discretización de la variable angular, el método FC--DOM 
-no resuelve este fenómeno. 
+el número de direcciones. 
+El método de continuación de Fourier sólo trata 
+al operador diferencial en las variables espaciales, independientemente 
+de la discretización angular. Por lo tanto, no 
+resuelve el fenómeno de rayos y otras estrategias deben ser consideradas 
+para solucionarlo.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.48\linewidth]{figuras/raycurrent.eps}\\
   \caption{
-Corriente de fotones exacta en la dirección $y$, $\mathcal{J}_y(x)$ (en circulos), 
-y valores simulados obtenidos por el método FC--DOM, 
-para un número variable de direcciones: M=32,64,128 (lineas). El gráfico 
+Círculos: corriente de fotones exacta en la dirección $y$, $\mathcal{J}_y(x)$. 
+Líneas: valores simulados obtenidos por el método FC--DOM, 
+para un número variable de direcciones: $M=32,64,128$. El gráfico 
 se presenta en unidades arbitrarias (a.u).}
  \label{fig:fluxph3}
 \end{figure}
 
 En medios altamente dispersivos, el comportamiento singular 
 que origina el fenómeno de rayos resulta rápidamente atenuado lejos 
-de la fuente, debido a que la radiación directa que origina el fenómeno 
+de la fuente, debido a que la radiación directa 
 (los fotones balísticos que no han sufrido dispersión) decaen rápidamente
-~\cite{Ramankutty1997}, con la radiación siendo redistribuida en todas las 
-direcciones. El método de continuación de Fourier sólo trata 
-el operador diferencial en las variables espaciales de la ETR, independientemente 
-de la discretización angular. Otras estrategias deben ser consideradas 
-para solucionar el fenómeno de rayos cuando es necesario. Debido 
-a que el tejido biológico es altamente dispersivo, en general 
-en tomografía óptica el medio participante presenta alta dispersión, 
-por lo cual el fenómeno de rayos no suele ser un problema (aún 
-en presencia de regiones de vacío, cuando se encuentran rodeadas de un 
-medio altamente dispersivo).
+~\cite{Ramankutty1997}, redistribuyendo la radiación en todas las 
+direcciones. Este fenómeno no suele ser un problema en tejidos biológicos, 
+ya que estos son altamente dispersivos.
 
 \subsection{Comparación con solución analítica}
 
