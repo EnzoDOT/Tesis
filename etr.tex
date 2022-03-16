@@ -91,7 +91,17 @@ donde $g \in [-1,1]$ caracteriza la anisotropía en los procesos de dispersión:
 los fotones emergen en la misma (opuesta) dirección de 
 incidencia. En el caso de dispersión isótropa, 
 donde los fotones emergen de los eventos de colisión con igual probabilidad 
-en cualquier dirección, se tiene $ g = 0 $. En general se exige que la función de fase 
+en cualquier dirección, se tiene $ g = 0 $ (ver Fig.~\ref{fig:Henyey--Greenstein}). 
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/henyey.eps}
+  \caption{Función de fase de Henyey--Greenstein, $\eta(v)$, 
+  con $v=\hth \cdot \hth'$, para distintos valores del factor de anisotropía, $g$. Para $g\to 1$ 
+  y $g\to -1$ la función de fase tiende a una distribución delta de Dirac.}
+ \label{fig:Henyey--Greenstein}
+\end{figure}
+
+En general se exige que la función de fase 
 esté normalizada, de forma tal que
 \begin{equation}
 \int_{S^1}\eta(\hth\cdot\hth') d\theta=1 \,,
@@ -713,7 +723,7 @@ en dos de las caras de los fantomas, como se muestra en la figura~(\ref{fig:phan
 \begin{center}
 \begin{tabular}{cccc}
 \hline
-$\mu_s$ $[cm^{-1}]$ ~~~~~~~~ & $\mu_a$ $[cm^{-1}]$ & ~~~~~~~~ $g$  ~~~~~~~~ & $n_{\Omega}$ \\
+$b$ $[cm^{-1}]$ ~~~~~~~~ & $a$ $[cm^{-1}]$ & ~~~~~~~~ $g$  ~~~~~~~~ & $n_{\Omega}$ \\
 \hline
 58 ~~~~~~~~ & 0.35 & ~~~~~~~~  0.8 ~~~~~~~~ & 1.56 \\
 \hline
@@ -854,7 +864,7 @@ en el marco de la teoría ETR independiente del tiempo.
 
 El segundo fantoma contiene una región de ``vacío'' en forma de anillo, 
 rellena de agua, de diámetro $d=2,8$ cm, en donde el coeficiente de absorción 
-y dispersión están dados por $\mu_a=\mu_s=0$. En el resto del medio, 
+y dispersión están dados por $a(\x)=b(\x)=0$. En el resto del medio, 
 se consideran los parámetros ópticos de la tabla~\ref{tab:tabopt}
 Las dimensiones de este fantoma a lo largo del eje $x$ e $y$ es de $4$ cm.
 Se realizaron simulaciones para tres experimentos, de acuerdo a las posiciones 
@@ -876,7 +886,7 @@ en forma de anillo.
 \centering
   \includegraphics[width=0.35\linewidth]{figuras/sigs.eps}
   \caption{Coeficiente de dispersión para el fantoma inhomogeneo, 
-  con región de vacío en forma de anillo donde  $\mu_a=\mu_s=0$.}
+  con región de vacío en forma de anillo donde  $a(\x)=b(\x)=0$.}
  \label{fig:scattcoef}
 \end{figure}
 El flujo escalar para el fantoma inhomogéneo se muestra en la Fig.~(\ref{fig:ph2timef}). 
@@ -990,11 +1000,11 @@ En esta sección validamos nuestros métodos computacionales
 dependientes del tiempo calculando el flujo escalar, 
 y comparándolo con la solución analítica dada por Paasschens~\cite{Paasschens1997} 
 para una fuente puntual en un medio infinito. 
-En el problema presentado por Paasschens, un medio bidimensional infinito, 
+En este problema, un medio bidimensional infinito, 
 isótropo y homogéneo es iluminado por una fuente puntual isótropa
 ubicada en el origen de coordenadas $s(\x,\hth,t)=\delta(\x)\delta(t)$.
 
-La solución para este problema es
+El flujo escalar resultante en este caso es 
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -1006,21 +1016,20 @@ La solución para este problema es
 \end{equation}
 donde $H(x)$ es la función escalón de Heaviside, 
 y se ha hecho uso del coeficiente de dispersión reducido $b'=(1-g)b$, 
-el cual aproxima la anisotropía en la dispersión manteniendo una 
-función de fase isótropa.
+el cual aproxima la anisotropía en la dispersión.
+Para esta simulación empleamos un fantoma homogéneo con las propiedades ópticas 
+dadas en la Tabla~\ref{tab:tabopt}, de donde $c=0.019$ cm/ps, 
+utilizando el coeficiente de dispersión reducido con $g=0.8$, y función de fase isótropa (con $g=0$ en la Ec.~\eqref{eq:Henyey-Greeinstein}). 
 
-Para este cálculo, simulamos un fantoma homogéneo con las propiedades ópticas 
-dadas en la tabla~\ref{tab:tabopt}, de donde $c=0.019$cm/ps.
 
 El primer término en la expresión~\eqref{eq:Paasschenssc} 
 representa el pico balístico~\cite{Paasschens1997}, originado 
-por los fotones que no han sufrido dispersión, y que arriban al punto 
-a una distancia $r$ de la fuente en un tiempo $t=r/c$.
-
+por los fotones que no han sufrido dispersión, y que arriban a una distancia $r$
+ de la fuente en un tiempo $t=r/c$.
 En el caso de medios altamente dispersivos, este término resulta rápidamente atenuado 
 a unos pocos milímetros de la fuente. Para las simulaciones numéricas 
 empleamos condiciones de borde de vacío, en las cuales el flujo 
-entrando a través de la superficie del dominio $\partial \Omega$ es nulo 
+entrante a través de la superficie del dominio $\partial \Omega$ es nulo 
 \begin{equation}
 u(\x,\hth,t)=0 \;\;\; \text{en}\; \Gamma_{-} \, .
 \label{eq:vacuumbc}
@@ -1029,10 +1038,10 @@ A los efectos prácticos, para evitar inestabilidades originadas
 por el fenómeno de Gibbs, y demandas computacionales significativas, 
 la función delta de Dirac de la fuente es aproximada con una función Gaussiana.
 
-Además, comparamos los resultados numéricos obtenidos por el método FC--DOM (FC)
-con una aproximación al gradiente espacial obtenido por el método ''upwind´´ 
-de diferencias finitas de tercer orden (FD) utilizado en \cite{Fujii2014}. 
-En la figura~ \ref{fig:analytic1} se muestran los resultados obtenidos por ambos métodos 
+Comparamos los resultados numéricos obtenidos por el método FC--DOM (FC)
+con una aproximación al gradiente espacial obtenido por el método {\em upwind} 
+de diferencias finitas de tercer orden (FD) utilizado en~\cite{Fujii2014}. 
+En la figura~\ref{fig:analytic1} se muestran los resultados obtenidos por ambos métodos 
 junto con la solución analítica. En ambos casos el acuerdo es excelente.
 
  \begin{figure}[h]
@@ -1040,13 +1049,13 @@ junto con la solución analítica. En ambos casos el acuerdo es excelente.
   \includegraphics[width=0.48\linewidth]{figuras/analytic1.eps}
   \caption{Solución analítica ec.~\eqref{eq:Paasschenssc}, 
   y soluciones numéricas obtenidas por el método FC--DOM (FC) 
-  y FD--DOM (FD) para un medio homogéneo ``infinito'' iluminado 
+  y FD--DOM (FD) para un medio homogéneo infinito iluminado 
   por un pulso puntual.}
  \label{fig:analytic1}
 \end{figure}
  
-Para dar una idea cuantitativa de la convergencia obtenida para el método 
-FC en comparación con el método de diferencias finitas empleado, 
+Para dar una idea cuantitativa de la convergencia obtenida por el método 
+FC en comparación con el método de diferencias finitas, 
 definimos el error con respecto a la solución analítica cómo
 \begin{equation}
 \Delta \phi(r)= 
@@ -1055,24 +1064,23 @@ definimos el error con respecto a la solución analítica cómo
 {\int_{t_0}^{t_f} \phi^a(r,t)^2 \, dt } 
 } \, , 
 \end{equation}
-donde $\phi^a(r,t)$ es el flujo escalar analítico~\eqref{eq:photondensity}, 
+donde $\phi^a(r,t)$ es el flujo escalar analítico~\eqref{eq:Paasschenssc}, 
 y $\phi^n(r,t)$ son los flujos escalares obtenidos a partir de las 
-simulaciones numéricas, con los métodos FC y FD. 
-Utilizamos un tiempo inicial $t_0=70$ps y un tiempo final 
-$t_f=400$ps. El tiempo inicial es elegido de forma tal que el pico balístico 
-ya paso el punto de observación $r$, evitando así el comportamiento 
-singular del mismo. El tiempo final es elegido de forma tal 
+simulaciones numéricas (Ec.~\eqref{eq:photondensity}), con los métodos FC y FD. 
+Utilizamos un tiempo inicial $t_0=70$ ps y un tiempo final 
+$t_f=400$ ps. El tiempo inicial es elegido de forma tal que el pico balístico 
+ya haya pasado por el punto de observación $r$, evitando así el comportamiento 
+singular del mismo. El tiempo final es elegido en forma tal 
 de evitar efectos de borde. En contraste con el acuerdo 
 cualitativo mostrado en la figura~\ref{fig:analytic1}, 
-los errores furon calculados en este caso sin normalización, 
-y en lugar de utilizar la función Gaussiana como aproximación, 
-la solución analítica (ec.~(26) en la referencia~\cite{Paasschens1997}) 
-a $t=t_0$ fue utilizada como condición inicial para evolucionar temporalmente 
-la solución hasta el tiempo final $t_f$. 
-Este procedimiento da una aproximación exacta a la solución a $t=t_0$, 
+los errores fueron calculados en este caso sin normalización. 
+En lugar de utilizar la función Gaussiana como aproximación a la delta de Dirac, 
+se utilizó la solución analítica (Ec.~(26) en la referencia~\cite{Paasschens1997}) 
+a $t=t_0$ como condición inicial. 
+De esta manera, la solución es exacta a $t=t_0$, 
 evitando errores numéricos asociados al comportamiento singular de la función 
 delta de Dirac. 
-Consideramos el error $\Delta \phi (r,t)$, con $r=1.27$cm desde la fuente. 
+Consideramos el error $\Delta \phi (r,t)$, con $r=1.27$ cm desde la fuente. 
 En la tabla~\ref{tab:convFCanalytic} mostramos los errores producidos por los métodos FC y FD 
 para una simulación utilizando $M=16$ direcciones discretas, con $T=3.3\times 10^5$ 
 pasos temporales, y un número variable de puntos en las coordenadas espaciales, 
@@ -1094,92 +1102,77 @@ con $\Delta =\Delta x =\Delta y$.
 \label{tab:convFCanalytic}
 \end{center}
 \end{table}
-La tabla~\ref{tab:convFCanalytic} muestra claramente que el error obtenido 
-del uso del método FC es significativamente menor al obtenido mediante el método FD, 
-en órdenes de magnitud, y para todos los valores de $N$ probados. 
-Esto puede explicarse en el hecho de que el método FC, a diferencia de 
-los métodos de diferencias finitas y elementos finitos, es un método que 
-por ser espectral, presenta un error de dispersión despreciable.
+La Tabla~\ref{tab:convFCanalytic} muestra claramente que el error obtenido 
+usando el método FC es significativamente menor al obtenido mediante el método FD, 
+para todos los valores de $N$ probados. 
+Esto puede explicarse por el hecho de que el método FC, a diferencia de 
+diferencias finitas y elementos finitos, es un método espectral que presenta un error 
+de dispersión despreciable.
 
 \section{Existencia de capa límite}
 \label{sec:blayer}
 En secciones previas demostramos el alto órden de convergencia numérica 
-del método FC--DOM propuesto para el caso de soluciones manufacturadas.
-
-La solución manufacturada que utilizamos en la sección~\ref{sec:manufacturada}
+del método FC--DOM para el caso de un problema manufacturado.
+La solución propuesta utilizada en la sección~\ref{sec:manufacturada}
 es suave, y no presenta gradientes significativos en ninguna de sus variables. 
 Los teoremas de convergencia para los métodos numéricos exigen, en general,  
-ciertas condiciones de regularidad de las soluciones subyacentes que se intentan aproximar. Cuando las soluciones, 
-o sus derivadas, no son continuas, los métodos no presentaran el órden 
-de convergencia deseado. El orden de convergencia de los métodos numéricos 
-depende, en general, de la regularidad de la solución y sus derivadas. En particular, en esta sección estudiaremos 
-una estructura de capa límite~\cite{Gaggioli2021} que existe de forma casi ubicua en las soluciones 
-a la ecuación ETR, que no había sido previamente detallada en la bibliografía, 
-y que representa una dificultad para la solución numérica de la ETR con alta precisión.
-En esta sección nos valdremos de la versión en una única dimensión espacial de la ETR, 
-para el caso independiente del tiempo. 
-Esto se corresponde a problemas de tres dimensiones con simetría de traslación en dos 
-de las variables espaciales. El modelo en una dimensión independiente del tiempo representa el caso 
-más simple para el estudio de la capa límite, y análisis que realizaremos
-se aplica a los casos multidimensionales en el dominio temporal. 
-
-El contexto de esta sección será ligeramente diferente al de secciones previas, 
-ya que abundará en referencias bibliográficas en el contexto 
-del análisis de transporte de neutrones. La razón de ello 
-es que en el análisis realizado de la bibliografía, encontramos 
-que las escasas menciones que se hacen a esta estructura de capa límite, 
-que a nuestro criterio no había sido correctamente descripta ni detallada, 
-son en el contexto de transporte de neutrones. Esta estructura 
+que las soluciones continuas subyacentes que se intentan aproximar cumplan 
+ciertas condiciones de regularidad. Discontinuidades en las soluciones 
+o en sus derivadas, degredan el orden de convergencia.
+En particular, en esta Sección estudiaremos 
+una estructura de capa límite~\cite{Gaggioli2021} que existe en forma casi ubicua en las soluciones 
+a la ecuación ETR. De acuerdo a la teoría de ecuaciones diferenciales, 
+las capa límite se manifiestan en 
+regiones  pequeñas donde las soluciones 
+presentan variaciones rápidas. Matemáticamente, estas estructuras 
+aparecen en las soluciones de las ecuaciones 
+diferenciales cuando la derivada de mayor orden 
+viene multiplicada por un parámetro 
+pequeño~\cite[Cap. 9]{Bender1999}.
+La presencia de la capa límite degrada considerablemente el orden de convergencia. 
+Sólo pueden obtenerse soluciones precisas con enormes esfuerzos computacionales. 
+ Este es un fenómeno novedoso que no 
+se encuentra detallado en la bibliografía.  La estructura 
 de capa límite ayuda a explicar problemas numéricos reportados en la bibliografía 
-a lo largo de décadas
+a lo largo de décadas~\cite{Case1967,Lewis1984,Petrovic1996,Bal2001,Hunter2015}  
 (en particular, las oscilaciones que ocurren en la llamada 
-``discretización de diamante''), fenómeno numérico el cual, a nuestro 
+``discretización de diamante''), fenómeno numérico que, a nuestro 
 criterio, no había sido correctamente comprendido hasta ahora.
 
-Si bien el desarrollo de métodos numéricos de alto órden de 
-convergencia para la ecuación de transporte en problemas más 
-generales de varias dimensiones para los casos más generales 
-escapa al alcance de esta tesis, nuestro trabajo 
-sienta los cimientos para el desarrollo de métodos numéricos 
-altamente eficiente, como lo demostraremos para el caso 
-de una dimensión espacial en el dominio temporal. El desarrollo 
-de métodos numéricos eficientes de las mismas características para los casos 
-multidimensionales requiere de métodos sofisticados como 
-los elaborados en el contexto de las ecuaciones de Navier-Stokes~\cite{Bruno2019}, 
-ya que requieren de métodos de evolución temporal implícitos, por las limitaciones 
-que impone la condición de Courant–Friedrichs–Lewy al resolver con grillas apropiadas 
-estas capa límite de naturaleza exponencial. Debido a la multidimensionalidad 
-de la ETR, la implementación de métodos de evolución temporal implícitos 
-pueden resultar sumamente costosos, y se requiere de estrategias 
-sumamente eficientes para su implementación. Por este motivo, 
-en esta sección nos límitamos al caso 1D, teniendo en cuenta que el mismo 
-análisis aplica al caso multidimensional. 
 
+La capa límite impone el uso de grillas numéricas densas. 
+Debido a la condición de Courant–Friedrichs–Lewy, para evitar cálculos 
+extremadamentes costosos y poder utilizar pasos temporales razonables, 
+se deben utilizar métodos de evolución temporal implícitos. 
+El desarrollo 
+de métodos numéricos eficientes para los casos 
+multidimensionales exige de estrategias sofisticadas~\cite{Bruno2019}. 
+Para facilitar la descripción y el análisis 
+de este fenómeno, en esta Sección trabajaremos con una única dimensión espacial. 
+Esto se corresponde a problemas de tres dimensiones con simetría de traslación en dos 
+de las variables espaciales. 
+Las conclusiones que se obtienen 
+de este análisis son generales, y se extienden naturalmente a problemas multidimensionales 
+y en el dominio temporal. Nuestro trabajo 
+sienta los cimientos para el desarrollo de métodos numéricos 
+altamente eficientes en casos generales.
 
 Como se mencionó anteriormente, la ETR es una ecuación de Boltzmann linearizada, 
-la cual provee de un modelo general para el transporte de partículas neutras, 
-que no se limita al transporte de fotones, si no que incluye el caso de 
-transporte de neutrones, la cual es utilizada en el modelado 
-para el diseño y desarrollo de reactores nucleares entre otras disciplinas 
+que provee un modelo general para el transporte de partículas neutras. 
+No se limita al transporte de fotones, sino que incluye el caso de 
+de neutrones. Esta es comunmente utilizada 
+para el diseño y desarrollo de reactores nucleares, entre otras aplicaciones~
 \cite{Chandrasekhar1960,Case1967,Lewis1984,Petrovic1996,Hunter2015,Barichello2016,Hu2020}.  
-En esta sección identificamos y caracterizamos a una capa límite 
-que, a pesar de presentarse \textit{e.g.}~en sistemas de autofunciones 
-en problemas unidimensionales de transporte~\cite[Cap. 4]{Case1967}, 
-no ha sido correctamente descripta previamente en la literatura. 
-Los problemas numéricos que surgen al intentar resolver 
-numéricamente la ETR son materia de una basta investigación 
-y discusión en la literatura~\cite{Case1967,Lewis1984,Petrovic1996,Bal2001,Hunter2015} 
-que se mantiene vigente. 
+Dado que las escasas menciones que se hacen a la estructura de capa límite 
+pertenecen al área de transporte de neutrones, serán frecuentes las referencias 
+bibliográficas en dicha área.
 
-Esta estructura de capa límite presenta transiciones abruptas 
-en las soluciones a la ETR, con gradientes de carácter exponencial 
-que se dan en regiones cercanas a los bordes, para las direcciones 
-entrantes que se aproximan a la dirección paralela al borde. 
-Físicamente, esto se origina debido a que para dichas direcciones, 
-las partículas atraviesan caminos geométricos relativamente grandes 
-hacia el interior del dominio, lo que puede originar tanto decaímientos 
-como crecimientos exponenciales en la intensidad específica en dichas direcciones, 
-dependiendo de la naturaleza del problema.
+La capa límite se manifiesta como transiciones abruptas de 
+ carácter exponencial, que se dan en regiones cercanas a los bordes. 
+Físicamente, este fenómeno se origina debido a que para las direcciones entrantes paralelas 
+al borde, las partículas atraviesan caminos geométricos relativamente grandes 
+hacia el interior del dominio. Esto puede originar tanto decaimientos 
+como crecimientos exponenciales en la intensidad específica.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/geom.pdf}
@@ -1187,7 +1180,7 @@ dependiendo de la naturaleza del problema.
  \label{fig:parallelgeom}
 \end{figure}
 La ecuación ETR independiente del tiempo, en una dimensión espacial 
-modela el transporte en una geometría plano paralela descripta en la 
+modela el transporte en una geometría plana paralela descripta en la 
 figura~\ref{fig:parallelgeom}. Por simplicidad, consideramos 
 el caso isótropo, con condiciones de borde de Fresnel
 \begin{equation}
@@ -1206,20 +1199,22 @@ borde de Fresnel modelan la reflexión de las partículas en el borde,
 donde $\xi_R=-\xi$ representa el coseno de la dirección reflejada 
 y $\mathcal{R}(\xi)$ es el coeficiente de Fresnel correspondiente~\cite{Born1999}.
 
+
 Dado que el coeficiente $\xi$ que acompaña a la derivada de mayor 
 orden en~\eqref{eq:transp1d} tiende a cero cuando $\theta \to \pi/2$, 
 se espera que ocurra una capa límite que presente variaciones rápidas 
 en la solución $u(x,\xi)$ para tales direcciones, y para valores 
-de $x$ en regiones cercanas a los bordes en $x=0$ y $x=1$~\cite[Cap. 9]{Bender1999}, 
-teniendo como consecuencia la existencia de gradientes que 
+de $x$ en regiones cercanas a los bordes en $x=0$ y $x=1$.
+Como consecuencia surgirán gradientes que 
 tienden a infinito para puntos $(x,\xi)$ cercanos a $(0,0)$ y $(1,0)$. 
-Estas estructuras de ``capa límite'', que son generadas por 
+Estas estructuras de capa límite, que son generadas por 
 la imposición de las condiciones de borde en conjunto con la existencia 
 de un parámetro $\xi$ infinitesimal que acompaña a la derivada de mayor 
-orden del operador diferencial, solo ocurren para las direcciones 
+orden del operador diferencial. En nuestro caso particular 
+las condiciones de borde son impuestas en~~\eqref{eq:transp1d} para las direcciones 
 entrantes (salientes), con $\xi>0$ ($\xi<0$) para puntos cercanos 
-a $x=0$, (resp. $x=1$)---dado que es para dichas direcciones que 
-se imponen las condiciones de borde en la ecuación~\eqref{eq:transp1d}. 
+a $x=0$, (resp. $x=1$)---y es para dichas direcciones que 
+se espera la aparición de la capa límite.
 
 Siguiendo la referencia~\cite{Bender1999}, para caracterizar
 la estructura de capa límite en \eg $x=0$, utilizamos una 
@@ -1261,9 +1256,9 @@ se obtiene
  \label{eq:intf}
 \end{equation}
 la cual exhibe de manera explícita el carácter exponencial 
-de la capa límite. Los diferentes términos de la solución asintótica 
-para la capa límite poseen diferente significado físico. Expandiendo 
-la igualdad~\eqref{eq:intf} podemos escribir:
+de la capa límite. Los distintos términos de la solución asintótica 
+para la capa límite poseen diferente interpretación física. Expandiendo 
+la igualdad~\eqref{eq:intf} podemos escribir
 \begin{equation}
 \begin{aligned}
  u_0(x,\xi) =   e^{-\mu_t(0)x/\xi}\times u(0,\xi) + \frac{e^{-\mu_t(0)x/\xi}}{\xi} \times  \int_0^{x} e^{\frac{ \mu_t(0) y}{\xi}} \frac{\mu_s(0)}{2} \int_{-1}^1u_0(y,\xi')d\xi'dy&\\
@@ -1297,8 +1292,8 @@ con
 \begin{equation*}
 \;\;\eta(\xi)=\frac{\mathcal{R}(|\xi|)-1}{\mathcal{R}(|\xi|)e^{-\mu_a/|\xi|}-1}.\qquad\qquad\qquad
 \end{equation*}
-Por simplicidad, consideramos condiciones de borde de vacío ($\mathcal{R}(\xi)=0$), 
-la solución se muestra en la figura~\ref{fig:ansol}, donde se observa claramente la estructura de capa 
+Por simplicidad, consideramos condiciones de borde de vacío ($\mathcal{R}(\xi)=0$).
+La solución se muestra en la figura~\ref{fig:ansol}, donde se observa claramente la estructura de capa 
 límite cuando $(x,\xi) \to (0^+,0^+)$.
 \begin{figure}[h!]
 \centering
@@ -1309,18 +1304,17 @@ límite cuando $(x,\xi) \to (0^+,0^+)$.
  \label{fig:ansol}
 \end{figure}
 
-Los dos métodos numéricos utilizados de manera predominante en la literatura 
+Los dos métodos numéricos utilizados de manera predominante 
 para resolver la ecuación de transporte son 
 el método de armónicos esféricos,  
-y el método de ordenadas discretas. Ambos métodos fallan 
+y el método de ordenadas discretas. Ambos fallan 
 en la resolución de las estructuras de capa límite, 
 lo cual puede apreciarse en resultados presentados 
-en la literatura~\cite{Rocheleau2020,Wang2019,Harel2020,Anli2006,Chai1993}
+en la literatura~\cite{Rocheleau2020,Wang2019,Harel2020,Anli2006,Chai1993}.
 
 En vista de la expresión~\cite[p. 77]{Trefethen2008} 
 para el término del error en la cuadratura de integración 
-de Gauss--Legandre, ampliamente utilizada en la literatura 
-de ordenadas discretas, el error para la cuadratura de $\ell$-puntos 
+de Gauss--Legandre, el error para la cuadratura de $\ell$-puntos 
 decrece como $32V/15\pi j (2\ell+1-j)^j$ siempre que la derivada 
 $j \leq 2\ell$ esté acotada por la constante $V$. 
 Introduciendo el cambio de variable  $\xi'=r^p$ en la integral 
@@ -1330,7 +1324,7 @@ Utilizando la versión integrada de la ecuación~\eqref{eq:transp1d},
 similar a~\eqref{eq:intf}, combinando dos términos exponenciales, 
 y utilizando el hecho de que para un entero no negativo $k$ 
 la integral $\int_0^\infty t^k e^{-t} dt$ es finita, 
-encontramos qué (apéndice~\ref{ap:demcv})
+encontramos qué (Apéndice~\ref{ap:demcv})
 \begin{equation*}
 \begin{split}
 \left | \frac{\partial^j }{\partial r^j}\left[ u(x,r^p) r^{p-1}\right]
@@ -1340,17 +1334,17 @@ encontramos qué (apéndice~\ref{ap:demcv})
 \end{equation*}
 para alguna constante $W$; llamando $V = W r^{p-j-1}$  
 se obtiene la cota deseada, la cual es {\em uniforme 
-para todos los valores relevantes de $x$ y $r$ } (siempre qué 
+para todos los valores relevantes de $x$ y $r$ } (siempre que 
 $p \ge j+1$). Los 
-detalles de la demostración pueden encontrarse en el apéndice~\ref{ap:demcv}.
+detalles de la demostración pueden encontrarse en el Apéndice~\ref{ap:demcv}.
 
 Para el caso considerado, con $\mathcal{R}(\xi)=0$, 
 dividiendo la integral en el punto de capa límite $\xi=0$ se tiene 
 \begin{equation}
-\int_{0}^{1} u(x,\xi) d\xi \sim \sum_{i=1}^{M/2} w_i u(x,\xi_i),
+\int_{0}^{1} u(x,\xi) d\xi \sim \sum_{i=1}^{M/2} w_i u(x,\xi_i) \, .
 \label{eq:MartensenKussmaul}
 \end{equation}
-donde, llamando $r_i$ y $w_i^{GL}$ a las abscisas y pesos de la 
+Llamando $r_i$ y $w_i^{GL}$ a las abscisas y pesos de la 
 cuadratura de Gauss--Legendre en el intervalo $[0,1]$, 
 definimos $\xi_i=r_i^p$ y $w_i= p \times r_i^{p-1} \times w_i^{GL}/2$. 
 Las abscisas y los pesos correspondientes a los valores negativos 
@@ -1358,23 +1352,23 @@ de $\xi$ se obtienen por simetría.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/quads.pdf}
-  \caption{Error de la integral numérica comparado con la integral 
+  \caption{Error de la integral numérica respecto a la 
   analítica $E(M)=\text{max}_x |\sum_{i=1}^M w_i u(x,\xi_i)-I^{\text{an}}(x)|$
-  obtenida para la solución dada en~\eqref{eq:transpnscatt} con $\mathcal{R}(\xi)=0$. 
-  Los errores son comparados con los obtenidos para la cuadratura 
-  de la ecuación~\eqref{eq:MartensenKussmaul}, donde 
-  también se muestra el error dado por la cuadratura de  Gauss--Legendre
-    (G--L) sin el cambio de variable típicamente utilizada.}
+  obtenida para la solución~\eqref{eq:transpnscatt} con $\mathcal{R}(\xi)=0$. 
+  Los errores fueron obtenidos para la cuadratura~\eqref{eq:MartensenKussmaul} 
+  para $p=5$ y $p=3.2$. G--L: 
+  Error dado por la cuadratura de Gauss--Legendre sin el cambio de variable propuesto.}
  \label{fig:intconvs}
 \end{figure}
 Se encontró el valor $p=3.2$ como óptimo, el cual 
 provee una convergencia excelente para la integral 
 de dispersión en la variable $\xi$, el cual a su vez limita la rapidez 
-de las variaciones de la capa límite en la variable $x$. 
-Para resolver la capa límite en la variable $x$, utilizamos 
+de las variaciones de la capa límite en la variable espacial $x$. 
+
+Para resolver la capa límite en $x$, utilizamos 
 el cambio de variable logarítmico $v=\log(\frac{x}{1-x})$, 
-el cual origina una grilla de discretización espacial con una 
-densidad de puntos exponencial en la cercanía de los bordes, 
+que origina una grilla de discretización espacial con una 
+densidad de puntos exponencial en la cercanía de los bordes. 
 con puntos extremadamente cercanos al borde (sin detrimento 
 en la convergencia de la cuadratura de la integral colisional, 
 en vista de las cotas halladas en la derivada del 
