@@ -1141,7 +1141,7 @@ criterio, no había sido correctamente comprendido hasta ahora.
 
 
 La capa límite impone el uso de grillas numéricas densas. 
-Debido a la condición de Courant–Friedrichs–Lewy, para evitar cálculos 
+Debido a la condición de Courant--Friedrichs--Lewy (CFL), para evitar cálculos 
 extremadamentes costosos y poder utilizar pasos temporales razonables, 
 se deben utilizar métodos de evolución temporal implícitos. 
 El desarrollo 
@@ -1325,13 +1325,13 @@ similar a~\eqref{eq:intf}, combinando dos términos exponenciales,
 y utilizando el hecho de que para un entero no negativo $k$ 
 la integral $\int_0^\infty t^k e^{-t} dt$ es finita, 
 encontramos qué (Apéndice~\ref{ap:demcv})
-\begin{equation*}
+\begin{equation}
 \begin{split}
 \left | \frac{\partial^j }{\partial r^j}\left[ u(x,r^p) r^{p-1}\right]
 \right|\leq W r^{p-j-1}\; \text{para}  \; (x,r) \to (0^+,0^+),
 \end{split}
-\label{eq:boundedder}
-\end{equation*}
+\label{eq:boundedderblayer}
+\end{equation}
 para alguna constante $W$; llamando $V = W r^{p-j-1}$  
 se obtiene la cota deseada, la cual es {\em uniforme 
 para todos los valores relevantes de $x$ y $r$ } (siempre que 
@@ -1362,28 +1362,34 @@ de $\xi$ se obtienen por simetría.
 \end{figure}
 Se encontró el valor $p=3.2$ como óptimo, el cual 
 provee una convergencia excelente para la integral 
-de dispersión en la variable $\xi$, el cual a su vez limita la rapidez 
+de dispersión en la variable $\xi$, y a su vez limita la rapidez 
 de las variaciones de la capa límite en la variable espacial $x$. 
 
 Para resolver la capa límite en $x$, utilizamos 
 el cambio de variable logarítmico $v=\log(\frac{x}{1-x})$, 
-que origina una grilla de discretización espacial con una 
-densidad de puntos exponencial en la cercanía de los bordes. 
-con puntos extremadamente cercanos al borde (sin detrimento 
-en la convergencia de la cuadratura de la integral colisional, 
-en vista de las cotas halladas en la derivada del 
-integrando con respecto a la nueva variable $r$ mencionada 
-anteriormente, las cuales son {\em uniformes para todo $x$}), 
-lo cual provee alto orden de convergencia en ambas variables $\xi$ y $x$
-
+que origina una grilla con puntos extremadamente cercanos al borde. 
+Dado que las cotas halladas~\eqref{eq:boundedderblayer} para las derivadas del 
+integrando con respecto a la nueva variable $r$ son {\em uniformes para todo $x$},  
+el procedimiento no deteriora la convergencia de la 
+cuadratura de la integral colisional.  Por lo tanto 
+se logra un alto orden de convergencia en ambas variables $\xi$ y $x$
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
+  \vspace{2mm}
+  \includegraphics[width=0.45\textwidth]{figuras/errdx.pdf}\\
+  \vspace{2mm}
+  \includegraphics[width=0.45\textwidth]{figuras/xiconv.pdf}
+  \caption{Círculos: error obtenido en diferentes grillas numéricas para el algoritmo 
+  propuesto. Diamantes: orden de convergencia.}
+ \label{fig:conv}
+\end{wrapfigure}
 Resolvemos la ecuación de transporte que resulta en el nuevo dominio computacional
 $[v_{\text{min}},v_{\text{max}}]$, con 
 $[x'_{\text{min}},x'_{\text{max}}]=[\frac{e^{v_{\text{min}}}}{e^{v_{\text{min}}}+1},
 \frac{e^{v_{\text{max}}}}{e^{v_{\text{max}}}+1}]$, 
 y condiciones de bordes en $x'_{\text{min}}$ y $x'_{\text{max}}$ 
-obtenidas a partir de la solución asintótica para la capa límite 
-de la ecuación~\eqref{eq:intf}. Utilizando las nuevas variables, 
-resulta el problema de transporte dependiente del tiempo
+obtenidas a partir de la solución asintótica~\eqref{eq:intf}. Utilizando las nuevas variables, 
+el problema de transporte dependiente del tiempo resulta 
 \begin{equation}
 \begin{split}
 &\frac{\partial}{\partial t}\uvi+\xi(2+2\cosh(v)) \frac{\partial}{\partial v}\uvi+
@@ -1395,25 +1401,12 @@ resulta el problema de transporte dependiente del tiempo
 \label{eq:transptd}
 \end{equation}
 Con el fin de evitar las
-limitaciones impuestas por la condición de Courant–Friedrichs–Lewy, utilizamos un 
-esquema implícito BDF (backward differentiation formula) de evolución temporal de tercer orden. 
+limitaciones impuestas por la condición de CFL, utilizamos un 
+esquema implícito BDF ({\em backward differentiation formula}) de evolución temporal de tercer orden. 
 Para evitar el alto costo en la inversión de matrices grandes a 
 cada paso temporal, el término 
-colisional se obtiene por extrapolación polinomial. La versión discreta 
-de la ecuación~\eqref{eq:transptd} resulta\looseness=-1
-\begin{wrapfigure}{r}{0.45\textwidth}
-  \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
-  \vspace{2mm}
-  \includegraphics[width=0.45\textwidth]{figuras/errdx.pdf}\\
-  \vspace{2mm}
-  \includegraphics[width=0.45\textwidth]{figuras/xiconv.pdf}
-  \caption{En círculos 
-  se muestra el error obtenido en diferentes grillas numéricas para el algoritmo 
-  propuesto. Las lineas 
-  de diamantes indican el orden de convergencia. En el texto se detalla 
-  como se determinó el error.}
- \label{fig:conv}
-\end{wrapfigure}
+colisional se obtiene por extrapolación polinomial. La versión discreta con propagación temporal 
+implícita de la Ecuación~\eqref{eq:transptd} resulta
 \begin{equation*}
 \begin{aligned}
  \left[ \id \right. & \left.+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  
@@ -1423,44 +1416,39 @@ de la ecuación~\eqref{eq:transptd} resulta\looseness=-1
 \end{aligned}
 \label{eq:transptd1disc}
 \end{equation*}
-donde $u^{n+1}_j=u(v,\xi_j,t^{n+1})$, $t^{n+1}=n\Delta t$, con $\alpha_k$ y $\beta$ 
-los coeficientes BDF de tercer orden, con $s=3$. El término extrapolado 
+donde $u^{n+1}_j=u(v,\xi_j,t^{n+1})$, $t^{n+1}=n\Delta t$, siendo $\alpha_k$ y $\beta$ 
+los coeficientes BDF, con $s=3$. El término extrapolado 
 a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa {3 \choose \kappa+1} u_j^{n-\kappa}$. Nuevamente, 
 $\id$ es el operador identidad, mientras qué $\ide$ representa al operador 
-de diferenciación espectral obtenido mediante el método de continuación de Fourier. Este procedimiento resulta en una versión implícita 
-del método FC--DOM. 
+de diferenciación espectral obtenido mediante el método de continuación de Fourier. 
 
-
-La fig.~\eqref{fig:conv} demuestra las excelentes propiedades de convergencia 
-obtenidas mediante el algoritmo propuesto con $\mu_s=\mu_a=q=1$. Dado 
-que no se conoce una solución analítica para este problema, 
-el error fue obtenido comparando la solución en diferentes grillas, utilizando 
-una solución de referencia en una grilla mas finas. El alto orden 
+La Fig.~\eqref{fig:conv} muestra las excelentes propiedades de convergencia 
+obtenidas mediante el algoritmo propuesto para $\mu_s=\mu_a=q=1$. Dado 
+que no se conoce una solución analítica para este problema, calculamos 
+el error comparando las soluciones en diferentes grillas, tomando 
+como referencia a la más fina de ellas. El alto orden 
 de convergencia obtenido sugiere que los cambios de variables 
-propuestos en las variables $x$ y $\xi$ dan origen a grilals numéricas 
-adecuadas, capaces de resolver las capas límite involucradas en ambas variables. 
-Se definió el error para las figuras~\eqref{fig:conv} (a) y (b) según
+propuestos en $x$ y $\xi$ permiten 
+resolver las capas límite en ambas variables. 
+Se definió el error para las Figuras~\eqref{fig:conv} (a) y (b) según
   $E(\Delta v, M,\Delta t)=\text{max}_{x,\xi}
     |u(x,\xi)-u^{\text{c}}(x,\xi)|$, donde $u^{\text{c}}(x,\xi)$ 
     es la solución convergida, obtenida en la grilla mas fina. 
 Debido a que las diferentes 
-    grillas direccionales poseen diferentes abscisas que no coinciden 
-    entre sí, para la figura (c) 
-    el error fue calculado utilizando el flujo escalar, con  
+    grillas direccionales poseen abscisas que no coinciden 
+    entre sí,  
+    el error calculado en la Fig. (c) utiliza el flujo escalar, con  
 $E(\Delta v, M,\Delta t)=\text{max}_x |\sum_{i=1}^M w_i u(x,\xi_i)-\phi^{\text{c}}(x)|$.
 
-A continuación, utilizaremos el algoritmo propuesto para 
-explorar y demostrar el carácter de las estructuras de capa límite 
-consideradas. Por simplicidad, en el resto de esta sección nos restringiremos 
-al caso de la ETR independiente del tiempo con soluciones 
-obtenidas mediante el algoritmo dependiente del tiempo propuesto, 
-dejando a la solución relajar temporalmente, como se describió 
-en la sección~\ref{sec:resexp}. Las soluciones resultantes independientes del 
-tiempo obtenidas se muestran en las figuras~\ref{fig:blayers1} 
-a~\ref{fig:DDlayer}; estas estructuras de capa límite 
-existen para todos los tiempos en las soluciones obtenidas 
-en el dominio temporal. 
-
+A continuación, emplearemos el algoritmo propuesto para 
+explorar y demostrar el carácter de las estructuras de capa límite. 
+Por simplicidad, en el resto de este capítulo nos restringiremos 
+al caso de la ETR independiente del tiempo. 
+Como se describió anteriormente 
+en la Sección~\ref{sec:resexp}, las soluciones se obtienen 
+evaluando las evoluciones temporales a tiempos asintóticos.
+Estas se muestran en las Figuras~\ref{fig:blayers1} 
+a~\ref{fig:DDlayer}.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/xilay.pdf}
@@ -1470,29 +1458,26 @@ en el dominio temporal.
   con $\xi_i>\xi_{i+1}>0$ y $x_i>x_{i+1}$.}
  \label{fig:blayers1}
 \end{figure}
-La fig.~\ref{fig:blayers1} muestra las estructuras de capa límite en las 
+La Fig.~\ref{fig:blayers1} muestra las estructuras de capa límite en las 
 variables $x$ y $\xi$ con $\mu_s=\mu_a=q=1$ (con parámetros numéricos $N=250$, $M=40$, 
-y $-v_{\text{min}}=v_{\text{max}}=25$). Como puede observarse 
-en la figura~\ref{fig:blayers1}, los valores mas chicos de $\xi$ 
-originan capas límite que se comprimen en regiones espaciales mas 
-pequeñas, tal como sugiere el análisis de capa límite realizado 
-previamente. 
-
-La fig.~\ref{fig:blayers} demuestra la existencia del fenómeno 
-de capa límite incluso para medios altamente difusivos, con 
-$\mu_a=q=1$ fijo. En esta figura, se muestra la dirección 
+y $-v_{\text{min}}=v_{\text{max}}=25$). Como puede observarse, 
+los valores más chicos de $\xi$ 
+originan capas límite que se comprimen en regiones espaciales más 
+pequeñas, tal como sugiere el análisis realizado. 
+La Fig.~\ref{fig:blayers} muestra la existencia de 
+de capas límite incluso para medios altamente difusivos, con 
+$\mu_a=q=1$ fijo. En esta figura, 
 $\xi=\xi_{\text{min}}\simeq 10^{-6}$, para los parámetros 
 $N=200$, $M=20$ y $-v_{\text{min}}=v_{\text{max}}=20$. 
-Claramente, incluso siendo que para los problemas difusivos 
-(donde $\mu_s>>\mu_a$ y $\mu_s>>q$ y $\mu_s>>|x_{\text{max}}-x_{\text{min}}|$~ 
-\cite{Larsen1987}) tienden a ser mas regulares en la variable $\xi$ 
----debido a que siendo la dispersión el fenómeno dominante, 
-la solución de transporte resulta fuertemente ``promediada'' entre las direcciones---, 
-las capa límite que surgen en la variable espacial con coeficiente 
-de dispersión creciente tienden a tener pendientes más abruptas 
-cuando $x\to 0^+$. De hecho, fue verificado numéricamente que bajo estas condiciones, 
-la solución de transporte independiente del tiempo, $u(x,\xi)$ 
-para distintos valores de $\xi$ difieren, esencialmente, en la región 
+En general, en problemas difusivos 
+(donde $\mu_s>>\mu_a$ y $\mu_s>>q$ y $\mu_s>>|x_{\text{max}}-x_{\text{min}}|$) 
+las funciones tienden a ser mas regulares en la variable $\xi$~\cite{Larsen1987}. 
+Siendo la dispersión el fenómeno dominante, 
+la solución resulta fuertemente ``promediada'' entre las direcciones.  
+Sin embargo, tienden a tener pendientes más abruptas 
+a medida que aumenta el coeficiente de dispersión. Cuando la dispersión es grande, 
+se verfica numéricamente que 
+ $u(x,\xi)$ es prácticamente independiente de la dirección, excepto en la región 
 de capa límite.
 \begin{figure}[h!]
 \centering
@@ -1503,69 +1488,67 @@ de capa límite.
   Notar las pendientes elevadas que existen para $x\to 0^+$.}
  \label{fig:blayers}
 \end{figure}
-Han habido esfuerzos en la literatura para comprender un tipo 
-de oscilaciones no físicas, originadas 
-meramente por un fenómeno numérico que 
-surge al resolver la ecuación de transporte 
-empleando el esquema de diferencias finitas de Diamante (DD)~\cite{Larsen1987,Petrovic1996,Bal2001}.
+Se ha reportado en la literatura la existencia 
+de oscilaciones no físicas 
+asociadas a problemas numéricos. 
+Estas surgen principalmente al emplear el esquema de 
+diferencias finitas de Diamante (DD)~\cite{Larsen1987,Petrovic1996,Bal2001}.
 En las referencias~\cite{Larsen1987,Petrovic1996} se atribuye 
-este fenómeno numérico a condiciones de borde anisótropas, capas límite no difusivas y/o 
-a un alto coeficiente de absorción. En esta tesis 
-se demuestra la existencia de estas capa límite incluso para el 
-caso de condiciones de borde isótropas, y para todos los valores 
-de los coeficientes de absorción y dispersión, con una interpretación 
-diferente a la reportada en la literatura. En particular, 
-nuestra contribución demuestra de forma explícita la existencia 
-de capas límite exponenciales, originadas por la imposición 
-de las condiciones de borde en conjunto con valores de  $\xi$ 
-pequeños, lo cual no fue considerado en las discusiones previas.
+este problema numérico a las condiciones de borde anisótropas, capas límite no difusivas y/o 
+a un alto coeficiente de absorción. Por el contrario, 
+en nuestro trabajo demostramos que esta interpretación es errónea. 
+Las capas límite surgen aún con condiciones de borde isótropas, 
+y para cualquier valor 
+de los coeficientes de absorción y dispersión. En particular, 
+nuestra contribución demuestra en forma explícita la existencia 
+de capas límite exponenciales, originadas al imponer cualquier 
+condicion de borde para valores de  $\xi$ 
+pequeños, lo cual no fue considerado en ninguno de los trabajos anteriores.
 
 Por ejemplo, la referencia~\cite{Larsen1987} trata un problema 
-difusivo de transporte (el Problema~1 en dicha referencia) 
-el cual, luego de reescalear las constantes, puede formularse 
-como an la ecuación~\eqref{eq:transp1d} con $\mu_s=\mu_t=1000$,
- $q=0.1$ y $\mathcal{R}(\xi)=0$. Este es un problema 
- puramente difusivo, con condiciones de borde isótropas, 
- sobre la que dicha referencia afirma~\cite[pp. 317]{Larsen1987} 
- ``...dado que el término de orden dominante en la expansión asintótica 
+difusivo de transporte (el Problema~1 en dicha referencia). 
+Este es el mismo que plantea la Ecuación~\eqref{eq:transp1d} con $\mu_s=\mu_t=1000$,
+ $q=0.1$ y $\mathcal{R}(\xi)=0$. Este es un caso  
+ difusivo, con condiciones de borde isótropas, 
+ sobre el que dicha referencia afirma~\cite[pp. 317]{Larsen1987} 
+ ``\ldots dado que el término de orden dominante en la expansión asintótica 
  de la ecuación de transporte analítica es isótropo, 
  este término no posee una capa límite para este problema''. 
- En contraste, la figura~\ref{fig:DDlayer} muestra que 
- las capa límite estan presentes en este problema, aunque 
- no fueron vistas por el autor debido a que no fueron correctamente 
- resueltas. La solución obtenida por el método FC--DOM implícito 
- con el cambio de variable propuesto que se muestra en dicha figura 
- fue obtenido con $M=40$ direcciones discretas y $N=400$ puntos 
- en la variable espacial. Para la solución obtenida con nuestra implementación 
- del esquema DD se utilizaron $N=10000$ puntos en la fig.~\ref{fig:DDlayer}---
- la cual claramente muestra las oscilaciones espurias producidas 
- por el esquema DD en este contexto.
+ En contraste, la Figura~\ref{fig:DDlayer} muestra que 
+ las capas límite persisten en este problema, y 
+ no fueron detectadas debido a que la grilla numérica utilizada 
+ no era lo suficientemente densa como para resolverlas. 
+ La solución obtenida por el método FC--DOM implícito,  
+ con el cambio de variable propuesto, se obtuvo 
+ con $M=40$ direcciones discretas y $N=400$ puntos 
+ en la variable espacial. En comparación, en la implementación del esquema DD 
+ se utilizaron $N=10000$ puntos. Aún teniendo en cuenta 
+ el alto costo computacional que requiere este esquema, no logra 
+ evitar las oscilaciones espurias.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/layerlar.pdf}
   \caption{Solución $u(x,\xi_{15})$ de la ec.~\eqref{eq:transp1d} 
   con $\mu_t=\mu_s=1000$, $q=0.1$ y $\xi_{\text{15}} \simeq 10^{-3}$
   donde pueden apreciarse las oscilaciones espurias originadas 
-  por el esquema DD debido a las pendientes pronunciadas originadas 
-  en la capa límite. Se utilizaron $N=400$ para la variable espacial 
-  en el método FC, y  $N=10000$ para el método DD.}
+  por el esquema DD. Se utilizaron $N=10000$ puntos espaciales para el método DD y 
+  tan sólo $N=400$ para el FC.}
  \label{fig:DDlayer}
 \end{figure}
-En la figura se muestran las soluciones obtenidas por ambos esquemas 
-en regiones lejanas a la capa límite, con grillas espaciales variables. 
-Puede apreciarse que las oscilaciones originadas por grillas que 
-no resuelven correctamente la capa límite tienen efectos en la 
-precisión de la solución que se propagan hacia todo el dominio espacial.
+
+En la Figura~\ref{fig:DDlayer2} se muestran las soluciones obtenidas por ambos esquemas 
+en regiones lejanas a la capa límite, para distintas grillas espaciales. 
+Puede apreciarse que si bien las oscilaciones que emergen del método DD lo hacen 
+en cercanías del origen, 
+se propagan hacia todo el dominio espacial.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/conv_2.eps}
-  \caption{Solución $u(x,\xi_{15})$ a la ec.~\eqref{eq:transp1d}, 
-  de la fig.~\ref{fig:DDlayer}, para un número variable 
-  de puntos en la grilla espacial, lejos de la región de capa límite. 
-  Como se observa en esta figura, 
-  los problemas numéricos originados por la capa límite en 
-  las cercanías del borde 
-  en el esquema DD se extienden a todo el dominio espacial.}
+  \caption{Solución $u(x,\xi_{15})$ de la Ec.~\eqref{eq:transp1d}, 
+  (cf. Fig.~\ref{fig:DDlayer}), para distintas grillas espaciales, 
+  lejos de la región de capa límite. 
+  Como se observa, las oscilaciones originadas en 
+  las cercanías del borde por el esquema DD se extienden a todo el dominio espacial.}
  \label{fig:DDlayer2}
 \end{figure}
 
@@ -1580,6 +1563,8 @@ en la fig.~\ref{fig:DDlayer} y a lo largo de esta sección,
 posee importantes implicancias en la física y en las simulaciones 
 numéricas de los fenómenos de transporte.
 
+Cabe destacar que las estructuras de capa límite 
+existen durante todos los tiempos de la evolución temporal. 
 En particular, tanto el análisis asintótico de la capa límite que 
 derivó en la ecuación~\eqref{eq:intf}, 
 así como las pruebas numéricas, sugieren que existirá una capa límite 
