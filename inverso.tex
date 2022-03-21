@@ -7,64 +7,62 @@
 \pagebreak
 
 En las secciones previas abordamos el problema directo de transporte 
-de radiación en la materia mediante la ETR. En síntesis, el problema 
-directo consta de, dados los parámetros ópticos $a(\x)$, $b(\x)$, la función  
+de radiación en la materia mediante la ETR. 
+En este problema los parámetros ópticos $a(\x)$, $b(\x)$, la función  
 de fase $\eta(\hth\cdot \hth')$, la velocidad de la luz en el medio participante 
-$c$, las fuentes internas $s$ y las condiciones iniciales y de contorno, 
-encontrar la solución $\ut$ a la ecuación~\eqref{eq:RTE}.
+$c$, las fuentes internas $s$ y las condiciones iniciales y de contorno 
+son datos. Se busca encontrar la solución $\ut$ a la ecuación~\eqref{eq:RTE}.
 
-Para el problema inverso en tomografía óptica, alguno de los parámetros 
-ópticos es desconocido, 
-o conocido sólo parcialmente, y se dispone de mediciones experimentales 
-de detectores colocados en el contorno del dominio que se quiere analizar. 
-A partir de las mediciones experimentales de estos detectores, 
-el objetivo es la reconstrucción de uno o más de los parámetros ópticos. 
-En el caso de tomografía por fluorescencia y tomografía de bioluminiscencia, lo que se intenta reconstruir 
-son las fuentes $s$ en la ec.~\eqref{eq:RTE}~\cite{Klose2005,Klose2009,Ren2010}, 
-que vienen relacionadas a los coeficientes de absorción de los 
-cromóforos y fluoróforos. 
+En el problema inverso, alguno de los parámetros son conocidos, 
+ y se dispone de mediciones experimentales  
+obtenidas por detectores. 
+A partir de estas mediciones, 
+el objetivo de este problema es la reconstrucción de las características del medio, incluyendo 
+al resto de los parámetros desconocidos. 
 
-En el contexto de esta tesis, nos limitaremos a la reconstrucción del 
-coeficiente de absorción, $a(\x)$. La reconstrucción de dicho coeficiente 
-encuentra aplicaciones en tomografía de fluorescencia, y en tomografía óptica. 
-La reconstrucción de las propiedades de absorción en tomografía óptica 
+En el contexto de esta Tesis, reconstruiremos, para distintos problemas, 
+ el coeficiente de absorción $a(\x)$ en tomografía óptica. Esto encuentra numerosas aplicaciones.  
+ La reconstrucción de las propiedades de absorción 
  permite la identificación de tumores~\cite{Zhu2005,Zhu2010,Fujii2016b}, 
 la obtención de imágenes funcionales del cerebro humano~\cite{Boas2001,bluestone2001,Arridge1999}, 
 y la caracterización de diferentes constituyentes del tejido 
-humano para la obtención de imágenes en medicina. En 
+humano para la obtención de imágenes en medicina.
+En el caso de tomografía por fluorescencia y tomografía de bioluminiscencia~\cite{Klose2005,Klose2009,Ren2010},
+ se intentan reconstruir 
+las fuentes $s(\x,\hth,t)$ en la ec.~\eqref{eq:RTE}. 
+Estas fuentes están relacionadas a los coeficientes de absorción de los 
+cromóforos y fluoróforos. 
+En aplicaciones de diagnóstico y monitoreo para el tratamiento de tumores, 
+se asume cierta información previa  
+del coeficiente de dispersión 
+$b(\x)$. Esta se obtiene, generalmente, mediante técnicas de 
+ imágenes de alta resolución~\cite{Althobaiti2017,Guven2003}, \eg Resonancia Magnética. 
+  El uso de estas técnicas posee ciertas limitaciones. 
+ El alto costo y la baja disponibilidad 
+de este tipo de aparatos dificulta el seguimiento de tratamientos  
+asistidos por diagnóstico de imágenes. 
+Por el contrario, los dispositivos 
+utilizados en tomografía óptica son portables, facilitando su disponibilidad. 
+Las imágenes permiten determinar regiones, 
+como por ejemplo ciertos tejidos óseos, o 
+el aire en la traquea del cuello humano en las cuales 
+los coeficientes de absorción toman valores conocidos.  
+Adicionalmente, estas sirven para imponer cotas superiores e inferiores 
+de $a(\x)$, lo que permite restringir el espacio de funciones donde se busca minimizar 
+la función objetivo. Si bien en 
 este trabajo nos enfocamos en la reconstrucción del coeficiente 
-de absorción, pero los algoritmos y las estrategias propuestas 
-pueden ser fácilmente generalizadas para la reconstrucción 
-de otros parámetros. 
+de absorción, los algoritmos y las estrategias propuestas 
+pueden ser fácilmente generalizadas para otros parámetros. 
 
-Generalmente, para aplicaciones 
-en diagnostico y monitoreo en el tratamiento de tumores, 
-se asume cierta información previa 
-para el coeficiente de dispersión, 
-$b(\x)$, obtenida por técnicas de obtención 
-de imágenes de alta resolución~\cite{Althobaiti2017,Guven2003} \eg Resonancia Magnética. 
-Este conocimiento previo obtenido por otras técnicas, también brinda 
-información limitada en el parámetro óptico de absorción $a(\x)$, 
-como pueden ser los coeficientes de absorción para ciertos tejidos óseos, 
-o el aire en regiones como la traquea del cuello humano, como también 
-se conocen cotas superiores e inferiores para dicho parámetro, 
-lo que permite restringir el espacio de funciones donde se busca minimizar 
-la función objetivo. El uso de técnicas de alta resolución, como la Resonancia 
-Magnética, posee ciertas limitaciones, como el alto costo, la baja disponibilidad 
-de este tipo de aparatos 
-(lo que impone una dificultad a la hora de seguir la evolución de un tratamiento 
-asistido por diagnóstico de imágenes), y adicionalmente los dispositivos 
-utilizados en tomografía óptica son portables, lo que permite tenerlos disponibles 
-para su uso en diversas situaciones. En la figura~\ref{fig:esquemainv} esquematizamos los problemas directos e inverso, tal como son 
-tratados en esta tesis. 
-
+En la figura~\ref{fig:esquemainv} 
+esquematizamos los problemas directos e inverso, tal como son 
+tratados en esta Tesis. 
 
 \begin{figure}[h!]
 \centering
   \includegraphics[width=\linewidth]{figuras/inv.pdf}\\
   \caption{
-Grafico esquemático de los problemas directo e inverso, tal como son considerados 
-en esta tesis.}
+Grafico esquemático de los problemas directo e inverso.}
  \label{fig:esquemainv}
 \end{figure}
 Para la resolución del problema inverso, utilizamos el esquema \textit{MOBIR}, 
@@ -76,59 +74,50 @@ presentado en la sección siguiente.
 
 \begin{wrapfigure}{l}{0.48\textwidth}
   \includegraphics[width=0.48\textwidth]{figuras/mobir.eps}\\
-  \caption{Esquema  MOBIR. El modelo directo es utilizado para obtener los observables simulados. Se evalúa el error entre los datos experimentales y los simulados por medio de la función objetivo. 
+  \caption{Esquema  MOBIR. El modelo directo es utilizado para obtener los observables simulados. 
+  Se evalúa el error entre los datos experimentales y los simulados por medio de la función objetivo. 
   Luego, utilizando un método de minimización, se actualiza el coeficiente $a(\x)^{i+1}$ a 
-  ser utilizado en la iteración subsiguiente, hasta cumplir 
-  un cierto criterio de convergencia. }
+  ser utilizado en la iteración subsiguiente, hasta converger. }
  \label{fig:mobir}
 \end{wrapfigure}
 
-En este tesis desarrollamos un algoritmo tipo MOBIR~\cite{Hielscher1999,Kim2010} (del inglés, {\em Model Based Iterative Image  
+En esta Tesis desarrollamos un algoritmo tipo MOBIR~\cite{Hielscher1999,Kim2010} (del inglés, {\em Model Based Iterative Image  
 Reconstruction}). Este tipo de esquemas se basan en un modelo físico, y un método de minimización 
 iterativo para la reconstrucción del parámetro deseado en el problema inverso.
-
 El modelo físico utilizado es la Ecuación de Transporte Radiativo~\eqref{eq:RTE}. 
-Para la minimización del funcional objetivo (que será introducido en una sección posterior) emplearemos el método de minimización 
-de Broyden–Fletcher–Goldfarb–Shanno (BFGS) con uso de memoria reducido 
-(lm-BFGS, de su sigla en inglés)~\cite{Byrd1995}. 
-
+Para la minimización del funcional objetivo (que será introducido en una sección posterior) 
+emplearemos el método de minimización 
+de Broyden--Fletcher--Goldfarb--Shanno (BFGS) con uso de memoria reducido 
+(lm--BFGS, de su sigla en inglés)~\cite{Byrd1995}. Este puede ser considerado un caso particular 
+de los métodos de cuasi--Newton~\cite{Nocedal2006,Klose2003QN,Ren2006}.
 El problema inverso en tomografía óptica es resuelto como un problema de optimización 
-no lineal. A partir de un valor inicial para el coeficiente de absorción $a(\x)^0$, 
-el coeficiente de absorción es buscado de forma iterativa, actualizando su valor 
-en cada iteración mediante el método lm-BFGS, el cual es un caso particular 
-de los métodos de cuasi-Newton~\cite{Nocedal2006,Klose2003QN,Ren2006}. 
-Partiendo del valor inicial $a^0(\x)$, el cual en general es estimado 
-a partir de información obtenida de manera previa por otros métodos de imagenes, 
-el coeficiente de absorción es 
-\clearpage
-\noindent actualizado en cada paso de la iteración $i+1$, según~\cite{Klose2003QN}
+no lineal. A partir de un coeficiente de absorción $a(\x)^0$ inicial, 
+se actualiza su valor  en cada paso de la iteración $i$, 
+mediante el método lm--BFGS según~\cite{Klose2003QN}
 \begin{equation}
 \mathbf{a}^{i+1}(\x)=\mathbf{a}^{i}(\x)+\alpha^i  \mathbf{d}^i(\x)
 \label{eq:update}
 \end{equation}
-donde $\mathbf{a}^{i}(\x)$ debe ser interpretado como el 
-vector obtenido a partir de el coeficiente de absorción en el 
-dominio espacial $\Omega$  
-discretizado, con $\alpha^i$ el largo del paso de Newton (que lo consideraremos 
-en general $\alpha^i=1$), y $\mathbf{d}^i(\x)$ 
-la dirección de descenso. En el caso del método de Newton (o {\em steepest descent}), la dirección de 
-descenso vendrá dada por el gradiente $\mathbf{d}^i=-\nabla_a g$ de la función objetivo $g$ (que será definida posteriormente). 
-En el contexto de esta tesis emplearemos el método lm-BFGS, ya que este método ha 
-mostrado ser eficiente en el contexto de tomografía óptica~\cite{Klose2003QN,Ren2006,
-Prieto2017}. 
+donde $\mathbf{a}^{i}(\x)$ es el 
+vector obtenido a partir del coeficiente de absorción $a(\x)$, 
+con la variable $\x$ discretizada, $\alpha^i$ es el largo del paso de Newton (que lo consideraremos 
+en general $\alpha^i=1$). En el caso del método de Newton (o {\em steepest descent}), la dirección de 
+descenso vendrá dada por el gradiente $\mathbf{d}=-\nabla_a g$, donde la función objetivo $g$ será definida posteriormente. 
+En el contexto de esta Tesis la dirección de descenso será determinada por el método lm--BFGS, 
+muy eficiente en tomografía óptica~\cite{Klose2003QN,Ren2006,Prieto2017}. 
 
 \section{El método de minimización BFGS}
 \label{sec:BFGS}
-Siguiendo a Nocedal~\cite{Nocedal2006}, el método BFGS parte de considerar la expansión de Taylor a segundo orden de la función objetivo 
-que buscamos minimizar, la cual estará evaluada para el coeficiente $\mathbf{a}(\x)$,  
-lo notaremos, por simplicidad  $g[\mathbf{a}]$
-
+Siguiendo a Nocedal~\cite{Nocedal2006}, el método BFGS parte de considerar la expansión de 
+Taylor a segundo orden de la función objetivo $g[\mathbf{a}]$
+que buscamos minimizar
 \begin{equation}
-g[\mathbf{a}^i+ \mathbf{d}^i]\approx g[\mathbf{a}^i]+ (\mathbf{d}^i)^T \nabla_a g[\mathbf{a}^i]+\frac{1}{2}(\mathbf{d}^i)^T \nabla_a^2 g[\mathbf{a}^i+t\mathbf{d}^i] \mathbf{d}^i=m(\mathbf{d}^i).
+g[\mathbf{a}^i+ \mathbf{d}^i]\approx g[\mathbf{a}^i]+ (\mathbf{d}^i)^T \nabla_a g[\mathbf{a}^i]+
+\frac{1}{2}(\mathbf{d}^i)^T \nabla_a^2 g[\mathbf{a}^i+t\mathbf{d}^i] \mathbf{d}^i\equiv m(\mathbf{d}^i).
 \label{eq:Taylor}
 \end{equation}
 donde $t \in (0,1)$, y $(\mathbf{d}^i)^T$ indica el vector traspuesto a $\mathbf{d}^i$.
-Además, si $g$ es al menos dos veces diferenciable se cumple qué 
+Además, si $g$ es al menos dos veces diferenciable se cumple que 
 \begin{equation}
 \nabla_a g[\mathbf{a}^i+ \mathbf{d}^i]\approx \nabla_a g[\mathbf{a}^i]+\int_0^1\nabla_a^2 g[\mathbf{a}^i+t\mathbf{d}^i] \mathbf{d}^idt 
 \label{eq:Taylor2}
@@ -139,20 +128,20 @@ Exigiendo que se anule la derivada de $m(\mathbf{d^i})$, se llega la dirección 
 \mathbf{d}^i=-(\nabla_a^2 g^i )^{-1} \nabla_a g^i.
 \label{eq:direccion}
 \end{equation}
-El principal obstaculo para la aplicación de la dirección de Newton es la 
-necesidad de calcular la inversa del Hessiano de la función objetivo, $\nabla_a^2 g^i$, 
-cálculo que en tomografía óptica, debido a la alta dimensionalidad de la ETR, puede 
-resultar extremadamente costoso. 
-
-Por este motivo, el método BFGS implementa una aproximación del Hessiano de la función objetivo (mas concretamente, 
-a la inversa del Hessiano) que 
-es actualizada a cada paso de la iteración. Sumando y restando el término $ \nabla_a^2 g \mathbf{d}^i$ en la ecuación~\eqref{eq:Taylor2} se llega a
+El principal obstáculo para la aplicación de la dirección de Newton es la 
+necesidad de calcular la inversa del Hessiano $\nabla_a^2 g^i$ de la función objetivo,  
+cálculo que en tomografía óptica puede 
+resultar extremadamente costoso, debido a la alta dimensionalidad de la ETR. 
+Por este motivo, el método BFGS implementa una aproximación del Hessiano (mas concretamente, 
+de la inversa del Hessiano) que 
+es actualizada a cada paso de la iteración. Formalmente, se suma y resta el término $ \nabla_a^2 g \mathbf{d}^i$ 
+en la ecuación~\eqref{eq:Taylor2}, y se llega a
 \begin{equation}
 \nabla_a g[\mathbf{a}^i+ \mathbf{d}^i]\approx \nabla_a g[\mathbf{a}^i]+ \nabla_a^2 g[\mathbf{a}^i]\mathbf{d}^i + \int_0^1   \left( \nabla_a^2 g[\mathbf{a}^i+t\mathbf{d}^i]-\nabla_a^2 g[\mathbf{a}^i] \right)\mathbf{d}^idt
 \label{eq:Taylor3}
 \end{equation}
 Dado que se asume la continuidad de $\nabla_a g$, el término de la integral 
-es $o(||\mathbf{a}^{i+1}-\mathbf{a}^{i}||)$. Tomando $\mathbf{d}^i=\mathbf{a}^{i+1}-\mathbf{a}^{i}$ se llega a la relación
+es $o(||\mathbf{a}^{i+1}-\mathbf{a}^{i}||)$. Tomando $\mathbf{d}^i=\mathbf{a}^{i+1}-\mathbf{a}^{i}$ se llega a la expresión
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -163,13 +152,14 @@ es $o(||\mathbf{a}^{i+1}-\mathbf{a}^{i}||)$. Tomando $\mathbf{d}^i=\mathbf{a}^{i
 \label{eq:Taylor4}
 \end{equation}
 Esta última relación nos permite aproximar el Hessiano utilizando las derivadas de 
-la función objetivo obtenidos para dos iteraciones sucevias. 
-La inversa del Hessiano de la función objetivo es aproximada exigiendo que se cumpla la última relación en~\eqref{eq:Taylor4}, que puede escribirse 
+la función objetivo obtenidas para dos iteraciones sucesivas. 
+La inversa del Hessiano es aproximada exigiendo que se cumpla la última relación en~\eqref{eq:Taylor4}, que puede escribirse 
 \begin{equation}
 (B^{i+1})^{-1}y^i=s^i,
 \label{eq:Taylor5}
 \end{equation}
-con $s_i=  \mathbf{a}^{i+1}-\mathbf{a}^{i}$ y $y^i=\nabla_a g[\mathbf{a}^{i+1}]  - \nabla_a g[\mathbf{a}^{i}]$. La fórmula BFGS para actualizar el Hessiano en cada iteración viene dada por~\cite{Nocedal2006}
+con $s_i=  \mathbf{a}^{i+1}-\mathbf{a}^{i}$ y $y^i=\nabla_a g[\mathbf{a}^{i+1}]  - \nabla_a g[\mathbf{a}^{i}]$. 
+La fórmula BFGS para actualizar el Hessiano en cada iteración viene dada por~\cite{Nocedal2006}
 \begin{equation}
 (B^{i+1})^{-1}=(V^i)^T (B^{i})^{-1}V^i + \rho^i s^i (s^i)^T  ,
 %B^{i}-\frac{B^{i}s^i (s^i)^T B^i }{(s^i)^TB^i s^i}+ \frac{y^i (y^i)^T}{(y^i)^T s^i}
@@ -184,28 +174,25 @@ el Hessiano por su aproximación $B^i$
 \label{eq:HBFGS2}
 \end{equation}
 
-\subsection{El método de uso de memoria limitada lm-BFGS}
+\subsection{El método de uso de memoria limitada lm--BFGS}
 \label{sec:lmBFGS}
 En nuestro algoritmo para la resolución del problema inverso, el coeficiente 
 de absorción es actualizado en cada iteración utilizando la relación 
-
 \begin{equation}
-\mathbf{a}^{i+1}(\x)=\mathbf{a}^{i}(\x)-(B^{i})^{-1} \nabla_a g[\mathbf{a}^i]
+\mathbf{a}^{i+1}(\x)=\mathbf{a}^{i}(\x)-(B^{i})^{-1} \nabla_a g[\mathbf{a}^i].
 \label{eq:update2}
 \end{equation}
-Debido a que la aproximación a la inversa del Hessiano, $(B^i)^{-1}$, en tomografía óptica es una matriz 
-que para el problema 2D discretizado, con $N_x \times N_y$ puntos 
-por cada coordenada espacial tendrá dimensiones  $B^i\in \mathbb{R}^{N_x \times N_y}$, 
-la manipulación y almacenamiento de esta matriz puede ser sumamente costosa. Por ello, 
-para evitar la manipulación y el almacenamiento de esta matriz, se utiliza 
-una versión aproximada de $(B^i)^{-1}$, para la cual se almacenan los vectores $\{s^k, y^k\}$, 
-$k=i-m,...,i-1$ para un dado número de puntos $m$ previos a la iteración $i$-esima. 
-Para esto se utiliza una aproximación inicial al Hessiano $(B^i)^{-1}_0$
+La discretización de la inversa del Hessiano $(B^i)^{-1}$ se representa con una matriz 
+que para el problema 2D tiene $N_x \times N_y$ puntos. 
+La manipulación y almacenamiento de esta matriz puede ser sumamente costosa. Por ello, 
+ se utiliza una versión aproximada, en la cual sólo se almacenan los vectores $\{s^k, y^k\}$, 
+$k=i-m,...,i-1$ para un dado número de puntos $m$ previos a la iteración $i$--esima. 
+Se utiliza una aproximación inicial al Hessiano $(B^i)^{-1}_0$
 \begin{equation}
 (B^i)^{-1}_0=\gamma^i \id,\quad \quad \gamma^i=\frac{(s^{i-1})^T y^{i-1}}{(y^{i-1})^Ty^{i-1}},
 \label{eq:initHess}
 \end{equation}
-y utilizando la ecuación~\eqref{eq:HBFGS} se tiene la relación de recurrencia
+y de la ecuación~\eqref{eq:HBFGS} se tiene la relación de recurrencia
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -218,7 +205,7 @@ y utilizando la ecuación~\eqref{eq:HBFGS} se tiene la relación de recurrencia
 \end{split}
 \label{eq:HBFGSrec}
 \end{equation}
-de donde se tiene el algoritmo~\eqref{algbfgs}~\cite{Byrd1995,Nocedal2006}
+de donde surge el algoritmo~\eqref{algbfgs}~\cite{Byrd1995,Nocedal2006}
 
 \begin{algorithm}
 \caption{lm-BFGS}\label{algbfgs}
@@ -238,19 +225,17 @@ de donde se tiene el algoritmo~\eqref{algbfgs}~\cite{Byrd1995,Nocedal2006}
 \end{algorithmic}
 \end{algorithm}  
   
-En esta tesis utilizaremos el algoritmo lm-BFGS para encontrar 
-el mínimo de la función objetivo. En todos los casos, usaremos el valor 
-de $m=5$, y se parte de un coeficiente inicial $a^0(\x)$ dado 
-por cierto conocimiento obtenido previamente, como puede ser la imagen 
+En esta Tesis utilizaremos el valor 
+de $m=5$, partiendo de un coeficiente inicial $a^0(\x)$ dado 
+por cierto conocimiento previo, como por ejemplo, la imagen 
 de resonancia magnética de un cuello humano utilizada en la sec.~\ref{sec:inverseres}.
-Adicionalmente, es posible incluir cotas para el coeficiente 
-de absorción que deseamos reconstruir, de forma tal que 
-el proceso de minimización sea realizado 
-en un subespacio tal que $a^l(\x)\leq a^i(\x) \leq a^u(\x)$, de forma 
-tal que el coeficiente de absorción, para cada punto espacial $\x$ se encuentre 
-restringido por las cotas inferior $a^l(\x)$ y superior $a^u(\x)$. Esto restringe el espacio de soluciones posibles, permitiendo explotar información a priori obtenida por otros métodos de imágenes. 
+Las cotas inferiores $a^l(\x)$ y superiores $a^u(\x)$ al coeficiente de absorción 
+limitan el subespacio de soluciones posibles a $a^l(\x)\leq a^i(\x) \leq a^u(\x)$. 
 Una condición física que debe cumplirse siempre es que la cota inferior 
-para el coeficiente de absorción cumpla $a^l(\x)\geq 0$. Similarmente, 
+no sea negativa. Las regiones a estudiar que se diferencian del medio 
+conocido se denominan inclusiones. En aquellos tejidos donde 
+no ocurren inclusiones, el coeficiente de absorción tiene 
+cotas superiores conocidas 
 se conocen cotas superiores para el coeficiente de absorción, y además, 
 puede utilizarse los valores conocidos de $a(\x)$ como cotas sobre 
 aquellos tejidos donde se sabe que la inclusión no puede ocurrir, 
@@ -337,7 +322,7 @@ atenuación de tipo exponencial, debido a la absorción y a la dispersión
 en el interior del medio participante, en general se requiere la utilización de 
 fuentes múltiples. Debido a la atenuación exponencial de la intensidad lumínica, 
 en general, la iluminación entre fuentes lejanas no suele afectarse entre sí. 
-Motivados por este hecho en esta tesis introducimos un método de Fuentes Múltiples 
+Motivados por este hecho en esta Tesis introducimos un método de Fuentes Múltiples 
 Simultáneas (FMS). Este método se vale del uso de ``fuentes generalizadas'', 
 las cuales pueden representar una o múltiples fuentes láser, las cuales 
 pueden ser activadas, con ciertos retrasos temporales, de forma superpuesta 
@@ -1014,7 +999,7 @@ para cada perturbación del coeficiente $a(\x)$ en el dominio discretizado.
 Cabe mencionar también que el método adjunto requiere el almacenamiento 
 en memoria de las soluciones completas a los problemas directos y adjunto de transporte 
 para varios pasos temporales para realizar las integrales correspondientes~\eqref{eq:FDwin22}. 
-El algoritmo paralelo propuesto en esta tesis es apropiado para este problema, ya que permite 
+El algoritmo paralelo propuesto en esta Tesis es apropiado para este problema, ya que permite 
 dividir simultáneamente el costo computacional y los requerimientos de memoria 
 en sistemas distribuidos.
  
@@ -1149,7 +1134,7 @@ originadas por fuentes láser individuales proveniente desde diferentes lugares.
 \section{Algoritmo para la resolución del problema inverso}
 \label{sec:inversesolv}
 
-Como se indico anteriormente, el algoritmo propuesto en esta tesis para la resolución del 
+Como se indico anteriormente, el algoritmo propuesto en esta Tesis para la resolución del 
 problema inverso incorpora, en particular, la estrategia FMS, basada 
 en el uso de fuentes que se aplican en un único problema directo, 
 en lugar de la estrategia MB utilizada previamente en la literatura. 
@@ -1311,7 +1296,7 @@ convergencia en el problema de reconstrucción del coeficiente $a(\x)$, y previe
 la amplificación de los errores numéricos, originados por la existencia 
 de las capa límite~\cite{Gaggioli2021} discutidas en la sección~\ref{sec:blayer}. 
 La resolución de la capa límite en el problema multidimensional exige de métodos 
-numéricos más sofisticados que escapan al alcance de esta tesis. 
+numéricos más sofisticados que escapan al alcance de esta Tesis. 
 
 Aplicamos el algoritmo para la reconstrucción del coeficiente 
 de absorción, y comparamos los métodos MB y FMS propuesto en este trabajo. 
