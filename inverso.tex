@@ -6,14 +6,14 @@
 \label{sec:inverso}
 \pagebreak
 
-En las secciones previas abordamos el problema directo de transporte 
+En las secciones previas abordamos el problema {\bf directo} de transporte 
 de radiación en la materia mediante la ETR. 
 En este problema los parámetros ópticos $a(\x)$, $b(\x)$, la función  
 de fase $\eta(\hth\cdot \hth')$, la velocidad de la luz en el medio participante 
-$c$, las fuentes internas $s$ y las condiciones iniciales y de contorno 
-son datos. Se busca encontrar la solución $\ut$ a la ecuación~\eqref{eq:RTE}.
+$c$, las fuentes internas $s(\x,\hth,t)$ y las condiciones iniciales y de contorno 
+son datos. Se busca encontrar la solución $\ut$ a la Ecuación~\eqref{eq:RTE}.
 
-En el problema inverso, alguno de los parámetros son conocidos, 
+En el problema {\bf inverso}, alguno de los parámetros son conocidos, 
  y se dispone de mediciones experimentales  
 obtenidas por detectores. 
 A partir de estas mediciones, 
@@ -21,23 +21,19 @@ el objetivo de este problema es la reconstrucción de las características del m
 al resto de los parámetros desconocidos. 
 
 En el contexto de esta Tesis, reconstruiremos, para distintos problemas, 
- el coeficiente de absorción $a(\x)$ en tomografía óptica. Esto encuentra numerosas aplicaciones.  
- La reconstrucción de las propiedades de absorción 
- permite la identificación de tumores~\cite{Zhu2005,Zhu2010,Fujii2016b}, 
-la obtención de imágenes funcionales del cerebro humano~\cite{Boas2001,bluestone2001,Arridge1999}, 
-y la caracterización de diferentes constituyentes del tejido 
-humano para la obtención de imágenes en medicina.
+ el coeficiente de absorción $a(\x)$ en tomografía óptica. Esto encuentra numerosas aplicaciones. Por ejemplo, 
+ para aplicaciones médicas, identificación de tumores~\cite{Zhu2005,Zhu2010,Fujii2016b}, imágenes funcionales del cerebro~\cite{Boas2001,bluestone2001,Arridge1999}, 
+y la caracterización de diferentes constituyentes del tejido.
 En el caso de tomografía por fluorescencia y tomografía de bioluminiscencia~\cite{Klose2005,Klose2009,Ren2010},
- se intentan reconstruir 
-las fuentes $s(\x,\hth,t)$ en la ec.~\eqref{eq:RTE}. 
+ se intentan determinar 
+las fuentes $s(\x,\hth,t)$ en la Ec.~\eqref{eq:RTE}. 
 Estas fuentes están relacionadas a los coeficientes de absorción de los 
 cromóforos y fluoróforos. 
 En aplicaciones de diagnóstico y monitoreo para el tratamiento de tumores, 
 se asume cierta información previa  
 del coeficiente de dispersión 
 $b(\x)$. Esta se obtiene, generalmente, mediante técnicas de 
- imágenes de alta resolución~\cite{Althobaiti2017,Guven2003}, \eg Resonancia Magnética. 
-  El uso de estas técnicas posee ciertas limitaciones. 
+ imágenes de alta resolución~\cite{Althobaiti2017,Guven2003}, \eg Resonancia Magnética, que poseen ciertas limitaciones.   
  El alto costo y la baja disponibilidad 
 de este tipo de aparatos dificulta el seguimiento de tratamientos  
 asistidos por diagnóstico de imágenes. 
@@ -45,7 +41,7 @@ Por el contrario, los dispositivos
 utilizados en tomografía óptica son portables, facilitando su disponibilidad. 
 Las imágenes permiten determinar regiones, 
 como por ejemplo ciertos tejidos óseos, o 
-el aire en la traquea del cuello humano en las cuales 
+el aire en la traquea del cuello humano, en las cuales 
 los coeficientes de absorción toman valores conocidos.  
 Adicionalmente, estas sirven para imponer cotas superiores e inferiores 
 de $a(\x)$, lo que permite restringir el espacio de funciones donde se busca minimizar 
@@ -81,17 +77,17 @@ presentado en la sección siguiente.
  \label{fig:mobir}
 \end{wrapfigure}
 
-En esta Tesis desarrollamos un algoritmo tipo MOBIR~\cite{Hielscher1999,Kim2010} (del inglés, {\em Model Based Iterative Image  
-Reconstruction}). Este tipo de esquemas se basan en un modelo físico, y un método de minimización 
+En este trabajo desarrollamos un algoritmo tipo MOBIR~\cite{Hielscher1999,Kim2010} (del inglés, {\em Model Based Iterative Image  
+Reconstruction}). Este esquema se basa en un modelo físico, y un método de minimización 
 iterativo para la reconstrucción del parámetro deseado en el problema inverso.
 El modelo físico utilizado es la Ecuación de Transporte Radiativo~\eqref{eq:RTE}. 
 Para la minimización del funcional objetivo (que será introducido en una sección posterior) 
 emplearemos el método de minimización 
 de Broyden--Fletcher--Goldfarb--Shanno (BFGS) con uso de memoria reducido 
 (lm--BFGS, de su sigla en inglés)~\cite{Byrd1995}. Este puede ser considerado un caso particular 
-de los métodos de cuasi--Newton~\cite{Nocedal2006,Klose2003QN,Ren2006}.
+de los métodos cuasi--Newton~\cite{Nocedal2006,Klose2003QN,Ren2006}.
 El problema inverso en tomografía óptica es resuelto como un problema de optimización 
-no lineal. A partir de un coeficiente de absorción $a(\x)^0$ inicial, 
+no lineal. A partir de un coeficiente de absorción $a^0(\x)$ inicial, 
 se actualiza su valor  en cada paso de la iteración $i$, 
 mediante el método lm--BFGS según~\cite{Klose2003QN}
 \begin{equation}
@@ -100,8 +96,7 @@ mediante el método lm--BFGS según~\cite{Klose2003QN}
 \end{equation}
 donde $\mathbf{a}^{i}(\x)$ es el 
 vector obtenido a partir del coeficiente de absorción $a(\x)$, 
-con la variable $\x$ discretizada, $\alpha^i$ es el largo del paso de Newton (que lo consideraremos 
-en general $\alpha^i=1$). En el caso del método de Newton (o {\em steepest descent}), la dirección de 
+con la variable $\x$ discretizada, $\alpha^i$ es el largo del paso de Newton (consideraremos $\alpha^i=1$). En el caso del método de Newton (o {\em steepest descent}), la dirección de 
 descenso vendrá dada por el gradiente $\mathbf{d}=-\nabla_a g$, donde la función objetivo $g$ será definida posteriormente. 
 En el contexto de esta Tesis la dirección de descenso será determinada por el método lm--BFGS, 
 muy eficiente en tomografía óptica~\cite{Klose2003QN,Ren2006,Prieto2017}. 
@@ -128,14 +123,13 @@ Exigiendo que se anule la derivada de $m(\mathbf{d^i})$, se llega la dirección 
 \mathbf{d}^i=-(\nabla_a^2 g^i )^{-1} \nabla_a g^i.
 \label{eq:direccion}
 \end{equation}
-El principal obstáculo para la aplicación de la dirección de Newton es la 
-necesidad de calcular la inversa del Hessiano $\nabla_a^2 g^i$ de la función objetivo,  
-cálculo que en tomografía óptica puede 
+El principal obstáculo para la aplicación de la dirección de Newton radica en el cálculo de la inversa del Hessiano $\nabla_a^2 g^i$ de la función objetivo,  
+que en tomografía óptica puede 
 resultar extremadamente costoso, debido a la alta dimensionalidad de la ETR. 
 Por este motivo, el método BFGS implementa una aproximación del Hessiano (mas concretamente, 
 de la inversa del Hessiano) que 
 es actualizada a cada paso de la iteración. Formalmente, se suma y resta el término $ \nabla_a^2 g \mathbf{d}^i$ 
-en la ecuación~\eqref{eq:Taylor2}, y se llega a
+en la Ecuación~\eqref{eq:Taylor2}, y se llega a
 \begin{equation}
 \nabla_a g[\mathbf{a}^i+ \mathbf{d}^i]\approx \nabla_a g[\mathbf{a}^i]+ \nabla_a^2 g[\mathbf{a}^i]\mathbf{d}^i + \int_0^1   \left( \nabla_a^2 g[\mathbf{a}^i+t\mathbf{d}^i]-\nabla_a^2 g[\mathbf{a}^i] \right)\mathbf{d}^idt
 \label{eq:Taylor3}
@@ -167,7 +161,7 @@ La fórmula BFGS para actualizar el Hessiano en cada iteración viene dada por~\
 \end{equation}
 la cual cumple la relación~\eqref{eq:Taylor5}, donde $\rho^i=\frac{1}{(y^i)^T s^i}$ 
 y $V^i=\id - \rho^i y^i (s^i)^T$. 
-La dirección de descenso, finalmente, se obtiene de la ecuación~\eqref{eq:direccion} reemplazando 
+La dirección de descenso, finalmente, se obtiene de la Ecuación~\eqref{eq:direccion} reemplazando 
 el Hessiano por su aproximación $B^i$
 \begin{equation}
 \mathbf{d}^{i}=-(B^{i})^{-1} \nabla_a g[\mathbf{a}^i]. 
@@ -182,7 +176,7 @@ de absorción es actualizado en cada iteración utilizando la relación
 \mathbf{a}^{i+1}(\x)=\mathbf{a}^{i}(\x)-(B^{i})^{-1} \nabla_a g[\mathbf{a}^i].
 \label{eq:update2}
 \end{equation}
-La discretización de la inversa del Hessiano $(B^i)^{-1}$ se representa con una matriz 
+La discretización de la inversa del Hessiano $(B^i)^{-1}$ se representa con una matriz,  
 que para el problema 2D tiene $N_x \times N_y$ puntos. 
 La manipulación y almacenamiento de esta matriz puede ser sumamente costosa. Por ello, 
  se utiliza una versión aproximada, en la cual sólo se almacenan los vectores $\{s^k, y^k\}$, 
@@ -192,7 +186,7 @@ Se utiliza una aproximación inicial al Hessiano $(B^i)^{-1}_0$
 (B^i)^{-1}_0=\gamma^i \id,\quad \quad \gamma^i=\frac{(s^{i-1})^T y^{i-1}}{(y^{i-1})^Ty^{i-1}},
 \label{eq:initHess}
 \end{equation}
-y de la ecuación~\eqref{eq:HBFGS} se tiene la relación de recurrencia
+y de la Ecuación~\eqref{eq:HBFGS} se tiene la relación de recurrencia
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -227,29 +221,29 @@ de donde surge el algoritmo~\eqref{algbfgs}~\cite{Byrd1995,Nocedal2006}
   
 En esta Tesis utilizaremos el valor 
 de $m=5$, partiendo de un coeficiente inicial $a^0(\x)$ dado 
-por cierto conocimiento previo, como por ejemplo, la imagen 
-de resonancia magnética de un cuello humano utilizada en la sec.~\ref{sec:inverseres}.
-Las cotas inferiores $a^l(\x)$ y superiores $a^u(\x)$ al coeficiente de absorción 
+por cierto conocimiento previo. En la Sec.~\ref{sec:inverseres}, esto se ejemplifica utilizando la imagen 
+de resonancia magnética de un cuello humano.
+Las cotas inferiores $a^l(\x)$ y superiores $a^u(\x)$ del coeficiente de absorción 
 limitan el subespacio de soluciones posibles a $a^l(\x)\leq a^i(\x) \leq a^u(\x)$. 
 Una condición física que debe cumplirse siempre es que la cota inferior 
 no sea negativa. Las regiones a estudiar que se diferencian del medio 
-conocido se denominan inclusiones. En aquellos tejidos donde 
-no ocurren inclusiones, el coeficiente de absorción tiene 
-cotas superiores conocidas 
-se conocen cotas superiores para el coeficiente de absorción, y además, 
-puede utilizarse los valores conocidos de $a(\x)$ como cotas sobre 
-aquellos tejidos donde se sabe que la inclusión no puede ocurrir, 
-o si, por la naturaleza del diagnóstico que se está realizando, 
-se espera que una dada inclusión 
-se encuentre dentro de cierto tipo de tejido, restringiendo mediante cotas 
-la reconstrucción para que ocurra dentro del tejido esperado, fijando los 
-valores para el resto de los tejidos, como puede ser, la existencia de 
-una región de absorción y dispersión nula en la traquea para el cuello 
-humano, o las regiones óseas para el caso en el que se intenta dar un diagnóstico 
-para un tipo de tumor específico, como lo puede ser para el cáncer de tiroides, 
-donde se sabe que el tumor se encontrará localizado en el tejido blando. 
-El procedimiento por el cual se imponen dichas cotas en los coeficientes 
-puede encontrarse en la ref.~\cite{Byrd1995}. 
+conocido se denominan inclusiones. En aquellos tejidos donde se sabe 
+que no habrán inclusiones, el coeficiente de absorción 
+puede fijarse utilizando $a^l(\x) = a^u(\x)=a^0(\x)$, cuyo valor se obtiene de la información preliminar. Si, por la naturaleza del diagnóstico que se está realizando, 
+se espera que una dada inclusión no 
+se encuentre dentro de cierto tipo de tejido 
+puede restringirse la minimización para excluirlo 
+del cálculo. 
+Esto ocurre, por ejemplo, en la traquea del cuello humano, que 
+al estar llena de aire, no puede contener 
+un tumor en su interior.
+Adicionalmente, se conocen cotas para el tipo de inclusión 
+que se estudia, \eg existen límites superiores e inferiores para los 
+excesos de absorción producidos por la existencia de tumores, 
+que también son utilizados para limitar el espacio de soluciones 
+del problema inverso. 
+El algoritmo mediante el cual se imponen dichas cotas en los coeficientes 
+se detalla en la ref.~\cite{Byrd1995}. 
 
 \section{El operador de transporte y otras definiciones preliminares}
 En esta sección, haremos uso del operador de transporte, el cual definimos
@@ -280,7 +274,7 @@ de contorno
 donde todas las cantidades fueron definidas en la sección~\ref{sec:ETR}.
 
 
-Para concluir esta sección, mencionamos la ``función ventana''~\cite{Bruno2014}
+Introducimos la ``función ventana''~\cite{Bruno2014}
 \begin{equation}
 \begin{aligned}
 \begin{split}
@@ -311,66 +305,76 @@ así como el modelado de la sensibilidad espacial de los fotodetectores.
 
 \section{El método de Fuentes Múltiples Superpuestas}
 \label{sec:FMS}
-El problema inverso en tomografía óptica en el dominio temporal, es ubicuamente resuelto utilizando el denominado ``método de barrido'' (MB), del inglés, ``Transport Sweep''. En éste método, se requiere la resolución de un problema directo y un problema adjunto 
-para cada fuente $q_i(\x,\hth,t)$, $i=1,\ldots,N_q$ en la ecuación~\eqref{eq:RTEt}, 
+En los problemas de tomografía óptica, la absorción 
+y dispersión del medio requieren el uso de un número 
+de fuentes lumínicas, que permitan sensar 
+las diferentes regiones del dominio en consideración. 
+Para esto, en general, se utiliza el denominado ``método de barrido'' (MB), del inglés, ``Transport Sweep''.
+En éste, se requiere la resolución de un problema directo y un problema adjunto 
+para cada fuente $q_i(\x,\hth,t)$, $i=1,\ldots,N_q$ 
 con $N_q$ el número total de fuentes empleadas. 
-El mayor inconveniente que encuentra este método es que el costo computacional 
-incrementa linealmente con el número de fuentes utilizadas. En general, 
-cada fuente permite sensar diferentes partes del dominio espacial en consideración. 
-Dado que la intensidad lumínica de las fuentes laser empleadas sufre una 
-atenuación de tipo exponencial, debido a la absorción y a la dispersión 
-en el interior del medio participante, en general se requiere la utilización de 
-fuentes múltiples. Debido a la atenuación exponencial de la intensidad lumínica, 
+El costo computacional en este método se 
+incrementa linealmente con el número de fuentes utilizadas. 
+
+ Debido a la atenuación exponencial de la intensidad lumínica, 
 en general, la iluminación entre fuentes lejanas no suele afectarse entre sí. 
-Motivados por este hecho en esta Tesis introducimos un método de Fuentes Múltiples 
-Simultáneas (FMS). Este método se vale del uso de ``fuentes generalizadas'', 
-las cuales pueden representar una o múltiples fuentes láser, las cuales 
-pueden ser activadas, con ciertos retrasos temporales, de forma superpuesta 
-en un único problema directo, lo que brinda ventajas en el costo computacional 
-que serán demostradas mas adelante.  
+Motivados por este hecho, en esta Tesis introducimos un método de Fuentes Múltiples 
+Superpuestas (FMS). Este introduce ``fuentes generalizadas'', 
+que pueden representar una o múltiples fuentes láser, y
+pueden ser activadas, con ciertos retrasos temporales. 
+Esto conforma un único problema directo, lo que brinda ventajas considerables en su costo computacional, como 
+demostraremos mas adelante. 
 
-Los métodos MB y FMS se basan en el uso de dos tipos diferentes de fuentes, 
-donde ambas pueden expresarse como
+Los métodos MB y FMS se basan en el uso de dos tipos diferentes de fuentes, que pueden expresarse como
 \begin{equation}
-  q = q_i(\x,\hth,t) =\sum_{k=1}^{N_s} s_{k,i}(\x,\hth,t) ,\quad i=1,2,\ldots,N_q
+  q = q_i(\x,\hth,t) =\sum_{k=1}^{N_s} s_{k,i}(\x,\hth,t) ,\quad i=1,2,\ldots,N_q \, ,
 \label{eq:RTEsources}
-\end{equation}
-para ciertos valores enteros de $N_q$ y $N_s$. Utilizando la 
-función ventana~\eqref{eq:sourcelabwind}, definimos
-\begin{equation}
-  s_{k,i}(\x,\hth,t) = \exp(-|\x-\x_{k,i}|^2/
-  2\sigma_\x^2)w(\beta_{k,i})w(\gamma_{k,i}),
-\label{eq:RTEsources2}
-\end{equation}
-para las posiciones de las fuentes láser $\x_{k,i}\in\partial\Omega$, 
-con el diámetro de la iluminación láser sobre la superficie del dominio $\partial \Omega$ 
-siendo $\sigma_\x$, y la distribución 
-ángular $\beta_{k,i}=|\theta-\theta_{k,i}|/\sigma_{\theta}$, 
-donde $\theta_{k,i}$ ($0\leq \theta_{k,i} < 2\pi$) y $\sigma_{\theta}$
-modelan el ángulo para la dirección $\hth_{k,i}$ en la que apunta el láser 
-y la distribución ángular de la radiación para el láser $(k,i)$-ésimo, respectivamente. 
-Similarmente, $\gamma_{k,i}=|t-\tau_{k,i}|/\sigma_t$, modela el pulso 
-láser, con retardos temporales $\tau_{k,i}\geq 0$ para diferentes fuentes láser, 
-y donde $\sigma_t$ denota la mitad de la duración total del pulso láser. 
+\end{equation} 
+donde $i$ distingue a cada fuente generalizada, y el índice $k$ indica el número de fuentes láser contenido en cada una de ellas. 
+Para las fuentes en el método MB, fijamos $N_s=1$ y, en general, $N_q>1$. Esto implica 
+que existen $N_q$ fuentes láser, y cada una de ellas requiere la resolución de un problema directo y adjunto para cada iteración en el problema inverso.  
+En nuestro método FMS, utilizamos $N_s>1$ y $N_q=1$. Esto 
+significa que $N_s$ fuentes láser son superpuestas en una única ``fuente generalizada''. Sólo 
+debe resolverse un único par de problemas directo y 
+adjunto por iteración para la resolución del problema inverso.
 
-Para las fuentes en el método MB fijamos $N_s=1$ y, en general, $N_q>1$ 
-(se utiliza una secuencia de $N_q>1$ fuentes láser, requiriendo la resolución de 
-$N_q$ pares de problemas directos y adjuntos por cada iteración en el problema inverso), 
-mientras que en el método FMS propuesto, utilizamos $N_s>1$ y $N_q=1$ (de forma 
-que $N_s>1$ fuentes láser son superpuestas en una única ``fuente generalizada'', 
-requiriendo por lo tanto la resolución de un único par de problemas directo y 
-adjunto por iteración para la resolución del problema inverso). En cada ``barido''
-del método MB cada una de las $N_q>1$ fuentes láser es aplicada de forma 
-independiente de las otras, con todos los retardos temporales $\tau_{i,1}=0$ ($1\leq i\leq N_q$), y se guardan los valores registrados por todos los fotodetectores utilizados~\cite{Prieto2017,Dorn}. En el método FMS propuesto, en cambio, 
-se utiliza una única fuente generalizada ($N_q=1$), la cual incorpora 
-las contribuciones de las $N_s>1$ fuentes láser alrededor de $\partial \Omega$, 
-con retardos temporales $\tau_{1,k}\geq 0$. Debido a los retardos temporales 
-utilizados, en el método FMS se requieren simulaciones mas largas para la resolución de los problemas directo y adjunto, en comparación con las simulaciones requeridas 
-para cada una de las $N_q>1$ fuentes en el método MB. Sin embargo, como se 
-demuestra en la sección~\ref{sec:inverseres}, la estrategia de fuentes simultaneas 
+Utilizando la 
+función ventana~\eqref{eq:sourcelabwind}, definimos
+\begin{eqnarray}
+  s_{k,i}(\x,\hth,t) & = & \exp \left(-\frac{|\x-\x_{k,i}|^2}{
+  2\sigma_\x^2}\right)\,w(\beta_{k,i}(\theta))\,w(\gamma_{k,i}(t)), %\nonumber \\
+%  \beta_{k,i}(\theta)& = & |\theta-\theta_{k,i}|/\sigma_{\theta}, \nonumber \\
+%\gamma_{k,i}(t) & = & |t-\tau_{k,i}|/\sigma_t \, ,
+\label{eq:RTEsources2}
+\end{eqnarray}
+para las posiciones de las fuentes láser $\x_{k,i}\in\partial\Omega$, de diámetro $\sigma_\x$. La ventana $w(\beta_{k,i})$, 
+con
+\begin{eqnarray}
+  \beta_{k,i}(\theta)& = & \frac{|\theta-\theta_{k,i}|}{\sigma_{\theta}},
+\label{eq:RTEsources2beta}
+\end{eqnarray}
+ representa el comportamiento ángular de la radiación para cada láser $(k,i)$, donde $0\leq \theta_{k,i} < 2\pi$  
+es el ángulo de la dirección $\hth_{k,i}$ en la que apunta 
+y $\sigma_{\theta}$ es su dispersión angular. 
+Similarmente $w(\gamma_{k,i})$, con 
+\begin{eqnarray}
+\gamma_{k,i}(t) & = & \frac{|t-\tau_{k,i}|}{\sigma_t} ,
+\label{eq:RTEsources2gamma}
+\end{eqnarray}
+modela el perfil temporal de 
+cada pulso, con retardos $\tau_{k,i}\geq 0$, 
+y duración $2\sigma_t$. 
+
+ En cada ``barrido''
+del método MB, cada fuente lumínica $i$ se aplica sin retardo temporal ($\tau_{i,1}=0$), y se guardan los valores registrados por todos los fotodetectores utilizados~\cite{Prieto2017,Dorn}. Por otra parte, en el método FMS, 
+el encendido de distintas $N_s$ fuentes a tiempos diferentes 
+se representa con una única fuente generalizada ($N_q=1$), 
+con retardos temporales $\tau_{1,k}\geq 0$.
+ En este método se requieren simulaciones más largas en comparación con el tiempo requerido  
+para cada una de las $N_q$ fuentes del método MB. Sin embargo, como se 
+demuestra en la Sección~\ref{sec:inverseres}, la estrategia de fuentes superpuestas 
 permite obtener ganancias significativas en términos del costo computacional 
-total para todo el proceso de inversión, sin detrmiento en la precisión de la 
-reconstrucción obtenida. 
+total para todo el proceso de inversión, sin detrimiento de la precisión. 
 
 \section{La función objetivo y el formalismo del método adjunto para el cálculo de su gradiente}
 
@@ -1361,7 +1365,7 @@ $\x_3^2=(10.0,6.0)$, $\x_3^3=(4.0,10.0)$,  $\x_3^4=(0.0,4.0)$ con $\tau_{3,1}=60
 and $\x_4^1=(4.0,0.0)$, 
 $\x_4^2=(10.0,4.0)$, $\x_4^3=(6.0,10.0)$,  $\x_4^4=(0.0,6.0)$ con retraso temporal $\tau_{4,1}=900$ps. 
 
-Este arreglo fue guiado por la idea de utilizar en el métofo FMS como fuentes simultaneas 
+Este arreglo fue guiado por la idea de utilizar en el método FMS como fuentes superpuestas 
 aquellas que están geométricamente más alejadas unas de otras. Debido 
 al decaimiento exponencial en la onda de densidad de fotones difusos (ver fig.~\ref{fig:photonflux}), es esperable que cada fuente láser tenga un efecto despreciable en las lecturas de los detectores cercanos a otras fuentes geométricamente lejanas, 
 aún cuando fueron activadas de manera simultánea. Para dar tiempo suficiente 
