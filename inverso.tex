@@ -840,20 +840,18 @@ satisfacen la relación
 \label{eq:RRTEdet6}
 \end{equation}
 siempre que los términos de borde se anulen, dadas las condiciones (i),~(ii) y (iii).
+
+
  \subsection{Verificación numérica de la expresion~\eqref{eq:FDwin2} para la derivada 
  funcional}
  \label{sec:gradcver}
  
  En esta sección presentamos verificaciones numéricas para la derivada 
  funcional~\eqref{eq:FDwin2}, así como una comprobación de la precisión 
- obtenida para dicha expresión, con $\lambda_i$ obtenida como solución del 
- problema adjunto~\eqref{eq:AdjointProblem}. Con este fin, 
+ obtenida para dicha expresión. Con este fin, 
  consideramos un problema del tipo~\eqref{eq:RTEt} con condiciones 
- de borde de Fresnel, que se describe a continuación---y el cual 
- sirve para ilustrar, en particular, la capacidad de la expresión 
- para la derivada funcional de producir el gradiente necesario 
- en los métodos de minimización empleados, para el método adjunto desarrollado en este trabajo (el cual incluye las condiciones de borde de Fresnel). 
- Para esto, compararemos la derivada funcional obtenida mediante la expresión~\eqref{gradient_fin} con la obtenida por la aproximación 
+ de borde de Fresnel~\eqref{eq:Fresnel}, que se describe a continuación. 
+  Compararemos la derivada funcional obtenida mediante la expresión~\eqref{gradient_fin} con la obtenida por la aproximación 
  de diferencias finitas
  \begin{equation}
   \frac{d (g \circ u)}{da}[a;\delta a]^{FD} \sim
@@ -863,22 +861,19 @@ siempre que los términos de borde se anulen, dadas las condiciones (i),~(ii) y 
 \end{equation}
 para una dada dirección $\delta a(\x)$, y un valor apropiado del parámetro $\varepsilon$. 
 Utilizaremos el índice de refracción $n_{\Omega}=1.4$ para el dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$ 
-con $n_s=1$ en el exterior del dominio $\Omega$.  Por simplicidad utilizaremos $\delta a=1$, 
-con coeficientes espaciales de absorción y dispersión constantes $a(\x)=a$ y $b(\x)=b$, 
-y, sin perdida de generalidad, consideramos una única fuente generalizada $q_1 = q$ 
-para ambos métodos, donde el método MB incluye una única fuente láser 
-incidente en $\x_s=(1.5,0.0)$, y el método FMS consiste en la combinación 
+con $n_0=1$ en el exterior del dominio $\Omega$.  Por simplicidad utilizaremos $\delta a(\x)=1$, 
+con coeficientes de absorción y dispersión constantes $a(\x)=a$ y $b(\x)=b$. Estudiaremos los errores producidos 
+en los dos métodos señalados anteriormente, MB y FMS.  
+Sin pérdida de generalidad, consideramos una única fuente generalizada $q_1 = q$. 
+Para el método MB se incluye una única fuente láser 
+incidente en $\x_s=(1.5,0.0)$. Para FMS se incorpora la combinación 
 de cuatro fuentes láser, cada una ubicada en el centro del dominio espacial cuadrado 
-$\Omega$, con $\x_{1,s}=(1.5,0.0)$, $\x_{2,s}=(3.0,1.5)$, $\x_{3,s}=(1.5,3.0)$ 
-y  $\x_{4,s}=(0,1.5)$ (en la sección~\ref{sec:forwsim} se darán mas detalles 
-sobre el modelado de las fuentes). En estas pruebas, empleamos un único 
-detector para ambos métodos, con $\x_d=(0.0,0.75)$. Los retardos 
-temporales requeridos por el método FMS se fijan dando un desplazamiento 
-temporal inicial de $50$ps entre fuentes sucesivas, comenzando con la fuente 
- $\x_{1,s}$ ubicada en $y_{\text{min}}$, y sucediéndose el resto de las fuentes 
- en sentido antihorario, en el orden dado por la sucesión $\x_{1,s}$, $\x_{2,s}$, $\x_{3,s}$ y $\x_{4,s}$. Utilizamos una duración total de $60$ps para cada pulso, y el sistema 
- fue evolucionado para ambos métodos MB y FMS hasta un tiempo final de $600$ps. 
- Utilizamos una discretización espacial con $N_x=N_y=200$ puntos espaciales, 
+$\Omega$, con $\x_{1,s}=(1.5,0.0)$ cm, $\x_{2,s}=(3.0,1.5)$ cm, $\x_{3,s}=(1.5,3.0)$ cm 
+y  $\x_{4,s}=(0,1.5)$ cm. En estas pruebas, empleamos un único 
+detector para ambos métodos, ubicado en $\x_d=(0.0,0.75)$ cm. Los retardos 
+temporales de las fuentes usadas en FMS son de $50$ ps entre fuentes sucesivas y cada pulso tiene una duración total de $60$ ps. El sistema 
+ fue evolucionado para ambos métodos MB y FMS hasta un tiempo final de $600$ ps. 
+ Utilizamos una discretización con $N_x=N_y=200$ espaciales, 
  $M=32$ direcciones discretas y $T=60000$ pasos temporales, tanto para el 
  problema directo como el adjunto. 
  
@@ -887,11 +882,11 @@ temporal inicial de $50$ps entre fuentes sucesivas, comenzando con la fuente
  e=\displaystyle \frac{\left|\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{Adj}- \frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{FD}\right|}{|\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{Adj}|},
 \label{eq:Errgrad}
 \end{equation}
-para cuantoficar la calidad del método adjunto propuesto, donde
+para cuantificar la calidad del método adjunto propuesto, donde
 $\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{Adj}$ y
 $\frac{d (g\circ u)}{da}[a;\delta a]^\mathrm{FD}$ denotan 
 las derivadas funcionales obtenidas por el método adjunto y por 
-diferencias finitas, respectivamente; empleamos el valor $\varepsilon=0.0001$ 
+diferencias finitas, respectivamente. Empleamos el valor $\varepsilon=0.0001$ 
 para la aproximación por diferencias finitas~\eqref{eq:ObjFD}.
 \begin{table}[h!]
 \caption{Diferencias obtenidas para las derivadas funcionales}
@@ -902,64 +897,65 @@ para la aproximación por diferencias finitas~\eqref{eq:ObjFD}.
 $a[1/cm]$ & ~ & $b[1/cm]$ ~ & $g$ ~ & $e_{\text{TS}}$  ~ & $e_{\text{MSS}}$ \\
 \hline
 %\hline
-$0.35$ & ~ & $80$ ~ &$0.9$ ~ & $0.00008$  ~ & $0.00009$ \\
-$0.35$ & ~ & $20$ ~ &$0.0$ ~ & $0.00008$  ~ & $0.00097$ \\
-$0.35$ & ~ & $8.0$ ~ &$0.0$ ~ & $0.00027$  ~ & $0.00016$ \\
-$0.35$ & ~ & $0.1$ ~ &$0.0$ ~ & $0.00009$  ~ & $0.00026$ \\
+$0.35$ & ~ & $80$ ~ &$0.9$ ~ & $8\times 10^{-5}$  ~ & $9\times 10^{-5}$ \\
+$0.35$ & ~ & $20$ ~ &$0.0$ ~ & $8\times 10^{-5}$  ~ & $1\times 10^{-3}$ \\
+$0.35$ & ~ & $8.0$ ~ &$0.0$ ~ & $3\times 10^{-4}$  ~ & $2\times 10^{-4}$ \\
+$0.35$ & ~ & $0.1$ ~ &$0.0$ ~ & $9\times 10^{-5}$  ~ & $3\times 10^{-4}$ \\
 \hline
 \end{tabular}
 \label{tab:grads}
 \end{center}
 \end{table}
-La tabla~\eqref{tab:grads} demuestra el acuerdo observado entre los valores 
-de la derivada funcional obtenida por diferencias finitas y por el método adjunto 
-para varios regímenes de transporte, incluyendo diferentes valores 
-del coeficiente de dispersión $b$ y del coeficiente de anisotropía $g$, 
-para ambos métodos MB y FMS. 
-El acuerdo observado en todos los casos es excelente, y sugiere que 
-las grandes ganancias que se obtienen en términos de costo computacional 
-mediante el método adjunto, el cual para el cálculo del gradiente funcional total 
-implica un factor del orden de  $(N_x+1) \times (N_y+1) = 40,401$, 
-no impacta en la precisión con la que se determina dicho gradiente.
+La Tabla~\eqref{tab:grads} muestra los errores de las derivadas funcionales 
+para varios regímenes de transporte, incluyendo diferentes  coeficientes de dispersión $b$ y de anisotropía $g$. 
+El acuerdo observado en todos los casos es excelente. 
+Como mostraremos en la sección siguiente, el método adjunto reduce la complejidad computacional 
+en varios órdenes de magnitud para el cálculo del gradiente 
+funcional. 
+Sin embargo, esto no impacta en la precisión con la que se determina el mismo.
 
 \subsection{Cálculo numérico del gradiente funcional}
 \label{sec:gradc}
- 
-Los gradientes numéricos utilizados en las secciones siguientes 
-se obtuvieron resolviendo los problemas directos y adjuntos, 
-seguidos del uso de la versión discreta de la ecuación~\eqref{gradient_fin} 
-para un número de perturbaciones $\delta a(\x)$---las cuales son elegidas 
-de forma tal de que provean una variación del coeficiente de absorción $a(\x)$ 
-en cada uno de los puntos del dominio espacial $\Omega$ discretizado $\x_{\ell_1,\ell_2} \in \Omega$ 
-para la discretización $\x_{\ell_1,\ell_2} \in \Omega$ donde 
+A continuación describiremos el empleo del método adjunto 
+para el cálculo de la derivada funcional~\eqref{gradient_fin} 
+en la determinación del gradiente de la función objetivo.
+Discretizamos el dominio espacial $\Omega$ asumiendo $\x_{\ell_1,\ell_2} \in \Omega$  donde 
 $\x_{\ell_1,\ell_2} =(x_{\text{min}}+ [\ell_1-1]\Delta x)\hat x
 +(y_{\text{min}}+[\ell_2-1]\Delta y)\hat y$, $\ell_1=1,\ldots,N_x+1$,
-$\ell_2=1,\ldots,N_y+1$. Para la perturbación $\delta a(\x)$ elegimos 
-una función de forma piramidal, la cual es igual a uno en el punto 
- $\x_{\ell_1,\ell_2} \in \Omega$, y se anula en y más allá 
- de los primeros vecinos de dicho punto en la grilla discreta. 
+$\ell_2=1,\ldots,N_y+1$. 
+
+Estamos interesados 
+en calcular las variaciones de la función objetivo 
+con perturbaciones $\delta a(\x)$ del coeficiente de 
+absorción en cada dirección posible. 
+Las perturbaciones escogidas son un conjunto de funciones 
+definidas para cada uno de los puntos $\x_{\ell_1,\ell_2} \in \Omega$. Estas funciones tienen forma piramidal, donde cada una de ellas tiene un valor igual a uno en un único punto 
+ $\x_{\ell_1,\ell_2}$, y es cero en el resto de los puntos, tal como se ilustra en la Fig.~\ref{fig:piramid} 
  \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/piramide.eps}\\
   \caption{
 Función de forma piramidal utilizada para producir las variaciones 
-en el coeficiente de absorción. Esta función vale uno en el punto $\x_{\ell_1,\ell_2}$ 
-y se anula a partir de los primeros vecinos de la grilla discreta.}
- \label{fig:priamid}
+en el coeficiente de absorción. Esta función vale uno en un  punto dado 
+y se anula en el resto de los puntos de la grilla discreta.}
+ \label{fig:piramid}
 \end{figure}
  La función piramidal discretizada es aproximada como un producto 
  de deltas de Kronecker $\delta a_{\ell_1,\ell_2}=\delta_{r,\ell_1}\times\delta_{s,\ell_2}$.
  Llamando $\nabla_a g(\x_{\ell_1,\ell_2})$ al valor del gradiente funcional 
  en la dirección $\delta a_{\ell_1,\ell_2}$, la versión discreta 
- de la ecuación~\eqref{gradient_fin} resulta
+ de la Ecuación~\eqref{gradient_fin} resulta
 \begin{equation}
-\nabla_a g(\x_{\ell_1,\ell_2})  \sim -\sum_{m,j}  \lambda_{\ell_1,\ell_2,m,j}u_{\ell_1,\ell_2,m,j} \Delta \theta \Delta x \Delta y \Delta t,
+\begin{aligned}
+\nabla_a g(\x_{\ell_1,\ell_2}) & =- \int_0^T \int_{\Omega} \int_{S^1} \lambda(\x,\hth,t) \, \delta
+  a(\x) \, u(\x,\hth,t) \, d \theta \, d\x \, dt \\ & \sim -\sum_{m,j}  \lambda_{\ell_1,\ell_2,m,j}u_{\ell_1,\ell_2,m,j} \Delta \theta \, \Delta x \, \Delta y \, \Delta t,
+\end{aligned}
 \label{eq:FDwin22}
 \end{equation}
 donde $\lambda_{\ell_1,\ell_2,m,j}\sim
-\lambda(\x_{\ell_1,\ell_2},\theta_m,t_j)$ y 
-$u_{\ell_1,\ell_2,m,j} \sim u(\x_{\ell_1,\ell_2},\theta_m,t_j)$. 
-Cabe notar que la ecuación~\eqref{eq:FDwin22} representa 
+\lambda(\x_{\ell_1,\ell_2},\hth_m,t_j)$ y 
+$u_{\ell_1,\ell_2,m,j} \sim u(\x_{\ell_1,\ell_2},\hth_m,t_j)$. 
+Cabe notar que la Ecuación~\eqref{eq:FDwin22} representa 
 la derivada funcional para una única dirección $\delta a_{\ell_1,\ell_2}$ 
 correspondiente a la componente $(\ell_1,\ell_2)$ del gradiente funcional discreto, 
 donde el gradiente total discretizado estará dado por las perturbaciones en todas las direcciones posibles
@@ -967,28 +963,25 @@ donde el gradiente total discretizado estará dado por las perturbaciones en tod
 \nabla_a g(\x)  = \left( \nabla_a g(\x_{1,1}), \nabla_a g(\x_{1,2}), \ldots, \nabla_a g(\x_{N_x+1,N_y+1})   \right).
 \label{eq:grad_total}
 \end{equation}
-En el método adjunto, la evaluación de la ecuación~\eqref{eq:FDwin22} 
+En el método adjunto, la evaluación de la Ecuación~\eqref{eq:FDwin22} 
 para todas las componentes $(\ell_1,\ell_2)$ del gradiente funcional requiere 
 únicamente la resolución de un problema directo de transporte, y de 
-su correspondiente problema adjunto para cada función generalizada $q=q_i$. 
-En cambio, el uso de la ecuación~\eqref{eq:ObjFD} demanda la resolución de 
-un número mucho más grande de problemas directos, donde debe evaluarse 
-la resolución de $(N_x+1)\times (N_y+1)$ problemas de transporte, uno 
-para cada perturbación del coeficiente $a(\x)$ en el dominio discretizado. 
+su correspondiente problema adjunto para cada fuente  generalizada $q=q_i$. 
+En cambio, el método de diferencias finitas hace uso de la Ecuación~\eqref{eq:ObjFD}, que demanda la resolución de 
+un número mucho más grande de problemas directos. En este último caso  deben evaluarse $(N_x+1) \times (N_y+1)$ problemas de transporte (uno por cada perturbación del coeficiente $a(\x)$ en el dominio discretizado). En el ejemplo que estamos analizando en esta sección $N_x=N_y=200$ por lo cual 
+el método adjunto reduce el tiempo computacional 
+en un factor $40401$.
 Cabe mencionar también que el método adjunto requiere el almacenamiento 
-en memoria de las soluciones completas a los problemas directos y adjunto de transporte 
-para varios pasos temporales para realizar las integrales correspondientes~\eqref{eq:FDwin22}. 
-El algoritmo paralelo propuesto en esta Tesis es apropiado para este problema, ya que permite 
-dividir simultáneamente el costo computacional y los requerimientos de memoria 
-en sistemas distribuidos.
+en memoria de las soluciones completas de los problemas directos y adjunto de transporte 
+para varios pasos temporales~\eqref{eq:FDwin22}. 
+El algoritmo paralelo propuesto en esta Tesis es apropiado para este problema, ya que no solo permite 
+reducir el tiempo computacional, si no que también distribuye los requerimientos de memoria en los diferentes nodos. 
  
-Como ilustración, en la figura~\ref{fig:gradient} se muestra 
+Como ilustración, en la Figura~\ref{fig:gradient} se muestra 
 el gradiente completo $\nabla_a g(\x_{\ell_1,\ell_2})$ para 
-$1\leq \ell_1\leq N_x+1$ y $1\leq \ell_2\leq N_y+1$ 
-para ciertos valores $\tilde G_{j,i}$, con una única fuente y 
-un único detector ubicados en $\x_s=(1.5,0)$ y $\x_d=(1.0,0)$, 
-respectivamente.
-
+$1\leq \ell_1\leq N_x+1$ y $1\leq \ell_2\leq N_y+1$. 
+El problema a simular consiste en una única fuente ubicada en $\x_s=(1.5,0)$ y un único detector ubicado en $\x_d=(1.0,0)$. 
+Elegimos el caso en el cual el detector mide $\tilde G_{j,i}(t)=1$.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/gradient.png}
@@ -1001,6 +994,10 @@ respectivamente.
   y por eso no se muestra.}
  \label{fig:gradient}
 \end{figure} 
+Como se observa en la figura, 
+el gradiente contiene información de los trayectos determinados por los fotones que salen desde la fuente y arriban al detector. Dichos trayectos definen una región donde el gradiente es más 
+sensible a las variaciones del medio participante. Esto muestra la importancia de contar con varias fuentes y varios detectores 
+que sean capaces de sensar la totalidad del dominio. 
  
 \section{Datos sintéticos con fuentes láser pulsadas} 
 \label{sec:sintetic} 
@@ -1015,7 +1012,7 @@ de una función picuda de la variable $\theta$, donde el pico
 de esta función coincide con la dirección del láser incidente. 
 Resolvemos la ecuación~ \eqref{eq:RTE} con condiciones de Fresnel, 
 utilizando los parámetros $a(\x)=0.1$/cm, $b(\x)=20$/cm, $g=0.8$, 
-$n_{\Omega}=1.4$ y $n_s=1.0$, en un dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$. 
+$n_{\Omega}=1.4$ y $n_0=1.0$, en un dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$. 
 
 Mostraremos resultados para el método MB, y el método FMS. 
 En el método MB empleamos una única fuente generalizada~\eqref{eq:RTEsources}, 
