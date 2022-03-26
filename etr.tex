@@ -348,15 +348,15 @@ que inyectan radiación, con las fuentes inicialmente apagadas.
 \subsection{Discretización de la variable espacial: el método de Continuación de Fourier (FC)}
 \label{sec:fcmethod}
 Para la discretización espacial, desarrollamos la implementación 
-del método de Continuación de Fourier (FC)~\cite{Lyon2010,Albin2011,Amlani2016}.  
+del método de Continuación de Fourier (FC)~\cite{Bruno2010,Albin2011,Amlani2016}.  
 Partiendo de una función que no es periódica, el método FC produce 
 una función continuada, que la convierte en periódica. 
 El método FC es un tipo de colocación de Fourier que permite 
 el tratamiento de condiciones de contorno arbitrarias, con 
 convergencia de tipo espectral.
 Éste método ha sido aplicado 
-a la resolución de las ecuaciones de Navier--Stokes~\cite{Cubillos2019}, la ecuación de difusión~\cite{Bruno}, 
-y la ecuación de onda~\cite{}, entre otras~\cite{Fontana}. En esta tesis extendimos su uso  
+a la resolución de las ecuaciones de Navier--Stokes~\cite{Albin2011,Bruno2019}, la ecuación de difusión~\cite{Bruno2010}, 
+y la ecuación de onda, entre otras~\cite{Bruno2014},. En esta tesis extendimos su uso  
 para la resolución de la ecuación~\eqref{eq:RTE}~\cite{Gaggioli2019}.
 
 Describiremos brevemente el método FC (para mayor detalle, ver apéndice~\ref{ap:fcgram}). 
@@ -635,7 +635,7 @@ obtenido numéricamente comparado con el obtenido analíticamente
 \begin{aligned}
 \phi^{\text{an}}(\x,t)&=\int_{2\pi} u^{an}(\x,\theta,t) d\theta=
 k_{\phi}\times e^{-(x-t)^2-(y-t)^2},\\
-k_{\phi}&=\int_{2\pi}e^{-\cos(\theta)^2}d\theta\simeq 4.0528...,
+k_{\phi}&=\int_{2\pi}e^{-\cos(\theta)^2}d\theta\simeq 4,052876133898710,
 \end{aligned}
 \end{split}
 \label{eq:photondensityan}
@@ -644,16 +644,7 @@ y estudiamos las propiedades de convergencia
 para todas las variables involucradas. La constante 
 $k_{\phi}$ se calcula con 16 dígitos de precisión. 
 La solución numérica es evaluada hasta el tiempo final $T$, 
-y luego se calcula el error máximo según
-\begin{equation*}
-\varepsilon=\text{max}_{\x \in \Omega} |\phi^{\text{num}}(\x,T) -\phi^{\text{an}}(\x,T)|.
-\label{eq:maximumerror}
-\end{equation*}
-El error numérico es en general una función 
-de cada una de las variables discretizadas en la ETR, 
-\ie~$\varepsilon=\varepsilon(\Delta \x, \Delta \theta, \Delta t)$. 
-Al comparar el término del error para una grilla de una dada variable, 
-el resto de los parámentros de discretización permanecen fijos.
+y luego se calcula el error máximo según\looseness=-1
 \begin{wrapfigure}{r}{0.45\textwidth}
  \begin{subfigure}{
   \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
@@ -669,6 +660,15 @@ el resto de los parámentros de discretización permanecen fijos.
   muestran la pendiente para un orden de convergencia prescripto. }
  \label{fig:convman}
 \end{wrapfigure}
+\begin{equation*}
+\varepsilon=\text{max}_{\x \in \Omega} |\phi^{\text{num}}(\x,T) -\phi^{\text{an}}(\x,T)|.
+\label{eq:maximumerror}
+\end{equation*}
+El error numérico es en general una función 
+de cada una de las variables discretizadas en la ETR, 
+\ie~$\varepsilon=\varepsilon(\Delta \x, \Delta \theta, \Delta t)$. 
+Al comparar el término del error para una grilla de una dada variable, 
+el resto de los parámentros de discretización permanecen fijos.
 
 El alto orden de convergencia del algoritmo FC--DOM en paralelo 
 para la solución manufacturada propuesta se muestra en la figura~(\ref{fig:convman}). 
@@ -1373,6 +1373,14 @@ integrando con respecto a la nueva variable $r$ son {\em uniformes para todo $x$
 el procedimiento no deteriora la convergencia de la 
 cuadratura de la integral colisional.  Por lo tanto 
 se logra un alto orden de convergencia en ambas variables $\xi$ y $x$
+
+Resolvemos la ecuación de transporte que resulta en el nuevo dominio computacional
+$[v_{\text{min}},v_{\text{max}}]$, con 
+$[x'_{\text{min}},x'_{\text{max}}]=[\frac{e^{v_{\text{min}}}}{e^{v_{\text{min}}}+1},
+\frac{e^{v_{\text{max}}}}{e^{v_{\text{max}}}+1}]$, 
+y condiciones de bordes en $x'_{\text{min}}$ y $x'_{\text{max}}$ 
+obtenidas a partir de la solución asintótica~\eqref{eq:intf}. Utilizando las nuevas variables, 
+el problema de transporte dependiente del tiempo resulta 
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
   \vspace{2mm}
@@ -1383,17 +1391,10 @@ se logra un alto orden de convergencia en ambas variables $\xi$ y $x$
   propuesto. Diamantes: orden de convergencia.}
  \label{fig:conv}
 \end{wrapfigure}
-Resolvemos la ecuación de transporte que resulta en el nuevo dominio computacional
-$[v_{\text{min}},v_{\text{max}}]$, con 
-$[x'_{\text{min}},x'_{\text{max}}]=[\frac{e^{v_{\text{min}}}}{e^{v_{\text{min}}}+1},
-\frac{e^{v_{\text{max}}}}{e^{v_{\text{max}}}+1}]$, 
-y condiciones de bordes en $x'_{\text{min}}$ y $x'_{\text{max}}$ 
-obtenidas a partir de la solución asintótica~\eqref{eq:intf}. Utilizando las nuevas variables, 
-el problema de transporte dependiente del tiempo resulta 
 \begin{equation}
 \begin{split}
-&\frac{\partial}{\partial t}\uvi+\xi(2+2\cosh(v)) \frac{\partial}{\partial v}\uvi+
-\st\uvi=\sct \int_{-1}^{1} \uvp d\xi'+q, \\
+&\frac{\partial}{\partial t}\uvi+\xi(2+2\cosh(v)) \frac{\partial}{\partial v}\uvi\\
+&+\st\uvi=\sct \int_{-1}^{1} \uvp d\xi'+q, \\
 &u(v,\xi,t_{\text{min}})=0,\\
 &u(v_{\text{min}},\xi,t)=u_{0}(x'_{\text{min}},\xi,t) \; \forall \xi>0,\\
 &u(v_{\text{max}},\xi,t)=u_{0}(x'_{\text{max}},\xi,t) \; \forall \xi<0.
