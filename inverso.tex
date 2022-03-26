@@ -1370,7 +1370,16 @@ e igual número de procesadores en cada caso.
  \label{fig:itdet}
 \end{figure*}
 
-\pagebreak 
+
+Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
+presentan propiedades de convergencia similares para un número variable 
+de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
+el método FMS tomó  $12689$ segundos para llegar a las 100 iteraciones, 
+del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
+dando una aceleración en la reconstrucción por un factor cercano a siete. 
+En la figura además se aprecia que incrementar el número de fuentes y de detectores 
+genera una mejora considerable en la convergencia del problema inverso 
+para un número fijo de iteraciones. El número de fuentes 
 \begin{wrapfigure}{r}{0.48\textwidth}
 %\begin{figure*}[h!]
 \centering
@@ -1384,16 +1393,7 @@ e igual número de procesadores en cada caso.
  \label{fig:reconst}
 %\end{figure*}
 \end{wrapfigure}
-Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
-presentan propiedades de convergencia similares para un número variable 
-de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
-el método FMS tomó  $12689$ segundos para llegar a las 100 iteraciones, 
-del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
-dando una aceleración en la reconstrucción por un factor cercano a siete. 
-
-En la figura además se aprecia que incrementar el número de fuentes y de detectores 
-genera una mejora considerable en la convergencia del problema inverso 
-para un número fijo de iteraciones. El número de fuentes tiene un impacto 
+tiene un impacto 
 mayor en las reconstrucciones que el número de detectores. 
 Esto puede entenderse de la siguiente manera, dado que la función de las fuentes 
 es producir los fotones que viajan a través del medio participante para sensarlo 
@@ -1408,7 +1408,6 @@ la totalidad de $\partial \Omega$, que si esas fuentes son simuladas en problema
 directos separados, lo cual sugiere que el método FMS es una estrategia 
 de optimización adecuada que permite ganar tiempo de cómputo aprovechando 
 el uso de fuentes simultáneas en único problema directo.
-
 
 En la figura~\ref{fig:reconst} mostramos el coeficiente de absorción verdadero, 
 junto con los coeficientes de absorción obtenidos mediante la resolución del problema 
