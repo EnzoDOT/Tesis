@@ -1553,46 +1553,36 @@ se propagan hacia todo el dominio espacial.
  \label{fig:DDlayer2}
 \end{figure}
 
-Físicamente, los valores pequeños de $\xi$ para las direcciones 
-entrantes en puntos espaciales $x$ cerca del borde (cf. fig.~\ref{fig:parallelgeom}) 
-estan asociados a caminos geométricos largos, lo que da origen 
-a las transiciones abruptas de capa límite observadas.
-Esta estructura de capa límite, que no fue previamente reportada 
-en la literatura, constituye un fenómeno físico que no fue correctamente 
-descripto, ni caracterizado por varias décadas, y que como se demostró 
-en la fig.~\ref{fig:DDlayer} y a lo largo de esta sección, 
-posee importantes implicancias en la física y en las simulaciones 
-numéricas de los fenómenos de transporte.
-
-Cabe destacar que las estructuras de capa límite 
-existen durante todos los tiempos de la evolución temporal. 
-En particular, tanto el análisis asintótico de la capa límite que 
-derivó en la ecuación~\eqref{eq:intf}, 
-así como las pruebas numéricas, sugieren que existirá una capa límite 
-siempre qué en un entorno del borde existan fuentes, haya dispersión, 
-o condiciones de contorno no nulas. La teoría desarrollada predice 
-una capa límite que se desarrollará con gradientes abruptos en regiones 
-espaciales $x'$ de orden $x'\sim \ord(\xi/\mu_t(0))$, y en regiones direccionales $\xi'$  
-de orden $\xi'\sim \ord(\mu_t(0) x)$. Si las grillas numéricas empleadas no resuelven 
-correctamente estas regiones, las soluciones obtenidas para problemas 
-que reflejan situaciones realistas para aplicaciones en tomografía óptica 
-(y otras disciplinas donde se requiere la solución a la ecuación ETR con 
-condiciones de contorno arbitrarias) gozarán de un orden de convergencia 
-limitado por la existencia de derivadas no acotadas en el integrando 
-colisional, y por la existencia de soluciones subyacentes que en el dominio 
-espacial discretizado también lucirán como discontinuas debido a la falta de resolución 
-en la grilla numérica, 
-con consecuencias e implicaciones similares a las observadas 
-en esta sección para la integral colisional en la fig.~\ref{fig:intconvs} 
-para la aproximación 
-numérica del operador diferencial en la ecuación de transporte. 
-
-Si bien el desarrollo de algoritmos capaces de resolver las capas límite 
-en más dimensiones espaciales es un tema de investigación vigente que escapa 
-al alcance de esta tesis, los resultados obtenidos en el marco de la misma 
-establecen los cimientos para la elaboración de nuevos métodos numéricos 
-capaces de hacerlo, de relevancia e impacto en varias disciplinas tecnológicas 
-y científicas. 
+Cerraremos la sección con un breve resumen de los reultados de
+nuestra investigación.
+Hemos encontrado una región particular, en la cual aparecen gradientes
+muy abruptos, que no pueden ser resueltos con los métodos numéricos
+tradicionales, sino que exigen un tratamiento especial.
+Las condiciones físicas que hacen posible la aparición de las capas
+límite están relacionadas con que en el borde existan fuentes, haya
+dispersión, o condiciones de contorno no nulas.
+La teoría desarrollada predice gradientes abruptos en regiones
+espaciales $x'$ de orden $x'\sim \ord(\xi/\mu_t(0))$, y en regiones
+direccionales $\xi'$ de orden $\xi'\sim \ord(\mu_t(0) x)$.
+La explicación física, relaciona a valores pequeños de las direcciones
+entrantes $\xi$ en puntos espaciales $x$ cerca del borde
+(cf. fig.~\ref{fig:parallelgeom}), con caminos geométricos largos.
+Tanto el análisis asintótico como las simulaciones numéricas demuestran
+que las estructuras irregulares aparecen durante toda la evolución temporal
+y sólo pueden ser resueltas utilizando grillas numéricas extremadamente
+finas, lo que resulta prácticamente irrealizable.
+Si bien el fenómeno se produce en puntos muy cercanos al
+borde, los errores producidos en esa región espacial se propagan,
+produciendo oscilaciones espurias en las soluciones, y degradando la
+convergencia de los métodos numéricos empleados.
+En nuestro trabajo hemos logrado no sólo identificar la presencia
+de las capas límite, sino también tratarlas correctamente con un
+cambio de variable que acumula los puntos de la grilla numérica cerca
+del borde. La combinación de esta técnica, con el uso del método FC--DOM
+para la resolución de las ecuaciones diferenciales, permiten superar
+todas las dificultades numéricas mencionadas durante décadas en
+diversos trabajos, muchos de ellos haciendo un diagnóstico equivocado
+de sus causas.
 
 \pagestyle{empty}
 
