@@ -645,7 +645,7 @@ Sustrayendo la combinación linear~\eqref{eq:RRTEdet5} de la Ec.~\eqref{eq:Adjoi
 \end{equation}
 La cantidad $\frac{\partial u_i}{\partial a}$ 
 en~\eqref{eq:AdjointMEthodIII} resultará eliminada, 
-como es deseado, sí y sólo sí
+como es deseado, si y sólo si
 \begin{equation}
   \mathcal{A} +\mathcal{B} +\mathcal{C} = \mathcal{G},
 \label{eq:AdjointMEthod4}
@@ -676,7 +676,7 @@ Para obtener la solución  $\lambda_i=\lambda_i[a](\x,\hth,t)$
 a la ec.~\eqref{eq:AdjointMEthod4} notamos que, en vista 
 de los dominios de integración espacial en las ecuaciones~\eqref{eq:AdjointMEthod2} 
 y ~\eqref{eq:A}-\eqref{eq:C}, la Ec.~\eqref{eq:AdjointMEthod4} 
-se satisface sí y sólo sí se cumplen 
+se satisface si y sólo si se cumplen 
 las condiciones (i)~$\mathcal{A}=0$, (ii)~$\mathcal{B}=0$ y
 (iii)~$\mathcal{C}-\mathcal{G}=0$. La condición (i) claramente implica 
 que el término en corchetes para~\eqref{eq:A} se anule:
@@ -1174,7 +1174,7 @@ de la función objetivo esté por encima de dicho criterio de convergencia.
 \State \textbf{para} $i=1,\ldots,i_{\text{max}}$ \textbf{hacer}
 \State \hskip0.5em \textbf{para} cada fuente generalizada $q_j, j = 1,\ldots,N_q$ \textbf{hacer}
 \State \hskip0.75em Resolver el problema directo por medio del algoritmo~\ref{algfc}
-\State \hskip0.75em Evaluar ec.~\eqref{eq:FObjpr}, sí $ \Lambda[a] < C $ ir a \ref{al:end}.
+\State \hskip0.75em Evaluar ec.~\eqref{eq:FObjpr}, si $ \Lambda[a] < C $ ir a \ref{al:end}.
 \State \hskip0.75em Resolver el problema adjunto mediante el algoritmo~\ref{algfc}
 \State \hskip0.5em\textbf{terminar}
 \State \hskip0.5em Construir el gradiente ec.~\eqref{eq:FDwin22}
