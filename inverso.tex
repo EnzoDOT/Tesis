@@ -1376,12 +1376,7 @@ e igual número de procesadores en cada caso.
 Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
 presentan propiedades de convergencia similares para un número variable 
 de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
-el método FMS tomó  $12689$ segundos para llegar a las 100 iteraciones, 
-del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
-dando una aceleración en la reconstrucción por un factor cercano a siete. 
-En la figura además se aprecia que incrementar el número de fuentes y de detectores 
-genera una mejora considerable en la convergencia del problema inverso 
-para un número fijo de iteraciones. El número de fuentes 
+el método FMS tomó  $12689$ segundos para llegar a las 100 
 \begin{wrapfigure}{r}{0.48\textwidth}
 %\begin{figure*}[h!]
 \centering
@@ -1395,6 +1390,12 @@ para un número fijo de iteraciones. El número de fuentes
  \label{fig:reconst}
 %\end{figure*}
 \end{wrapfigure}
+iteraciones, 
+del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
+dando una aceleración en la reconstrucción por un factor cercano a siete. 
+En la figura además se aprecia que incrementar el número de fuentes y de detectores 
+genera una mejora considerable en la convergencia del problema inverso 
+para un número fijo de iteraciones. El número de fuentes 
 tiene un impacto 
 mayor en las reconstrucciones que el número de detectores. 
 Esto puede entenderse de la siguiente manera, dado que la función de las fuentes 

@@ -1364,23 +1364,17 @@ Se encontró el valor $p=3.2$ como óptimo, el cual
 provee una convergencia excelente para la integral 
 de dispersión en la variable $\xi$, y a su vez limita la rapidez 
 de las variaciones de la capa límite en la variable espacial $x$. 
-
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/puntos.eps}
+  \caption{Cambio de variable $v(x) = \log \left( \frac{x}{1-x} \right)$. 
+  Una grilla uniforme en la variable $v$ genera una discretización en $x$ 
+  con puntos que se acumulan en la cercanía de los bordes.}
+ \label{fig:pindonga}
+\end{figure}
 Para resolver la capa límite en $x$, utilizamos 
 el cambio de variable logarítmico $v=\log(\frac{x}{1-x})$, 
-que origina una grilla con puntos extremadamente cercanos al borde. 
-Dado que las cotas halladas~\eqref{eq:boundedderblayer} para las derivadas del 
-integrando con respecto a la nueva variable $r$ son {\em uniformes para todo $x$},  
-el procedimiento no deteriora la convergencia de la 
-cuadratura de la integral colisional.  Por lo tanto 
-se logra un alto orden de convergencia en ambas variables $\xi$ y $x$
-
-Resolvemos la ecuación de transporte que resulta en el nuevo dominio computacional
-$[v_{\text{min}},v_{\text{max}}]$, con 
-$[x'_{\text{min}},x'_{\text{max}}]=[\frac{e^{v_{\text{min}}}}{e^{v_{\text{min}}}+1},
-\frac{e^{v_{\text{max}}}}{e^{v_{\text{max}}}+1}]$, 
-y condiciones de bordes en $x'_{\text{min}}$ y $x'_{\text{max}}$ 
-obtenidas a partir de la solución asintótica~\eqref{eq:intf}. Utilizando las nuevas variables, 
-el problema de transporte dependiente del tiempo resulta 
+que origina una grilla con puntos extremadamente cercanos al borde (Fig.~\ref{fig:pindonga}). 
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
   \vspace{2mm}
@@ -1391,6 +1385,19 @@ el problema de transporte dependiente del tiempo resulta
   propuesto. Diamantes: orden de convergencia.}
  \label{fig:conv}
 \end{wrapfigure}
+Dado que las cotas halladas~\eqref{eq:boundedderblayer} para las derivadas del 
+integrando con respecto a la nueva variable $r$ son {\em uniformes para todo $x$},  
+el procedimiento no deteriora la convergencia de la 
+cuadratura de la integral colisional.  Por lo tanto 
+se logra un alto orden de convergencia en ambas variables $\xi$ y $x$.
+
+Resolvemos la ecuación de transporte que resulta en el nuevo dominio computacional
+$[v_{\text{min}},v_{\text{max}}]$, con 
+$[x'_{\text{min}},x'_{\text{max}}]=[\frac{e^{v_{\text{min}}}}{e^{v_{\text{min}}}+1},
+\frac{e^{v_{\text{max}}}}{e^{v_{\text{max}}}+1}]$, 
+y condiciones de bordes en $x'_{\text{min}}$ y $x'_{\text{max}}$ 
+obtenidas a partir de la solución asintótica~\eqref{eq:intf}. Utilizando las nuevas variables, 
+el problema de transporte dependiente del tiempo resulta 
 \begin{equation}
 \begin{split}
 &\frac{\partial}{\partial t}\uvi+\xi(2+2\cosh(v)) \frac{\partial}{\partial v}\uvi\\
@@ -1411,8 +1418,8 @@ implícita de la Ecuación~\eqref{eq:transptd} resulta
 \begin{equation*}
 \begin{aligned}
  \left[ \id \right. & \left.+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  
- u^{n+1}_j  = \\
-&\sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
+ u^{n+1}_j  = 
+\sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
  \sum_{i=1}^{M} w_i \tilde{u}_i^{n+1} + \beta\Delta t q^{n+1},
 \end{aligned}
 \label{eq:transptd1disc}
