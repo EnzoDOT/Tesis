@@ -411,7 +411,6 @@ en términos del problema de minimización de la función objetivo
 donde, para un dado coeficiente de absorción $a$,
 \begin{equation}\label{ui_of_a}
   u_i = u_i[a] = u_i[a](\x,\hth,t)
-\label{eq:FObjpr2}
 \end{equation}
 denota la solución $u=u_i$ de la ecuación~\eqref{eq:RTEt} con $q=q_i$. Para $N_q$ fuentes generalizadas $q_i$, y $N_d$ 
 detecciones $\tilde{G}_{j,i}$ para cada una de ellas, se obtiene un número 
@@ -982,7 +981,7 @@ reducir el tiempo computacional, si no que también distribuye los requerimiento
 Como ilustración, en la Figura~\ref{fig:gradient} se muestra 
 el gradiente completo $\nabla_a g(\x_{\ell_1,\ell_2})$ para 
 $1\leq \ell_1\leq N_x+1$ y $1\leq \ell_2\leq N_y+1$. 
-El problema a simular consiste en una única fuente ubicada en $\x_s=(1.5,0)$ y un único detector ubicado en $\x_d=(1.0,0)$. 
+El problema a simular consiste en una única fuente ubicada en $\x_s=(1.5,0)$ cm y un único detector ubicado en $\x_d=(0,1.0)$ cm. 
 Elegimos el caso en el cual el detector mide $\tilde G_{j,i}(t)=1$.
 \begin{figure}[h!]
 \centering
@@ -990,8 +989,8 @@ Elegimos el caso en el cual el detector mide $\tilde G_{j,i}(t)=1$.
   \caption{
   Gradiente espacial~\eqref{eq:FDwin22} para todas 
   las direcciones discretas posibles $1\leq \ell_1\leq N_x+1$ y $1\leq \ell_2\leq N_y+1$, 
-  con una única fuente y un único detector ubicados en $\x_s=(1.5,0)$ 
-  y $\x_d=(0,1.0)$ respectivamente. Dado que se utilizaron 
+  con una única fuente y un único detector ubicados en $\x_s=(1.5,0)$ cm
+  y $\x_d=(0,1.0)$ cm respectivamente. Dado que se utilizaron 
   datos artificiales, la escala carece de sentido en esta figura, 
   y por eso no se muestra.}
  \label{fig:gradient}
@@ -1003,51 +1002,70 @@ que sean capaces de sensar la totalidad del dominio.
  
 \section{Datos sintéticos con fuentes láser pulsadas} 
 \label{sec:sintetic} 
+En esta sección simularemos escenarios que pueden ocurrir 
+en tomografía óptica. A diferencia de los casos estudiados 
+hasta ahora, trataremos situaciones 
+con fuentes láser pulsadas que inciden sobre la superficie del dominio. 
+Modelamos la radiación colimada de las fuentes por medio 
+de una función de la variable $\hth$, que tienen máximos abruptos en las direcciones incidentes de cada láser. 
+Resolvemos el problema directo~\eqref{eq:RTE} con condiciones 
+de borde de Fresnel, utilizando el método FC--DOM. 
 
-En las situaciones realistas en tomografía óptica, típicamente 
-radiación colimada proveniente de una fuente láser incide en 
-la superficie del dominio en estudio. En esta sección damos 
-algunos detalles para el modelo directo utilizado  
-en las siguientes secciones para la resolución del problema inverso. 
-Modelamos la radiación colimada de las fuentes láser por medio 
-de una función picuda de la variable $\theta$, donde el pico 
-de esta función coincide con la dirección del láser incidente. 
-Resolvemos la ecuación~ \eqref{eq:RTE} con condiciones de Fresnel, 
-utilizando los parámetros $a(\x)=0.1$/cm, $b(\x)=20$/cm, $g=0.8$, 
-$n_{\Omega}=1.4$ y $n_0=1.0$, en un dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$. 
+Asumimos un medio con parámetros ópticos constantes $a(\x)=0.1$ cm$^{-1}$, $b(\x)=20$ cm$^{-1}$, $g=0.8$, 
+$n_{\Omega}=1.4$ y $n_0=1.0$, en un dominio espacial $\Omega=[x_{\text{min}},x_{\text{max}}]\times[y_{\text{min}},y_{\text{max}}]=[0,3]\times[0,3]$ cm$^2$. 
 
-Mostraremos resultados para el método MB, y el método FMS. 
-En el método MB empleamos una única fuente generalizada~\eqref{eq:RTEsources}, 
-con $N_q=N_s=1$, centrada en $\x_{1,1}=(1.5,0)$, apuntando en la dirección 
-normal a la superficie, de forma qué $\theta_{1,1}=\pi/2$, con $\sigma_{\theta}=\pi/4$. 
-En esta configuración, una fuente láser inyecta radiación $y_{\text{min}}$ en la dirección 
-normal a $\partial \Omega$ (Fig.~\ref{fig:photonflux}).
+Como primer caso supondremos una única fuente, 
+centrada en $\x_{1,1}=(1.5,0)$ cm, apuntando en la dirección 
+normal a la superficie, con $\theta_{1,1}=\pi/2$, y $\sigma_{\theta}=\pi/4$. 
+Este láser inyecta un pulso de $60$ ps de duración. La Figura~\ref{fig:photonflux} muestra la evolución 
+temporal de una ``onda de flujo de fotones'' difusos.
 \begin{figure*}[h!]
 \centering
   \includegraphics[width=0.325\textwidth]{figuras/sim_MB_t30.png}
   \includegraphics[width=0.325\textwidth]{figuras/sim_MB_t100.png}
   \includegraphics[width=0.325\textwidth]{figuras/sim_MB_t170.png}
-  \caption{Simulación para el modelo directo MB utilizando 
-  el método FC--DOM en paralelo~\ref{algfc} presentado en 
-  la sección~\ref{subsec:FC-DOM}. En la figura se muestra el 
-  flujo escalar $\phi(\x,t)$, ec.~\eqref{eq:photondensity} para tres tiempos 
-  diferentes utilizando el método MB con una única fuente generalizada. De 
-  izquierda a derecha se tiene $t=30$ps, 
-$t=100$ps y $t=170$ps, para una fuente láser 
-inyectando radiación en  $\x_s=(1.5,0)$cm. La figura muestra la evolución 
-temporal de una ``onda de flujo de fotones'' difusos.}
+  \caption{Simulación para el modelo directo utilizando 
+  el método FC--DOM en paralelo. En la figura se muestra el 
+  flujo escalar $\phi(\x,t)$ debido a una fuente láser 
+  ubicada en $\x_s=(1.5,0)$ cm para tres tiempos diferentes. De 
+  izquierda a derecha: $t=30$ ps, 
+$t=100$ ps y $t=170$ ps.}
  \label{fig:photonflux}
 \end{figure*}
- 
-Para el método FMS, utilizamos una única fuente generalizada, con cuatro 
-fuentes superpuestas, de forma qué $N_q=1$ y $N_s=4$. Cada fuente inyecta 
-radiación en la dirección normal a $\partial \Omega$ a través del 
-centro de las caras, con retardos temporales $\tau=200$ps entre fuentes sucesivas, 
-comenzando con la fuente ubicada en $y_{\text{min}}$, seguida de la fuente 
-en $y_{\text{max}}$, luego la ubicada en $x_{\text{min}}$ y finalmente 
-se enciende la fuente en $y_{\text{max}}$ (Fig.~\ref{fig:photonflux2}).   
- 
+En la Fig.~\ref{fig:detread} se muestra la lectura la lectura de un detector ubicado en 
+$\x_d=(0.0,0.75)$ cm en función del tiempo. 
+Dado que en situaciones realistas se espera 
+que los datos experimentales presenten ruido, agregamos un 10\% de fluctuaciones aleatorias. 
+Este tipo de simulaciones se utiliza para construir datos sintéticos 
+en el método MB.
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.48\linewidth]{figuras/detread_sweep.eps}
+  \caption{Lectura del detector ubicado en $\x_d=(0.0,0.75)$ cm para 
+  una única fuente (curva roja). Agregando un 10\% de ruido aleatorio 
+ se obtiene la señal sintética (curva negra).}
+ \label{fig:detread}
+\end{figure}
 
+A continuación resolveremos un problema directo en el cual 
+se introducen diversas fuentes pulsadas que se encienden en distintos tiempos. 
+Mostramos la resolución de este tipo de problemas, ya que constituye 
+una simulación tipica utilizada en la estrategia FMS. 
+En este ejemplo se inyecta radiación en la dirección normal a 
+la superficie por cuatro láseres ubicados en el centro de las caras. 
+Cada uno de estos pulsos tiene una duración de $60$ ps, 
+y se encienden con una separación temporal de $\tau=200$ps. 
+El orden de encendido es: primero la fuente ubicada en $y_{\text{min}}$, seguida de la fuente 
+en $y_{\text{max}}$, luego la ubicada en $x_{\text{min}}$ y finalmente 
+se enciende la fuente en $x_{\text{max}}$.   
+En la resolución que utiliza el método FMS estas cuatro fuentes 
+constituyen una única fuente generalizada ($N_q=1$ y $N_s=4$). 
+Se imponen estos retardos temporales 
+para desacoplar las señales 
+originadas por las fuentes individuales proveniente de diferentes lugares.
+La Figura~\ref{fig:photonflux2} muestra el flujo escalar resultante 
+para distintos tiempos.
+ 
 \begin{figure*}[h!]
 \centering
   \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t30.png}
@@ -1062,57 +1080,35 @@ se enciende la fuente en $y_{\text{max}}$ (Fig.~\ref{fig:photonflux2}).
   \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t630.png}
   \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t700.png}
   \includegraphics[width=0.325\textwidth]{figuras/sim_FMS_t770.png}
-  \caption{Simulación para el modelo directo FMS utilizando 
-  el método FC--DOM en paralelo~\ref{algfc} presentado en 
-  la sección~\ref{subsec:FC-DOM}. En la figura se muestra el 
-  flujo escalar $\phi(\x,t)=\phi(\x)$, ec.~\eqref{eq:photondensity} para tiempos 
-  diferentes utilizando el método FMS con una única fuente generalizada 
-  que contiene cuatro fuentes láser superpuestas, con tiempos de retraso $\tau=200$ps. De 
-  izquierda a derecha y de arriba hacía abajo, se tiene $t=30$ps, $t=100$ps y $t=170$ps, 
-   $t=230$ps, $t=300$ps y $t=370$ps,  $t=430$ps, $t=500$ps y $t=570$ps, 
-    $t=630$ps, $t=700$ps y $t=770$ps.}
+  \caption{Simulación para el problema directo utilizando 
+  el método FC--DOM en paralelo y asumiendo una única fuente 
+  generalizada que contiene cuatro fuentes láser que se encienden 
+  a distintos tiempos. De 
+  izquierda a derecha y de arriba hacía abajo: $t=30$ ps, $t=100$ ps y $t=170$ ps, 
+   $t=230$ ps, $t=300$ ps y $t=370$ ps,  $t=430$ ps, $t=500$ ps y $t=570$ ps, 
+    $t=630$ ps, $t=700$ ps y $t=770$ ps.}
  \label{fig:photonflux2}
 \end{figure*}
 
-Para las reconstrucciones numéricas presentadas en la sección siguiente, utilizamos 
-datos ``sintéticos'', esto es, datos generados de manera numérica 
-con el algoritmo FC--DOM, para un dado 
-coeficiente $a(\x)$. Dado que en situaciones realistas se espera 
-que los datos experimentales presenten ruido, agregamos a los 
-datos sintéticos un 10\% de ruido aleatorio a los datos sintéticos simulados 
-utilizados en las reconstrucciones del problema inverso. 
-
-
-Como puede observarse en la figura~\ref{fig:photonflux2}, para el método 
-MB, dado que cada fuente láser individual es tratada mediante una simulación 
-independiente de las otras fuentes, cada señal originada por los fotones 
-transportados en el medio participante desde el láser hasta los detectores 
-se encuentra desacoplada de la señal de las otras fuentes. En el método 
-FMS, en cambio, las señales de todas las fuentes láser individuales 
-aparece mezclada en los detectores.  El rol de los retardos temporales 
-utilizados en el método FMS es desacopla en algún grado para 
-un dado detector las señales 
-originadas por fuentes láser individuales proveniente desde diferentes lugares.  
+La Figura~\ref{fig:detread2} muestra los valores que mide un 
+detector ubicado en $\x_d=(3.0,2.25)$ en distintos tiempos. 
+Como puede observarse, las señales producidas por cada fuente 
+se superponen. Esto contrasta con la estrategia MB, 
+donde la información de cada fuente está desacoplada del resto.  
 
 \begin{figure}[h!]
 \centering
-  \includegraphics[width=0.48\linewidth]{figuras/detread_sweep.eps}
   \includegraphics[width=0.48\linewidth]{figuras/detread_prop.eps}
-  \caption{Lectura del detector $G[u_1]$ en la ec.~\eqref{eq:OpMed} para 
-  una única fuente generalizada del método MB, y una fuente generalizada con 
-  $N_s=4$ para el métofo FMS, antes y después de agregar un 10\% de ruido aleatorio 
-  a la señal. El detector utilizado se ubicó en  $\x_d=(3.0,2.25)$. Cada fuente 
-  láser individual se ubicó en el centro de las caras del dominio cuadrado. 
-  Como puede observarse, en el método FMS las lecturas de los detectores 
-  aparecen mezcladas. Utilizamos un retraso temporal  $\tau=200$ps entre las fuentes 
-  ubicadas en las diferentes caras.}
- \label{fig:detread}
+  \caption{Lectura del detector ubicado en $\x_d=(3.0,2.25)$ para las cuatro fuentes superpuestas, en función del tiempo 
+  (curva roja). Agregando un 10\% de ruido aleatorio 
+ se obtiene la señal sintética (curva negra).}
+ \label{fig:detread2}
 \end{figure}
 
 \section{Algoritmo para la resolución del problema inverso}
 \label{sec:inversesolv}
 
-Como se indico anteriormente, el algoritmo propuesto en esta Tesis para la resolución del 
+Como se indicó anteriormente, el algoritmo propuesto en esta Tesis para la resolución del 
 problema inverso incorpora, en particular, la estrategia FMS, basada 
 en el uso de fuentes que se aplican en un único problema directo, 
 en lugar de la estrategia MB utilizada previamente en la literatura. 
