@@ -308,13 +308,18 @@ El costo computacional en este método se
 incrementa linealmente con el número de fuentes utilizadas. 
 
  Debido a la atenuación exponencial de la intensidad lumínica, 
-en general, la iluminación entre fuentes lejanas no suele afectarse entre sí. 
-Motivados por este hecho, en esta Tesis introducimos un método de Fuentes Múltiples 
-Superpuestas (FMS). Este introduce ``fuentes generalizadas'', 
-que pueden representar una o múltiples fuentes láser, y
-pueden ser activadas, con ciertos retrasos temporales. 
-Esto conforma un único problema directo, lo que brinda ventajas considerables en su costo computacional, como 
-demostraremos mas adelante. 
+las fuentes aportan 
+una cantidad de fotones despreciables en los detectores 
+alejados de las mismas.  
+Esto hace que se pierda una gran cantidad de información, 
+aún incrementando la cantidad de fuentes utilizadas.   
+Esto nos motivó a concebir un método novedoso 
+con el que podemos evitar el desperdicio de esfuerzos computacionales. 
+En esta Tesis introducimos el método de Fuentes Múltiples Superpuestas (FMS), que consiste en la utilización de ``fuentes generalizadas''. Estas fuentes representan una o múltiples fuentes láser activadas con ciertos retrasos temporales. 
+Esto conforma un único problema directo en el cual 
+todos los detectores reciben información de las fuentes,
+ lo que brinda ventajas considerables en su costo computacional, como 
+demostraremos más adelante. 
 
 Los métodos MB y FMS se basan en el uso de dos tipos diferentes de fuentes, que pueden expresarse como
 \begin{equation}
@@ -1050,7 +1055,7 @@ en el método MB.
 A continuación resolveremos un problema directo en el cual 
 se introducen diversas fuentes pulsadas que se encienden en distintos tiempos. 
 Mostramos la resolución de este tipo de problemas, ya que constituye 
-una simulación tipica utilizada en la estrategia FMS. 
+una simulación típica utilizada en la estrategia FMS. 
 En este ejemplo se inyecta radiación en la dirección normal a 
 la superficie por cuatro láseres ubicados en el centro de las caras. 
 Cada uno de estos pulsos tiene una duración de $60$ ps, 
@@ -1105,73 +1110,72 @@ donde la información de cada fuente está desacoplada del resto.
  \label{fig:detread2}
 \end{figure}
 
-\section{Algoritmo para la resolución del problema inverso}
+\section{Algoritmo para la resolución de problemas inversos}
 \label{sec:inversesolv}
 
-Como se indicó anteriormente, el algoritmo propuesto en esta Tesis para la resolución del 
-problema inverso incorpora, en particular, la estrategia FMS, basada 
-en el uso de fuentes que se aplican en un único problema directo, 
-en lugar de la estrategia MB utilizada previamente en la literatura. 
-En el método MB, por cada fuente láser deben realizarse un par 
-de simulaciones para el problema directo y el problema adjunto, 
-para luego combinar los resultados para obtener el gradiente utilizado 
-en el método lm-BFGS. En cambio, en el método FMS propuesto, 
+Como se indicó anteriormente, proponemos en esta Tesis para la utilización de un algoritmo novedoso para el tratamiento de  
+problemas inversos. Esta estrategia se basa en el uso 
+de multiples fuentes escalonadas en el tiempo (FMS), 
+en lugar de la estrategia de barrido (MB) que subyace 
+en los métodos tradicionalmente presentados en la literatura. 
+En estos métodos previos,  por cada fuente láser deben realizarse simulaciones separadas para el par de problemas directo--adjunto, y luego combinar los resultados para obtener el gradiente utilizado en el método de minimización.
+ Por el contrario, en el método FMS que proponemos en nuestro trabajo,
 se construye la función objetivo utilizado una única fuente 
 generalizada que contiene a todas las fuentes láser, de forma tal 
-que se utiliza un único par de simulaciones para los problemas directos 
-y adjuntos, lo cual, como se demuestra en la sección~\ref{sec:inverseres} 
-(de manera cualitativa en las figuras~\ref{fig:itdet} y~\ref{fig:ithead} 
-y de forma cuantitativa en las figuras~\ref{fig:reconst} y~\ref{fig:rechead}) 
-reduce los tiempos de computo para el problema inverso de manera significativa 
-(\eg en un factor de seis en la figura~\ref{fig:ithead}), sin que se 
-produzca un deterioro en la calidad de la imagen obtenida. 
+que se utiliza {\em una única simulacion del par directo--adjunto}. Como se demuestra en la sección~\ref{sec:inverseres} 
+(de manera cualitativa en las Figuras~\ref{fig:itdet} y~\ref{fig:ithead} 
+y de forma cuantitativa en las Figuras~\ref{fig:reconst} y~\ref{fig:rechead}), nuestro método  
+reduce los tiempos de cómputo de manera significativa 
+(\eg en un factor de seis), sin que se 
+produzca ningún deterioro en la calidad de la imagen obtenida. 
 
-Buscamos el coeficiente de absorción que minimiza la ec.~\eqref{eq:FObjpr}  
-sujeto a las restricciones $a^l(\x) \leq a(\x) \leq a^u(\x) \forall \x$, \ie, buscamos 
-el coeficiente $a(\x)$ que es solución del problema 
+Resolvemos los problemas inversos basandonos en el método 
+iterativo cuasi--Newton de descenso de gradiente lm--BFGS. 
+En detalle, este método busca el coeficiente de absorción que minimiza la Ec.~\eqref{eq:FObjpr}  
+sujeto a las restricciones $a^l(\x) \leq a(\x) \leq a^u(\x) ~\forall \x$, o sea, buscamos 
+el coeficiente de absorción $a(\x)$ dado por 
 \begin{equation}
 \begin{split}
 \begin{aligned}
-a(\x)=\text{argmin}_{a^l \leq \widetilde a(\x) \leq a^u} \Lambda[a]
+a(\x)=\text{argmin}_{a^l \leq \widetilde a(\x) \leq a^u} \Lambda[a].
 \end{aligned}
 \end{split}
 \label{eq:minprob}
 \end{equation}
-
-Las restricciones impuestas en el proceso de minimización están dadas 
-por propiedades generales conocidas del coeficiente de absorción ($a^l(\x)\ge 0$ 
-es una condición física que siempre debe cumplirse), y por cierto conocimiento 
-del coeficiente, obtenido previamente por otras técnicas tomográficas, lo 
-cual reduce el espacio de soluciones admisibles al problema de minimización~\eqref{eq:minprob}.
+Las restricciones de los valores admisibles de la función 
+$\widetilde a(\x)$ es un conocimiento previo dado por las  propiedades de absorción generales del medio considerado. Una propiedad física que siempre debe cumplirse es que   
+$a^l(\x)\ge 0$. Información adicional adquirida por 
+técnicas de imagenes 
+puede incorporarse para reducir el espacio de soluciones admisibles. 
 
 El algoritmo para la resolución del problema inverso~\ref{algfcinv},
 procede de la siguiente manera. A partir de una estimación inicial $a^0(\x)$ para el
 coeficiente de absorción y utilizando las lecturas de los detectores experimentales
 $\widetilde{G}_{j,i}$, con $j=1, \ldots,N_d$ y $i=1,\ldots,N_q$, se resuelven
 los problemas directos y adjuntos~\eqref{eq:RTE}
-y~\eqref{eq:AdjointProblem}, a partir de lo cual se calcula el gradiente 
-funcional~\eqref{eq:FDwin22}. El gradiente funcional 
-se pasa al algoritmo lm-BFGS, que devuelve una actualización para 
-coeficiente de absorción $a^1(\x)$ que reduce las diferencias entre
+y~\eqref{eq:AdjointProblem}, y se calcula el gradiente 
+funcional~\eqref{eq:FDwin22}. Seguidamente, este gradiente 
+se utiliza en el algoritmo lm--BFGS, que devuelve una actualización para 
+coeficiente de absorción $a^1(\x)$ el cual reduce las diferencias entre
 las lecturas de los detectores experimentales y los valores para los detectores simulados.
 La iteración de este procedimiento converge, mediante el método lm-BFGS, al mínimo 
 de la función objetivo~\eqref{eq:FObjpr}.
 
-El algoritmo para la solución del problema inverso de transporte radiativo, 
-para un dado número de iteraciones $i_{\text{max}}$, se presenta en forma de pseudocódigo en el 
-algoritmo~\ref{algfcinv}. En este algoritmo, $C \in \mathbb{R}$ representa un criterio 
+El pseudocódigo con el cual solucionamos el problema inverso de transporte radiativo, 
+para un dado número de iteraciones $i_{\text{max}}$, se presenta en 
+Algoritmo~\ref{algfcinv}. Aquí $C \in \mathbb{R}$ representa un criterio 
 de convergencia preestablecido. El algoritmo se itera mientras el valor 
 de la función objetivo esté por encima de dicho criterio de convergencia.
 \begin{algorithm}
-\caption{Algoritmo para la resolución del problema inverso en paralelo}
+\caption{Pseudocódigo para la resolución del problema inverso}
 \label{algfcinv}
 \begin{algorithmic}[1]
 \State Dar una estimación inicial $a^0(\x)$
 \State \textbf{para} $i=1,\ldots,i_{\text{max}}$ \textbf{hacer}
 \State \hskip0.5em \textbf{para} cada fuente generalizada $q_j, j = 1,\ldots,N_q$ \textbf{hacer}
-\State \hskip0.75em Resolver el problema directo por medio del algoritmo~\ref{algfc}
+\State \hskip0.75em Resolver el problema directo por medio del Algoritmo~\ref{algfc}
 \State \hskip0.75em Evaluar ec.~\eqref{eq:FObjpr}, si $ \Lambda[a] < C $ ir a \ref{al:end}.
-\State \hskip0.75em Resolver el problema adjunto mediante el algoritmo~\ref{algfc}
+\State \hskip0.75em Resolver el problema adjunto mediante el Algoritmo~\ref{algfc}
 \State \hskip0.5em\textbf{terminar}
 \State \hskip0.5em Construir el gradiente ec.~\eqref{eq:FDwin22}
 \State \hskip0.5em Llamar al algoritmo lm-BFGS para actualizar el coeficiente $a^{i+1}(\x)$.       
@@ -1180,44 +1184,34 @@ de la función objetivo esté por encima de dicho criterio de convergencia.
 \end{algorithm}
 
 
-\section{Reconstrucciones numéricas}
+\section{Reconstrucciones numéricas del problema inverso}
 \label{sec:inverseres}
-En esta sección aplicamos los algoritmos desarrollados 
-en las secciones previas al problema inverso en tomografía óptica. 
-Los problemas inversos en tomografía óptica que consideramos 
-conciernen a configuraciones en las cuales se buscan inclusiones 
-sobre un tejido de ``fondo'' que se asume conocido. Esta situación describe, 
-\eg, los excesos en la absorción de la radiación originados 
-por la presencia de hemoglobina oxigenada en el cerebro, 
-producida por la respuesta hemodinámica debido a la activación 
-de una región determinada del cerebro~\cite{Boas2001,bluestone2001,Arridge1999,Hernandez2020}, 
-para aplicaciones en neurociencias, 
-o el exceso de hemoglobina oxigenada originada por la presencia de un tumor 
-para aplicaciones en diagnósticos médicos~\cite{Althobaiti2017,Guven2003,Zhu2005,Zhu2010,Fujii2016b}.
+En esta sección demostraremos las notables 
+ventajas que se obtienen utilizando nuestros métodos 
+aplicandolos a la solución de dos problemas de sumo 
+interés en tomografía óptica y diagnostico médico: 
+1) Imagen de tejidos cancerosos en un cuello humano; 
+2) Respuesta hemodinámica en un modelo de cabeza humana.
+En ambos, los problemas inversos de tomografía óptica que consideramos 
+conciernen configuraciones en las cuales se buscan inclusiones 
+sobre un tejido de ``fondo'' que se asume conocido. 
+Estas inclusiones están caracterizadas por un índice 
+de absorción que la del tejido que la rodea. Los excesos en la absorción son originados 
+por el aumento de la hemoglobina oxigenada. 
+Este aumento se puede producir por la presencia de un tumor (angiogénesis tumoral) en el tejido 
+(de gran importancia en diagnósticos médicos~\cite{Althobaiti2017,Guven2003,Zhu2005,Zhu2010,Fujii2016b}).
+El exceso de hemoglobina oxigenada también puede dispararse por la respuesta hemodinámica debido a la activación 
+de una región determinada del cerebro (de interés 
+en neurociencias~\cite{Boas2001,bluestone2001,Arridge1999,Hernandez2020}).
 
-La primera demostración que haremos ilustrará una aplicación potencial 
-de la técnica de tomografía óptica para el diagnóstico 
-de un paciente para el cual se dispone de una imágen por resonancia magnética (MRI)
-del cuello (fig.~\ref{fig:mriim}). Describimos una situación teniendo 
-en mente la aplicación potencial para el estudio de la evolución de la metástasis 
-en una región específica del cuerpo (el cuello), tiempo después 
-de haber adquirido la imagen MRI. Similarmente, el procedimiento 
-podría utilizarse para seguir la evolución del tratamiento de un tumor en esta región. 
-La portabilidad y el bajo costo de los sistema de tomografía óptica 
-hace que estos dispositivos sean mucho mas accesibles para el diagnóstico 
-que las imágenes obtenidas por sistemas MRI, para monitorear 
-la evolución del tratamiento y el avance de un tumor de forma regular. 
-
-En las referencias~\cite{Fujii2016b,Fujii2016} se realizó un estudio sobre el problema directo de la propagación de la luz en el cuello humano. Aquí presentamos un modelo similar,
- y extendemos la idea para el estudio 
-de la convergencia del problema inverso siguiendo las lineas de las referencias~\cite{Fujii2016b,Fujii2016} con la intención de capturar 
-algunas de las características mas importantes del cuello humano, 
-manteniendo una geometría simple. 
-
+Resolvemos el problema inverso sobre la base de los datos sintéticos 
+que se obtienen de la solución numérica del problema directo para 
+un coeficiente de absorción ``buscado'', $a^v(\x)$. 
+Como se describió en la sección anterior, agregamos un 10\% de ruido 
+aleatorio a las lecturas resultantes de los detectores para tener en cuenta el ruido experimental. 
 Estudiaremos la convergencia por iteración del algoritmo~\ref{algfcinv} 
-para un número variable de fuentes y detectores, para una dada configuración. 
-Para evaluar la convergencia en el proceso de reconstrucción cuantificamos 
-el error en la norma $L^2$ definido como
+para un número variable de fuentes y detectores, para una  configuración dada. 
+Para evaluar la convergencia en el proceso de reconstrucción cuantificamos el error en la norma $L^2$ definido como
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -1226,17 +1220,45 @@ E(i)=\sqrt{\frac{\int_{\Omega}(a^v(\x)-a^i(\x))^2  d\x}{\int_{\Omega}a^v(\x) d\x
 \end{split}
 \label{eq:errl2}
 \end{equation}
-donde $E(i)$ corresponde al error en la norma $L^2$ para la iteración $i$, 
+donde $E(i)$ corresponde al error $L^2$ para la iteración $i$, 
 donde $a^v(\x)$ es el coeficiente de absorción ``verdadero'', y $a^i(\x)$ 
-es el coeficiente de absorción obtenido por el algoritmo~\ref{algfcinv} 
-en la iteración $i$-ésima. 
+es el coeficiente de absorción obtenido por el algoritmo~\ref{algfcinv}.
+
+\subsection{Imagen de tumor en cuello humano}
+
+El primer caso de prueba concierne a la aplicación potencial 
+de la técnica de tomografía óptica en el diagnóstico 
+de pacientes para los cuales se dispone de imagenes por resonancia magnética (MRI)
+del cuello (Fig.~\ref{fig:mriim}). 
+Describimos una situación teniendo 
+en mente la posible evolución de la metástasis 
+en una región específica del cuerpo (el cuello), tiempo después 
+de haber adquirido la imagen MRI. Similarmente, el procedimiento 
+podría utilizarse para seguir la evolución del tratamiento de un tumor en esta región. 
+La portabilidad y el bajo costo de los sistema de tomografía óptica 
+hace que estos dispositivos sean mucho mas accesibles para el diagnóstico 
+que las imágenes obtenidas por sistemas MRI, para monitorear 
+la evolución del tratamiento y el avance de un tumor de forma regular. 
+
+En las referencias~\cite{Fujii2016b,Fujii2016} se 
+pueden encontrar estudios sobre el problema directo de la propagación de la luz en el cuello humano. 
+Nosotros utilizamos un modelo similar, 
+para el estudio del problema inverso 
+correspondiente (el cual requiere la resolución 
+repetida del par de problemas directo--adjunto, 
+como se describe en el Algoritmo~\ref{algfcinv}).  
+En particular, nos enfocaremos en la 
+reconstrucción de las propiedades del medio, 
+el estudio de la convergencia y los tiempos computacionales 
+requeridos por los diferentes métodos. 
 
 Buscaremos la existencia de un tumor en el tejido blando. 
-Los coeficientes de la columna vertebral, la médula espinal, y la tráquea 
-se mantendrán fijos en el proceso de reconstrucción, con $a^l(\x)=a^u(\x)=a(\x)$ 
-en estas regiones, con los coeficientes dados para cada tipo de tejido correspondiente, 
-los cuales se presentan en la tabla~\ref{tab:cuello}, y fueron tomados de las referencias~\cite{Bashkatov2011,Dehaes2011,Fujii2016}.
-
+ Esto se debe 
+a que la angiogénesis tumoral sólo ocurre en este tipo 
+de tejidos.
+Tanto los coeficientes de la columna vertebral, 
+como los de la médula espinal, y de la tráquea 
+se mantendrán fijos en el proceso de reconstrucción (Tabla~\ref{tab:cuello}), y fueron tomados de las referencias~\cite{Bashkatov2011,Dehaes2011,Fujii2016}.
 \begin{table}[h!]
 \caption{Propiedades ópticas para el modelo de cuello humano}
 \vspace{-0.3cm}
@@ -1256,44 +1278,26 @@ Médula espinal & ~$0.17$ & ~ & $882$ ~ &$0.9$  ~ &  $1.4$ \\
 \end{table}
 Para simplificar el modelo, tomamos el coeficiente de refracción 
 de la traquea cómo $n_{\Omega}=1.4$. Esto evita las dificultades 
-encontradas para el modelado de la interfase entre la traquea y el tejido blando, 
-el cual para un modelado mas preciso requiere tener en cuenta la reflexión 
+encontradas para el modelado de la interfase entre la traquea y el tejido blando. Para mayor precisión se requiere tener en cuenta la reflexión 
 de Fresnel en esta interfase geométricamente compleja. Otras simplificaciones 
-adicionales utilizadas consistieron en no considerar los vasos sanguíneos, y en la 
-simplificación de la geometría del cuello, el cual se tomo como una geometría 
-cuadrada.
+adicionales utilizadas consistieron en no considerar los vasos sanguíneos, y en la geometría del cuello, que se asumió cuadrado.
 
-Por otra parte, fijamos el valor  $a(\x)=a^l(\x)=a^u(\x)$ 
-al valor del fondo en las proximidades de los bordes, para puntos 
-a una distancia menor a $0.5$cm. Este procedimiento genera una mejor 
-convergencia en el problema de reconstrucción del coeficiente $a(\x)$, y previene 
+Restringimos la presencia de las inclusiones (tumores) 
+a regiones levemente alejadas de la superficie del cuello.  Este procedimiento permite una mejor 
+convergencia en el problema de reconstrucción, y previene 
 la amplificación de los errores numéricos, originados por la existencia 
-de las capa límite~\cite{Gaggioli2021} discutidas en la sección~\ref{sec:blayer}. 
-La resolución de la capa límite en el problema multidimensional exige de métodos 
-numéricos más sofisticados que escapan al alcance de esta Tesis. 
-
-Aplicamos el algoritmo para la reconstrucción del coeficiente 
-de absorción, y comparamos los métodos MB y FMS propuesto en este trabajo. 
-Para ello, producimos datos sintéticos de la forma descripta en la sección~
-\ref{sec:sintetic}, donde agregamos un 10\% de ruido aleatorio a los datos obtenidos 
-para los detectores mediante las simulaciones numéricas, de forma de obtener 
-resultados que se acerquen a una situación experimental real.
-
-Como mencionamos anteriormente, la situación que simulamos es una en la cual se buscan inclusiones sobre 
-cierto ``fondo'' conocido. La situación que ilustramos en este primer caso corresponde 
-a los excesos de absorción 
-originados por la presencia de hemoglobina oxigenada debido a la presencia de un tumor 
-en el tejido, lo cual encuentra aplicaciones tanto en el diagnostico de la enfermedad, así 
-como en el seguimiento del tratamiento de la misma.
-
+de las capa límite~\cite{Gaggioli2021} discutidas en la Sección~\ref{sec:blayer}. En consecuencia fijamos el valor  $a(\x)=a^0(\x)$ 
+al valor del fondo en las proximidades de los bordes, para puntos a una distancia menor a $0.5$ cm.
 El mínimo $a^l$ para el coeficiente de absorción vendrá dado 
-por los valores del ``fondo'' del tejido analisado (que se asume conocido \textit{a priori}). 
+por los valores del ``fondo'' del tejido analizado (que se asume conocido \textit{a priori}). 
 El límite superior estará dado por valores típicos del coeficiente de absorción 
-para el tejido que se está examinando, y lo fijaremos en $a^u=1$.
+para el tejido que se está examinando, y lo fijaremos en $a^u=1$ cm$^{-1}$.
 
-La imagen MRI es tomada como el coeficiente inicial $a^0(\x)$
-para la iniciación de las iteraciones. 
-
+A partir de la imagen MRI se obtiene el coeficiente $a^0(\x)$ para la iniciación de las iteraciones. En nuestro 
+ejemplo tomamos la imagen de la Fig.~\ref{fig:mriim}, 
+de donde se obtienen los coeficientes de absorción $a^0(\x)$ y 
+dispersión $b(\x)$ que se muestran en la Fig.~\ref{fig:mriimc} 
+a la izquierda y derecha, respectivamente.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.25\linewidth]{figuras/neck_mri.png} 
