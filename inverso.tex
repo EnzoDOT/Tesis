@@ -1323,35 +1323,70 @@ la cual contiene multiples fuentes láser. Las diferentes fuentes láser
 contenidas en esta única fuente generalizada iluminan el borde del dominio $\partial \Omega$ 
 en la dirección normal al mismo, inyectando la radiación que atraviesa 
 el medio participante, sensándolo, y luego es recolectada por los detectores. 
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.48\linewidth]{figuras/neck_srcs.png}
+  \caption{Estrategia de activación de fuentes generalizadas 
+  empleada para la reconstrucción en el modelo de cuello humano. Las flechas indican la ubicación donde los láser  
+  inyectan la radiación, 
+  y los colores indican los tiempos de activación, 
+  donde un mismo color indica fuentes individuales que se activan 
+  de manera simultanea.}
+ \label{fig:necksrcs}
+\end{figure}
 La configuración que elegimos para la activación de las fuentes es tal 
-que se activan de manera simultánea una fuente por cara. 
+que se activan de manera simultánea una fuente por cara, 
+como se indica en la Figura~\ref{fig:necksrcs}. 
 Utilizamos un retraso temporal de $300$ps para fuentes vecinas ubicadas 
-en una misma cara. En detalle, para el caso con 16 fuentes, fijamos 
-$\tau_{1,1}=0$ps para las fuentes simultáneas ubicadas en $\x_1^1=(2.0,0.0)$, 
-$\x_1^2=(10.0,2.0)$, $\x_1^3=(8.0,10.0)$,  $\x_1^4=(0.0,8.0)$, donde utilizamos 
-el supraíndice para indicar las diferentes fuentes láser individuales, y el subíndice 
-para indicar el teimpo de retraso temporal correspondiente $\tau_{k,1}$ (ver la ecuación~\eqref{eq:RTEsources}).
-El resto de las fuentes se configuran de la siguiente manera: 
-$\x_2^1=(4.0,0.0)$, 
-$\x_2^2=(10.0,4.0)$, $\x_2^3=(6.0,10.0)$,  $\x_2^4=(0.0,6.0)$ con $\tau_{2,1}=300$ps, 
-$\x_3^1=(6.0,0.0)$, 
-$\x_3^2=(10.0,6.0)$, $\x_3^3=(4.0,10.0)$,  $\x_3^4=(0.0,4.0)$ con $\tau_{3,1}=600$ps 
-and $\x_4^1=(4.0,0.0)$, 
-$\x_4^2=(10.0,4.0)$, $\x_4^3=(6.0,10.0)$,  $\x_4^4=(0.0,6.0)$ con retraso temporal $\tau_{4,1}=900$ps. 
+en una misma cara. Emplamos la notación $\x_k^i$, ($i=1,\ldots,4$ $k=1,\ldots,4$) donde  
+el supraíndice indica los conjuntos de diferentes fuentes láser individuales activadas simultáneamente, y el subíndice 
+para indica el teimpo de retraso temporal correspondiente $\tau_{k,1}$ (ver la Ecuación~\eqref{eq:RTEsources}).
+En la Tabla~\ref{tab:necksrc} se muestran los tiempos de activación para cada conjuntos de fuentes, 
+y en la Tabla~\ref{tab:neckxsrc} las posiciones correspondientes.
+\begin{table}[h!]
+\caption{Configuración de activación FMS: modelo de cuello humano}
+\vspace{-0.4cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+& ~ & $\tau_{1,1}$ ~ & $\tau_{2,1}$ ~ & $\tau_{3,1}$  ~ & $\tau_{4,1}$ \\
+\hline
+ & ~ & $0$ ps ~ & $300$ ps ~ & $600$ ps  ~ & $900$ ps \\
+\hline
+\end{tabular}
+\label{tab:necksrc}
+\end{center}
+\end{table}
 
-Este arreglo fue guiado por la idea de utilizar en el método FMS como fuentes superpuestas 
-aquellas que están geométricamente más alejadas unas de otras. Debido 
-al decaimiento exponencial en la onda de densidad de fotones difusos (ver fig.~\ref{fig:photonflux}), es esperable que cada fuente láser tenga un efecto despreciable en las lecturas de los detectores cercanos a otras fuentes geométricamente lejanas, 
-aún cuando fueron activadas de manera simultánea. Para dar tiempo suficiente 
-a la relajación de las ondas de fotones producidas por las fuentes activadas 
-de forma más tardía, cada simulación directa en el método FMS fue evolucionada 
-hasta el tiempo final $t_{\text{max}}=1400$ps. Para los casos en los que se utilizaron 
-un número menor de fuentes, la configuración para la activación de las mismas 
-fue similar. Para el método MB, cada simulación directa fue evolucionada hasta el tiempo 
-final $t_{\text{max}}=600$ps, con los detectores y las fuentes ubicados en las mismas 
-posiciones que las utilizadas en el método FMS, y utilizando las mismas grillas numéricas, 
-e igual número de procesadores en cada caso.
+\begin{table}[h!]
+\caption{Configuración de posiciones $\x_k^i$}
+\vspace{-0.4cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+%\hline
+ ~ & $\x_1^1=(2.0,0.0)$ cm ~ & $\x_1^2=(10.0,2.0)$ cm ~ & $\x_1^3=(8.0,10.0)$ cm  ~ & $\x_1^4=(0.0,8.0)$ cm \\
+ ~ & $\x_2^1=(4.0,0.0)$ cm ~ & $\x_2^2=(10.0,4.0)$ cm ~ & $\x_2^3=(6.0,10.0)$ cm  ~ & $\x_2^4=(0.0,6.0)$ cm \\
+ ~ & $\x_3^1=(6.0,0.0)$ cm ~ & $\x_3^2=(10.0,6.0)$ cm ~ & $\x_3^3=(4.0,10.0)$ cm  ~ & $\x_3^4=(0.0,4.0)$ cm \\
+ ~ & $\x_4^1=(8.0,0.0)$ cm ~ & $\x_4^2=(10.0,8.0)$ cm ~ & $\x_4^3=(2.0,10.0)$ cm  ~ & $\x_4^4=(0.0,2.0)$ cm \\
+\hline
+\end{tabular}
+\label{tab:neckxsrc}
+\end{center}
+\end{table}
 
+%En detalle, para el caso con 16 fuentes, fijamos 
+%$\tau_{1,1}=0$ps para las fuentes simultáneas ubicadas en $\x_1^1=(2.0,0.0)$, 
+%$\x_1^2=(10.0,2.0)$, $\x_1^3=(8.0,10.0)$,  $\x_1^4=(0.0,8.0)$, donde utilizamos 
+%el supraíndice para indicar los conjuntos de diferentes fuentes láser individuales activadas simultáneamente, y el subíndice 
+%para indicar el teimpo de retraso temporal correspondiente $\tau_{k,1}$ (ver la ecuación~\eqref{eq:RTEsources}).
+%El resto de las fuentes se configuran de la siguiente manera: 
+%$\x_2^1=(4.0,0.0)$, 
+%$\x_2^2=(10.0,4.0)$, $\x_2^3=(6.0,10.0)$,  $\x_2^4=(0.0,6.0)$ con $\tau_{2,1}=300$ps, 
+%$\x_3^1=(6.0,0.0)$, 
+%$\x_3^2=(10.0,6.0)$, $\x_3^3=(4.0,10.0)$,  $\x_3^4=(0.0,4.0)$ con $\tau_{3,1}=600$ps 
+%and $\x_4^1=(4.0,0.0)$, 
+%$\x_4^2=(10.0,4.0)$, $\x_4^3=(6.0,10.0)$,  $\x_4^4=(0.0,6.0)$ con retraso temporal $\tau_{4,1}=900$ps. 
 \begin{figure*}[h!]
 \centering
   \includegraphics[width=0.49\textwidth]{figuras/detsSweep.eps}
@@ -1371,14 +1406,31 @@ e igual número de procesadores en cada caso.
   las simulaciones en el panel inferior, se utilizaron 36 detectores.}
  \label{fig:itdet}
 \end{figure*}
-
+Esta configuración fue guiada por la idea de utilizar en el método FMS como fuentes superpuestas 
+aquellas que están geométricamente más alejadas unas de otras. Debido 
+al decaimiento exponencial en la onda de densidad de fotones difusos (ver fig.~\ref{fig:photonflux}), es esperable que cada fuente láser tenga un efecto despreciable en las lecturas de los detectores cercanos a otras fuentes geométricamente lejanas, 
+aún cuando fueron activadas de manera simultánea. Para dar tiempo suficiente 
+a la relajación de las ondas de fotones producidas por las fuentes activadas 
+de forma más tardía, cada simulación directa en el método FMS fue evolucionada 
+hasta el tiempo final $t_{\text{max}}=1400$ps. Para los casos en los que se utilizaron 
+un número menor de fuentes, la configuración para la activación de las mismas 
+fue similar. Para el método MB, cada simulación directa fue evolucionada hasta el tiempo 
+final $t_{\text{max}}=600$ps, con los detectores y las fuentes ubicados en las mismas 
+posiciones que las utilizadas en el método FMS, y utilizando las mismas grillas numéricas, 
+e igual número de procesadores en cada caso.
 
 Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
 presentan propiedades de convergencia similares para un número variable 
 de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
 el método FMS tomó  $12689$ segundos para llegar a las 100 
+iteraciones, 
+del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
+dando una aceleración en la reconstrucción por un factor cercano a siete. 
+En la figura además se aprecia que incrementar el número de fuentes y de detectores 
+genera una mejora considerable en la convergencia del problema inverso 
+para un número fijo de iteraciones. El número de fuentes 
+tiene un impacto 
 \begin{wrapfigure}{r}{0.48\textwidth}
-%\begin{figure*}[h!]
 \centering
   \includegraphics[width=0.45\textwidth]{figuras/necktrue.png}\\
 
@@ -1388,15 +1440,7 @@ el método FMS tomó  $12689$ segundos para llegar a las 100
   \caption{De arriba a abajo: coeficiente de absorción verdadero, y
   coeficientes de absorción obtenidos mediante resolución del problema inverso para 100 iteraciones de los métodos MB y FMS, respectivamente.}
  \label{fig:reconst}
-%\end{figure*}
 \end{wrapfigure}
-iteraciones, 
-del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
-dando una aceleración en la reconstrucción por un factor cercano a siete. 
-En la figura además se aprecia que incrementar el número de fuentes y de detectores 
-genera una mejora considerable en la convergencia del problema inverso 
-para un número fijo de iteraciones. El número de fuentes 
-tiene un impacto 
 mayor en las reconstrucciones que el número de detectores. 
 Esto puede entenderse de la siguiente manera, dado que la función de las fuentes 
 es producir los fotones que viajan a través del medio participante para sensarlo 
@@ -1407,7 +1451,8 @@ pero la intensidad de estas ``fuentes'' en el problema adjunto dependen de la ca
 de fotones originados en las fuentes láser que inyectan la radiación en el medio participante 
 para llegar luego a los detectores. Puede argumentarse que por esta misma razón, 
 es mas importante la cantidad de fuentes que inyectan radiación en el medio para sensar 
-la totalidad de $\partial \Omega$, que si esas fuentes son simuladas en problemas 
+la 
+totalidad de $\partial \Omega$, que si esas fuentes son simuladas en problemas 
 directos separados, lo cual sugiere que el método FMS es una estrategia 
 de optimización adecuada que permite ganar tiempo de cómputo aprovechando 
 el uso de fuentes simultáneas en único problema directo.
@@ -1417,12 +1462,9 @@ junto con los coeficientes de absorción obtenidos mediante la resolución del p
 inverso empleando las estrategias MB y FMS, con 16 fuentes y 36 detectores 
 para 100 iteraciones del algoritmo~\ref{algfcinv}. Como puede observarse, 
 las reconstrucciones obtenidas por ambos métodos son de similares características. 
-\begin{figure}[h!]
-\centering
-  \includegraphics[width=0.5\linewidth]{figuras/l2err.eps}\\
-  \caption{Evolución del error en la norma $L^2$ por iteración ec.~\eqref{eq:errl2} para el coeficiente de absorción, obtenido para el modelo de cabeza humana para los métodos MB y FMS.}
- \label{fig:ithead}
-\end{figure}
+
+\subsection{Imagenes de activación hemodinámica 
+o tejido canceroso en modelo de cabeza humana}
 Finalmente, presentaremos una reconstrucción simulando un ``modelo de cabeza''. 
 Para esta demostración, utilizaremos el modelo de cabeza similar 
 a los utilizados en las referencias~\cite{Klose2002,Prieto2017}. 
@@ -1435,15 +1477,7 @@ como fluido cerebroespinal. Esta región cumple la función de
 amortiguar al cerebro ane movimientos bruscos. Además, el fluido cerebroespinal 
 se encarga de transportar nutrientes hacia el cerebro, y de
 eliminar metabolitos.
-\begin{wrapfigure}{r}{0.48\textwidth}
-\centering
-  \includegraphics[width=0.45\textwidth]{figuras/head_true.png}\\
-  \includegraphics[width=0.45\textwidth]{figuras/head_sweep.png}\\
-  \includegraphics[width=0.45\textwidth]{figuras/head_ours.png}
-  \caption{De arriba a abajo: coeficiente de absorción verdadero, y coeficientes de 
-  absorción obtenidos para 50 iteraciones del método MB, y 79 iteraciones del métofo FMS.}
- \label{fig:rechead}
-\end{wrapfigure}
+
 Dado que el fluido cerebroespinal presenta coeficientes de absorción y de dispersión 
 despreciables, la ecuación de difusión de fotones no es físicamente preciso para modelar 
 el transporte de fotones en esta región, por lo cual debe emplearse la ecuación de transporte.
@@ -1464,21 +1498,81 @@ el cerebro en una situación menos idealizada.
 Para mostrar que también pueden emplearse otras estrategias de activación, 
 en esta prueba utilizaremos una configuración diferente para la 
 activación de las fuentes en el método FMS. Todas las fuentes ubicadas 
-en una misma cara serán activadas de manera simultánea. En la notación 
-utilizada anteriormente, tendremos $\x_1^1=(1.0,0.0)$, 
-$\x_1^2=(2.0,0.0)$, $\x_1^3=(3.0,0.0)$, $\x_1^4=(4.0,0.0)$, con retardo temporal $\tau_{1,1}=0$ps. \looseness=-1
+en una misma cara serán activadas de manera simultánea~(Fig.~\ref{fig:headsrcs}). 
 
-Luego 
-$\x_2^1=(1.0,5.0)$, 
-$\x_2^2=(2.0,5.0)$, $\x_2^3=(3.0,5.0)$,  $\x_2^4=(4.0,5.0)$ con $\tau_{2,1}=100$ps, 
-$\x_3^1=(5.0,1.0)$, 
-$\x_3^2=(5.0,2.0)$, $\x_3^3=(5.0,3.0)$,  $\x_3^4=(5.0,4.0)$ con $\tau_{3,1}=400$ps 
-y $\x_4^1=(0.0,1.0)$, 
-$\x_4^2=(0.0,2.0)$, $\x_4^3=(0.0,3.0)$,  $\x_4^4=(0.0,4.0)$ con retardo temporal de $\tau_{4,1}=500$ps.
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/head_srcs.png}\\
+  \caption{Estrategia de activación de fuentes generalizadas 
+  empleada para la reconstrucción en el modelo de cabeza humana. Las flechas indican la ubicación de las fuentes, 
+  y los colores indican los tiempos de activación, 
+  donde un mismo color indica fuentes láser que se activan 
+  de manera simultanea.}
+ \label{fig:headsrcs}
+\end{figure}
+Nuevamente, utilizamos la notación de la sección anterior, con 
+$\x_k^i$, ($i=1,\ldots,4$ ~$k=1,\ldots,4$) indica la posición 
+de la fuente $i$ esima activada a tiempo  $\tau_{k,1}$.
+En la Tabla~\ref{tab:headsrc} se muestra la configuración de activación 
+para cada conjunto de fuentes, y en la Tabla~\ref{tab:headxsrc} 
+las posiciones correspondientes.
+
+\begin{table}[h!]
+\caption{Configuración de activación FMS: modelo de cabeza humana}
+\vspace{-0.3cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+& ~ & $\tau_{1,1}$ ~ & $\tau_{2,1}$ ~ & $\tau_{3,1}$  ~ & $\tau_{4,1}$ \\
+\hline
+%\hline
+ & ~ & $0$ ps ~ &  $100$ ps ~ & $400$ ps ~ & $500$  \\
+\hline
+\end{tabular}
+\label{tab:headsrc}
+\end{center}
+\end{table}
+
+\begin{table}[h!]
+\caption{Configuración de posiciones $\x_k^i$}
+\vspace{-0.4cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\hline
+%\hline
+ ~ & $\x_1^1=(1.0,0.0)$ cm ~ & $\x_1^2=(2.0,0.0)$ cm ~ & $\x_1^3=(3.0,0.0)$ cm  ~ & $\x_1^4=(4.0,0.0)$ cm \\
+ ~ & $\x_2^1=(1.0,5.0)$ cm ~ & $\x_2^2=(2.0,5.0)$ cm ~ & $\x_2^3=(3.0,5.0)$ cm  ~ & $\x_2^4=(4.0,5.0)$ cm \\
+ ~ & $\x_3^1=(5.0,1.0)$ cm ~ & $\x_3^2=(5.0,2.0)$ cm ~ & $\x_3^3=(5.0,3.0)$ cm  ~ & $\x_3^4=(5.0,4.0)$ cm \\
+ ~ & $\x_4^1=(0.0,1.0)$ cm ~ & $\x_4^2=(0.0,2.0)$ cm ~ & $\x_4^3=(0.0,3.0)$ cm  ~ & $\x_4^4=(0.0,4.0)$ cm \\
+\hline
+\end{tabular}
+\label{tab:headxsrc}
+\end{center}
+\end{table}
+
+
+%En la notación 
+%utilizada anteriormente, tendremos $\x_1^1=(1.0,0.0)$, 
+%$\x_1^2=(2.0,0.0)$, $\x_1^3=(3.0,0.0)$, $\x_1^4=(4.0,0.0)$, con retardo temporal $\tau_{1,1}=0$ps. \looseness=-1
+
+%Luego 
+%$\x_2^1=(1.0,5.0)$, 
+%$\x_2^2=(2.0,5.0)$, $\x_2^3=(3.0,5.0)$,  $\x_2^4=(4.0,5.0)$ con $\tau_{2,1}=100$ps, 
+%$\x_3^1=(5.0,1.0)$, 
+%$\x_3^2=(5.0,2.0)$, $\x_3^3=(5.0,3.0)$,  $\x_3^4=(5.0,4.0)$ con $\tau_{3,1}=400$ps 
+%y $\x_4^1=(0.0,1.0)$, 
+%$\x_4^2=(0.0,2.0)$, $\x_4^3=(0.0,3.0)$,  $\x_4^4=(0.0,4.0)$ con retardo temporal de $\tau_{4,1}=500$ps.
 En la figura~\ref{fig:ithead} mostramos la evolución del error ec.~\eqref{eq:errl2} 
 para los métodos MB y el método FMS propuesto. En la figura~\ref{fig:rechead} 
 mostramos el coeficiente de absorción verdadero, y los obtenidos al final 
 de la iteración para cada método.
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/l2err.eps}\\
+  \caption{Evolución del error en la norma $L^2$ por iteración ec.~\eqref{eq:errl2} para el coeficiente de absorción, obtenido para el modelo de cabeza humana para los métodos MB y FMS.}
+ \label{fig:ithead}
+\end{figure}
+
 
 En términos de tiempo computacional, las cincuenta iteraciones del método 
 MB tomaron mas de seis veces que las setenta y nueve iteraciones del 
@@ -1491,7 +1585,18 @@ si se utilizan menos direcciones discretas, se obtienen
 reconstrucciones de menor calidad para ambos métodos, 
 posiblemente debido a la aparición del efecto de rayos 
 en el interior de la región de baja absorción y dispersión. 
-
+%\begin{wrapfigure}{r}{0.48\textwidth}
+\begin{figure}
+\centering
+  \includegraphics[width=0.32\textwidth]{figuras/head_true.png}
+  \includegraphics[width=0.32\textwidth]{figuras/head_sweep.png}
+  \includegraphics[width=0.32\textwidth]{figuras/head_ours.png}
+%  \caption{De arriba a abajo: coeficiente de absorción verdadero, y coeficientes de 
+  \caption{Izquierda a derecha: coeficiente de absorción verdadero, y coeficientes de 
+  absorción obtenidos para 50 iteraciones del método MB, y 79 iteraciones del métofo FMS.}
+ \label{fig:rechead}
+\end{figure}
+%\end{wrapfigure}
 También es posible emplear otras estrategias de activación en el método 
 FMS. A pesar de que no hemos explorado otras posibilidades, 
 es posible incluir más fuentes generalizadas, con diferentes 
