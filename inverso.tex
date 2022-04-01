@@ -126,7 +126,7 @@ Por este motivo, el método BFGS implementa una aproximación del Hessiano (mas 
 de la inversa del Hessiano) que 
 es actualizada a cada paso de la iteración. 
 
-Exigiendo que el gradiente de la Ecuación~\eqref{eq:Taylor} coincida coincida con el gradiente de la función objetivo 
+Exigiendo que el gradiente de la Ecuación~\eqref{eq:Taylor} coincida con el gradiente de la función objetivo 
 en los últimos dos iterandos sucesivos se llega a
 \begin{equation}
 \begin{split}
@@ -172,7 +172,7 @@ que para el problema 2D tiene $N_x \times N_y$ puntos.
 La manipulación y almacenamiento de esta matriz puede ser sumamente costosa. Por ello, 
  se utiliza una versión aproximada, en la cual sólo se almacenan los vectores $\{s^k, y^k\}$, 
 $k=i-m,...,i-1$ para un dado número de puntos $m$ previos a la iteración $i$--esima. 
-Se utiliza una aproximación inicial al Hessiano $(B^i)^{-1}_0$
+Se utiliza una aproximación inicial al Hessiano $(B^i)^{-1}_0$~\cite[Cap. 7]{Nocedal2006}
 \begin{equation}
 (B^i)^{-1}_0=\gamma^i \id,\quad \quad \gamma^i=\frac{(s^{i-1})^T y^{i-1}}{(y^{i-1})^Ty^{i-1}},
 \label{eq:initHess}
@@ -1340,7 +1340,7 @@ como se indica en la Figura~\ref{fig:necksrcs}.
 Utilizamos un retraso temporal de $300$ps para fuentes vecinas ubicadas 
 en una misma cara. Emplamos la notación $\x_k^i$, ($i=1,\ldots,4$ $k=1,\ldots,4$) donde  
 el supraíndice indica los conjuntos de diferentes fuentes láser individuales activadas simultáneamente, y el subíndice 
-para indica el teimpo de retraso temporal correspondiente $\tau_{k,1}$ (ver la Ecuación~\eqref{eq:RTEsources}).
+para indica el teimpo de retraso temporal correspondiente $\tau_{k,1}$ (ver Ecuaciones~\eqref{eq:RTEsources}~a~\eqref{eq:RTEsources2gamma}).
 En la Tabla~\ref{tab:necksrc} se muestran los tiempos de activación para cada conjuntos de fuentes, 
 y en la Tabla~\ref{tab:neckxsrc} las posiciones correspondientes.
 \begin{table}[h!]
@@ -1406,26 +1406,31 @@ y en la Tabla~\ref{tab:neckxsrc} las posiciones correspondientes.
   las simulaciones en el panel inferior, se utilizaron 36 detectores.}
  \label{fig:itdet}
 \end{figure*}
-Esta configuración fue guiada por la idea de utilizar en el método FMS como fuentes superpuestas 
-aquellas que están geométricamente más alejadas unas de otras. Debido 
-al decaimiento exponencial en la onda de densidad de fotones difusos (ver fig.~\ref{fig:photonflux}), es esperable que cada fuente láser tenga un efecto despreciable en las lecturas de los detectores cercanos a otras fuentes geométricamente lejanas, 
-aún cuando fueron activadas de manera simultánea. Para dar tiempo suficiente 
+El diseño de esta configuración logra que se enciendan de manera simultánea
+aquellas fuentes que están más alejadas unas de otras. Debido 
+al decaimiento exponencial del flujo de fotones, sólo los detectores 
+ubicados en la cercanía de una fuente registraran información de la misma. 
+Es por ello que no es necesario que todas las fuentes se enciendan 
+a tiempos diferentes, sino que es posible encender simultáneamente 
+grupos de fuentes lo suficientemente alejadas como para no afectar 
+la calidad de la información obtenida.
+
+Las comparaciones de las propiedades de convergencia de los métodos MB y FMS 
+se ilustran en la Figura~\ref{fig:itdet}. En ambos casos se utilizaron 
+las mismas grillas numéricas y el mismo número de fuentes láser y detectores, ubicados 
+en idénticas posiciones, realizando los cómputos con igual número de procesadores. 
+Para las simulaciones utilizando MB, 
+cada problema directo fue evolucionado hasta el tiempo final $t_{\text{max}}=600$ ps. 
+Para dar tiempo suficiente 
 a la relajación de las ondas de fotones producidas por las fuentes activadas 
 de forma más tardía, cada simulación directa en el método FMS fue evolucionada 
-hasta el tiempo final $t_{\text{max}}=1400$ps. Para los casos en los que se utilizaron 
-un número menor de fuentes, la configuración para la activación de las mismas 
-fue similar. Para el método MB, cada simulación directa fue evolucionada hasta el tiempo 
-final $t_{\text{max}}=600$ps, con los detectores y las fuentes ubicados en las mismas 
-posiciones que las utilizadas en el método FMS, y utilizando las mismas grillas numéricas, 
-e igual número de procesadores en cada caso.
-
-Como puede apreciarse en la figura~\ref{fig:itdet}, los métodos MB y FMS 
+hasta el tiempo final $t_{\text{max}}=1400$ ps.
+Como puede apreciarse en la Figura~\ref{fig:itdet}, ambos métodos  
 presentan propiedades de convergencia similares para un número variable 
 de fuentes y detectores. Sin embargo, para el caso con 16 fuentes, 
-el método FMS tomó  $12689$ segundos para llegar a las 100 
-iteraciones, 
-del algoritmo~\ref{algfcinv}, mientras que el método MB tomó $88093$ segundos, 
-dando una aceleración en la reconstrucción por un factor cercano a siete. 
+el método FMS requirió  $1.3\times 10^4$ segundos para llegar a las 100 
+iteraciones, mientras que el método MB tomó $8.8\times 10^4$ segundos, 
+lo que implica una aceleración en la reconstrucción por un factor cercano a siete. 
 En la figura además se aprecia que incrementar el número de fuentes y de detectores 
 genera una mejora considerable en la convergencia del problema inverso 
 para un número fijo de iteraciones. El número de fuentes 
@@ -1442,21 +1447,39 @@ tiene un impacto
  \label{fig:reconst}
 \end{wrapfigure}
 mayor en las reconstrucciones que el número de detectores. 
-Esto puede entenderse de la siguiente manera, dado que la función de las fuentes 
+Esto puede entenderse de la siguiente manera: la función de las fuentes 
 es producir los fotones que viajan a través del medio participante para sensarlo 
-y finalmente ser recolectados en los detectores, si bien los detectores son necesarios 
-para conocer la distribución de los fotones en el medio, en el problema adjunto~\eqref{eq:AdjointProblem} 
-son las diferencias $(G_j[u_i]-\widetilde{G}_{j,i})$ los que cumplen el rol de las fuentes, 
-pero la intensidad de estas ``fuentes'' en el problema adjunto dependen de la cantidad 
-de fotones originados en las fuentes láser que inyectan la radiación en el medio participante 
-para llegar luego a los detectores. Puede argumentarse que por esta misma razón, 
-es mas importante la cantidad de fuentes que inyectan radiación en el medio para sensar 
-la 
-totalidad de $\partial \Omega$, que si esas fuentes son simuladas en problemas 
-directos separados, lo cual sugiere que el método FMS es una estrategia 
-de optimización adecuada que permite ganar tiempo de cómputo aprovechando 
-el uso de fuentes simultáneas en único problema directo.
+y finalmente ser recolectados en los detectores. 
+Matemáticamente, las diferencias entre las señales simuladas y 
+experimentales ($G-\widetilde{G}$) constituyen las ``fuentes'' en el problema 
+adjunto~\eqref{eq:AdjointProblem}.
+A su vez, la intensidad de estas fuentes virtuales depende de la cantidad 
+de fotones originados por las fuentes láser que inyectan la radiación. 
 
+En resumen, nuestras simulaciones demuestran la importancia de tener una cantidad 
+de fuentes suficiente como para sensar el medio en las distintas regiones de interés. 
+Dado que ambos métodos emplean idénticas fuentes, 
+la cantidad total de fotones emitidos es la misma. Para una correcta 
+resolución del problema inverso se requiere un número suficiente 
+de fuentes, pero no es relevante si el problema directo 
+se asumen fuentes independientes, o la superposición 
+de las mismas. El método MB requiere la resolución del problema 
+directo--adjunto por cada fuente, lo que resulta sumamente costoso 
+desde el punto de vista computacional. Por el contrario, demostramos que 
+es posible desarrollar una estrategia de encendido de dichas fuentes, 
+que nos permite reducir considerablemente este costo, sin perjuicio 
+de los resultados obtenidos. 
+
+%Sin embargo, en el método MB sólo una parte de estos fotones aporta 
+%información relevante. Por el contrario, el método FMS permite explotar 
+%en todos los tiempos fotones que poseen información relevante para el proceso de inversión. 
+
+%Si bien los detectores son necesarios para conocer la distribución de los fotones en el medio, 
+%es mas importante la cantidad de fuentes que inyectan 
+%radiación para sensar el medio, que si esas fuentes son simuladas en problemas 
+%directos separados, lo cual sugiere que el método FMS es una estrategia 
+%de optimización adecuada que permite ganar tiempo de cómputo aprovechando 
+%el uso de fuentes simultáneas en único problema directo.
 En la figura~\ref{fig:reconst} mostramos el coeficiente de absorción verdadero, 
 junto con los coeficientes de absorción obtenidos mediante la resolución del problema 
 inverso empleando las estrategias MB y FMS, con 16 fuentes y 36 detectores 
