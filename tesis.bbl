@@ -67,7 +67,7 @@ A.~D. Klose, U.~Netz, J.~Beuthan, and A.~H. Hielscher, ``{Optical tomography
 
 \bibitem{Netz2001}
 U.~Netz, J.~Beuthan, and H.~J. Cappius, ``{Imaging of Rheumatoid Arthritis in
-  Finger Joints ...},'' vol.~16, pp.~306--310, 2001.
+  Finger Joints},'' vol.~16, pp.~306--310, 2001.
 
 \bibitem{Larsen2006}
 E.~W. Larsen, ``{An Overview of Neutron Transport Problems and Simulation
@@ -227,15 +227,30 @@ O.~P. Bruno and M.~Cubillos, ``{Higher-order in time "quasi-unconditionally
   curvilinear domains},'' {\em Journal of Computational Physics}, vol.~307,
   pp.~476--495, 2016.
 
+\bibitem{Bruno2010}
+O.~P. Bruno and M.~Lyon, ``{High-order unconditionally stable FC-AD solvers for
+  general smooth domains I. Basic elements},'' {\em Journal of Computational
+  Physics}, vol.~229, no.~6, pp.~2009--2033, 2010.
+
 \bibitem{Albin2011}
 N.~Albin and O.~P. Bruno, ``{A spectral FC solver for the compressible
   Navier-Stokes equations in general domains I: Explicit time-stepping},'' {\em
   Journal of Computational Physics}, vol.~230, no.~16, pp.~6248--6270, 2011.
 
-\bibitem{Bruno2010}
-O.~P. Bruno and M.~Lyon, ``{High-order unconditionally stable FC-AD solvers for
-  general smooth domains I. Basic elements},'' {\em Journal of Computational
-  Physics}, vol.~229, no.~6, pp.~2009--2033, 2010.
+\bibitem{Amlani2016}
+F.~Amlani and O.~P. Bruno, ``{An FC-based spectral solver for elastodynamic
+  problems in general three-dimensional domains},'' {\em Journal of
+  Computational Physics}, vol.~307, pp.~333--354, 2016.
+
+\bibitem{Bruno2019}
+O.~P. Bruno, M.~Cubillos, and E.~Jimenez, ``{Higher-order implicit-explicit
+  multi-domain compressible Navier-Stokes solvers},'' {\em Journal of
+  Computational Physics}, vol.~391, pp.~322--346, 2019.
+
+\bibitem{Bruno2014}
+O.~P. Bruno and A.~Prieto, ``{Spatially dispersionless, unconditionally stable
+  FC-AD solvers for variable-coefficient PDEs},'' {\em Journal of Scientific
+  Computing}, vol.~58, no.~2, pp.~331--366, 2014.
 
 \bibitem{Bruno2014a}
 O.~P. Bruno and B.~Delourme, ``{Rapidly convergent two-dimensional
@@ -281,10 +296,10 @@ E.~L. Gaggioli, D.~M. Mitnik, and O.~P. Bruno, ``{Skin effect in neutron
   transport theory},'' {\em Physical Review E}, vol.~104, no.~3,
   pp.~L032801--1--L032801--6, 2021.
 
-\bibitem{Bruno2019}
-O.~P. Bruno, M.~Cubillos, and E.~Jimenez, ``{Higher-order implicit-explicit
-  multi-domain compressible Navier-Stokes solvers},'' {\em Journal of
-  Computational Physics}, vol.~391, pp.~322--346, 2019.
+\bibitem{Bender1999}
+C.~M. Bender and S.~A. Orszag, {\em {Advanced Mathematical Methods for
+  Scientists and Engineers I}}.
+\newblock 1999.
 
 \bibitem{Case1967}
 K.~M. Case and Z.~P. F, ``{Linear Transport Theory},'' 1967.
@@ -293,6 +308,10 @@ K.~M. Case and Z.~P. F, ``{Linear Transport Theory},'' 1967.
 B.~G. Petrovi{\'{c}} and A.~Haghighat, ``{Analysis of inherent oscillations in
   multidimensional $S_N$ solutions of the neutron transport equation},'' {\em
   Nuclear Science and Engineering}, vol.~124, no.~1, pp.~31--62, 1996.
+
+\bibitem{Bal2001}
+G.~Bal, ``{Fourier analysis of diamond discretization in particle transport},''
+  {\em Calcolo}, vol.~38, no.~3, pp.~141--172, 2001.
 
 \bibitem{Hunter2015}
 B.~Hunter and Z.~Guo, ``{Numerical smearing, ray effect, and angular false
@@ -311,15 +330,6 @@ X.~Hu and Y.~Y. Azmy, ``{Asymptotic convergence of the angular discretization
   the method of discrete ordinates},'' {\em Annals of Nuclear Energy},
   vol.~138, p.~107199, 2020.
 
-\bibitem{Bal2001}
-G.~Bal, ``{Fourier analysis of diamond discretization in particle transport},''
-  {\em Calcolo}, vol.~38, no.~3, pp.~141--172, 2001.
-
-\bibitem{Bender1999}
-C.~M. Bender and S.~A. Orszag, {\em {Advanced Mathematical Methods for
-  Scientists and Engineers I}}.
-\newblock 1999.
-
 \bibitem{Rocheleau2020}
 J.~Rocheleau, ``{An Analytical Nodal Discrete Ordinates Solution to the
   Transport Equation in Cartesian Geometry},'' Master's thesis, 2020.
@@ -330,7 +340,7 @@ D.~Wang and T.~Byambaakhuu, ``{High-Order Lax-Friedrichs WENO Fast Sweeping
   Engineering}, vol.~193, no.~9, pp.~982--990, 2019.
 
 \bibitem{Harel2020}
-R.~Harel, S.~Burov, and S.~I. Heizler, ``{Asymptotic PN Approximation in
+R.~Harel, S.~Burov, and S.~I. Heizler, ``{Asymptotic $P_N$ Approximation in
   Radiative Transfer Problems},'' {\em Journal of Computational and Theoretical
   Transport}, vol.~0, no.~0, pp.~1--17, 2020.
 
@@ -378,11 +388,6 @@ A.~D. Klose and A.~H. Hielscher, ``{Quasi-Newton methods in optical tomographic
   image reconstruction},'' {\em Inverse Problems}, vol.~19, no.~2,
   pp.~387--409, 2003.
 
-\bibitem{Bruno2014}
-O.~P. Bruno and A.~Prieto, ``{Spatially dispersionless, unconditionally stable
-  FC-AD solvers for variable-coefficient PDEs},'' {\em Journal of Scientific
-  Computing}, vol.~58, no.~2, pp.~331--366, 2014.
-
 \bibitem{Dorn}
 O.~Dorn, ``{A transport – backtransport method for optical tomography},''
   {\em Inverse Problems}, vol.~14, pp.~1107--1130, 1998.
@@ -391,9 +396,20 @@ O.~Dorn, ``{A transport – backtransport method for optical tomography},''
 E.~Hille and R.~Phillips, {\em {Functional analysis and semi-groups}}.
 \newblock Rhode Island, USA: American Mathematical Society, first~ed., 1957.
 
+\bibitem{Gaggioli2022}
+E.~L. Gaggioli and O.~P. Bruno, ``{Parallel inverse-problem solver for
+  time-domain optical tomography with perfect parallel scaling},'' {\em arXiv
+  2202.09421}, 2022.
+
 \bibitem{Dorn2000}
 O.~Dorn, ``{Scattering and absorption transport sensitivity functions for
   optical tomography},'' {\em Optics Express}, vol.~7, no.~13, p.~492, 2000.
+
+\bibitem{Hernandez2020}
+E.~Hernandez-Martin and J.~L. Gonzalez-Mora, ``{Diffuse optical tomography in
+  the human brain: A briefly review from the neurophysiology to its
+  applications},'' {\em Brain Science Advances}, vol.~6, no.~4, pp.~289--305,
+  2020.
 
 \bibitem{Bashkatov2011}
 A.~N. Bashkatov, E.~A. Genina, and V.~V. Tuchin, ``{Optical properties of skin,
@@ -447,10 +463,5 @@ R.~C. Haskell, L.~O. Svaasand, T.-T. Tsay, H.~M. College, M.~S. Mcadams, T.-C.
 M.~Xu, W.~Cai, M.~Lax, and R.~R. Alfano, ``{Photon migration in turbid media
   using a cumulant approximation to radiative transfer},'' {\em Physical Review
   E}, vol.~65, no.~6, pp.~1--10, 2002.
-
-\bibitem{Amlani2016}
-F.~Amlani and O.~P. Bruno, ``{An FC-based spectral solver for elastodynamic
-  problems in general three-dimensional domains},'' {\em Journal of
-  Computational Physics}, vol.~307, pp.~333--354, 2016.
 
 \end{thebibliography}
