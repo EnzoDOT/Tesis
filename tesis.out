@@ -1,0 +1,39 @@
+\BOOKMARK [0][-]{chapter*.2}{Resumen}{}% 1
+\BOOKMARK [0][-]{chapter*.3}{Abstract}{}% 2
+\BOOKMARK [0][-]{chapter*.4}{Agradecimientos}{}% 3
+\BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 4
+\BOOKMARK [0][-]{chapter.2}{El modelo directo}{}% 5
+\BOOKMARK [1][-]{section.2.1}{La ecuaci\363n de transferencia radiativa y su interpretaci\363n f\355sica}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{M\351todos num\351ricos}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.1}{Discretizaci\363n de la variable angular}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Discretizaci\363n de la variable temporal}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.3}{Discretizaci\363n de la variable espacial: el m\351todo de Continuaci\363n de Fourier \(FC\)}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.4}{Descomposici\363n de dominio e implementaci\363n en paralelo: El m\351todo FC\205DOM}{section.2.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Validaci\363n}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.3.1}{Convergencia de soluciones manufacturadas}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.2}{Comparaci\363n con resultados experimentales}{section.2.3}% 14
+\BOOKMARK [3][-]{subsubsection.2.3.2.1}{Fantoma homog\351neo}{subsection.2.3.2}% 15
+\BOOKMARK [3][-]{subsubsection.2.3.2.2}{Fantoma inhomog\351neo}{subsection.2.3.2}% 16
+\BOOKMARK [2][-]{subsection.2.3.3}{El fen\363meno de rayos}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.4}{Comparaci\363n con soluci\363n anal\355tica}{section.2.3}% 18
+\BOOKMARK [1][-]{section.2.4}{Existencia de capa l\355mite}{chapter.2}% 19
+\BOOKMARK [0][-]{chapter.3}{El problema inverso}{}% 20
+\BOOKMARK [1][-]{section.3.1}{El esquma MOBIR}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.2}{El m\351todo de minimizaci\363n BFGS}{chapter.3}% 22
+\BOOKMARK [2][-]{subsection.3.2.1}{El m\351todo de uso de memoria limitada lm\205BFGS}{section.3.2}% 23
+\BOOKMARK [1][-]{section.3.3}{El operador de transporte y otras definiciones preliminares}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.4}{El m\351todo de Fuentes M\372ltiples Superpuestas}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.5}{El m\351todo adjunto para el c\341lculo de gradientes}{chapter.3}% 26
+\BOOKMARK [2][-]{subsection.3.5.1}{Verificaci\363n num\351rica de la expresion \(3.43\) para la derivada funcional}{section.3.5}% 27
+\BOOKMARK [2][-]{subsection.3.5.2}{C\341lculo num\351rico del gradiente funcional}{section.3.5}% 28
+\BOOKMARK [1][-]{section.3.6}{Datos sint\351ticos con fuentes l\341ser pulsadas}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.7}{Algoritmo para la resoluci\363n de problemas inversos}{chapter.3}% 30
+\BOOKMARK [1][-]{section.3.8}{Reconstrucciones num\351ricas del problema inverso}{chapter.3}% 31
+\BOOKMARK [2][-]{subsection.3.8.1}{Imagen de tumor en cuello humano}{section.3.8}% 32
+\BOOKMARK [2][-]{subsection.3.8.2}{Im\341genes de activaci\363n hemodin\341mica en modelo de cabeza humana}{section.3.8}% 33
+\BOOKMARK [0][-]{chapter.4}{Conclusiones}{}% 34
+\BOOKMARK [0][-]{appendix*.51}{Ap\351ndice}{}% 35
+\BOOKMARK [0][-]{appendix.A}{La aproximaci\363n de difusi\363n}{}% 36
+\BOOKMARK [0][-]{appendix.B}{El algoritmo FC\(Gram\)}{}% 37
+\BOOKMARK [0][-]{appendix.C}{Resoluci\363n de capa l\355mite}{}% 38
+\BOOKMARK [0][-]{appendix*.52}{Bibliograf\355a}{}% 39

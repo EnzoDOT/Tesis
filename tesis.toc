@@ -1,0 +1,39 @@
+\contentsline {chapter}{Resumen}{1}{chapter*.2}%
+\contentsline {chapter}{Abstract}{3}{chapter*.3}%
+\contentsline {chapter}{Agradecimientos}{4}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Introducción}{11}{chapter.1}%
+\contentsline {chapter}{\numberline {2}El modelo directo}{20}{chapter.2}%
+\contentsline {section}{\numberline {2.1}La ecuación de transferencia radiativa y su interpretación física}{21}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Métodos numéricos}{26}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Discretización de la variable angular}{27}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Discretización de la variable temporal}{27}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Discretización de la variable espacial: el método de Continuación de Fourier (FC)}{28}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Descomposición de dominio e implementación en paralelo: El método FC--DOM}{31}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Validación}{34}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Convergencia de soluciones manufacturadas}{35}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Comparación con resultados experimentales}{36}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Fantoma homogéneo}{39}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Fantoma inhomogéneo}{41}{subsubsection.2.3.2.2}%
+\contentsline {subsection}{\numberline {2.3.3}El fenómeno de rayos}{43}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Comparación con solución analítica}{44}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Existencia de capa límite}{47}{section.2.4}%
+\contentsline {chapter}{\numberline {3}El problema inverso}{61}{chapter.3}%
+\contentsline {section}{\numberline {3.1}El esquma \textit {MOBIR}}{64}{section.3.1}%
+\contentsline {section}{\numberline {3.2}El método de minimización BFGS}{65}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}El método de uso de memoria limitada lm--BFGS}{66}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}El operador de transporte y otras definiciones preliminares}{68}{section.3.3}%
+\contentsline {section}{\numberline {3.4}El método de Fuentes Múltiples Superpuestas}{69}{section.3.4}%
+\contentsline {section}{\numberline {3.5}El método adjunto para el cálculo de gradientes}{71}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Verificación numérica de la expresion\nobreakspace {}\textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:FDwin2}\unskip \@@italiccorr )}} para la derivada funcional}{78}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Cálculo numérico del gradiente funcional}{79}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Datos sintéticos con fuentes láser pulsadas}{81}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Algoritmo para la resolución de problemas inversos}{85}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Reconstrucciones numéricas del problema inverso}{86}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Imagen de tumor en cuello humano}{88}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Imágenes de activación hemodinámica en modelo de cabeza humana}{94}{subsection.3.8.2}%
+\contentsline {chapter}{\numberline {4}Conclusiones}{99}{chapter.4}%
+\contentsline {chapter}{Apéndice}{104}{appendix*.51}%
+\contentsline {chapter}{\numberline {A}La aproximación de difusión}{105}{appendix.A}%
+\contentsline {chapter}{\numberline {B}El algoritmo FC(Gram)}{112}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Resolución de capa límite}{117}{appendix.C}%
+\contentsline {chapter}{Bibliografía}{125}{appendix*.52}%

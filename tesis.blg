@@ -1,0 +1,350 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: tesis.aux
+The style file: ieeetr.bst
+A level-1 auxiliary file: titulo.aux
+A level-1 auxiliary file: resumen.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: agradecimientos.aux
+A level-1 auxiliary file: dedicatoria.aux
+A level-1 auxiliary file: introduccion.aux
+A level-1 auxiliary file: etr.aux
+A level-1 auxiliary file: inverso.aux
+A level-1 auxiliary file: conclusion.aux
+A level-1 auxiliary file: apendice.aux
+A level-1 auxiliary file: bibliografia.aux
+Illegal, another \bibstyle command---line 97 of file bibliografia.aux
+ : \bibstyle
+ :          {ieeetr}
+I'm skipping whatever remains of this command
+Database file #1: bibliografia.bib
+Repeated entry---line 359 of file bibliografia.bib
+ : @article{Gaggioli2019
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 413 of file bibliografia.bib
+ : @article{Arridge1999
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 584 of file bibliografia.bib
+ : @article{Fujii2016
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 785 of file bibliografia.bib
+ : @article{tagnekamdem2015
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1024 of file bibliografia.bib
+ : @incollection{Klose2009
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1035 of file bibliografia.bib
+ : @article{Ren2006
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1047 of file bibliografia.bib
+ : @article{Sanchez1982
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1060 of file bibliografia.bib
+ : @article{Larsen1987
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1072 of file bibliografia.bib
+ : @article{Bluestone2001
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1099 of file bibliografia.bib
+ : @article{Klose2002
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1154 of file bibliografia.bib
+ : @article{Fujii2014
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1203 of file bibliografia.bib
+ : @article{Arridge1999
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1213 of file bibliografia.bib
+ : @article{Fujii2016
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1230 of file bibliografia.bib
+ : @article{Bruno2014
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1243 of file bibliografia.bib
+ : @article{Albin2011
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1257 of file bibliografia.bib
+ : @article{Paasschens1997
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1270 of file bibliografia.bib
+ : @article{Bruno2014a
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1293 of file bibliografia.bib
+ : @article{Netz2001
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1363 of file bibliografia.bib
+ : @article{Qin2015
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1377 of file bibliografia.bib
+ : @article{Dymond1997
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1431 of file bibliografia.bib
+ : @article{tagnekamdem2015
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1616 of file bibliografia.bib
+ : @article{Fujii2014
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1631 of file bibliografia.bib
+ : @book{Bender1999
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1654 of file bibliografia.bib
+ : @article{Petrovic1996
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1667 of file bibliografia.bib
+ : @article{Thynell1998
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1680 of file bibliografia.bib
+ : @article{Trefethen2008
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1694 of file bibliografia.bib
+ : @book{Chandrasekhar1960
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1703 of file bibliografia.bib
+ : @article{Gaggioli2019
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1714 of file bibliografia.bib
+ : @article{Bal2001
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1728 of file bibliografia.bib
+ : @article{Mishchenko1999
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1741 of file bibliografia.bib
+ : @article{Qin2015
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1755 of file bibliografia.bib
+ : @article{Wang2019
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1799 of file bibliografia.bib
+ : @article{tagnekamdem2015
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1810 of file bibliografia.bib
+ : @article{Vassiliev2010
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1839 of file bibliografia.bib
+ : @article{Larsen1987
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1863 of file bibliografia.bib
+ : @book{Born1999
+ :               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1872 of file bibliografia.bib
+ : @article{Harel2020
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1916 of file bibliografia.bib
+ : @article{Klose2002
+ :                   ,
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 1951 of file bibliografia.bib
+ : 
+ : @article{Dehaes2011,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Repeated entry---line 1983 of file bibliografia.bib
+ : @article{Anli2006
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2011 of file bibliografia.bib
+ : @article{tagnekamdem2015
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2022 of file bibliografia.bib
+ : @article{Wang2009
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2036 of file bibliografia.bib
+ : @article{Klose2002
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2067 of file bibliografia.bib
+ : @article{Bruno2014a
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2082 of file bibliografia.bib
+ : @article{Bruno2014
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2095 of file bibliografia.bib
+ : @article{Gaggioli2019
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2106 of file bibliografia.bib
+ : @article{Amlani2016
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2120 of file bibliografia.bib
+ : @article{Bluestone2001
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2150 of file bibliografia.bib
+ : @article{Boulanger2005
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2188 of file bibliografia.bib
+ : @article{Sanchez1982
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2201 of file bibliografia.bib
+ : @article{Arridge1999
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2211 of file bibliografia.bib
+ : @article{Dorn
+ :              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2230 of file bibliografia.bib
+ : @article{Albin2011
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2282 of file bibliografia.bib
+ : @article{Crosbie1984
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2295 of file bibliografia.bib
+ : @article{Netz2001
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2306 of file bibliografia.bib
+ : @article{Ren2010
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2320 of file bibliografia.bib
+ : @article{Dymond1997
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2379 of file bibliografia.bib
+ : @article{Ren2006
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2391 of file bibliografia.bib
+ : @article{Qin2015
+ :                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2405 of file bibliografia.bib
+ : @article{Larsen1987
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2432 of file bibliografia.bib
+ : @article{Ramankutty1997
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2445 of file bibliografia.bib
+ : @incollection{Klose2009
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2483 of file bibliografia.bib
+ : @article{Boas2001
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2634 of file bibliografia.bib
+ : @book{Chandrasekhar1960
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2777 of file bibliografia.bib
+ : @article{Henyey1941
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2811 of file bibliografia.bib
+ : @article{Fujii2014
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2882 of file bibliografia.bib
+ : @article{Paasschens1997
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2895 of file bibliografia.bib
+ : @article{Fujii2016
+ :                   ,
+I'm skipping whatever remains of this entry
+Warning--can't use both author and editor fields in Howell2010
+Warning--empty publisher in Duderstadt1979
+Warning--empty journal in Netz2001
+Warning--empty journal in Ren2006
+Warning--can't use both author and editor fields in Cercignani1988
+Warning--can't use both volume and number fields in Cercignani1988
+Warning--empty publisher in Bender1999
+Warning--empty journal in Case1967
+Warning--empty school in Rocheleau2020
+Warning--empty author in CCommons
+Warning--empty journal in CCommons
+Warning--empty year in CCommons
+Warning--empty publisher in Wang2009
+Warning--can't use both author and editor fields in Modest2013
+Warning--empty publisher in Modest2013
+You've used 92 entries,
+            1876 wiz_defined-function locations,
+            1117 strings with 20219 characters,
+and the built_in function-call counts, 26997 in all, are:
+= -- 2859
+> -- 904
+< -- 0
++ -- 340
+- -- 248
+* -- 1927
+:= -- 3680
+add.period$ -- 104
+call.type$ -- 92
+change.case$ -- 86
+chr.to.int$ -- 0
+cite$ -- 107
+duplicate$ -- 1400
+empty$ -- 2459
+format.name$ -- 248
+if$ -- 6643
+int.to.chr$ -- 0
+int.to.str$ -- 92
+missing$ -- 104
+newline$ -- 292
+num.names$ -- 93
+pop$ -- 206
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1043
+stack$ -- 0
+substring$ -- 2058
+swap$ -- 661
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 15
+while$ -- 285
+width$ -- 94
+write$ -- 956
+(There were 69 error messages)
