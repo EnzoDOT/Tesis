@@ -308,6 +308,20 @@ pueden calcularse en forma eficiente y con alta precisión a partir de la repres
 \label{eq:fccont2}
 \end{equation}
 
+\begin{figure}[h!]
+\centering
+  \includegraphics[width=0.5\linewidth]{figuras/fx.eps}\\
+   \includegraphics[width=0.5\linewidth]{figuras/fx_contz.eps} \\
+   \includegraphics[width=0.5\linewidth]{figuras/fx_cont.eps} 
+  \caption{De arriba hacia abajo: 
+  Función $f(x)=3x^2-2.5x^3+0.5$, con los intervalos $[0,\delta_{\ell}]$ (verde) 
+   $[1-\delta_r,1]$ (rojo) considerados
+  para realizar las continuaciones. Continuaciones a cero a izquierda ($f_{\ell}(x)$) y a derecha ($f_r(x)$)
+  obtenidas a partir de la proyección de los $d_{\ell}=d_r=5$ puntos (en diamantes). 
+  Función continuada resultante, $f_c(x)$, de período $b=1.52$.}
+ \label{fig:Continuedg}
+\end{figure}
+
 Para obtener la continuación de Fourier $f_c$ en forma eficiente, el método FC(Gram) utiliza información obtenida 
 evaluando la función $f$ únicamente en unos pocos puntos 
 en los bordes del dominio discretizado. 
@@ -322,7 +336,6 @@ la extensión periódica de $f$, con $f(x_j+b)=f(x_j)$, y similarmente, la proye
 en dichos polinomios genera una aproximación a la función original en el intervalo $[b,b+\delta_{\ell}]$ ($\delta_{\ell}=(d_l-1)h$) la cual se anula suavemente en $x\leq 1$ (donde el 
 intervalo $[b,b+\delta_{\ell}]$ corresponde a la continuación periódica de la función original $f$, con $f(x_1)=f(x_1+b),f(x_2)=f(x_2+b),\ldots, f(x_{d_{\ell}})=f(x_{d_{\ell}}+b)$). 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 En esta Tesis utilizamos $d_{\ell}=d_r=d=5$, por lo tanto $\delta_r=\delta_{\ell}$.  
 Como ejemplo mostraremos la construcción de la base 
 de polinomios utilizada para la proyección y continuación a cero 
