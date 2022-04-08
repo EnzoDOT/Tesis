@@ -484,12 +484,11 @@ Luego, buscamos los coeficientes $\vec{a}$ que son solución de
 la matriz $\bar{B}^s$ se obtiene 
 de evaluar la función~\eqref{eq:fccontint} en los $d$ puntos de ajuste, y en los $Z$ puntos donde se fuerzan los polinomios a anularse, $ \vec{q_j}^s(x)$ son las columnas 
 de la matriz $\bar{Q}^s$ en la ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vector nulo de dimensión $(Z-1)\times N_s +1$. Los coeficientes de Fourier que minimizan la relación~\eqref{eq:SVD} se encuentran mediante descomposición en valores singulares (SVD). 
-Las matrices $A_{\ell}$ y $A_r$ se obtienen, finalmente, de evaluar la relación~\eqref{eq:fccontint} con los coeficientes que resuelven~\eqref{eq:SVD} 
+Las matrices $\bar{A}_{\ell}$ y $\bar{A}_{r}$ se obtienen, finalmente, de evaluar la relación~\eqref{eq:fccontint} con los coeficientes que resuelven~\eqref{eq:SVD} 
 para todo el intervalo $[0,(d+C+Z+E-1)h]$.
 
-
 Cabe destacar que este procedimiento  solo se usa para obtener un pequeño archivo de parámetros 
-(el cual contiene los elementos de las matrices $A_{\ell}$ $Q_{\ell}$, $A_{r}$ y $Q_{r}$), que se incorpora como parte integrante de la subrutina FC, y subsiguientemente se utiliza para la aplicación de la rutina en la expansión de cualquier función discreta $f$---de acuerdo a la ec.~\eqref{eq:FCopA}.  
+(el cual contiene los elementos de las matrices $\bar{A}_{\ell}$, $\bar{Q}_{\ell}$, $\bar{A}_{r}$ y $\bar{Q}_r$), que se incorpora como parte integrante de la subrutina FC, y subsiguientemente se utiliza para la aplicación de la rutina en la expansión de cualquier función discreta $f(x)$---de acuerdo a la ec.~\eqref{eq:FCopA}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
