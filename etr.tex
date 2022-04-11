@@ -385,18 +385,18 @@ El proceso de continuación puede resumirse en los siguientes pasos:
 y los $d_r$ $g_{N+2-d_r},\ldots,g_{N+1}$ 
 son proyectados en una base de polinomios Gram.
 
-\item Dicha proyección genera las ``continuaciones suaves a cero'' 
-$\mathbf{g}_l'=[g_{l,N+1}'=0,g_{l,N}',$ $\ldots,g_{l,N+1+C}'=g_{d_l}]^T$ y 
-$\mathbf{g}_r'=[g_{r,N+2-d_r}'=g_{N+2-d_r},$ $\ldots,g_{r,N-d_r+C}',
-g_{r,N+1-d_r+C}'=0]^T$ de cada 
-uno de los polinomios ortogonales.
+\item Se generan continuaciones suaves a cero
+$\widetilde{\mathbf{g}}_l$ y 
+$\widetilde{\mathbf{g}_r}$ sobre la base de extensiones 
+precalculadas con alta precisión~(ver Apéndice~\ref{ap:fcgram})  
+para cada uno de los polinomios Gram.
 
 \item Se generan dos nuevos vectores $\mathbf{g}_l$ y $\mathbf{g}_r$ 
-que expanden las dimensiones de $\mathbf{g}_l'$ y $\mathbf{g}_r'$ a $C+E$. 
-$E$ es un número de puntos ``extra'' tal que el número total de puntos 
-$N_p=N+1+C+E$ se pueda factorizar en números primos pequeños. Estos 
-vectores se obtienen agregando un número $E$ de puntos nulos 
-en los extremos de la continuación.
+que expanden las dimensiones de $\widetilde{\mathbf{g}}_l$ y $\widetilde{\mathbf{g}_r}$
+ a $C+E$, agregando un número $E$ de componentes nulas al vector. 
+Esta extensión es utilizada para obtener vectores cuya 
+dimensión puede factorizarse en números primos pequeños, 
+permitiendo el uso eficiente de la Transformada Rápida de Fourier.
 
 \item La función discreta continuada de $N+1+C+E$ componentes 
 vendrá dada por el vector $\mathbf{g}_c$:  

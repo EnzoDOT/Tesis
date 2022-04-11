@@ -327,7 +327,7 @@ evaluando la función $f$ únicamente en unos pocos puntos
 en los bordes del dominio discretizado. 
 El algoritmo procede mediante la proyección de $f$ en una base de polinomios Gram $\mathcal{B}_r$ 
 (que definiremos mas adelante) en los puntos del extremo 
-derecho $\{x_{N+1-d_r},x_{N-d_r},\ldots, x_{N+1} \}$, y 
+derecho $\{x_{N+1-d_r},x_{N+2-d_r},\ldots, x_{N+1} \}$, y 
 polinomios $\mathcal{B}_{\ell}$ a la izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$. 
 La proyección en los polinomios $p_r \in \mathcal{B}_r$ genera una continuación que 
 aproxima a la función $f$ en el intervalo $[1-\delta_r,1]$ y que se vuelve cero de 
@@ -431,7 +431,7 @@ da la extensión periódica de la función continuada
 \label{eq:Acont}
 \end{equation}
 donde $\vec{f}_{\ell}=(f_1,f_2,\ldots,f_d)$, 
- $\vec{f}_{r}=(f_{N+1-d},f_{N-d},\ldots,f_{N+1})$ 
+ $\vec{f}_{r}=(f_{N+1-d},f_{N+2-d},\ldots,f_{N+1})$ 
  son los valores de la función discreta utilizados para producir las continuaciones, $\bar{Q}_{\ell} $ y $\bar{Q}_{r}$ son las matrices obtenidas por factorización 
 QR de los polinomios de Vandermonde correspondientes, y donde las matrices $\bar{A}_{\ell}$ 
 y $\bar{A}_{r}$ generan las transiciones a cero a izquierda y derecha respectivamente, en el intervalo de continuación, 
