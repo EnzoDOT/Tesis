@@ -376,18 +376,18 @@ consideramos dos vectores
 que son generados a partir de la función discretizada 
 $\mathbf{g}=[g_1,\ldots,g(x_i),\ldots,g_{N+1}]^T$. Llamamos a estos vectores
 $\mathbf{g}_l$ y $\mathbf{g}_r$. El primero 
-se obtiene de proyectar los primeros $d_l$ puntos de $\mathbf{g}$, $g_1,g_2,\ldots,g_{d_l}$ 
+se obtiene de proyectar los primeros $d_l$ puntos de $\mathbf{g}$, $g_1,\ldots,g_{d_l}$ 
 en una base de polinomios Gram (ver apéndice~\ref{ap:fcgram}). El segundo, $\mathbf{g}_r$, se 
-obtiene de proyectar los últimos $d_r$ puntos $g_{N+1-d_r},\ldots,$ $g_{N+1}$ en dicha base. 
+obtiene de proyectar los últimos $d_r$ puntos $g_{N+2-d_r},\ldots,$ $g_{N+1}$ en dicha base. 
 El proceso de continuación puede resumirse en los siguientes pasos:
 \begin{enumerate}
-\item Los $d_l$ puntos $g_1,g_2,\ldots,g_{d_l}$
-y los $d_r$ $g_{N+1-d_r},g_{N-d_r},\ldots,g_{N+1}$ 
+\item Los $d_l$ puntos $g_1,\ldots,g_{d_l}$
+y los $d_r$ $g_{N+2-d_r},\ldots,g_{N+1}$ 
 son proyectados en una base de polinomios Gram.
 
 \item Dicha proyección genera las ``continuaciones suaves a cero'' 
 $\mathbf{g}_l'=[g_{l,N+1}'=0,g_{l,N}',$ $\ldots,g_{l,N+1+C}'=g_{d_l}]^T$ y 
-$\mathbf{g}_r'=[g_{r,N+1-d_r}'=g_{N+1-d_r},$ $\ldots,g_{r,N-d_r+C}',
+$\mathbf{g}_r'=[g_{r,N+2-d_r}'=g_{N+2-d_r},$ $\ldots,g_{r,N-d_r+C}',
 g_{r,N+1-d_r+C}'=0]^T$ de cada 
 uno de los polinomios ortogonales.
 
@@ -396,9 +396,7 @@ que expanden las dimensiones de $\mathbf{g}_l'$ y $\mathbf{g}_r'$ a $C+E$.
 $E$ es un número de puntos ``extra'' tal que el número total de puntos 
 $N_p=N+1+C+E$ se pueda factorizar en números primos pequeños. Estos 
 vectores se obtienen agregando un número $E$ de puntos nulos 
-en los extremos de la continuación, de donde se tiene 
-$\mathbf{g}_l=[g_{l,N+1}'=0,\ldots,g_{l,N+1+E}=0,\mathbf{g}_l'^T]^T$
-y $\mathbf{g}_r=[\mathbf{g}_r'^T,0\ldots,g_{r,N+1+C+E}=0]^T$.
+en los extremos de la continuación.
 
 \item La función discreta continuada de $N+1+C+E$ componentes 
 vendrá dada por el vector $\mathbf{g}_c$:  
