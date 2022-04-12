@@ -1,5 +1,6 @@
 \pagestyle{fancy}
 \chapter{Conclusiones}
+\label{cap:conc}
 \lhead{\thepage}
 \rhead{Conclusiones} 
 \vspace{0.01\textheight}
@@ -12,7 +13,7 @@ para la resolución de la ETR de forma eficiente en el campo
 de tomografía óptica, 
 dado que la ETR es una ecuación de Boltzmann 
 linearizada de utilidad en el modelado de diversos 
-fenómenos físicos, y como se mencionó en la introducción, estos algorítmos pueden ser aplicados e impactan 
+fenómenos físicos, estos algorítmos pueden ser aplicados e impactan 
 en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010, Thynell1998,Duderstadt1979,Qin2015,Dymond1997,Chandrasekhar1960,Zhu2005,Zhu2010,Vassiliev2010,Bedford2019,Vassiliev2010,Bedford2019,Larsen2006, Sanchez1982, Anli2006,Mishchenko1999, Prasher2003}
 
  Hemos desarrollado algoritmos que permiten obtener soluciones 
@@ -28,7 +29,7 @@ en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010
  estudiado en la sección~\ref{sec:blayer}, el cual representa un desafío 
  vigente, que a consideración del autor no ha sido correctamente 
  abordado en la literatura. Por esta razón, en esta tesis 
- se desarrollo la teoría de capa límite correspondiente, y se demostró 
+ se desarrollo la teoría de capa límite correspondiente, se demostró 
  el caracter exponencial de esta capa límite, el cual se manifiesta 
  incluso para problemas altamente difusivos.
  
@@ -36,25 +37,27 @@ en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010
  tener alto órden de convergencia en situaciones realistas para 
  el caso dependiente del tiempo en una única dimensión espacial, 
  explotando el análisis asintótico desarrollado en esta tésis para las capas límite. 
- Queda vigente la generalización y el desarrollo de algoritmos capaces 
- de resolver las estructuras de capa límite existentes en el caso 
- multidimensional. Si bien este último problema no fue abordado en el marco de esta tésis, 
- la teoría desarrollada en el marco de la misma sienta las bases 
+ Como resultado de esta Tesis, 
+ surge como tema de investigación a futuro, la generalización y el desarrollo de algoritmos capaces 
+ de resolver las estructuras de capa límite para el caso 
+ multidimensional de la ETR. Si bien este último problema no fue abordado, 
+ la teoría desarrollada en el marco de esta Tesis sienta las bases 
  para el desarrollo de algoritmos de alto órden de convergencia en el 
- caso multidimensional, también de interés e impácto en diversas 
+ caso multidimensional, de interés e impácto en diversas 
  áreas de la ciencia y la tecnología. 
  
- Hemos extendido el uso de los algorítmos desarrollados 
- para el problema directo al problema inverso en tomografía óptica. 
- Desarrollamos una formulación mediánte el método adjunto para 
+ Hemos extendido el uso del algorítmo FC--DOM desarrollado 
+ para el problema directo, al problema inverso en tomografía óptica. 
+ Se presentó una formulación mediánte el método adjunto para 
  la obtención del gradiente de la función objetivo, que incluye 
- las condiciones de borde de Fresnel, de importancia en tomografía óptica. 
+ las condiciones de borde de Fresnel. 
  Resolvimos el problema inverso en tomografía óptica mediante el uso 
  del método cuasi-Newton lm-BFGS.
  Demostramos que es posible obtener una aceleración adicional 
- mediante la estrategia de Fuentes Multiples Superpuestas, 
- donde las múltiples fuentes láser presentan una activación de 
- forma sincronizada, que permite optimizar los tiempos de simulación. 
+ en las reconstrucciones del parámetro de absorción 
+ mediante la estrategia de Fuentes Múltiples Superpuestas. 
+En el método FMS, las múltiples fuentes láser presentan una activación de 
+ forma sincronizada, que permite optimizar y ganar control en los tiempos computacionales requeridos para las simulaciones. 
  Mostramos que esta estrategia produce una aceleración en un factor de 
  seis y siete para los casos estudiados, produciendo imágenes 
  de similar calidad a las obtenidas mediánte el Método de Barrido 
@@ -63,7 +66,7 @@ en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010
  En el marco del problema inverso, posibles direcciones futuras 
  de investigación incluyen el estudio del impacto 
  de la estructura de capa límite en las reconstrucciones, 
- y la generalización de los algoritmos presentados en esta tesis 
+ y la generalización de los algoritmos presentados en esta Tesis 
  a otros problemas relacionados, como lo es la obtención 
  simultánea de los coeficientes de absorción y dispersión, 
  o la aplicación a problemas de tomografía por fluorescencia~\cite{Klose2009,Ren2010}.
