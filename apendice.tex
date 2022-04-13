@@ -329,7 +329,7 @@ en los bordes del dominio discretizado.
 El algoritmo procede mediante la proyección de $f$ en una base de polinomios Gram $\mathcal{B}_r$ 
 (que definiremos mas adelante) en los puntos del extremo 
 derecho $\{x_{N+1-d_r},x_{N+2-d_r},\ldots, x_{N+1} \}$, y 
-polinomios $\mathcal{B}_{\ell}$ a la izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$. 
+polinomios $\mathcal{B}_{\ell}$ en los puntos de la izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$. 
 La proyección en los polinomios $p_r \in \mathcal{B}_r$ genera una continuación que 
 aproxima a la función $f$ en el intervalo $[1-\delta_r,1]$ y que se vuelve cero de 
 forma suave en $x\ge b$, con $\delta_r=(d_r-1)h$. Para la continuación a izquierda, se considera 
@@ -453,13 +453,13 @@ La Ecuación~\eqref{eq:fccontint} puede escribirse
 \begin{equation*}
 f(x)=\bar{B}^s \vec{a}=
 \begin{bmatrix}
-    e^{\frac{-\pi M x_1}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)\pi  x_1}{(d+C+Z+E-1)h}} & \dots & 
-    e^{\frac{2\pi k x_1}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M \pi  x_1}{(d+C+Z+E-1)h}} \\
-    e^{\frac{-\pi M x_2}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)\pi  x_2}{(d+C+Z+E-1)h}}  & \dots & 
-    e^{\frac{2\pi k x_2}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M \pi  x_2}{(d+C+Z+E-1)h}} \\
+    e^{\frac{-i\pi M x_1}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)i\pi  x_1}{(d+C+Z+E-1)h}} & \dots & 
+    e^{\frac{2i\pi k x_1}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M i\pi  x_1}{(d+C+Z+E-1)h}} \\
+    e^{\frac{-i\pi M x_2}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)i\pi  x_2}{(d+C+Z+E-1)h}}  & \dots & 
+    e^{\frac{2i\pi k x_2}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M i\pi  x_2}{(d+C+Z+E-1)h}} \\
     \vdots  & \vdots & \ddots & \vdots \\
-    e^{\frac{-\pi M x_j}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)\pi  x_j}{(d+C+Z+E-1)h}}  & \dots & 
-    e^{\frac{2\pi k x_j}{(d+C+Z+E-1)h}}  & \dots & e^{\frac{M \pi  x_j}{(d+C+Z+E-1)h}} \\
+    e^{\frac{-i\pi M x_j}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)i\pi  x_j}{(d+C+Z+E-1)h}}  & \dots & 
+    e^{\frac{2i\pi k x_j}{(d+C+Z+E-1)h}}  & \dots & e^{\frac{M i\pi  x_j}{(d+C+Z+E-1)h}} \\
     \vdots  & \vdots & \ddots & \vdots \\
 \end{bmatrix}
 \begin{bmatrix}
@@ -488,26 +488,25 @@ de la matriz $\bar{Q}^s$ en la ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vecto
 Las matrices $\bar{A}_{\ell}$ y $\bar{A}_{r}$ se obtienen, finalmente, de evaluar la relación~\eqref{eq:fccontint} con los coeficientes que resuelven~\eqref{eq:SVD} 
 para todo el intervalo $[0,(d+C+Z+E-1)h]$.
 
-Cabe destacar que este procedimiento  solo se usa para obtener un pequeño archivo de parámetros 
+Cabe destacar que este procedimiento  solo se usa para obtener un pequeño archivo con parámetros 
 (el cual contiene los elementos de las matrices $\bar{A}_{\ell}$, $\bar{Q}_{\ell}$, $\bar{A}_{r}$ y $\bar{Q}_r$), que se incorpora como parte integrante de la subrutina FC, y subsiguientemente se utiliza para la aplicación de la rutina en la expansión de cualquier función discreta $f(x)$---de acuerdo a la ec.~\eqref{eq:FCopA}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Resolución de capa límite}
 \label{ap:demcv}
-Como se vio en la sección~\ref{sec:blayer}, las soluciones de la ETR presentan 
+Como se vió en la Sección~\ref{sec:blayer}, las soluciones de la ETR presentan 
 estructuras de capa límite tanto en las variables espaciales como en la variable angular, $\xi$. 
-En esa sección se vio que la introducción de un cambio de variable logarítmico (otros cambios 
+La introducción de un cambio de variable logarítmico (otros cambios 
 de variable también son posibles) generan una densidad de puntos espaciales en la cercanía 
 del borde de forma que la capa límite puede ser resuelta apropiadamente en 
-la variable espacial. Adicionalmente, dicho cambio 
-de variable genera puntos extremadamente cercanos al borde. Para que la integral colisional sea correctamente 
-resuelta en las proximidades del borde, se propuso el cambio de variable $\xi'=r^n$. 
+la variable espacial. Para que la integral colisional sea correctamente 
+resuelta en las proximidades del borde, se propuso el cambio de variable $\xi=r^n$. 
 Esta sección provee una demostración matemática de que la combinación del cambio 
-de variable espacial, en conjunto con el cambio de variable $\xi'=r^n$ utilizado 
+de variable espacial, en conjunto con el cambio de variable $\xi=r^n$ utilizado 
 en la sección~\ref{sec:blayer} regulariza las derivadas 
-del integrando en $\int_0^1 u_0(x,\xi)d\xi' = \int_0^1  u_0(x,r^n) r^{n-1} dr$ (la demostración 
-para la integral complementaria  $\int_{-1}^0 u_0(x,\xi)d\xi'$ es análoga). 
+del integrando en $\int_0^1 u_0(x,\xi)d\xi = n\int_0^1  u_0(x,r^n) r^{n-1} dr$ (la demostración 
+para la integral complementaria  $\int_{-1}^0 u_0(x,\xi)d\xi$ es análoga). 
 
 Partimos de la solución asintótica para la capa límite~\eqref{eq:intf}
 \begin{equation}
@@ -673,7 +672,7 @@ Para el último término usamos
 \end{split}
 \label{eq:derivadasj}
 \end{equation}
-Es fácil probar que vale para $j=1$, luego vemos que vale para $j$, 
+Es fácil probar que~\eqref{eq:derivadasj} vale para $j=1$, luego vemos que vale para $j$, 
 y finalmente derivando para $j$ vemos que entonces se cumple para $j+1$.
 Tenemos
 \begin{equation}
@@ -688,10 +687,10 @@ Este término estará acotado para $n\ge j+1$ (para cualquier entero no negativo
 la integral $\int_0^\infty t^k e^{-t} dt$ es acotada).
 
 Para los términos que quedan, debemos utilizar una combinación de la regla generalizada 
-para la derivada del 
-del producto de funciones, en conjunto con la fórmula de Faà di Bruno 
-para las derivadas de las funciones compuestas. Pero se ve claramente que, de entre estos términos, el término 
-que va a determinar la relación asintótica para $r \to 0$ es el que surge de 
+para la derivada 
+del producto de funciones, en conjunto con la fórmula de Faà di Bruno~\cite{Fraenkel1978}
+para las derivadas de las funciones compuestas. Pero se ve claramente que, de entre estos términos, el 
+que va a determinar la relación asintótica para $r \to 0^+$ es el que surge de 
 tomar la derivada $j$-ésima para $r^{n-1}$ en el producto $\frac{q(0,r^n)}{\mu_t(0)}r^{n-1}$, ya que los otros términos están multiplicados por exponenciales negativas 
 que van a cancelar cualquier $r^{-p}$ que pueda surgir. 
 
@@ -702,7 +701,7 @@ Dado que
 \end{split}
 \label{eq:derivadasj3}
 \end{equation}
-de donde claramente el término dominante estará acotado siempre que 
+de donde se demuestra que para $r\to 0^+$ el término dominante estará acotado siempre que 
 $n\ge j+1$. $\blacksquare$
 
 \pagestyle{empty}
