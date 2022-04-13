@@ -438,20 +438,20 @@ QR de los polinomios de Vandermonde correspondientes, y donde las matrices $\bar
 y $\bar{A}_{r}$ generan las transiciones a cero a izquierda y derecha respectivamente, en el intervalo de continuación, 
 y se obtienen de resolver un problema de minimización 
 para el polinomio trigonométrico interpolante en la grilla numérica sobresampleada 
-que coincide con los polinomios Gram en los $d$ puntos de la función $f$, y 
+que coincide con los polinomios Gram en los $d$ puntos de la grilla discreta, y 
 que se anula en la región de continuación
 \begin{equation}
-f(x)=\sum_{k=-M}^{M} a_k e^{\frac{2\pi i k x}{(d+C+Z+E-1)h}},
+f^{q_j}(x)=\sum_{k=-M}^{M} a_k e^{\frac{2\pi i k x}{(d+C+Z+E-1)h}},
 \label{eq:fccontint}
 \end{equation}
 donde $d$, $C$, $Z$ y $E$ representan los $d$ puntos de ajuste (para las continuaciones a izquierda, los puntos $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$) de la función original, 
 los $C$ puntos de continuación, $Z$ puntos donde se exige que la función se anule, $E$ 
 puntos extra que permiten realizar continuaciones de longitud prescripta 
-y $M=(d+C+Z+E)/2$ (para mas detalles, ver~\cite{Amlani2016}).
+y $M=(d+C+Z+E)/2$ (para mas detalles, ver~\cite{Amlani2016,Bruno2010}).
 
 La Ecuación~\eqref{eq:fccontint} puede escribirse
 \begin{equation*}
-f(x)=\bar{B}^s \vec{a}=
+f^{q_j}(x)=\bar{B}^s \vec{a}=
 \begin{bmatrix}
     e^{\frac{-i\pi M x_1}{(d+C+Z+E-1)h}}  & e^{\frac{-(M+2)i\pi  x_1}{(d+C+Z+E-1)h}} & \dots & 
     e^{\frac{2i\pi k x_1}{(d+C+Z+E-1)h}}  & \dots  & e^{\frac{M i\pi  x_1}{(d+C+Z+E-1)h}} \\
