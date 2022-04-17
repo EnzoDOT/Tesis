@@ -1,76 +1,206 @@
 \pagestyle{fancy}
 \chapter{Conclusiones}
-\label{cap:conc}
 \lhead{\thepage}
 \rhead{Conclusiones} 
 \vspace{0.01\textheight}
 \pagebreak
 
-\clearpage \pagebreak En este trabajo hemos desarrollado métodos numéricos eficientes 
-para la resolución de los problemas directos e inversos con 
-aplicaciones en tomografía óptica. 
-Si bien el foco de esta tesis ha sido el desarrollo de algorítmos 
-para la resolución de la ETR de forma eficiente en el campo 
-de tomografía óptica, 
-dado que la ETR es una ecuación de Boltzmann 
-linearizada de utilidad en el modelado de diversos 
-fenómenos físicos, estos algorítmos pueden ser aplicados e impactan 
+En este trabajo se desarrollaron estrategias computacionales para el 
+estudio de problemas de transporte de partículas neutras, y la 
+caracterización de los medios que estas atraviesan.
+En particular, hemos estudiado radiación de fotones y 
+flujos de neutrones.
+
+El objetivo principal ha sido la resolución del 
+problema inverso, que consiste en determinar las características 
+del medio participante mediante los datos obtenidos por mediciones 
+de radiación producida por fuentes externas.
+Nos hemos enfocado en diversos ejemplos de 
+reconstrucción de las características físicas de tejidos humanos, 
+incluyendo tumores y activaciones hemodinámicas.
+La resolución de este tipo de problemas exige una enorme cantidad 
+de recursos computacionales, ya que requiere la propagación temporal 
+de la radiación en el medio durante muchas iteraciones, 
+hasta minimizar las diferencias entre las predicciones teóricas y 
+los valores medidos en los detectores. 
+Esta altísima demanda de cálculos limita drásticamente 
+la aplicación de los métodos precisos, imponiendo la necesidad de 
+recurrir a aproximaciones que no siempre producen resultados correctos.
+
+Hemos abordado este problema combinando tres estrategias principales, 
+desarrolladas a lo largo de nuestro trabajo:
+
+\begin{enumerate}
+\item El uso de un método espectral novedoso de alto orden
+para el tratamiento del problema directo, que permite resolver la 
+ecuación de transporte con gran precisión y con reducido esfuerzo 
+computacional. La novedad del método se basa en la incorporación 
+del procedimiento de continuación de Fourier 
+en ordenadas discretas (FC--DOM)~\cite{Gaggioli2019}. 
+Este método permite convertir cualquier función arbitraria en periódica, y 
+por ende, resolver los operadores diferenciales utilizando transformadas 
+de Fourier. Con ello se logran resultados prácticamente libres de 
+errores de dispersión.
+
+\item Una efectiva estrategia de descomposición del dominio espacial 
+\cite{Gaggioli2022}, 
+que permite la implementación del método FC--DOM en máquinas paralelas. 
+El algoritmo presentado en este trabajo muestra que utilizando 
+256 procesadores, es posible lograr una eficiencia de escala 
+mejor a la ideal (137\%). 
+La escalabilidad lograda es mucho mayor que la de todos los 
+resultados reportados hasta el momento, teniendo en cuenta que 
+se aplica a problemas generales, sin restricciones a las 
+características del medio.
+
+\item Una configuración de fuentes múltiples superpuestas (FMS)~\cite{Gaggioli2022}, 
+que permite resolver el problema inverso a un costo computacional 
+independiente del número de fuentes empleados. 
+Con esta metodología logramos acelerar significativamente la reconstrucción 
+de los parámetros ópticos, que en nuestros ejemplos han dado un factor mayor a 6 
+respecto a los métodos de secuencias de fuentes únicas (TS).
+
+\end{enumerate}
+
+A lo largo de esta Tesis, se describen diversos aspectos y resultados 
+de nuestra investigación. 
+Comenzamos describiendo el método FC--DOM y su implementación en la 
+solución de la ecuación de transporte radiativo, con amplio detalle.
+Validamos nuestra estrategia presentando diversos ejemplos, 
+comparando la precisión y eficiencia del mismo con otros métodos 
+recientes propuestos en la literatura.
+Para ello, hemos realizado un análisis de los errores y los 
+tiempos computacionales empleados en distintos escenarios.
+En primer lugar, mostramos que nuestro método presenta un cuarto 
+orden de aproximación en la derivadas espaciales, mientras que 
+los métodos tradicionales de diferencias finitas son de tercer orden.
+En segundo término, se empleó una solución manufacturada para 
+validar nuestro método.
+Esto significa que  
+se propone una función analítica que representa a la intensidad 
+de radiación, y con ella se calcula cuál sería la ``fuente manufacturada'' correspondiente.
+Luego, se parte de esta fuente, y se resuelve la ecuación de transporte, 
+obteniendo una intensidad lumínica que se compara con la solución 
+manufacturada inicial. 
+Hicimos esto simulando dos tipos de medios con propiedades ópticas similares 
+al tejido humano. Estos medios tienen representación experimental, 
+mediante fantomas compuestos de epoxy y tinta. 
+En uno de estos arreglos experimentales, se trata de un cubo homogéneo, 
+y en el otro, se introduce un anillo cilíndrico con agua en su interior.
+Se lograron acuerdos excelentes entre nuestras predicciones y las 
+mediciones experimentales de los detectores. El segundo arreglo mencionado 
+tiene una importancia fundamental, dado que al introducir una inhomogeneidad 
+no dispersiva, se excluye la posibilidad de resolución teórica mediante 
+el uso de la aproximación de difusión.
+Luego se analizó un problema analítico de referencia, que tiene la 
+particularidad de presentar fenómeno de rayos. Este fenómeno está ligado 
+exclusivamente a las variables angulares, por lo tanto, podemos eludirlo 
+utilizando un grillado más fino en esta discretización. 
+Finalmente, hemos validado el método a través de los resultados 
+obtenidos en un problema de fuente puntual en un medio infinito, 
+isótropo y homogéneo, 
+para el que se conoce solución analítica.
+Comparamos nuestras soluciones con las que se obtienen mediante un 
+método de diferencias finitas de tercer orden, obteniendo errores 
+significativamente menores.
+
+Durante nuestra investigación nos topamos con un descubrimiento importante: 
+la existencia de una estructura de capa límite en las soluciones a la 
+ecuación de transporte. Esta se manifiesta en variaciones abruptas 
+de las soluciones de la ETR, que aparecen en regiones espaciales 
+muy cercanas a los bordes. 
+Numéricamente, la existencia de esta capa límite implica una 
+degradación considerable en el orden de convergencia, y otras dificultades 
+como ser la aparición de oscilaciones no físicas en las soluciones. 
+A lo largo de décadas, se han propuesto distintas interpretaciones a 
+estos fenómenos, que han resultado erróneas.
+En nuestro trabajo, realizamos las simulaciones en un contexto de flujo 
+de neutrones. 
+No sólo describimos las condiciones que producen la aparición de 
+este fenómeno, sino que también propusimos y describimos un método 
+para sobreponerse a las dificultades numéricas que este produce. 
+La metodología se basa en un cambio de 
+variables, que produce una discretización con mucho mayor densidad de 
+puntos en los bordes. Esta discretización, combinada con el método FC--DOM, 
+permite obtener resultados de muy alta precisión, con un significativo 
+ahorro de los recursos computacionales requeridos (por ejemplo, 
+obtenemos mucho mejores resultados en una simulación FC--DOM con 400 puntos de 
+este grillado espacial, comparados a un cálculo que emplea la diferenciación de 
+diamante, utiliza 10000 puntos equiespaciados, y que además presenta 
+soluciones plagadas de oscilaciones espurias).
+
+Dedicamos una sección para explicar la 
+estrategia de paralelización propuesta, demostrando sus ventajas.
+Si bien los problemas inversos se resuelven mayormente basandose 
+en arquitecturas de GPU~\cite{Doulgerakis2017}, estos métodos 
+utilizan la aproximación de difusión, que sólo puede asumirse 
+válida en escenarios particulares. 
+Según la referencia~\cite{Coelho2014}, que hace una revisión de los 
+principales algoritmos presentados en la literatura, 
+todas las estrategias de paralelización de la ETR resultan en una 
+eficiencia significativamente por debajo de la ideal (al menos que se 
+trate de situaciones muy particulares, restringidas a medios no 
+absorbentes ni dispersantes).
+En los ejemplos que presentamos, obtuvimos una escalabilidad de 
+137\% empleando 256 procesadores. Logramos resolver, por ejemplo, 
+un problema modelo que requiere 2 días de cálculo, en menos de 30 minutos, 
+utilizando 64 procesadores.
+Una reducción adicional significativa se obtuvo mediante el uso 
+del método de múltiples fuentes, desarrollado en nuestra investigación.
+Con el mismo, podemos lograr factores de aceleración cercanos a la 
+decena, empleando un número alto de fuentes sin necesidad de 
+repetir la solución del problema para cada una de ellas en forma 
+independiente (tal como lo hace el ``método de barrido'' 
+mayormente utilizado en tomografía óptica).
+
+Durante nuestro trabajo hemos debido dedicar grandes esfuerzos 
+al desarrollo matemático de varias expresiones, a estudios de 
+convergencia, y a la elaboración de métodos matemáticos que 
+permiten facilitar 
+los cálculos. Específicamente, desarrollamos un método adjunto para 
+el cálculo de gradientes funcionales en el contexto de tomografía óptica, 
+el cual incorpora las condicioens de borde de Fresnel.
+
+Finalmente, empleamos todos los algoritmos desarrollados en esta Tesis, 
+para resolver el problema inverso para dos casos de prueba relacionados. 
+En el primer caso, simulamos la obtención de imagenes para un tumor 
+en un cullo humano. Tomamos una imagen de resonancia magnética de un 
+cuello humano, y la reconstruímos fijando ciertos coeficientes de 
+absorción y dispersión similares a los que se encuentran en los trabajos 
+de referencia. A esa configuración le agregamos una inclusión 
+(tumor) en una región del tejido blando. 
+Asumimos un número determinado de láseres, que iluminan la región en 
+distintos tiempos, y sabiendo las propiedades del medio, resolvimos 
+el problema directo, adquiriendo la información medida por una serie 
+de detectores colocados alrededor del medio en cuestión.
+Esta información es utilizada entonces para el problema inverso, 
+cuya misión es reconstruir las propiedades del medio, y por supuesto, 
+determinar las dimensiones y posición de la inclusión. 
+Los resultados obtenidos son excelentes. Logramos reconstruir con 
+sumo detalle las imágenes del medio. Logramos también realizar 
+estos cálculos en forma eficiente, diseñando una estrategia de 
+colocación y encendido de las fuentes, que permite superar ampliamente al 
+método de barrido.
+El segundo caso consiste en la simulación de una cabeza humana, 
+la cual incorpora la región ubicada entre el cráneo y el 
+cerebro, en la que se encuentra el fluido cerebroespinal. 
+Dadas las características de los coeficientes de absorción y dispersión, 
+la aproximación difusiva no es válida en esta región.
+Aquí también introducimos ciertas inclusiones, que pueden corresponder 
+a regiones en los cuales se produce la activación hemodinámica. 
+Hemos encontrado que dada la geometría del sistema, y probablemente a 
+la configuración de las inclusiones, es preferible alterar el 
+orden de encendido de las fuentes, por lo que concluímos que la 
+ubicación y temporalidad de las mismas merece un estudio específico.
+De todos modos, con el orden encontrado, logramos reproducir el 
+medio con amplio detalle y precisión, en un tiempo 6 veces menor 
+al empleado con el método de barrido.
+
+Si bien en esta Tesis el desarrollo de algoritmos 
+para la resolución de la ecuación de transporte en forma eficiente 
+ha tenido un enfoque principal en el campo de tomografía óptica, 
+nuestros algoritmos pueden ser aplicados, con alto impacto, 
 en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010, Thynell1998,Duderstadt1979,Qin2015,Dymond1997,Chandrasekhar1960,Zhu2005,Zhu2010,Vassiliev2010,Bedford2019,Vassiliev2010,Bedford2019,Larsen2006, Sanchez1982, Anli2006,Mishchenko1999, Prasher2003}
 
- Hemos desarrollado algoritmos que permiten obtener soluciones 
- a la ETR de forma eficiente, en entornos de máquinas paralelas, 
- y que para el caso de soluciones suaves presentan un alto órden de convergencia. 
- Demostramos que los códigos desarrollados en esta tésis son matemáticamente 
- correctos mediante comparación con soluciones manufacturadas y soluciones 
- analíticas, así como también demostramos que son físicamente 
- precisos mediante comparación con resultados experimentales 
- reportados en la literatura.
  
- En aplicaciones realistas, surge el fenómeno de capas límite exponenciales 
- estudiado en la sección~\ref{sec:blayer}, el cual representa un desafío 
- vigente, que a consideración del autor no ha sido correctamente 
- abordado en la literatura. Por esta razón, en esta tesis 
- se desarrollo la teoría de capa límite correspondiente, se demostró 
- el caracter exponencial de esta capa límite, el cual se manifiesta 
- incluso para problemas altamente difusivos.
- 
- Hemos demostrado que es posible 
- tener alto órden de convergencia en situaciones realistas para 
- el caso dependiente del tiempo en una única dimensión espacial, 
- explotando el análisis asintótico desarrollado en esta tésis para las capas límite. 
- Como resultado de esta Tesis, 
- surge como tema de investigación a futuro, la generalización y el desarrollo de algoritmos capaces 
- de resolver las estructuras de capa límite para el caso 
- multidimensional de la ETR. Si bien este último problema no fue abordado, 
- la teoría desarrollada en el marco de esta Tesis sienta las bases 
- para el desarrollo de algoritmos de alto órden de convergencia en el 
- caso multidimensional, de interés e impácto en diversas 
- áreas de la ciencia y la tecnología. 
- 
- Hemos extendido el uso del algorítmo FC--DOM desarrollado 
- para el problema directo, al problema inverso en tomografía óptica. 
- Se presentó una formulación mediánte el método adjunto para 
- la obtención del gradiente de la función objetivo, que incluye 
- las condiciones de borde de Fresnel. 
- Resolvimos el problema inverso en tomografía óptica mediante el uso 
- del método cuasi-Newton lm-BFGS.
- Demostramos que es posible obtener una aceleración adicional 
- en las reconstrucciones del parámetro de absorción 
- mediante la estrategia de Fuentes Múltiples Superpuestas. 
-En el método FMS, las múltiples fuentes láser presentan una activación de 
- forma sincronizada, que permite optimizar y ganar control en los tiempos computacionales requeridos para las simulaciones. 
- Mostramos que esta estrategia produce una aceleración en un factor de 
- seis y siete para los casos estudiados, produciendo imágenes 
- de similar calidad a las obtenidas mediánte el Método de Barrido 
- utilizado ubicuamente en la literatura. 
-
- En el marco del problema inverso, posibles direcciones futuras 
- de investigación incluyen el estudio del impacto 
- de la estructura de capa límite en las reconstrucciones, 
- y la generalización de los algoritmos presentados en esta Tesis 
- a otros problemas relacionados, como lo es la obtención 
- simultánea de los coeficientes de absorción y dispersión, 
- o la aplicación a problemas de tomografía por fluorescencia~\cite{Klose2009,Ren2010}.
-
-
 \pagestyle{empty}
