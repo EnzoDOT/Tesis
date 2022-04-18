@@ -1,112 +1,233 @@
+%\documentclass[a4,14pt]{book}
+
 \pagestyle{fancy}
-\chapter{Introducción}
 \lhead{\thepage}
 \rhead{\textit{Introducción}}
+
+%\begin{document}
+
+
+\chapter{Introducción}
 \vspace{0.01\textheight}
 \pagebreak
 
-\clearpage \pagebreak La ecuación de transporte radiativo (ETR de ahora en adelante) es la forma lineal de la ecuación de transporte de Boltzmann, 
+
+\section{Descripción general del trabajo}  
+
+El objetivo principal planteado en esta Tesis es el desarrollo 
+de estrategias computacionales para el 
+estudio de problemas de transporte de partículas neutras, y para la 
+caracterización de los medios atravesados por estas.
+Específicamente, concierne al estudio de radiación de fotones y 
+flujos de neutrones.
+
+En concreto, lo que buscamos es resolver el llamado  
+{\bf problema inverso}, que consiste en determinar las características 
+del medio participante basados en los datos obtenidos por mediciones 
+de radiación producida por fuentes externas conocidas.
+La idea fundamental radica en suponer inicialmente unos parámetros 
+físicos del medio (coeficientes de absorción y dispersión en distintas 
+regiones del mismo), y luego, mediante la resolución del {\bf problema 
+directo} (es decir, la solución de la ecuación de transporte), 
+simular los resultados que se obtendrían en los fotodetectores. 
+Seguidamente, estos se contrastan con los valores reales experimentales, 
+y mediante una serie de iteraciones se busca que las diferencias 
+entre las predicciones teóricas y las mediciones experimentales 
+se minimicen.
+Si bien esto tiene numerosas aplicaciones, daremos prioridad al estudio 
+orientado hacia la tomografía óptica, y en particular, a la 
+caracterización de medios biológicos (tejido humano). 
+Por ello, sin perder generalidad, nos referiremos mayormente 
+durante el transcurso de esta Tesis, a la ecuación de transporte radiativo (ETR).
+
+La resolución de este problema exige enormes recursos computacionales, 
+fundamentalmente debido a su alta dimensionalidad.
+Para el problema directo, deben tomarse en cuenta las tres dimensiones 
+espaciales, y en cada punto se deben considerar las direcciones 
+angulares para la propagación de la radiación. 
+Sumado a esto y dado que su solución se obtiene a través de la 
+evolución de un estado inicial, se debe incluir la variable temporal.
+El problema directo por sí mismo presenta grandes complejidades 
+numéricas, especialmente si los escenarios a resolver incluyen 
+medios inhomogéneos, geometrías complicadas, y condiciones de 
+borde específicas.
+Por ello, es muy común el uso de la aproximación de difusión, 
+que simplifica notablemente los cálculos. 
+Desafortunadamente, esta aproximación no es válida para medios 
+no dispersivos, especialmente para los casos tratados en nuestro trabajo.
+
+El problema inverso es aún mas complicado. 
+En este caso, se supone que se cuenta con resultados experimentales, 
+por ejemplo, el flujo de radiación emitido por ciertas fuentes, 
+y luego medido por ciertos detectores. 
+Lo que se busca determinar, son las propiedades del medio.  
+Para ello, las simulaciones numéricas parten de   
+una configuración inicial, con la que se resuelve la ecuación de transporte, 
+obteniendo los resultados teóricos que representan a las 
+mediciones en los detectores. 
+Este procedimiento se itera, modificando las propiedades del medio, hasta que las 
+diferencias entre las predicciones teóricas y los valores experimentales 
+medidos en los detectores sean despreciables.
+Este problema exige numerosos pasos de iteración, 
+donde en cada uno de ellos se resuelve un problema directo. 
+Además, la minimización exige el almacenamiento en memoria de 
+los diferentes resultados, que permitan inferir los cambios en 
+los parámetros que llevan hacia el mínimo.
+
+En nuestro trabajo aplicamos un novedoso método de resolución de 
+ecuaciones diferenciales, para el tratamiento de la ecuación de 
+transporte. Se trata del método de continuación de Fourier para 
+ordenadas discretas (FC--DOM, por {\it Fourier Continuation -- Discrete 
+Ordinates Method}), que explicaremos en detalle. 
+Este método convierte cualquier función arbitraria en 
+periódica, y por ende, permite la resolución de las ecuaciones 
+utilizando transformadas de Fourier. Con ello se logran resultados 
+precisos y economía de recursos computacionales. Esto es de enorme importancia 
+en la disciplina de tomografía óptica, debido a sus demandas computacionales. 
+Dedicamos un capítulo entero al desarrollo del método, a
+sus aplicaciones en problemas modelo y a la descripción teórica de 
+experimentos, análisis de errores y comparaciones con 
+otros métodos.
+
+Por supuesto que al tratarse de problemas de alta complejidad 
+numérica, es menester dedicar esfuerzos en su resolución mediante 
+técnicas computacionales de alta performance. 
+
+En nuestro trabajo, desarrollamos una estrategia de paralelización 
+basada en una descomposición de dominio. Con ella, se logran factores 
+de escalabilidad que superan al 
+número de procesadores utilizados (escalabilidad ideal), y que resultan de combinar la estrategia  de descomposición de dominio 
+con el método FC--DOM.
+Esta estrategia de paralelización se explicará en detalle, 
+junto con ciertos ejemplos de su aplicación.
+
+Un componente adicional que desarrollamos en nuestra investigación, 
+consiste en el tratamiento de las fuentes, que pueden encenderse 
+en diferentes tiempos, como un conjunto de fuentes generalizadas. 
+Esto significa, que consideramos a varias fuentes independientes, 
+como una fuente única que varía en el tiempo. 
+De esta manera, es posible resolver el problema 
+inverso una sóla vez, en lugar de hacerlo una vez por cada fuente. 
+Con esta estrategia logramos reducir considerablemente los tiempos de 
+cálculo, haciéndolos independientes del número de fuentes. 
+Esto es importante, porque al incrementar las fuentes y los 
+detectores, y al encender las primeras en distintos tiempos, 
+se logra obtener mayor información del sistema, y por consiguiente, 
+una mejor reconstrucción de las características del mismo.
+
+Todas las estrategias y métodos de cálculo serán desarrolladas 
+en detalle, brindando ejemplos de aplicaciones, y comparaciones 
+con resultados analíticos y experimentales. 
+En particular, reproduciremos dos ejemplos reales, de un cuello 
+humano y de una cabeza humana, en los 
+cuales se reconstruyen imágenes de resonancia magnética, a las 
+que le agregamos algunas inclusiones, que pueden representar 
+tumores o regiones de activación hemodinámica.
+Mostraremos la excelente reproducción teórica de estas imágenes, 
+junto a la discusión correspondiente que demuestra la enorme 
+eficiencia de nuestros métodos.
+
+El resto de esta Tesis se organiza como sigue. 
+En la sección {\em Motivación} del presente capítulo 
+se presentan algunos aspectos 
+generales de la teoría de transporte. Se incluye
+ una revisión de bibliografía relevante, 
+y detalles adicionales sobre las contribuciones realizadas en el marco de este trabajo.
+En el Capítulo~\ref{cap:forw} se presenta 
+la ETR, la cual es utilizada en el contexto 
+de esta Tesis como modelo directo 
+en el problema inverso de tomografía óptica. Se desarrollan 
+los métodos numéricos y algoritmos elaborados en esta Tesis 
+para la resolución de la ETR, así como su validación 
+mediante comparación con mediciones experimentales, y soluciones analíticas. Este capítulo finaliza con la identificación y 
+caracterización de las estructuras de capa límite existentes 
+en las soluciones a la ETR, donde se propone un método para 
+la correcta resolución de estas estructuras. 
+En el Capítulo~\ref{cap:inverso} se presenta el problema inverso 
+en tomografía óptica. En este capítulo se detallan los métodos 
+y algoritmos utilizados para la resolución del problema inverso. 
+Se describen el ``método de barrido'' y la estrategia de Fuentes Múltiples Superpuestas, propuesta en esta Tesis. 
+Se presenta una formulación para la obtención del gradiente 
+funcional de la función objetivo mediante la utilización del método adjunto. El capítulo termina con dos 
+reconstrucciones obtenidas por ambos métodos, donde se demuestra 
+la eficiencia del enfoque propuesto. Finalmente, en el Capítulo~\ref{cap:conc} se sintetizan las conclusiones de este trabajo.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip
+\section{Motivación}
+
+La ecuación de transporte radiativo ETR es la forma lineal de la ecuación de transporte de Boltzmann, 
 cuyo dominio de definición es el espacio de las fases. Ésta ecuación modela el transporte 
 de radiación electromagnética en un medio participante ---la radiación en el proceso de transporte 
 interactúa con el medio, siendo absorbida, dispersada y emitida por éste---. La ETR modela también el transporte de partículas neutras en
  general (para las cuales las interacciones mutuas entre las partículas involucradas 
- en el proceso de transporte puede ser despreciada). La importancia del modelado del transporte de 
- partículas neutras (siendo los fotones la partícula involucrada en el proceso de transporte de 
- radiación electromagnética) difícilmente puede ser sobrestimada, ya que dicho modelado encuentra aplicaciones en diversas
- áreas de la ciencia y la tecnología, como lo es el transporte de radiación 
- térmica para aplicaciones industriales~\cite{Howell2010, Thynell1998}, la dinámica de 
- gases~\cite{Duderstadt1979}, el transporte de radiación en atmósferas estelares y 
- planetarias~\cite{Qin2015, Dymond1997, Chandrasekhar1960}, el diagnóstico médico de 
- tumores~\cite{Zhu2005, Zhu2010, Fujii2016b}, la planificación y dosificación 
- de radiación en radioterapia~\cite{Vassiliev2010,Bedford2019}, el diagnóstico de artritis~\cite{Klose2002, Netz2001} 
+ en el proceso de transporte puede ser despreciada).
+
+La importancia del modelado del transporte de partículas neutras 
+difícilmente puede ser sobrestimada, ya que encuentra aplicaciones 
+en diversas áreas de la ciencia y la tecnología, 
+como por ejemplo el transporte de radiación 
+ térmica para aplicaciones industriales~\cite{Howell2010, Thynell1998}, 
+ la dinámica de gases~\cite{Duderstadt1979}, 
+ el transporte de radiación en atmósferas estelares y 
+ planetarias~\cite{Qin2015, Dymond1997, Chandrasekhar1960}, 
+ el diagnóstico médico de tumores~\cite{Zhu2005, Zhu2010, Fujii2016b}, 
+ la planificación y dosificación de radiación en radioterapia~\cite{Vassiliev2010,Bedford2019}, 
+ el diagnóstico de artritis~\cite{Klose2002, Netz2001}, 
+ la tomografía óptica por fluorescencia~\cite{Klose2005,Klose2010, Ren2010},
  y el modelado de transporte de neutrones para el desarrollo 
- y diseño de reactores nucleares~\cite{Larsen2006, Sanchez1982, Anli2006}, entre otros~\cite {Mishchenko1999, Prasher2003}. 
- En cuanto al transporte de radiación electromagnética, la ETR puede derivarse, bajo ciertas aproximaciones, como un límite asintótico 
+ y diseño de reactores nucleares~\cite{Larsen2006, Sanchez1982, Anli2006}, 
+ entre otros~\cite {Mishchenko1999, Prasher2003}. 
+ La ETR puede derivarse, bajo ciertas aproximaciones, como un límite asintótico 
  para soluciones de las ecuaciones de Maxwell. La cantidad modelada por la ETR, comúnmente denominada 
  intensidad específica, queda relacionada en dicho límite con el vector de Poynting~\cite{Mishchenko2002, Ripoll2011} 
  en la teoría ondulatoria del electromagnetismo. Los fenómenos ondulatorios como la interferencia y la difracción no son
  capturados por la ETR, la cual expresa esencialmente la conservación de la
  energía irradiada a escala mesoscópica en el campo electromagnético.
 
+  
  La tomografía óptica es una técnica no invasiva en la que
- radiación electromagnética no ionizante es inyectada dentro del tejido en estudio.
+ radiación electromagnética es inyectada dentro del medio
+ en estudio.
  La radiación emergente es detectada mediante fotodectectores 
- ubicados en el contorno del medio que se está analizando. A
-  partir de la luz detectada, el objetivo es la reconstrucción de
- los parámetros ópticos que lo caracterizan. Esta técnica 
- tiene la capacidad de proporcionar información funcional y anatómica. 
+ ubicados en el contorno del medio que se está analizando. 
+ A partir de la luz detectada, el objetivo es la reconstrucción de
+ los parámetros ópticos que lo caracterizan. 
+Esta técnica posee numerosas 
+ ventajas relativas, entre las que se destacan su bajo costo, la fácil portabilidad, y 
+ el empleo de radiación no ionizante (no cancerígena). 
  
- Algunas de las ventajas relativas de esta técnica tomográfica que se encuentra aún en desarrollo, respecto a 
- técnicas ya establecidas, son la portabilidad y su bajo costo. 
-A diferencia de la tomografía 
- computarizada de rayos-X, esta técnica utiliza radiación no 
- ionizante, la cual no es cancerígena, ofreciendo 
- una alternativa para el diagnóstico de cáncer de mama, entre otros. 
- 
- La ETR es utilizada 
+La ETR es utilizada 
  en tomografía óptica como
  un modelo para el transporte de fotones a una longitud de onda prescripta, 
- típicamente proveniente de una fuente láser.
+ típicamente proveniente de fuentes láser.
  La ``ventana óptica'' ubicada en el rango de longitudes de onda del espectro electromagnético comprendida entre los 600 a 900 nanómetros permite a la radiación en el 
  infrarrojo cercano penetrar y sensar varios centímetros en el interior del tejido biológico~\cite{Boas2001}. 
- Para estas longitudes de onda del espectro electromagnético, el tejido humano se comporta 
- como un medio altamente dispersivo. Los fotones viajan a través del
- tejido, sufriendo múltiples colisiones de dispersión elástica, describiendo trayectorias 
-aleatorias.
-
+ Para estas longitudes de onda, el tejido 
+ biológico se comporta como un medio altamente dispersivo, y 
+ permite sensar varios centímetros en el interior del mismo~\cite{Boas2001}.
+Los fotones viajan a través del tejido, sufriendo múltiples colisiones 
+ de dispersión elástica, describiendo trayectorias aleatorias.
  Los componentes del tejido biológico pueden identificarse y caracterizarse
- explotando el denominado coeficiente de absorción óptica, o en conjunto 
- los coeficientes de absorción y de dispersión, ambos dependientes 
+ mediante el denominado coeficiente de absorción óptica,  dependiente 
  de los componentes presentes en el medio.
- Debido a las interacciones altamente dispersivas,
- la información de la trayectoria de los fotones se pierde,
- lo que da como resultado los bajos niveles de resolución que se obtienen en esta disciplina. 
- Esta es una característica particular de la técnica, que la distingue de la tomografía 
- por rayos-X, donde los fotones sufren poca dispersión y la transformada de 
-Radon resulta eficiente para la obtención de las imágenes. Dado que el coeficiente de absorción depende fuertemente en la longitud de onda 
- de la radiación electromagnética utilizada, esta técnica provee alto contraste, 
- ya que dicha longitud de onda se puede ajustar a la longitud de onda de absorción 
- del medio de interés que quiere detectarse, \eg utilizando radiación alrededor de los $650$nm 
- para distinguir hemoglobina oxigenada de la desoxihemoglobina~\cite{Boas2001}. La angiogenesis 
- cumple un rol central en el crecimiento de los tumores. Este es 
- el mecanismo mediante el cual las células tumorales generan los vasos sanguíneos 
- necesarios para que las células cancerosas se alimenten y se reproduzcan. Por este 
- motivo un caso de particular interés es la detección de la hemoglobina, ya que esta indica la presencia de vasos sanguíneos, los cuales pueden ser un indicador de la presencia y del estado de un tumor, para su detección o para monitoreo y seguimiento en su tratamiento. 
- Por otra parte, 
- la activación de diferentes regiones del cerebro 
- es acompañada por una respuesta hemodinámica que lleva sangre oxigenada 
- a las mismas. La detección de la hemoglobina 
- oxigenada es por lo tanto un indicador de actividad cerebral, con aplicaciones 
- en neurociencias. 
  
- La reconstrucción de las propiedades de absorción en el tejido humano permiten la identificación de tumores~\cite{Zhu2005, Zhu2010, Fujii2016b},
- la obtención de imágenes funcionales del cerebro~\cite{Boas2001, bluestone2001, Arridge1999}, y la caracterización de los diferentes
- constituyentes del tejido humano para diagnóstico médico, entre otros. En este trabajo nos enfocamos en
- la reconstrucción del coeficiente de absorción, aunque
- el enfoque propuesto puede ser fácilmente generalizado para la reconstrucción 
- de otros parámetros, como \eg, el problema de determinar las fuentes en la ETR,
- que encuentra aplicaciones en la disciplina relacionada de
- tomografía óptica por fluorescencia~\cite{Klose2005,Klose2010, Ren2010}, y la reconstrucción 
- simultánea de los coeficientes de absorción y de dispersión~\cite{Ren2006,Prieto2017}.
-
- Resolvemos el problema inverso en tomografía óptica como un problema 
- de minimización no lineal para el que empleamos
- el método cuasi-Newton de descenso de gradiente denominado 
- Broyden–Fletcher–Goldfarb–Shanno (BFGS) con uso de memoria reducido lm-BFGS~\cite{Byrd1995}. Éste es un método de minimización iterativo 
- que se vale del gradiente, y de una aproximación 
- al Hessiano de la función objetivo (a ser 
- introducida en el Capítulo~\ref{cap:inverso}) para encontrar el mínimo deseado. En las referencias~\cite{Prieto2017,Boulanger2005} 
- el problema inverso en tomografía óptica en dos dimensiones espaciales (2D)
-es presentado, utilizando la ETR dependiente del tiempo, sin considerar las condiciones de contorno de Fresnel. Debido a los altos costos computacionales,
- solo se emplean grillas numéricas de poca resolución,
- haciendo que estos enfoques no sean adecuados para situaciones reales, que pueden requerir
- de soluciones numéricas mejor convergidas, y dominios espaciales más grandes. 
- Los métodos de alto orden
- permiten obtener soluciones precisas de la ETR
- utilizando grillas numéricas mas gruesas, en comparación a métodos de menor orden. Esto impacta en los recursos computacionales requeridos para una precisión dada, en términos de tiempo computacional y exigencias de memoria, que se vuelven prohibitivos muy rápidamente debido a la alta dimensionalidad de la ETR. Los algoritmos propuestos 
- en este trabajo pueden ser fácilmente extendidos a geometrías de tres dimensiones espaciales (3D). En geometrías 2D, la ETR
- conserva la complejidad matemática de los problemas 3D, 
- exigiendo menor cantidad de recursos computacionales. 
+La tomografía óptica sirve para obtener información tanto anatómica como funcional.
+La reconstrucción de las propiedades de absorción en el tejido humano 
+ permiten la identificación de tumores~\cite{Zhu2005, Zhu2010, Fujii2016b}.
+Estas técnicas se basan en la detección de hemoglobina, que puede hacerse 
+favorablemente utilizando radiación del infrarrojo cercano.
+Las células tumorales generan -- mediante el proceso de angiogénesis --, 
+los vasos sanguíneos necesarios para su alimentación y reproducción.
+La obtención de imágenes funcionales del cerebro~\cite{Boas2001, bluestone2001, Arridge1999}, se basa en los grandes cambios 
+que sufre el coeficiente de absorción de la hemoglobina 
+alrededor de los $650$ nm, cuando esta absorbe oxígeno 
+(hemoglobina oxigenada vs.~desoxihemoglobina). 
+ La activación de diferentes regiones del cerebro 
+ es acompañada por una respuesta hemodinámica que lleva sangre oxigenada 
+ a las mismas, lo que permite detectar qué regiones están funcionando 
+ ante determinadas actividades. 
 
 La ETR proporciona un
 modelo físicamente preciso para el transporte de fotones en el tejido biológico
@@ -168,7 +289,7 @@ se informa un tiempo de cálculo de 44,3 horas para la resolución de la ETR de 
 en 2D por medio un único procesador. La solución del mismo problema utilizando 
 los mismos parámetros y la misma resolución de la grilla numérica, corriendo en 64 procesadores, se obtiene mediante la estrategia de paralelización del algoritmo FC-DOM propuesto en menos de treinta minutos.
 
-Como se mencionó anteriormente, una reducción adicional significativa en el
+Una reducción adicional significativa en el
 el tiempo de cálculo requerido para la solución del problema inverso es
 lograda mediante la explotación del método FMS propuesto---el cual, combinando
 múltiples fuentes en cada solución a la ETR, reduce el número de
@@ -176,26 +297,8 @@ de soluciones ETR directas y adjuntas requeridas.
 En esta Tesis se demuestra la aceleración por un factor de seis, 
 relativo al tiempo requerido por el ``método de barrido'' 
 utilizado de manera ubicua en tomografía óptica.
-
-El resto de esta Tesis se organiza como sigue. 
-En el Capítulo~\ref{cap:forw} se presenta 
-la ETR, la cual es utilizada en el contexto 
-de esta Tesis como modelo directo 
-en el problema inverso de tomografía óptica. Se desarrollan 
-los métodos numéricos y algoritmos elaborados en esta Tesis 
-para la resolución de la ETR, así como su validación 
-mediante comparación con mediciones experimentales, y soluciones analíticas. Este capítulo finaliza con la identificación y 
-caracterización de las estructuras de capa límite existentes 
-en las soluciones a la ETR, donde se propone un método para 
-la correcta resolución de estas estructuras. 
-En el Capítulo~\ref{cap:inverso} se presenta el problema inverso 
-en tomografía óptica. En este capítulo se detallan los métodos 
-y algoritmos utilizados para la resolución del problema inverso. 
-Se describen el ``método de barrido'' y la estrategia de Fuentes Multiples Superpuestas, propuesta en esta Tesis. 
-Se presenta una formulación para la obtención del gradiente 
-funcional de la función objetivo mediante la utilización del método adjunto. El capítulo termina con dos 
-reconstrucciones obtenidas por ambos métodos, donde se demuestra 
-la eficiencia del enfoque propuesto. Finalmente, en el Capítulo~\ref{cap:conc} se sintetizan las conclusiones de este trabajo.
-
+ 
 \pagestyle{empty}
+
+%\end{document}
 
