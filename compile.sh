@@ -1,6 +1,6 @@
-latex tesis
+pdflatex tesis
 bibtex tesis
-latex tesis
-latex tesis
+pdflatex tesis
+pdflatex tesis
 
 pdflatex tesis.tex
