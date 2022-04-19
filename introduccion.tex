@@ -29,7 +29,7 @@ La idea fundamental radica en suponer inicialmente unos parámetros
 físicos del medio (coeficientes de absorción y dispersión en distintas 
 regiones del mismo), y luego, mediante la resolución del {\bf problema 
 directo} (es decir, la solución de la ecuación de transporte), 
-simular los resultados que se obtendrían en los fotodetectores. 
+simular los resultados que se obtendrían en los detectores. 
 Seguidamente, estos se contrastan con los valores reales experimentales, 
 y mediante una serie de iteraciones se busca que las diferencias 
 entre las predicciones teóricas y las mediciones experimentales 
@@ -68,7 +68,7 @@ mediciones en los detectores.
 Este procedimiento se itera, modificando las propiedades del medio, hasta que las 
 diferencias entre las predicciones teóricas y los valores experimentales 
 medidos en los detectores sean despreciables.
-Este problema exige numerosos pasos de iteración, 
+Como se percibe, este problema exige numerosos pasos de iteración, 
 donde en cada uno de ellos se resuelve un problema directo. 
 Además, la minimización exige el almacenamiento en memoria de 
 los diferentes resultados, que permitan inferir los cambios en 
@@ -82,8 +82,7 @@ Ordinates Method}), que explicaremos en detalle.
 Este método convierte cualquier función arbitraria en 
 periódica, y por ende, permite la resolución de las ecuaciones 
 utilizando transformadas de Fourier. Con ello se logran resultados 
-precisos y economía de recursos computacionales. Esto es de enorme importancia 
-en la disciplina de tomografía óptica, debido a sus demandas computacionales. 
+muy precisos con economía de recursos computacionales.
 Dedicamos un capítulo entero al desarrollo del método, a
 sus aplicaciones en problemas modelo y a la descripción teórica de 
 experimentos, análisis de errores y comparaciones con 
@@ -92,11 +91,11 @@ otros métodos.
 Por supuesto que al tratarse de problemas de alta complejidad 
 numérica, es menester dedicar esfuerzos en su resolución mediante 
 técnicas computacionales de alta performance. 
-
 En nuestro trabajo, desarrollamos una estrategia de paralelización 
 basada en una descomposición de dominio. Con ella, se logran factores 
 de escalabilidad que superan al 
-número de procesadores utilizados (escalabilidad ideal), y que resultan de combinar la estrategia  de descomposición de dominio 
+número de procesadores utilizados (escalabilidad ideal), y que resultan de combinar 
+la estrategia  de descomposición de dominio 
 con el método FC--DOM.
 Esta estrategia de paralelización se explicará en detalle, 
 junto con ciertos ejemplos de su aplicación.
@@ -128,7 +127,7 @@ junto a la discusión correspondiente que demuestra la enorme
 eficiencia de nuestros métodos.
 
 El resto de esta Tesis se organiza como sigue. 
-En la sección {\em Contexto general y motivación} del presente capítulo 
+En la Sección {\em Contexto general y motivación} del presente capítulo 
 se presentan algunos aspectos 
 generales de la teoría de transporte. Se incluye
  una revisión de bibliografía relevante, 
@@ -157,7 +156,7 @@ la eficiencia del enfoque propuesto. Finalmente, en el Capítulo~\ref{cap:conc} 
 \bigskip
 \section{Contexto general y motivación}
 
-La ecuación de transporte radiativo ETR es la forma lineal de la ecuación de transporte de Boltzmann, 
+La ETR es la forma lineal de la ecuación de transporte de Boltzmann, 
 cuyo dominio de definición es el espacio de las fases. Ésta ecuación modela el transporte 
 de radiación electromagnética en un medio participante ---la radiación en el proceso de transporte 
 interactúa con el medio, siendo absorbida, dispersada y emitida por éste---. La ETR modela también el transporte de partículas neutras en
@@ -218,7 +217,7 @@ La reconstrucción de las propiedades de absorción en el tejido humano
  permiten la identificación de tumores~\cite{Zhu2005, Zhu2010, Fujii2016b}.
 Estas técnicas se basan en la detección de hemoglobina, que puede hacerse 
 favorablemente utilizando radiación del infrarrojo cercano.
-Las células tumorales generan -- mediante el proceso de angiogénesis --, 
+Las células tumorales generan ---mediante el proceso de angiogénesis---, 
 los vasos sanguíneos necesarios para su alimentación y reproducción.
 La obtención de imágenes funcionales del cerebro~\cite{Boas2001, bluestone2001, Arridge1999}, se basa en los grandes cambios 
 que sufre el coeficiente de absorción de la hemoglobina 
@@ -267,7 +266,7 @@ La estrategia de paralelización propuesta presenta una serie de
 ventajas. A diferencia de otros algoritmos reportados en la literatura, el enfoque
 presentado en este trabajo es altamente eficiente independientemente de
 el número de fuentes empleadas (\cf \cite{Hielscher2004}).
-Estrategias de computo en paralelo basadas en arquitecturas de GPU~\cite {Doulgerakis2017} han mostrado ser apropiadas para aplicaciones de tomografía óptica basadas en la aproximación de difusión. Desafortunadamente, 
+Estrategias de computo en paralelo basadas en arquitecturas de GPU~\cite{Doulgerakis2017} han mostrado ser apropiadas para aplicaciones de tomografía óptica basadas en la aproximación de difusión. Desafortunadamente, 
 la aproximación de difusión no es físicamente precisa en un amplio rango de situaciones,
 y, debido a las altas exigencias en memoria de almacenamiento requerida para 
 la resolución del problema inverso ---el cual exige guardar en memoria soluciones completas 
