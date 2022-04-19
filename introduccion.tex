@@ -128,7 +128,7 @@ junto a la discusión correspondiente que demuestra la enorme
 eficiencia de nuestros métodos.
 
 El resto de esta Tesis se organiza como sigue. 
-En la sección {\em Motivación} del presente capítulo 
+En la sección {\em Contexto general y motivación} del presente capítulo 
 se presentan algunos aspectos 
 generales de la teoría de transporte. Se incluye
  una revisión de bibliografía relevante, 
@@ -155,7 +155,7 @@ la eficiencia del enfoque propuesto. Finalmente, en el Capítulo~\ref{cap:conc} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
-\section{Motivación}
+\section{Contexto general y motivación}
 
 La ecuación de transporte radiativo ETR es la forma lineal de la ecuación de transporte de Boltzmann, 
 cuyo dominio de definición es el espacio de las fases. Ésta ecuación modela el transporte 
@@ -289,9 +289,8 @@ se informa un tiempo de cálculo de 44,3 horas para la resolución de la ETR de 
 en 2D por medio un único procesador. La solución del mismo problema utilizando 
 los mismos parámetros y la misma resolución de la grilla numérica, corriendo en 64 procesadores, se obtiene mediante la estrategia de paralelización del algoritmo FC-DOM propuesto en menos de treinta minutos.
 
-Una reducción adicional significativa en el
-el tiempo de cálculo requerido para la solución del problema inverso es
-lograda mediante la explotación del método FMS propuesto---el cual, combinando
+Se logra una reducción adicional significativa en el
+el tiempo de cálculo requerido para la solución del problema inverso mediante el método FMS propuesto---el cual, combinando
 múltiples fuentes en cada solución a la ETR, reduce el número de
 de soluciones ETR directas y adjuntas requeridas. 
 En esta Tesis se demuestra la aceleración por un factor de seis, 
