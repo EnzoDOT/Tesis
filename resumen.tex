@@ -9,32 +9,35 @@
 \end{center}
 
 \vspace{1cm}
-En este trabajo desarrollamos    
-algoritmos eficientes para la resolución de los problemas directos 
-e inversos necesarios en la disciplina de tomografía óptica. Para ello, utilizamos la Ecuación de Transporte 
-Radiativo (ETR) como modelo físico de transporte para la radiación 
-en la materia. 
-
-La ETR es resuelta por medio de algoritmos basados en el Método  
-de Continuación de Fourier en Ordenadas Discretas (FC-DOM, de su sigla en inglés). Estos algoritmos 
-permiten resolver la ERT de forma eficiente y en entornos de máquinas paralelas 
-con escalabilidad ideal, como se muestra en esta tesis. 
-
-Adicionalmente, presentamos una identificación y caracterización de estructuras 
-de capa límite existentes en las soluciones de la ETR, en conjunto con un método para su resolución. La teoría 
-de capa límite presentada provee estrategias para la solución de la ETR 
-que dan como resultado un 
-alto orden de convergencia en todas las variables involucradas,
-como se demuestra en la sección~\ref{sec:blayer} para el caso de una única dimensión espacial.
-
-Para la resolución del problema inverso en tomografía óptica utilizamos el método de minimización 
-de Broyden–Fletcher–Goldfarb–Shanno (BFGS) con uso de memoria reducido 
-(lm-BFGS, de su sigla en inglés). 
-Se desarrolla una metodología que mediante la resolución del 
-problema adjunto de transporte permite el cálculo eficiente del gradiente 
-funcional de la función objetivo, incluyendo el caso de condiciones de bordes 
-de Fresnel.
-
+Esta Tesis presenta un algoritmo {\em paralelo} eficiente  
+para la resolución del problema inverso en 
+tomografía óptica basado en la ecuación de transferencia radiativa en el dominio temporal. 
+La ecuación de transferencia radiativa provee un modelo 
+físicamente preciso para el transporte de fotones 
+en el tejido biológico, pero el alto costo computacional 
+asociado a su resolución representa un obstáculo 
+para su utilización en tomografía óptica en el dominio 
+temporal, y otras áreas. En esta Tesis se aborda este problema 
+mediante un número de innovaciones computacionales y de 
+modelado, que incluyen 1) Una estrategia de paralelización 
+basada en la descomposición del dominio espacial que presenta 
+\textit{escalabilidad ideal} para los problemas directos 
+e inversos; 2) Una estrategia de Fuentes Múltiples Simultaneas 
+(FMS) que resuelve el problema inverso de transporte 
+con un costo computacional que es {\em independiente del 
+número de fuentes empleadas}, y el cual acelera significativamente la reconstrucción de los parámetros ópticos: 
+se demuestra un factor de aceleración de seis en esta Tesis. 
+Finalmente, esta contribución presenta 3) Una derivación 
+intuitiva de la formulación del problema adjunto para la 
+cálculo de los gradientes funcionales, que incorpora 
+las condiciones de borde de Fresnel---generalizando 
+resultados reportados en la literatura para las condiciones 
+de borde de vacío. Se presentan 
+soluciones de problemas inversos realistas en 2D, 
+que fueron obtenidos en un cluster de computadoras con 
+hasta 256 procesadores. La combinación de la estrategia 
+de paralelización con la estrategia FMS redujo el tiempo 
+computacional requerido para la resolución de los problemas inversos en varios órdenes de magnitud, de meses a unas pocas horas. 
 
 \vspace{1cm}
 \noindent

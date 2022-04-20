@@ -639,20 +639,6 @@ una descomposición de 8 subdominios para
 poder realizar estas pruebas en una PC de escritorio. 
 El coeficiente de dispersión en el medio considerado es isótropo, 
 con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
-
-Evaluamos el error máximo obtenido en todo el dominio 
-comparando el flujo escalar dado por la ecuación~\eqref{eq:photondensity} 
-obtenido numéricamente comparado con el obtenido analíticamente
-\begin{equation*}
-\begin{split}
-\begin{aligned}
-\phi^{\text{an}}(\x,t)&=\int_{2\pi} u^{an}(\x,\theta,t) d\theta=
-k_{\phi}\times e^{-(x-t)^2-(y-t)^2},\\
-k_{\phi}&=\int_{2\pi}e^{-\cos(\theta)^2}d\theta\simeq 4,052876133898710,
-\end{aligned}
-\end{split}
-\label{eq:photondensityan}
-\end{equation*}
 \begin{wrapfigure}{r}{0.45\textwidth}
  \begin{subfigure}{
   \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
@@ -668,6 +654,19 @@ k_{\phi}&=\int_{2\pi}e^{-\cos(\theta)^2}d\theta\simeq 4,052876133898710,
   muestran la pendiente para un orden de convergencia prescripto. }
  \label{fig:convman}
 \end{wrapfigure}
+Evaluamos el error máximo obtenido en todo el dominio 
+comparando el flujo escalar dado por la ecuación~\eqref{eq:photondensity} 
+obtenido numéricamente comparado con el obtenido analíticamente
+\begin{equation*}
+\begin{split}
+\begin{aligned}
+\phi^{\text{an}}(\x,t)&=\int_{2\pi} u^{an}(\x,\theta,t) d\theta=
+k_{\phi}\times e^{-(x-t)^2-(y-t)^2},\\
+k_{\phi}&=\int_{2\pi}e^{-\cos(\theta)^2}d\theta\simeq 4,052876133898710,
+\end{aligned}
+\end{split}
+\label{eq:photondensityan}
+\end{equation*}
 y estudiamos las propiedades de convergencia 
 para todas las variables involucradas. La constante 
 $k_{\phi}$ se calcula con 16 dígitos de precisión. 
@@ -1431,9 +1430,7 @@ donde $u^{n+1}_j=u(v,\xi_j,t^{n+1})$, $t^{n+1}=n\Delta t$, siendo $\alpha_k$ y $
 los coeficientes BDF, con $s=3$. 
 El término extrapolado 
 a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa {3 \choose \kappa+1} u_j^{n-\kappa}$.
- Nuevamente, 
-$\id$ es  el operador identidad, mientras que $\ide$ representa al operador 
-de diferenciación espectral obtenido mediante el método de continuación de Fourier. 
+
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
   \vspace{2mm}
@@ -1444,6 +1441,10 @@ de diferenciación espectral obtenido mediante el método de continuación de Fo
   propuesto. Diamantes: orden de convergencia.}
  \label{fig:conv}
 \end{wrapfigure}
+
+ Nuevamente, 
+$\id$ es  el operador identidad, mientras que $\ide$ representa al operador 
+de diferenciación espectral obtenido mediante el método de continuación de Fourier. 
 
 La Fig.~\eqref{fig:conv} muestra las excelentes propiedades de convergencia 
 obtenidas mediante el algoritmo propuesto para $\mu_s=\mu_a=q=1$. Dado 
