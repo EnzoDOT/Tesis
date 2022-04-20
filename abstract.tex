@@ -9,28 +9,31 @@
 \end{center}
 
 \vspace{1cm}
-In this work we develop efficient algorithms for the resolution 
-of the direct and inverse problems in optical tomography. 
-To this end, we utilize the Radiative Transfer Equation (RTE) 
-as a physical model for the transport of photons in matter. 
-
-The RTE is solved by means of algorithms based on the Fourier 
-Continuation Method in conjunction with the Discrete Ordinates method (FC-DOM method).
-These algorithms allows to solve the RTE in an efficient manner on parallel 
-machines with ideal scalability, as it is shown in this thesis.
-
-We also present an identification and characterization of boundary layer structures 
-in the solutions of the RTE, providing a strategy for its resolution. 
-The 
-boundary layer theory provided strategies for the numerical resolution 
-of the RTE with high order convergence in all the variables involved, 
-as demonstrated in section~\ref{sec:blayer} in one spatial dimension.
-
-For the inverse problem resolution in optical tomography, 
-we employ the quasi-Newton Broyden–Fletcher–Goldfarb–Shanno method, 
-with limited use of memory (lm-BFGS). An adjoint problem methodology 
-is developed, which allows the efficient evaluation of the objective 
-function involved, including Fresnel boundary conditions.
+This Thesis presents an efficient {\em parallel} radiative
+  transfer-based inverse-problem solver for time-domain optical
+  tomography. The radiative transfer equation provides a physically
+  accurate model for the transport of photons in biological tissue,
+  but the high computational cost associated with its solution has
+  hindered its use in time-domain optical-tomography and other
+  areas. In this paper this problem is tackled by means of a number of
+  computational and modeling innovations, including 1) A spatial
+  parallel-decomposition strategy with \textit{perfect parallel
+    scaling} for the forward and inverse problems of optical
+  tomography on parallel computer systems; and, 2) A Multiple
+  Staggered Source method (MSS) that solves the inverse transport
+  problem at a computational cost that is {\em independent of the
+    number of sources employed}, and which significantly accelerates
+  the reconstruction of the optical parameters: a six-fold MSS
+  acceleration factor is demonstrated in this paper. Finally, this
+  contribution presents 3) An intuitive derivation of the
+  adjoint-based formulation for evaluation of functional gradients,
+  including general Fresnel boundary conditions---thus, in particular,
+  generalizing results previously available for vacuum boundary
+  conditions. Solutions of large and realistic 2D inverse problems are
+  presented in this paper, which were produced on a 256-core computer
+  system. The combined parallel/MSS acceleration approach reduced the
+  required computing times by several orders of magnitude, from months
+  to a few hours.
 
 
 \vspace{1cm}
