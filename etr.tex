@@ -4,7 +4,9 @@
 \lhead{\thepage}
 \rhead{\textit{El modelo directo}} 
 \pagebreak
-\clearpage \pagebreak Como mencionamos en la introducción, en este trabajo resolvemos el problema {\bf inverso} 
+\clearpage \pagebreak 
+
+En este trabajo resolvemos el problema {\bf inverso} 
 en tomografía óptica como un problema de minimización no lineal. 
 En primer lugar, se debe resolver el problema {\bf directo}, 
 el cual provee un modelo 
@@ -41,7 +43,6 @@ la conservación de la energía en forma de
 radiación electromagnética al atravesar la materia. La radiación 
 interactúa con el medio, el cual absorbe, dispersa, y en el caso 
 general, emite radiación electromagnética. 
-
 Originalmente, esta ecuación fue derivada mediante 
 consideraciones para la conservación de la energía. Tal es el enfoque 
 que puede encontrarse en, \eg\cite{Chandrasekhar1960,Lewis1984}. En trabajos 
@@ -419,15 +420,15 @@ El tercer paso permite la utilización eficiente de la Transformada Rápida de F
 utilizados en la grilla.  
 Si $g(x)$ es una función suave, con derivadas continuas, el 
 procedimiento de continuación detallado genera una función suave 
-y periódica tal qué $\mathbf{g}_{c,i}=\mathbf{g}_i$ para $i=1,2,\ldots,N+1$.
+y periódica tal que $\mathbf{g}_{c,i}=\mathbf{g}_i$ para $i=1,2,\ldots,N+1$.
 
-Como ejemplo, en la fig.~(\ref{fig:Continuedg}) se muestra la continuación 
+Como ejemplo, en la Fig.~(\ref{fig:Continuedg}) se muestra la continuación 
 producida para la función $g(x)=12+x^2 - e^{x/3}$ en el intervalo $x\in [0,6]$.
 Utilizamos $N=60$ puntos en la grilla, con $C=25$ puntos de continuación (en círculos), 
 y $d_l=d_r=5$ (diamantes). Eligiendo $E=4$, se obtiene  $N_p = N + 1 + C + E=90$, 
 que se puede factorizar en números primos pequeños ($N_p=2\times 3 \times 3 \times 5$). 
 En general, fijamos $N_p$ ajustando el número $E$ de forma tal 
-qué $N_p=\prod_{\gamma=1}^{F} \pi_{\gamma}$, con los factores 
+que $N_p=\prod_{\gamma=1}^{F} \pi_{\gamma}$, con los factores 
 primos pequeños cumpliendo $\pi_1\leq\pi_2\leq \ldots \leq \pi_{F} \leq 5$. 
 
 \begin{figure}[h!]
@@ -575,6 +576,20 @@ desarrolla ampliamente en el trabajo de Albin y Bruno~\cite{Albin2011}
 (sección 6). Esencialmente, esto se debe a que 
 las transformaciones FFT 
 poseen una complejidad computacional $\mathcal{O}(N\log(N))$.
+
+En la 
+referencia~\cite{Coelho2014} se realiza una revisión de algoritmos propuestos en la literatura 
+para la paralelización de la ETR. Todas las estrategias muestran una escalabilidad significativamente por debajo de la ideal, con excepción de la ref.~\cite{Colomer2013}, 
+que presenta resultados para escenarios muy restringidos. 
+En adición a los ejemplos presentados, hemos comparado 
+el tiempo de cómputo empleado para resolver 
+un problema modelo en 2D planteado por Fujii~\cite [p. 153]{Fujii2014}, para el que reporta un tiempo de cálculo de 44,3 horas utilizando un único procesador. Pudimos resolver este problema empleando 
+los mismos parámetros y la misma grilla numérica, 
+en menos de treinta minutos, utilizando 64 procesadores.
+Nuestros algoritmos resultan en escalabilidad ideal, independientemente 
+del régimen de transporte, sin restricciones 
+para los coeficientes de absorción y dispersión, el número de fuentes empleadas o el número de ordenadas discretas que se  utilicen.
+
 
 \section{Validación}
 
@@ -1322,7 +1337,7 @@ Utilizando la versión integrada de la ecuación~\eqref{eq:transp1d},
 similar a~\eqref{eq:intf}, combinando dos términos exponenciales, 
 y utilizando el hecho de que para un entero no negativo $k$ 
 la integral $\int_0^\infty t^k e^{-t} dt$ es finita, 
-encontramos qué (Apéndice~\ref{ap:demcv})
+encontramos que (Apéndice~\ref{ap:demcv})
 \begin{equation}
 \begin{split}
 \left | \frac{\partial^j }{\partial r^j}\left[ u(x,r^p) r^{p-1}\right]
@@ -1417,7 +1432,7 @@ los coeficientes BDF, con $s=3$.
 El término extrapolado 
 a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa {3 \choose \kappa+1} u_j^{n-\kappa}$.
  Nuevamente, 
-$\id$ es  el operador identidad, mientras qué $\ide$ representa al operador 
+$\id$ es  el operador identidad, mientras que $\ide$ representa al operador 
 de diferenciación espectral obtenido mediante el método de continuación de Fourier. 
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\

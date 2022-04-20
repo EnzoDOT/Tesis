@@ -81,8 +81,8 @@ ordenadas discretas (FC--DOM, por {\it Fourier Continuation -- Discrete
 Ordinates Method}), que explicaremos en detalle. 
 Este método convierte cualquier función arbitraria en 
 periódica, y por ende, permite la resolución de las ecuaciones 
-utilizando transformadas de Fourier. Con ello se logran resultados 
-muy precisos con economía de recursos computacionales.
+utilizando transformadas de Fourier. Con ello se logran enormes 
+precisiones y una gran economía de recursos computacionales.
 Dedicamos un capítulo entero al desarrollo del método, a
 sus aplicaciones en problemas modelo y a la descripción teórica de 
 experimentos, análisis de errores y comparaciones con 
@@ -91,12 +91,17 @@ otros métodos.
 Por supuesto que al tratarse de problemas de alta complejidad 
 numérica, es menester dedicar esfuerzos en su resolución mediante 
 técnicas computacionales de alta performance. 
+Si bien es común encontrar que los problemas directos se resuelven 
+utilizando arquitecturas gráficas (GPU), generalmente estos 
+métodos se basan en la aproximación difusiva, la cual no es 
+viable en problemas de tomografía óptica como los que discutiremos.
+Tampoco son útiles estas arquitecturas para el tratamiento del 
+problema inverso, debido a la enorme demanda de almacenamiento 
+de memoria que requieren estos cálculos.
 En nuestro trabajo, desarrollamos una estrategia de paralelización 
-basada en una descomposición de dominio. Con ella, se logran factores 
-de escalabilidad que superan al 
-número de procesadores utilizados (escalabilidad ideal), y que resultan de combinar 
-la estrategia  de descomposición de dominio 
-con el método FC--DOM.
+basada en una descomposición de dominio. Combinando esta estrategia 
+con el método FC--DOM, se logra un factor de escalabilidad que supera 
+al número de procesadores empleados (escalabilidad ideal).
 Esta estrategia de paralelización se explicará en detalle, 
 junto con ciertos ejemplos de su aplicación.
 
@@ -126,42 +131,25 @@ Mostraremos la excelente reproducción teórica de estas imágenes,
 junto a la discusión correspondiente que demuestra la enorme 
 eficiencia de nuestros métodos.
 
-El resto de esta Tesis se organiza como sigue. 
-En la Sección {\em Contexto general y motivación} del presente capítulo 
-se presentan algunos aspectos 
-generales de la teoría de transporte. Se incluye
- una revisión de bibliografía relevante, 
-y detalles adicionales sobre las contribuciones realizadas en el marco de este trabajo.
-En el Capítulo~\ref{cap:forw} se presenta 
-la ETR, la cual es utilizada en el contexto 
-de esta Tesis como modelo directo 
-en el problema inverso de tomografía óptica. Se desarrollan 
-los métodos numéricos y algoritmos elaborados en esta Tesis 
-para la resolución de la ETR, así como su validación 
-mediante comparación con mediciones experimentales, y soluciones analíticas. Este capítulo finaliza con la identificación y 
+La organización de esta Tesis es la siguiente: 
+En el Capítulo~\ref{cap:forw} se describe la ETR y su interpretación 
+física. Se presenta el método FC--DOM, y su validación mediante 
+comparación con resultados analíticos y experimentales. 
+Este capítulo finaliza con la identificación y 
 caracterización de las estructuras de capa límite existentes 
 en las soluciones a la ETR, donde se propone un método para 
 la correcta resolución de estas estructuras. 
-En el Capítulo~\ref{cap:inverso} se presenta el problema inverso 
-en tomografía óptica. En este capítulo se detallan los métodos 
+ En el Capítulo~\ref{cap:inverso}  se detallan los métodos 
 y algoritmos utilizados para la resolución del problema inverso. 
-Se describen el ``método de barrido'' y la estrategia de Fuentes Múltiples Superpuestas, propuesta en esta Tesis. 
-Se presenta una formulación para la obtención del gradiente 
-funcional de la función objetivo mediante la utilización del método adjunto. El capítulo termina con dos 
-reconstrucciones obtenidas por ambos métodos, donde se demuestra 
-la eficiencia del enfoque propuesto. Finalmente, en el Capítulo~\ref{cap:conc} se sintetizan las conclusiones de este trabajo.
+Se realizan reconstrucciones de imágenes tomograficas en un cuello 
+y cabeza humana, para la identificación de tumores y actividad hemodinámica. 
+Finalmente, en el Capítulo~\ref{cap:conc} se sintetizan los principales 
+logros de este trabajo.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip
-\section{Contexto general y motivación}
-
-La ETR es la forma lineal de la ecuación de transporte de Boltzmann, 
-cuyo dominio de definición es el espacio de las fases. Ésta ecuación modela el transporte 
-de radiación electromagnética en un medio participante ---la radiación en el proceso de transporte 
-interactúa con el medio, siendo absorbida, dispersada y emitida por éste---. La ETR modela también el transporte de partículas neutras en
- general (para las cuales las interacciones mutuas entre las partículas involucradas 
- en el proceso de transporte puede ser despreciada).
+\section{Motivación}
 
 La importancia del modelado del transporte de partículas neutras 
 difícilmente puede ser sobrestimada, ya que encuentra aplicaciones 
@@ -178,39 +166,27 @@ como por ejemplo el transporte de radiación
  y el modelado de transporte de neutrones para el desarrollo 
  y diseño de reactores nucleares~\cite{Larsen2006, Sanchez1982, Anli2006}, 
  entre otros~\cite {Mishchenko1999, Prasher2003}. 
- La ETR puede derivarse, bajo ciertas aproximaciones, como un límite asintótico 
- para soluciones de las ecuaciones de Maxwell. La cantidad modelada por la ETR, comúnmente denominada 
- intensidad específica, queda relacionada en dicho límite con el vector de Poynting~\cite{Mishchenko2002, Ripoll2011} 
- en la teoría ondulatoria del electromagnetismo. Los fenómenos ondulatorios como la interferencia y la difracción no son
- capturados por la ETR, la cual expresa esencialmente la conservación de la
- energía irradiada a escala mesoscópica en el campo electromagnético.
-
   
  La tomografía óptica es una técnica no invasiva en la que
  radiación electromagnética es inyectada dentro del medio
  en estudio.
  La radiación emergente es detectada mediante fotodectectores 
  ubicados en el contorno del medio que se está analizando. 
- A partir de la luz detectada, el objetivo es la reconstrucción de
- los parámetros ópticos que lo caracterizan. 
-Esta técnica posee numerosas 
- ventajas relativas, entre las que se destacan su bajo costo, la fácil portabilidad, y 
- el empleo de radiación no ionizante (no cancerígena). 
- 
-La ETR es utilizada 
- en tomografía óptica como
- un modelo para el transporte de fotones a una longitud de onda prescripta, 
- típicamente proveniente de fuentes láser.
- La ``ventana óptica'' ubicada en el rango de longitudes de onda del espectro electromagnético comprendida entre los 600 a 900 nanómetros permite a la radiación en el 
- infrarrojo cercano penetrar y sensar varios centímetros en el interior del tejido biológico~\cite{Boas2001}. 
+ A partir de la luz detectada, se pueden reconstruir
+ los parámetros ópticos que caracterizan al mismo.
+ En las aplicaciones médicas, esta técnica ha demostrado numerosas 
+ ventajas, entre ellas su bajo costo, la fácil portabilidad, y 
+ el empleo de radiación no ionizante (no es cancerígena). 
+ Se utiliza en general radiación proveniente de láseres, en un 
+ rango del infrarrojo cercano, entre 600 a 900 nanómetros, que 
+ corresponde a la ventana de penetración de la piel humana.
  Para estas longitudes de onda, el tejido 
  biológico se comporta como un medio altamente dispersivo, y 
  permite sensar varios centímetros en el interior del mismo~\cite{Boas2001}.
 Los fotones viajan a través del tejido, sufriendo múltiples colisiones 
  de dispersión elástica, describiendo trayectorias aleatorias.
  Los componentes del tejido biológico pueden identificarse y caracterizarse
- mediante el denominado coeficiente de absorción óptica,  dependiente 
- de los componentes presentes en el medio.
+ mediante el denominado coeficiente de absorción óptica.
  
 La tomografía óptica sirve para obtener información tanto anatómica como funcional.
 La reconstrucción de las propiedades de absorción en el tejido humano 
@@ -225,78 +201,13 @@ alrededor de los $650$ nm, cuando esta absorbe oxígeno
 (hemoglobina oxigenada vs.~desoxihemoglobina). 
  La activación de diferentes regiones del cerebro 
  es acompañada por una respuesta hemodinámica que lleva sangre oxigenada 
- a las mismas, lo que permite detectar qué regiones están funcionando 
+ a las mismas, lo que permite detectar que regiones están funcionando 
  ante determinadas actividades. 
-
-La ETR proporciona un
-modelo físicamente preciso para el transporte de fotones en el tejido biológico
-\cite{Klose2009, Arridge2009}, pero su aplicabilidad en el contexto de
-los problemas inversos en tomografía óptica se ha visto obstaculizada por el alto costo computacional requerido para su solución. 
-
-El desarrollo de estrategias eficientes y de algoritmos capaces de distribuir el trabajo en máquinas paralelas es particularmente importante para la
-resolución de los problemas directos e inversos para la ETR en 3D, donde las exigencias 
-de memoria RAM y
-los requisitos computacionales se vuelven prohibitivos muy rápidamente
-debido a la alta dimensionalidad de la ETR, que en problemas 3D
-involucra dos variables direccionales asociadas a las velocidades en 3D (definidas 
-en la esfera unitaria), además de las tres variables espaciales y el tiempo. 
-
- En esta Tesis se presenta una descripción detallada 
-de capas límite exponenciales presentes en la solución de la ETR, previamente no discutidas ni explotadas en la literatura. Como se demuestra en la Sección~\ref{sec:blayer}, la correcta resolución de dichas capas límite 
-permite el desarrollo de métodos numéricos sumamente eficientes para la resolución de la ETR. 
-
-Abordamos las dificultades y exigencias computacionales para la resolución del problema inverso en tomografía óptica 
-mediante una combinación de tres estrategias principales, (i)~el uso de
-un enfoque espectral basado en el método de continuación de Fourier 
-en ordenadas discretas
-(FC-DOM)~\cite{Gaggioli2019} para la solución del 
-problema de transporte de los fotones en el tejido humano; (ii)~Una implementación 
-en máquinas paralelas sumamente eficiente del
-Método FC-DOM basado en una estrategia de descomposición del dominio espacial 
-involucrado; y (iii)~Una configuración de fuentes múltiples superpuestas (FMS), que utiliza ciertas combinaciones de fuentes que operan simultáneamente en lugar de
-secuencias de fuentes únicas utilizadas en enfoques anteriores. En suma, 
-dicha estrategia 
-implementada en un clúster de computadoras con 256 núcleos físicos, da como resultado una aceleración del tiempo de cálculo de varios órdenes de
-magnitud---lo que hace posible resolver problemas inversos en dominios del 
-tamaño necesario para abordar 
-problemas tales como el de la obtención de imágenes dentro de un modelo de cuello
-humano considerado en la Sección~\ref{sec:inverseres}.
-
-La estrategia de paralelización propuesta presenta una serie de
-ventajas. A diferencia de otros algoritmos reportados en la literatura, el enfoque
-presentado en este trabajo es altamente eficiente independientemente de
-el número de fuentes empleadas (\cf \cite{Hielscher2004}).
-Estrategias de computo en paralelo basadas en arquitecturas de GPU~\cite{Doulgerakis2017} han mostrado ser apropiadas para aplicaciones de tomografía óptica basadas en la aproximación de difusión. Desafortunadamente, 
-la aproximación de difusión no es físicamente precisa en un amplio rango de situaciones,
-y, debido a las altas exigencias en memoria de almacenamiento requerida para 
-la resolución del problema inverso ---el cual exige guardar en memoria soluciones completas 
-de la ETR para el problema 
-directo y el problema adjunto--- la utilización de GPUs en este contexto no parece viable. 
-Cabe mencionar que el uso de GPUs es una estrategia valida para reconstrucciones 
-basadas en métodos estocásticos de Monte Carlo. Pero estos métodos son intrínsecamente 
-altamente ineficientes. En la 
-referencia~\cite{Coelho2014} se realiza una revisión de algoritmos propuestos en la literatura 
-para la paralelización de la ETR. Todas las estrategias de paralelización muestran una eficiencia significativamente por debajo de la ideal, con excepción de la ref.~\cite {Colomer2013}, la cual presenta una estrategia de paralelización 
-por encima de la ideal, pero
-la aplicabilidad del método está restringida a medios no absorbentes y no dispersantes, 
-para los cuales se conocen soluciones analíticas. La estrategia de paralelización 
-desarrollada en esta Tesis presenta escalabilidad ideal, independientemente 
-del régimen de transporte en el que se requiere resolver la ETR, sin restricciones 
-para los coeficientes de absorción y dispersión empleados, el número de fuentes o el número de ordenadas discretas que necesiten utilizarse. Como referencia, se obtuvo una eficiencia de 136,7 \% para las pruebas de escalabilidad realizadas con hasta 256 procesadores por
-medio de la paralelización propuesta para el método FC-DOM (ver sec.~\ref{subsec:FC-DOM} fig.~\ref{fig:scala}). En la referencia~\cite [p. 153]{Fujii2014} 
-se informa un tiempo de cálculo de 44,3 horas para la resolución de la ETR de un problema modelo 
-en 2D por medio un único procesador. La solución del mismo problema utilizando 
-los mismos parámetros y la misma resolución de la grilla numérica, corriendo en 64 procesadores, se obtiene mediante la estrategia de paralelización del algoritmo FC-DOM propuesto en menos de treinta minutos.
-
-Se logra una reducción adicional significativa en el
-el tiempo de cálculo requerido para la solución del problema inverso mediante el método FMS propuesto---el cual, combinando
-múltiples fuentes en cada solución a la ETR, reduce el número de
-de soluciones ETR directas y adjuntas requeridas. 
-En esta Tesis se demuestra la aceleración por un factor de seis, 
-relativo al tiempo requerido por el ``método de barrido'' 
-utilizado de manera ubicua en tomografía óptica.
+ 
+ 
  
 \pagestyle{empty}
 
 %\end{document}
+
 
