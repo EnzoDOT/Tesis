@@ -120,7 +120,7 @@ modela el transporte de fotones para una única longitud de onda, que es la long
 de onda de la fuente láser empleada.
 Los distintos términos en la ecuación~\eqref{eq:RTE} poseen 
 diferentes significados físicos. El primer término del lado izquierdo, representa la variación temporal  
-de la intensidad específica para el rayo que viaja en la dirección $\hth$. 
+de la intensidad específica $u$ para el rayo que viaja en la dirección $\hth$. 
 El segundo término es un término de advección, que modela la propagación de 
 los fotones en forma de rayos, reminiscentes a la óptica geométrica. Los términos $a(\x)\ut$ y $b(\x)\ut$ modelan la 
 absorción y dispersión de fotones 
@@ -237,7 +237,7 @@ se encuentra definida en el espacio de las fases,
 y su solución proporciona información detallada sobre el estado y distribución 
 de los fotones y de su evolución temporal. Por esta razón, 
 el problema de transferencia radiativa es multidimensional, 
-que involucra las variables espaciales $\x$, y las variables angulares 
+involucra las variables espaciales $\x$, y las variables angulares 
 $\hth$, asociadas a las velocidades de los fotones. 
 Debido a la alta dimensionalidad de la ec.~\eqref{eq:RTE}, su resolución numérica 
 puede resultar altamente costosa, especialmente cuando se consideran 
@@ -250,7 +250,7 @@ constituyendo un serio desafío numérico,
 aún para los métodos más eficientes. 
 Por este motivo, en esta tesis nos restringimos a casos de 
 simetría 2D, donde el 
-problema puede tratarse en de dos dimensiones espaciales, 
+problema puede tratarse en dos dimensiones espaciales, 
 con una única variable angular, $\hth(\theta)$.
 
 
@@ -363,7 +363,7 @@ y la ecuación de onda~\cite{Bruno2014}, entre otras. En esta tesis extendimos s
 para la resolución de la ecuación~\eqref{eq:RTE}~\cite{Gaggioli2019}.
 
 Describiremos brevemente el método FC (para mayor detalle, ver apéndice~\ref{ap:fcgram}). 
-Utilizamos una grilla uniforme en la dirección $\hat x$., 
+Utilizamos una grilla uniforme en la dirección $\hat x$, 
 de tamaño $\Delta x$ (análogamente en la dirección $\hat y$)
 \begin{equation*}
 \begin{aligned}
