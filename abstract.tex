@@ -10,38 +10,38 @@
 
 \vspace{1cm}
 This Thesis presents an efficient {\em parallel} radiative
-  transfer-based inverse-problem solver for time-domain optical
-  tomography. The radiative transfer equation provides a physically
-  accurate model for the transport of photons in biological tissue,
+  transfer--based inverse--problem solver for time--domain optical
+  tomography. This equation provides a physically
+  accurate model for the transport of photons in biological tissue, 
   but the high computational cost associated with its solution has
-  hindered its use in time-domain optical-tomography and other
-  areas. In this Thesis this problem is tackled by means of a number of
-  computational and modeling innovations, including 1) A spatial
-  parallel-decomposition strategy with \textit{perfect parallel
+  hindered its use in time--domain optical--tomography and other
+  areas. In this Thesis this problem is tackled by means of a number of 
+  computational and modeling innovations, including 
+  1) The incorporation of a high--order spectral method 
+(Fourier continuation discrete ordinates method (FC--DOM)), 
+allowing the solution of the transport equation with 
+high precision and with low computational cost.  
+  2) A spatial
+  parallel--decomposition strategy with \textit{perfect parallel
     scaling} for the forward and inverse problems of optical
-  tomography on parallel computer systems; and, 2) A Multiple
+  tomography on parallel computer systems; and, 3) A Multiple
   Staggered Source method (MSS) that solves the inverse transport
   problem at a computational cost that is {\em independent of the
     number of sources employed}, and which significantly accelerates
-  the reconstruction of the optical parameters: a six-fold MSS
-  acceleration factor is demonstrated in this Thesis. Finally, this
-  contribution presents 3) An intuitive derivation of the
-  adjoint-based formulation for evaluation of functional gradients,
-  including general Fresnel boundary conditions---thus, in particular,
-  generalizing results previously available for vacuum boundary
-  conditions. Solutions of large and realistic 2D inverse problems are
-  presented in this Thesis, which were produced on a 256-core computer
-  system. The combined parallel/MSS acceleration approach reduced the
-  required computing times by several orders of magnitude, from months
-  to a few hours.
+  the reconstruction of the optical parameters. Additionally, this
+  contribution presents an intuitive derivation of the
+  adjoint--based formulation for evaluation of functional gradients,
+  including general Fresnel boundary conditions. Solutions of large and realistic 2D inverse problems are
+  presented, which were produced on a 256--core computer
+  system. The combined FC--DOM/parallel/MSS acceleration approach reduced the required computing times by several orders of magnitude, from months to a few hours.
 
 
 \vspace{1cm}
 \noindent
 Key words: 
+Radiation transport through matter,
 Optical tomography,
 Radiative transfer equation, 
 Near infrared spectroscopy, 
-Radiatition transport through matter,
 Inverse problem.
 \pagestyle{empty}

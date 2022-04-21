@@ -1,7 +1,7 @@
 \pagestyle{empty}
 \chapter*{}
 \addcontentsline{toc}{chapter}{Resumen}
-
+\vspace{-3cm}
 \begin{center}
 \begin{large}
 \textbf{Algoritmos eficientes para aplicaciones en tomografía óptica}
@@ -9,42 +9,45 @@
 \end{center}
 
 \vspace{1cm}
-Esta Tesis presenta un algoritmo {\em paralelo} eficiente  
+En esta Tesis se presenta un algoritmo {\em paralelo} eficiente  
 para la resolución del problema inverso en 
 tomografía óptica basado en la ecuación de transferencia radiativa en el dominio temporal. 
-La ecuación de transferencia radiativa provee un modelo 
+Esta ecuación provee un modelo 
 físicamente preciso para el transporte de fotones 
 en el tejido biológico, pero el alto costo computacional 
 asociado a su resolución representa un obstáculo 
-para su utilización en tomografía óptica en el dominio 
-temporal, y otras áreas. En esta Tesis se aborda este problema 
+para su utilización en tomografía óptica, y otras áreas. En esta Tesis se aborda este problema 
 mediante un número de innovaciones computacionales y de 
-modelado, que incluyen 1) Una estrategia de paralelización 
+modelado, que incluyen 1) La incorporación 
+de un método espectral de alto orden (continuación de Fourier 
+en ordenadas discretas (FC--DOM)) que permite resolver la 
+ecuación de transporte con gran precisión y con reducido esfuerzo 
+computacional.
+2) Una estrategia de paralelización 
 basada en la descomposición del dominio espacial que presenta 
 \textit{escalabilidad ideal} para los problemas directos 
-e inversos; 2) Una estrategia de Fuentes Múltiples Superpuestas 
+e inversos; 3) Una estrategia de Fuentes Múltiples Superpuestas 
 (FMS) que resuelve el problema inverso de transporte 
 con un costo computacional que es {\em independiente del 
-número de fuentes empleadas}, y el cual acelera significativamente la reconstrucción de los parámetros ópticos: 
-se demuestra un factor de aceleración de seis en esta Tesis. 
-Finalmente, esta contribución presenta 3) Una derivación 
-intuitiva de la formulación del problema adjunto para la 
+número de fuentes empleadas}, y el cual acelera significativamente la reconstrucción de los parámetros ópticos.
+Adicionalmente, esta contribución presenta una derivación 
+intuitiva de la formulación del problema adjunto para el  
 cálculo de los gradientes funcionales, que incorpora 
-las condiciones de borde de Fresnel---generalizando 
-resultados reportados en la literatura para las condiciones 
-de borde de vacío. Se presentan 
+las condiciones de borde de Fresnel. Se presentan 
 soluciones de problemas inversos realistas en 2D, 
 que fueron obtenidos en un cluster de computadoras con 
-hasta 256 procesadores. La combinación de la estrategia 
-de paralelización con la estrategia FMS redujo el tiempo 
-computacional requerido para la resolución de los problemas inversos en varios órdenes de magnitud, de meses a unas pocas horas. 
+hasta 256 procesadores. La combinación del método 
+FC--DOM, la estrategia de paralelización y la técnica 
+FMS redujo el tiempo 
+computacional requerido para la resolución de estos problemas, 
+de meses a unas pocas horas. 
 
 \vspace{1cm}
 \noindent
 Palabras clave: 
+Propagación de la radiación en la materia,
 Tomografía óptica,
 Ecuación de transporte radiativo, 
 Espectroscopia del infrarrojo cercano, 
-Propagación de la radiación en la materia,
 Problema inverso.
 \pagestyle{empty}
