@@ -1,3 +1,4 @@
+
 \pagestyle{fancy}
 \chapter{Conclusiones}
 \label{cap:conc}
@@ -5,7 +6,8 @@
 \rhead{\textit{Conclusiones}} 
 \vspace{0.01\textheight}
 
-\clearpage \pagebreak En este trabajo se desarrollaron estrategias computacionales para el 
+\clearpage \pagebreak 
+En este trabajo se desarrollaron estrategias computacionales para el 
 estudio de problemas de transporte de partículas neutras, y la 
 caracterización de los medios que estas atraviesan.
 En particular, hemos estudiado radiación de fotones y 
@@ -15,7 +17,7 @@ El objetivo principal ha sido la resolución del
 problema inverso, que consiste en determinar las características 
 del medio participante mediante los datos obtenidos por mediciones 
 de radiación producida por fuentes externas.
-Nos hemos enfocado en diversos ejemplos de 
+En particular, nos hemos enfocado en diversos ejemplos de 
 reconstrucción de las características físicas de tejidos humanos, 
 incluyendo tumores y activaciones hemodinámicas.
 La resolución de este tipo de problemas exige una enorme cantidad 
@@ -47,7 +49,7 @@ errores de dispersión.
 que permite la implementación del método FC--DOM en máquinas paralelas. 
 El algoritmo presentado en este trabajo muestra que utilizando 
 256 procesadores, es posible lograr una eficiencia de escala 
-mejor a la ideal (137\%). 
+mejor a la ideal (140\%). 
 La escalabilidad lograda es mucho mayor que la de todos los 
 resultados reportados hasta el momento, teniendo en cuenta que 
 se aplica a problemas generales, sin restricciones a las 
@@ -107,7 +109,7 @@ significativamente menores.
 Durante nuestra investigación nos topamos con un descubrimiento importante: 
 la existencia de una estructura de capa límite en las soluciones a la 
 ecuación de transporte. Esta se manifiesta en variaciones abruptas 
-de las soluciones de la ETR, que aparecen en regiones espaciales 
+de las funciones, que aparecen en regiones espaciales 
 muy cercanas a los bordes. 
 Numéricamente, la existencia de esta capa límite implica una 
 degradación considerable en el orden de convergencia, y otras dificultades 
@@ -137,12 +139,12 @@ utilizan la aproximación de difusión, que sólo puede asumirse
 válida en escenarios particulares. 
 Según la referencia~\cite{Coelho2014}, que hace una revisión de los 
 principales algoritmos presentados en la literatura, 
-todas las estrategias de paralelización de la ETR resultan en una 
+todas las estrategias de paralelización resultan en una 
 eficiencia significativamente por debajo de la ideal (al menos que se 
 trate de situaciones muy particulares, restringidas a medios no 
 absorbentes ni dispersantes).
 En los ejemplos que presentamos, obtuvimos una escalabilidad de 
-137\% empleando 256 procesadores. Logramos resolver, por ejemplo, 
+140\% empleando 256 procesadores. Logramos resolver, por ejemplo, 
 un problema modelo que requiere 2 días de cálculo, en menos de 30 minutos, 
 utilizando 64 procesadores.
 Una reducción adicional significativa se obtuvo mediante el uso 
@@ -151,22 +153,24 @@ Con el mismo, podemos lograr factores de aceleración cercanos a la
 decena, empleando un número alto de fuentes sin necesidad de 
 repetir la solución del problema para cada una de ellas en forma 
 independiente (tal como lo hace el ``método de barrido'' 
-mayormente utilizado en tomografía óptica).
+que es el mayormente utilizado en tomografía óptica).
 
 Durante nuestro trabajo hemos debido dedicar grandes esfuerzos 
 al desarrollo matemático de varias expresiones, a estudios de 
-convergencia, y a la elaboración de métodos matemáticos que 
-permiten facilitar 
-los cálculos. Específicamente, desarrollamos un método adjunto para 
-el cálculo de gradientes funcionales en el contexto de tomografía óptica, 
-el cual incorpora las condiciones de borde de Fresnel. 
-Dado que esto merece una explicación detallada,  antes de presentar los resultados finales de problemas 
-inversos, dedicamos una sección a estos desarrollos.
+convergencias, y a la elaboración de métodos  que 
+permitan eliminar ciertos términos en las ecuaciones, y facilitar 
+los cálculos. 
+Específicamente, desarrollamos un método adjunto para 
+el cálculo de gradientes funcionales que incluyen 
+condiciones de borde de Fresnel. 
+Dado que esto merece una explicación detallada,  antes de presentar los resultados 
+finales de problemas inversos, dedicamos una sección a estos desarrollos.
 
 Finalmente, empleamos todos los algoritmos desarrollados en esta Tesis, 
-para resolver el problema inverso para dos casos de prueba relacionados. 
-En el primer caso, simulamos la obtención de imagenes para un tumor 
-en un cullo humano. Tomamos una imagen de resonancia magnética de un 
+para resolver el problema inverso para dos casos de prueba relacionados 
+a la tomografía óptica. 
+En el primer ejemplo, simulamos una imagen de un tumor 
+en un cuello humano. Tomamos una imagen de resonancia magnética de un 
 cuello humano, y la reconstruímos fijando ciertos coeficientes de 
 absorción y dispersión similares a los que se encuentran en los trabajos 
 de referencia. A esa configuración le agregamos una inclusión 
@@ -184,12 +188,12 @@ estos cálculos en forma eficiente, diseñando una estrategia de
 colocación y encendido de las fuentes, que permite superar ampliamente al 
 método de barrido.
 El segundo caso consiste en la simulación de una cabeza humana, 
-la cual incorpora la región ubicada entre el cráneo y el 
+específicamente, de la región ubicada entre el cráneo y el 
 cerebro, en la que se encuentra el fluido cerebroespinal. 
 Dadas las características de los coeficientes de absorción y dispersión, 
 la aproximación difusiva no es válida en esta región.
 Aquí también introducimos ciertas inclusiones, que pueden corresponder 
-a regiones en los cuales se produce la activación hemodinámica. 
+a regiones en las cuales se produce la activación hemodinámica. 
 Hemos encontrado que dada la geometría del sistema, y probablemente a 
 la configuración de las inclusiones, es preferible alterar el 
 orden de encendido de las fuentes, por lo que concluímos que la 
