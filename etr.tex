@@ -1,8 +1,8 @@
 \pagestyle{fancy}
-\chapter{El modelo directo}
+\chapter{El problema directo}
 \label{cap:forw}
 \lhead{\thepage}
-\rhead{\textit{El modelo directo}} 
+\rhead{\textit{El problema directo}} 
 
 
 \clearpage \pagebreak  En este trabajo resolvemos el problema {\bf inverso} 
@@ -14,16 +14,16 @@ son conocidos (condición inicial, condiciones de contorno,
 y parámetros ópticos) y lo que se busca es la solución a la ecuación de transporte radiativo (ETR), la cual modela 
 el transporte de los fotones en el medio, y da como resultado la distribución 
 espacial de los fotones, para cada dirección de propagación a cada instante del tiempo. 
-El problema inverso será abordado en la sección~\ref{sec:inverso}. 
-La diferencia principal con el modelo directo es que lo que se busca 
-determinar no es la distribución de fotones, sino un parámetro óptico 
-que permita caracterizar el medio. Para ello, en general, se cuenta con ciertas mediciones experimentales.
+%El problema inverso será abordado en la Sección~\ref{sec:inverso}. 
+%La diferencia principal con el modelo directo es que lo que se busca 
+%determinar no es la distribución de fotones, sino un parámetro óptico 
+%que permita caracterizar el medio. Para ello, en general, se cuenta con ciertas %mediciones experimentales.
 
-En esta sección presentamos el modelo directo, 
+En esta sección presentamos el problema directo, 
 la ecuación de transporte y los métodos numéricos utilizados para su resolución. 
 Dado que los códigos y algoritmos empleados 
-fueron desarrollados en el marco de esta tesis, presentaremos 
-comparaciones de los resultados numéricos obtenidos con soluciones manufacturadas, 
+fueron desarrollados en el marco de esta Tesis, presentaremos 
+comparaciones de nuestros resultados numéricos  con soluciones manufacturadas, 
 mediciones experimentales y soluciones analíticas, con el fin de validarlos.
 
 Del análisis del problema directo, hemos encontrado características inherentes 
@@ -75,7 +75,7 @@ coeficientes macroscópicos de absorción y dispersión, respectivamente. La fun
 se denomina función de fase, y representa la probabilidad de que un fotón 
 viajando en la dirección $\hth$ sea dispersado en la dirección $\hth'$ 
 por interacciones con el medio participante. El tipo de función 
-de fase que consideramos en esta tesis posee simetría de rotación, 
+de fase que consideramos en esta Tesis posee simetría de rotación, 
 en el sentido de que la probabilidad de dispersión se mantiene invariante 
 ante rotaciones del sistema de coordenadas, dependiendo solamente 
 del ángulo $\alpha=\arccos(\hth \cdot \hth')$ que se forma entre la dirección 
@@ -114,10 +114,10 @@ modela una fuente ubicada en el interior del dominio, y en tomografía óptica
 se considera nulo (ya que la radiación incide a través de la frontera $\partial \Omega$), 
 a menos que se indique explícitamente lo contrario. 
 
-La ecuación~\eqref{eq:RTE} 
+La Ecuación~\eqref{eq:RTE} 
 modela el transporte de fotones para una única longitud de onda, que es la longitud 
 de onda de la fuente láser empleada.
-Los distintos términos en la ecuación~\eqref{eq:RTE} poseen 
+Los distintos términos en dicha ecuación poseen 
 diferentes significados físicos. El primer término del lado izquierdo, representa la variación temporal  
 de la intensidad específica $u$ para el rayo que viaja en la dirección $\hth$. 
 El segundo término es un término de advección, que modela la propagación de 
@@ -138,7 +138,7 @@ esta integral se realiza en el círculo unitario, con $\hth \in S^1$,
 para $\theta \in [0,2\pi)$.
 
 En tomografía óptica, la condición inicial generalmente se considera nula 
-(segunda línea en la ec.~\eqref{eq:RTE}), ya 
+(segunda línea en la Ec.~\eqref{eq:RTE}), ya 
 que el medio será iluminado con uno o múltiples pulsos láser, partiendo con las 
 fuentes inicialmente apagadas. 
 También se emplean, generalmente, las condiciones de contorno de Fresnel. 
@@ -171,7 +171,7 @@ La dirección reflejada $\hth_r=\R \hth$, donde $\R =\id-2\hnu \hnu^T$ es la mat
 (también conocida como transformación de Householder) con respecto al plano de normal $\hnu$, donde $\id$ 
 es la matriz identidad y $\hnu^T$ 
 indica el vector transpuesto de $\hnu$.   El 
-segundo término en la condición de contorno, $q$, es la fuente, que en el marco de esta tesis 
+segundo término en la condición de contorno, $q$, es la fuente, que en el marco de nuestro trabajo  
 modela uno o múltiples lásers que iluminan el contorno del dominio espacial $\partial \Omega$. 
 Las condiciones de contorno se imponen para la radiación entrante 
 al dominio espacial $\Omega$ a través de su contorno $\partial \Omega$. 
@@ -213,7 +213,7 @@ e integrando en la variable angular $\theta$
 \label{eq:RTEscflux}
 \end{equation}
 donde $s_0=\int_{S^1}s(\x,\hth,t)d\theta$. Integrando la 
-ecuación~\eqref{eq:RTEscflux} en el dominio espacial, utilizando el teorema de la divergencia
+Ecuación~\eqref{eq:RTEscflux} en el dominio espacial, utilizando el teorema de la divergencia
 y reordenando los términos, se llega a la siguiente ecuación de balance
 \begin{equation}
 \frac{1}{c}\frac{\partial}{\partial t} \int_{\Omega}\phi(\x,t)d\x = 
@@ -226,9 +226,8 @@ viene dada por el aporte de la fuente $s_0$, menos el flujo de fotones salientes
  a través de la superficie del 
 dominio $\partial \Omega$, menos los fotones absorbidos 
 por el medio participante. 
-Dado que en 
-las interacciones de dispersión consideradas son de tipo elásticas, el número 
-de fotones se conserva en estos procesos, y por lo tanto, los terminos asociados 
+Dado que las interacciones de dispersión consideradas son de tipo elásticas, el número 
+de fotones se conserva en estos procesos, y por lo tanto, los términos asociados 
 al coeficiente de dispersión $b(\x)$ no intervienen en el balance global~\eqref{eq:RTEfullint}. 
 
 Siendo~\eqref{eq:RTE} una ecuación de Boltzmann, 
@@ -238,7 +237,7 @@ de los fotones y de su evolución temporal. Por esta razón,
 el problema de transferencia radiativa es multidimensional, 
 involucra las variables espaciales $\x$, y las variables angulares 
 $\hth$, asociadas a las velocidades de los fotones. 
-Debido a la alta dimensionalidad de la ec.~\eqref{eq:RTE}, su resolución numérica 
+Debido a la alta dimensionalidad de la Ec.~\eqref{eq:RTE}, su resolución numérica 
 puede resultar altamente costosa, especialmente cuando se consideran 
 tres dimensiones espaciales. En tal caso, debe agregarse a las dimensiones 
 espaciales y al tiempo, la discretización de la variable angular, 
@@ -247,7 +246,7 @@ En tres dimensiones, a las tres variables espaciales, se suman
 dos variables asociadas a las direcciones, y una variable temporal, 
 constituyendo un serio desafío numérico,  
 aún para los métodos más eficientes. 
-Por este motivo, en esta tesis nos restringimos a casos de 
+Por este motivo, en esta Tesis nos restringimos a casos de 
 simetría 2D, donde el 
 problema puede tratarse en dos dimensiones espaciales, 
 con una única variable angular, $\hth(\theta)$.
@@ -308,7 +307,7 @@ con los pesos de cuadratura dados por $w_{m}=2\pi/M$.
 
 Llamando  $ u_m= u (\ x, \hth_m, t)$ a la intensidad específica 
 en la dirección $\hth_m$, la versión semidiscretizada de la 
-ecuación~\eqref{eq:RTE} en el dominio de la velocidad resulta
+Ecuación~\eqref{eq:RTE} en el dominio de la velocidad resulta
 \begin{equation*}
 \frac{1}{c}  \frac{\partial  u_m}{\partial t}  
  + \hth_m
@@ -351,15 +350,15 @@ que inyectan radiación, con las fuentes inicialmente apagadas.
 \label{sec:fcmethod}
 Para la discretización espacial, desarrollamos la implementación 
 del método de Continuación de Fourier (FC)~\cite{Bruno2010,Albin2011,Amlani2016}.  
-Partiendo de una función que no es periódica, el método FC produce 
+Partiendo de una función arbitraria, el método FC produce 
 una función continuada, que la convierte en periódica. 
 El método FC es un tipo de colocación de Fourier que permite 
 el tratamiento de condiciones de contorno arbitrarias, con 
 convergencia de tipo espectral.
 Éste método ha sido aplicado 
 a la resolución de las ecuaciones de Navier--Stokes~\cite{Albin2011,Bruno2019}, la ecuación de difusión~\cite{Bruno2010}, 
-y la ecuación de onda~\cite{Bruno2014}, entre otras. En esta tesis extendimos su uso  
-para la resolución de la ecuación~\eqref{eq:RTE}~\cite{Gaggioli2019}.
+y la ecuación de onda~\cite{Bruno2014}, entre otras. En esta Tesis extendimos su uso  
+para la resolución de la Ecuación~\eqref{eq:RTE}~\cite{Gaggioli2019}.
 
 Describiremos brevemente el método FC (para mayor detalle, ver apéndice~\ref{ap:fcgram}). 
 Utilizamos una grilla uniforme en la dirección $\hat x$, 
@@ -372,7 +371,7 @@ x_i &=x_{\mathrm{min}}+(i-1)\Delta x
 \end{equation*} 
 
 Aproximaremos el gradiente espacial mediante el método FC.
-Para generar la función periódica de, \textit{e.g.} $g(x)=u^k_m(x,y_j)$ para un dado $y_j$, 
+Para construir la función periódica de, \textit{e.g.} $g(x)=u^k_m(x,y_j)$ para un dado $y_j$, 
 consideramos dos vectores 
 que son generados a partir de la función discretizada 
 $\mathbf{g}=[g_1,\ldots,g(x_i),\ldots,g_{N+1}]^T$. Llamamos a estos vectores
@@ -435,7 +434,7 @@ primos pequeños cumpliendo $\pi_1\leq\pi_2\leq \ldots \leq \pi_{F} \leq 5$.
   \includegraphics[width=0.5\linewidth]{figuras/continued.eps}
   \caption{Función $g(x)=12+x^2 - e^{x/3}$ y su continuación de Fourier. 
   la función original está definida para $x\in[0,6]$. Los círculos muestran las continuaciones a cero, $g_l(x)$ y $g_r(x)$.
-  La linea punteada muestra la continuaciòn periódica obtenida. 
+  La línea punteada muestra la continuaciòn periódica obtenida. 
   Los diamantes muestran los puntos en los extremos de la función 
   que se utilizan en la proyección en polinomios Gram para generar las continuaciones 
   a cero, con $d_l=d_r=5$. Los triángulos muestran los $E=4$ puntos 
@@ -529,15 +528,15 @@ lo denominamos método FC--DOM~\cite{Gaggioli2019}. El pseudocódigo se presenta
 \State \hskip0.75em \textbf{para} Cada dirección $\hth_m$ \textbf{hacer} \emph{}
 \State \hskip1.0em \textbf{para} cada $y_j$ \textbf{hacer} en la dirección $\hat x$
 \State \hskip1.5em Aplicar la continuación de Fourier a $u_{m,j}^k(x)$.
-\State \hskip1.5em Aplicar la Transformada Rápida de Fourier para obtener eq.~\eqref{eq:RTEFCSum}.
-\State \hskip1.5em Evaluar $\partial u_{m,j}^k(x)/\partial x$ usando la ec.~\eqref{eq:RTEFCSumder}.
+\State \hskip1.5em Aplicar la Transformada Rápida de Fourier para obtener Ec.~\eqref{eq:RTEFCSum}.
+\State \hskip1.5em Evaluar $\partial u_{m,j}^k(x)/\partial x$ usando la Ec.~\eqref{eq:RTEFCSumder}.
 \State \hskip1.0em\textbf{terminar}
 \State \hskip1.0em\textbf{para} cada $x_i$ \textbf{hacer} en la dirección $\hat y$ 
 \State \hskip1.5em Aplicar la continuación de Fourier a $u_{m,i}^k(y)$.
-\State \hskip1.5em Aplicar la Transformada Rápida de Fourier para obtener eq.~\eqref{eq:RTEFCSum}.
-\State \hskip1.5em Evaluar $\partial u_{m,i}^k(y)/\partial y$ usando ec.~\eqref{eq:RTEFCSumder}.
+\State \hskip1.5em Aplicar la Transformada Rápida de Fourier para obtener Ec.~\eqref{eq:RTEFCSum}.
+\State \hskip1.5em Evaluar $\partial u_{m,i}^k(y)/\partial y$ usando Ec.~\eqref{eq:RTEFCSumder}.
 \State \hskip1.0em\textbf{terminar}
-\State \hskip1.0em Evaluar el lado derecho de la ec.~\eqref{eq:RTEAB4}.
+\State \hskip1.0em Evaluar el lado derecho de la Ec.~\eqref{eq:RTEAB4}.
 \State \hskip1.0em Imponer condiciones de borde.
 \State \hskip1.0em Intercambiar bordes no físicos entre subdominios vecinos.
 \State \hskip0.75em\textbf{terminar}
@@ -626,18 +625,11 @@ u^{\text{an}}(\x,\hth,t)=e^{-(x-t)^2-(y-t)^2-\cos(\theta)^2}.
 \end{equation*}
 donde el término de la fuente $s(\x,\hth,t)$, 
 la condición inicial $u_0(\x,\hth,t)$ y las condiciones 
-de contorno $u_b(\x,\hth,t)$ en la ecuación~\eqref{eq:RTEdisp} 
+de contorno $u_b(\x,\hth,t)$ en la Ecuación~\eqref{eq:RTEdisp} 
 se obtienen, respectivamente, aplicando el operador de transporte, 
 evaluando a tiempo $t=0$ y en $\Gamma_-$ la solución manufacturada 
 propuesta~\eqref{eq:RTEmansol}.
 Resolvemos el problema~\eqref{eq:RTEdisp} en un dominio cuadrado 
-$\Omega=\{ \x \in [x_{\text{min}},x_{\text{max}}]\times [y_{\text{min}},y_{\text{max}}] \}$
-donde $x_{\text{min}}=y_{\text{min}}=0$ cm, $x_{\text{max}}=y_{\text{max}}=3$ cm, 
-y evolucionamos la solución hasta el tiempo final $T=3$ ps. Utilizamos 
-una descomposición de 8 subdominios para 
-poder realizar estas pruebas en una PC de escritorio. 
-El coeficiente de dispersión en el medio considerado es isótropo, 
-con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
 \begin{wrapfigure}{r}{0.45\textwidth}
  \begin{subfigure}{
   \includegraphics[width=0.45\textwidth]{figuras/errdt.eps}}
@@ -653,8 +645,15 @@ con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm.
   muestran la pendiente para un orden de convergencia prescripto. }
  \label{fig:convman}
 \end{wrapfigure}
+$\Omega=\{ \x \in [x_{\text{min}},x_{\text{max}}]\times [y_{\text{min}},y_{\text{max}}] \}$
+donde $x_{\text{min}}=y_{\text{min}}=0$ cm, $x_{\text{max}}=y_{\text{max}}=3$ cm, 
+y evolucionamos la solución hasta el tiempo final $T=3$ ps. Utilizamos 
+una descomposición de 8 subdominios para 
+poder realizar estas pruebas en una PC de escritorio. 
+El coeficiente de dispersión en el medio considerado es isótropo, 
+con $g=0$, $a(\x)=0.35/$cm y $b(\x)=20/$cm. 
 Evaluamos el error máximo obtenido en todo el dominio 
-comparando el flujo escalar dado por la ecuación~\eqref{eq:photondensity} 
+comparando el flujo escalar dado por la Ecuación~\eqref{eq:photondensity} 
 obtenido numéricamente comparado con el obtenido analíticamente
 \begin{equation*}
 \begin{split}
@@ -682,7 +681,7 @@ Al comparar el término del error para una grilla de una dada variable,
 el resto de los parámentros de discretización permanecen fijos.
 
 El alto orden de convergencia del algoritmo FC--DOM en paralelo 
-para la solución manufacturada propuesta se muestra en la figura~(\ref{fig:convman}). 
+para la solución manufacturada propuesta se muestra en la Figura~(\ref{fig:convman}). 
 Esta convergencia es la esperada dadas las aproximaciones 
 numéricas empleadas.
 %\pagebreak 
@@ -711,21 +710,21 @@ es válida para medios de alta dispersión,
 baja absorción y en regiones alejadas de las fuentes.
 Dado que nuestro método resuelve el problema ETR completo, podemos considerar adecuadamente 
 medios con baja absorción y dispersión, como puede ser el fluido cerebroespinal 
-en la cabeza, o la traquea en un cuello humano. 
+en la cabeza, o la tráquea en un cuello humano. 
 
 Analizaremos dos arreglos experimentales diferentes propuestos por Klose~\textit{et al.}. 
 Estos poseen simetría 2D, apropiada para nuestro tratamiento. 
  En el primer experimento, se simula un cubo homogéneo, de propiedades ópticas dadas en 
  la Tabla~\ref{tab:tabopt}.
  En el segundo, la geometría del fantoma también 
- es cubica, pero contiene una inhomogeneidad en forma 
+ es cúbica, pero contiene una inhomogeneidad en forma 
  de anillo cilíndrico, con agua en su interior. Esta inhomogeneidad 
  es similar a la que se encuentra en 
  el fluido cerebroespinal, y el fantoma constituye un modelo 
  simple para una cabeza humana. En ambos experimentos,
 los fantomas fueron iluminados con luz láser en el 
 infrarrojo ($\lambda = 678$ nm), en tres posiciones a lo largo del eje $x$. Se detectó la luz emergente 
-en dos de las caras de los fantomas, como se muestra en la figura~(\ref{fig:phantom}).
+en dos de las caras de los fantomas, como se muestra en la Figura~(\ref{fig:phantom}).
 
  
  \begin{table}[h!]
@@ -774,7 +773,7 @@ son independientes del tiempo, evaluaremos la corriente de fotones saliente
 \label{eq:photoncurrentsal}
 \end{equation}
 utilizando una función sigmoidea para el perfil temporal, $T(t)$, 
-que adquiere suavemente valores partiendo desde cero 
+que varía suavemente desde cero 
 hasta uno. La solución independiente del tiempo 
 se adquiere a un tiempo asintótico.
 La fuente láser se modela por la función
@@ -792,28 +791,28 @@ luego de atravesar una corta distancia (del orden del camino libre medio).
 Se resuelve la ETR para un número de pasos temporales, 
 hasta que la solución alcanza, numéricamente, el comportamiento 
 asintótico~\cite{Bruno2010}, para el cual $\lim_{t\to \infty} \frac{\partial u}{\partial t}=0$. 
-Luego se evalúa el operador de la ecuación~\eqref{eq:photoncurrentsal} 
+Luego se evalúa el operador de la Ecuación~\eqref{eq:photoncurrentsal} 
 en las regiones de la superficie en $\partial \Omega$ 
 donde se ubican los detectores.
 Una vez  calculada la corriente de fotones salientes, se
-se realiza una normalización para ubicar la lectura 
+realiza una normalización para ubicar la lectura 
 de los resultados experimentales (reportados en escala arbitraria) 
-en la misma escala que las obtenidas por el método FC--DOM. 
+en la misma escala que los obtenidos por el método FC--DOM. 
 Para las detecciones a lo largo del eje $x$ se normalizó 
 con respecto al máximo valor de cada curva. 
  Las lecturas de los detectores sobre el eje $y$ 
  se normalizaron ajustando el punto en la grilla numérica 
- que se encontró mas cerca de la posición reportada 
+ que se encontró más cerca de la posición reportada 
  para alguno de los detectores. 
  
 \subsubsection{Fantoma homogéneo}
 
 El primer arreglo experimental reportado por~\cite{Klose2002} 
 se basa en un fantoma homogéneo con los parámetros ópticos 
-dados en la tabla~\ref{tab:tabopt}. El fantoma posee un tamaño  
+dados en la Tabla~\ref{tab:tabopt}. El fantoma posee un tamaño  
 de $3$ cm a lo largo de los ejes $x$ e $y$. La posición del láser 
    $\x_s$ es, para los tres casos considerados $A=(1.5,0)$ cm, $B=(0.9,0)$ cm
-    y $C=(0.3,0)$ cm. En la figura~(\ref{fig:ph1timef}) se muestra 
+    y $C=(0.3,0)$ cm. En la Figura~(\ref{fig:ph1timef}) se muestra 
 el flujo escalar~\eqref{eq:photondensity} 
 correspondiente a las tres posiciones de la fuente láser $\x_s$. 
 
@@ -839,7 +838,7 @@ dando lugar a reflexiones que afectan la intensidad
 de la luz con una dependencia angular particular.
 
 El flujo de fotones que llegan a los detectores, ubicados en el borde $\partial \Omega$ 
-del dominio, se obtuvo mediante la ecuación~\eqref{eq:photoncurrentsal}. 
+del dominio, se obtuvo mediante la Ecuación~\eqref{eq:photoncurrentsal}. 
 Los resultados se muestran en la Figura~(\ref{fig:fluxph1}), 
 para los 28 detectores ubicados en el borde a lo largo del eje $x$ (izquierda) 
 y para los 28 detectores en la dirección $y$ a la derecha. 
@@ -852,7 +851,7 @@ que está siendo reflejada y que escapa a través de la superficie de la izquier
 A medida que la fuente se acerca más al borde, el ángulo de incidencia de la 
 radiación con respecto a la normal de la superficie aumenta. Por lo tanto, 
 más radiación resulta reflejada desde puntos cercanos a la superficie, 
-propagandose hacia el interior del medio participante, 
+propagándose hacia el interior del medio participante, 
 contribuyendo al máximo. También se espera que la contribución de fotones dispersados 
 por el medio desde la región a la derecha sea relativamente mayor 
 que desde la izquierda, ya que la radiación 
@@ -876,12 +875,12 @@ en el marco de la teoría ETR independiente del tiempo.
 El segundo fantoma contiene una región de ``vacío'' en forma de anillo, 
 rellena de agua, de diámetro $d=2,8$ cm, en donde el coeficiente de absorción 
 y dispersión están dados por $a(\x)=b(\x)=0$. En el resto del medio, 
-se consideran los parámetros ópticos de la tabla~\ref{tab:tabopt}
+se consideran los parámetros ópticos de la Tabla~\ref{tab:tabopt}
 Las dimensiones de este fantoma a lo largo del eje $x$ e $y$ es de $4$ cm.
 Se realizaron simulaciones para tres experimentos, de acuerdo a las posiciones 
 $\x_s$ de la fuente $A=(2.0,0)$ cm, $B=(1.2,0)$ cm, 
 y $C=(0.4,0)$ cm.
-Para evitar el deterioro de la convergencia del método, las discontinuidades
+Para mantener el orden de la convergencia del método, las discontinuidades
  en los parámetros ópticos del medio 
 deben ser evitadas. De otra forma, el fenómeno de Gibbs deterioraría 
 la precisión de los cálculos. Por esta razón, implementamos una aproximación 
@@ -889,7 +888,7 @@ suave a los coeficientes, haciendo uso de la función ventana introducida
 por Bruno \textit{et al}.~\cite{Bruno2014a} en otro contexto. 
 Esta función provee una transición suave hacia la región de 
 vacío.
-En la figura~(\ref{fig:scattcoef}), se muestra una representación de los 
+En la Figura~(\ref{fig:scattcoef}), se muestra una representación de los 
 parámetros ópticos utilizados para el fantoma inhomogéneo, 
 donde puede observarse la transición suave a la inhomogeneidad 
 en forma de anillo.
@@ -910,12 +909,12 @@ El flujo escalar para el fantoma inhomogéneo se muestra en la Fig.~(\ref{fig:ph
   obtenido en las simulaciones para el fantoma inhomogéneo. A (izquierda), B (centro) y C (derecha).}
  \label{fig:ph2timef}
 \end{figure}
-Estos resultados muestran claramente el efecto de la región de vacío. 
-En esta región, los fotones viajan libremente. Esta característica 
+Estos resultados muestran claramente el efecto de la región de vacío,  
+en la cual los fotones viajan libremente. Esta característica 
 implica que este problema no puede ser correctamente resuelto 
 mediante la aproximación de difusión.
 El flujo de fotones que llegan a los 38 detectores ubicados en la frontera del 
-dominio se muestra en la figura~(\ref{fig:fluxph2}). 
+dominio se muestra en la Figura~(\ref{fig:fluxph2}). 
 Se observa un buen acuerdo entre teoría y experimento, aunque 
 con mayores desviaciones respecto al caso del fantoma homogéneo. 
 Estas desviaciones pueden explicarse por el hecho de que 
@@ -926,7 +925,7 @@ lo cual requeriría de un tratamiento especial~\cite{Bal2006}.
 La presencia de regiones de vacío, como la que se encuentra en el 
 fluido cerebroespinal en la cabeza, o entre órganos en el cuerpo 
 --el fluido sinovial en las articulaciones~\cite{Netz2001}, 
-o la traquea en el cuello humano~\cite{Fujii2016}--, 
+o la tráquea en el cuello humano~\cite{Fujii2016}--, 
 requiere del uso de la ETR como modelo físico, ya que la 
 aproximación de difusión de fotones no es apropiada en este régimen de transporte. 
 \begin{figure}[h!]
@@ -945,12 +944,12 @@ independiente del tiempo.
 \subsection{El fenómeno de rayos}
 \label{subsec:rayeff}
 En esta sección presentamos el último caso independiente del tiempo 
-que trataremos en esta tesis. Este concierne a un 
+que trataremos en esta Tesis. Este concierne a un 
 fenómeno importante que surge en las aproximaciones numéricas 
 que utilizan métodos de ordenadas discretas para resolver la ETR~\cite{Lewis1984}. 
 Se trata del fenómeno de rayos, 
 el cual se manifiesta esencialmente en medios de baja dispersión. 
-El fenómeno de rayos se origina debido a la discretización 
+El fenómeno de rayos se origina en la discretización 
 de la variable angular $\hth$. Debido a dicha discretización, 
 las direcciones posibles para la propagación de los fotones 
 se encuentra limitada. Cuando existen fuentes localizadas, 
@@ -1008,9 +1007,10 @@ ya que estos son altamente dispersivos.
 \subsection{Comparación con solución analítica}
 
 En esta sección validamos nuestros métodos computacionales 
-dependientes del tiempo calculando el flujo escalar, 
-y comparándolo con la solución analítica dada por Paasschens~\cite{Paasschens1997} 
-para una fuente puntual en un medio infinito. 
+dependientes del tiempo calculando el flujo escalar
+para una fuente puntual en un medio infinito, 
+y comparándolo con la solución analítica dada por 
+Paasschens~\cite{Paasschens1997}. 
 En este problema, un medio bidimensional infinito, 
 isótropo y homogéneo es iluminado por una fuente puntual isótropa
 ubicada en el origen de coordenadas $s(\x,\hth,t)=\delta(\x)\delta(t)$.
@@ -1052,13 +1052,13 @@ la función delta de Dirac de la fuente es aproximada con una función Gaussiana
 Comparamos los resultados numéricos obtenidos por el método FC--DOM (FC)
 con una aproximación al gradiente espacial obtenido por el método {\em upwind} 
 de diferencias finitas de tercer orden (FD) utilizado en~\cite{Fujii2014}. 
-En la figura~\ref{fig:analytic1} se muestran los resultados obtenidos por ambos métodos 
+En la Figura~\ref{fig:analytic1} se muestran los resultados obtenidos por ambos métodos 
 junto con la solución analítica. En ambos casos el acuerdo es excelente.
 
  \begin{figure}[h]
 \centering
   \includegraphics[width=0.48\linewidth]{figuras/analytic1.eps}
-  \caption{Solución analítica ec.~\eqref{eq:Paasschenssc}, 
+  \caption{Solución analítica Ec.~\eqref{eq:Paasschenssc}, 
   y soluciones numéricas obtenidas por el método FC--DOM (FC) 
   y FD--DOM (FD) para un medio homogéneo infinito iluminado 
   por un pulso puntual.}
@@ -1067,7 +1067,7 @@ junto con la solución analítica. En ambos casos el acuerdo es excelente.
  
 Para dar una idea cuantitativa de la convergencia obtenida por el método 
 FC en comparación con el método de diferencias finitas, 
-definimos el error con respecto a la solución analítica cómo
+definimos el error con respecto a la solución analítica como
 \begin{equation}
 \Delta \phi(r)= 
 \sqrt{
@@ -1083,7 +1083,7 @@ $t_f=400$ ps. El tiempo inicial es elegido de forma tal que el pico balístico
 ya haya pasado por el punto de observación $r$, evitando así el comportamiento 
 singular del mismo. El tiempo final es elegido en forma tal 
 de evitar efectos de borde. En contraste con el acuerdo 
-cualitativo mostrado en la figura~\ref{fig:analytic1}, 
+cualitativo mostrado en la Figura~\ref{fig:analytic1}, 
 los errores fueron calculados en este caso sin normalización. 
 En lugar de utilizar la función Gaussiana como aproximación a la delta de Dirac, 
 se utilizó la solución analítica (Ec.~(26) en la referencia~\cite{Paasschens1997}) 
@@ -1122,18 +1122,18 @@ de dispersión despreciable.
 
 \section{Existencia de capa límite}
 \label{sec:blayer}
-En secciones previas demostramos el alto órden de convergencia numérica 
+En secciones previas demostramos el alto orden de convergencia numérica 
 del método FC--DOM para el caso de un problema manufacturado.
-La solución propuesta utilizada en la sección~\ref{sec:manufacturada}
+La solución propuesta utilizada en la Sección~\ref{sec:manufacturada}
 es suave, y no presenta gradientes significativos en ninguna de sus variables. 
 Los teoremas de convergencia para los métodos numéricos exigen, en general,  
 que las soluciones continuas subyacentes que se intentan aproximar cumplan 
 ciertas condiciones de regularidad. Discontinuidades en las soluciones 
-o en sus derivadas, degredan el orden de convergencia.
-En particular, en esta Sección estudiaremos 
+o en sus derivadas, degradan el orden de convergencia.
+En particular, en esta sección estudiaremos 
 una estructura de capa límite~\cite{Gaggioli2021} que existe en forma casi ubicua en las soluciones 
 a la ecuación ETR. De acuerdo a la teoría de ecuaciones diferenciales, 
-las capa límite se manifiestan en 
+las capas límites se manifiestan en 
 regiones  pequeñas donde las soluciones 
 presentan variaciones rápidas. Matemáticamente, estas estructuras 
 aparecen en las soluciones de las ecuaciones 
@@ -1141,7 +1141,7 @@ diferenciales cuando la derivada de mayor orden
 viene multiplicada por un parámetro 
 pequeño~\cite[Cap. 9]{Bender1999}.
 La presencia de la capa límite degrada considerablemente el orden de convergencia. 
-Sólo pueden obtenerse soluciones precisas con enormes esfuerzos computacionales. 
+Sólo pueden obtenerse soluciones precisas haciendo enormes esfuerzos computacionales. 
  Este es un fenómeno novedoso que no 
 se encuentra detallado en la bibliografía.  La estructura 
 de capa límite ayuda a explicar problemas numéricos reportados en la bibliografía 
@@ -1159,7 +1159,7 @@ El desarrollo
 de métodos numéricos eficientes para los casos 
 multidimensionales exige de estrategias sofisticadas~\cite{Bruno2019}. 
 Para facilitar la descripción y el análisis 
-de este fenómeno, en esta Sección trabajaremos con una única dimensión espacial. 
+de este fenómeno, en esta sección trabajaremos con una única dimensión espacial. 
 Esto se corresponde a problemas de tres dimensiones con simetría de traslación en dos 
 de las variables espaciales. 
 Las conclusiones que se obtienen 
@@ -1182,7 +1182,7 @@ La capa límite se manifiesta como transiciones abruptas de
  carácter exponencial, que se dan en regiones cercanas a los bordes. 
 Físicamente, este fenómeno se origina debido a que para las direcciones entrantes paralelas 
 al borde, las partículas atraviesan caminos geométricos relativamente grandes 
-hacia el interior del dominio. Esto puede originar tanto decaimientos 
+hacia el interior del dominio. Esto puede producir tanto decaimientos 
 como crecimientos exponenciales en la intensidad específica.
 \begin{figure}[h!]
 \centering
@@ -1192,7 +1192,7 @@ como crecimientos exponenciales en la intensidad específica.
 \end{figure}
 La ecuación ETR independiente del tiempo, en una dimensión espacial 
 modela el transporte en una geometría plana paralela descripta en la 
-figura~\ref{fig:parallelgeom}. Por simplicidad, consideramos 
+Figura~\ref{fig:parallelgeom}. Por simplicidad, consideramos 
 el caso isótropo, con condiciones de borde de Fresnel
 \begin{equation}
 \begin{split}
@@ -1218,7 +1218,7 @@ en la solución $u(x,\xi)$ para tales direcciones, y para valores
 de $x$ en regiones cercanas a los bordes en $x=0$ y $x=1$.
 Como consecuencia surgirán gradientes que 
 tienden a infinito para puntos $(x,\xi)$ cercanos a $(0,0)$ y $(1,0)$. 
-Estas estructuras de capa límite, que son generadas por 
+Estas estructuras de capa límite,  son generadas por 
 la imposición de las condiciones de borde en conjunto con la existencia 
 de un parámetro $\xi$ infinitesimal que acompaña a la derivada de mayor 
 orden del operador diferencial. En nuestro caso particular 
@@ -1242,7 +1242,7 @@ a {\em coeficientes constantes}
 \label{eq:transp1d2}
 \end{equation}
 con condiciones de borde inducidas por~\eqref{eq:transp1d}. 
-La ecuación~\eqref{eq:transp1d2} nos dice que la derivada 
+La Ecuación~\eqref{eq:transp1d2} nos dice que la derivada 
 $\frac{\partial U_0(X,\xi)}{\partial X}$ se encuentra 
 acotada cuando $\xi\to 0^+$, y, por lo tanto, que la función 
 $U_0(X,\xi)$ caracteriza la estructura de capa límite 
@@ -1255,7 +1255,7 @@ incluyendo el dominio temporal y dominios generales curvos. En tales casos,
 la capa límite presenta gradientes que no están acotados 
 en la proximidad de los bordes en direcciones paralelas a estos 
 (situación que a escalas apropiadas se corresponde con la geometría 
-de la fig.~\ref{fig:parallelgeom} para $\theta \to \pi/2$). 
+de la Fig.~\ref{fig:parallelgeom} para $\theta \to \pi/2$). 
 
 Utilizando el factor integrante, y definiendo
 \begin{equation*}
@@ -1281,12 +1281,12 @@ donde el primer término representa el flujo entrante a través del borde en la 
 que no ha sufrido colisiones, el cual posee una atenuación exponencial 
 debido a las interacciones de absorción y dispersión con el medio. El segundo término representa las contribuciones 
 del medio debido a los procesos dispersivos, que sufren tanto una atenuación 
-como un crecimiento exponencial, debido a la suma de contribuciones en el interior del medio. Finalmente, el último representa 
+como un crecimiento exponencial, debido a la suma de contribuciones en el interior del medio. Finalmente, el último término representa 
 las contribuciones del medio debido a las fuentes $q$ en el interior de éste, 
 las cuales también vienen dadas por contribuciones y atenuaciones en el interior del medio.
 
 La estructura de capa límite puede visualizarse fácilmente 
-considerando la solución exacta de la ecuación~\eqref{eq:transp1d} 
+considerando la solución exacta de la Ecuación~\eqref{eq:transp1d} 
 para el caso de coeficientes constantes sin dispersión ($\mu_s(x)=0$), 
 de donde obtiene la solución analítica 
 \begin{equation}
@@ -1304,12 +1304,12 @@ con
 \;\;\eta(\xi)=\frac{\mathcal{R}(|\xi|)-1}{\mathcal{R}(|\xi|)e^{-\mu_a/|\xi|}-1}.\qquad\qquad\qquad
 \end{equation*}
 Por simplicidad, consideramos condiciones de borde de vacío ($\mathcal{R}(\xi)=0$).
-La solución se muestra en la figura~\ref{fig:ansol}, donde se observa claramente la estructura de capa 
+La solución se muestra en la Figura~\ref{fig:ansol}, donde se observa claramente la estructura de capa 
 límite cuando $(x,\xi) \to (0^+,0^+)$.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/Analytic_lay_3.pdf}
-  \caption{Solución~\eqref{eq:transpnscatt} $\uxi$ de la ecuación.~\eqref{eq:transp1d} con
+  \caption{Solución~\eqref{eq:transpnscatt} $\uxi$ de la Ecuación.~\eqref{eq:transp1d} con
   $\mathcal{R}(\xi)=0$. Se observa la capa límite en las variables $x$ y $\xi$ 
   para $(x,\xi) \to (0^+,0^+)$ (enfatizadas en las curvas roja y azul).}
  \label{fig:ansol}
@@ -1324,14 +1324,14 @@ lo cual puede apreciarse en resultados presentados
 en la literatura~\cite{Rocheleau2020,Wang2019,Harel2020,Anli2006,Chai1993}.
 
 En vista de la expresión~\cite[p. 77]{Trefethen2008} 
-para el término del error en la cuadratura de integración 
+para la determinación del error en la integración 
 de Gauss--Legandre, el error para la cuadratura de $\ell$-puntos 
 decrece como $32V/15\pi j (2\ell+1-j)^j$ siempre que la derivada 
 $j \leq 2\ell$ esté acotada por la constante $V$. 
 Introduciendo el cambio de variable  $\xi'=r^p$ en la integral 
-de la ecuación~\eqref{eq:transp1d}, buscamos una cota $V$ 
+de la Ecuación~\eqref{eq:transp1d}, buscamos una cota $V$ 
 para la derivada $j$--ésima del integrando. 
-Utilizando la versión integrada de la ecuación~\eqref{eq:transp1d}, 
+Utilizando la versión integrada de la Ecuación~\eqref{eq:transp1d}, 
 similar a~\eqref{eq:intf}, combinando dos términos exponenciales, 
 y utilizando el hecho de que para un entero no negativo $k$ 
 la integral $\int_0^\infty t^k e^{-t} dt$ es finita, 
@@ -1354,8 +1354,8 @@ detalles de la demostración pueden encontrarse en el Apéndice~\ref{ap:demcv}.
   \caption{Error de la integral numérica respecto a la 
   analítica $E(M)=\text{max}_x |\sum_{i=1}^M w_i u(x,\xi_i)-I^{\text{an}}(x)|$
   obtenida para la solución~\eqref{eq:transpnscatt} con $\mathcal{R}(\xi)=0$. 
-  Los errores fueron obtenidos para la cuadratura~\eqref{eq:MartensenKussmaul} 
-  para $p=5$ y $p=3.2$. G--L: 
+  Los errores corresponden a la cuadratura~\eqref{eq:MartensenKussmaul} 
+  con $p=5$ y $p=3.2$. G--L: 
   Error dado por la cuadratura de Gauss--Legendre sin el cambio de variable propuesto.}
  \label{fig:intconvs}
 \end{figure}
@@ -1409,27 +1409,9 @@ el problema de transporte dependiente del tiempo resulta
 \end{split}
 \label{eq:transptd}
 \end{equation}
+
 Con el fin de evitar las
 limitaciones impuestas por la condición de CFL, utilizamos un 
-esquema implícito BDF ({\em backward differentiation formula}) de evolución temporal de tercer orden. 
-Para evitar el alto costo en la inversión de matrices grandes a 
-cada paso 
-temporal, el término 
-colisional se obtiene por extrapolación polinomial. La versión discreta con propagación temporal 
-implícita de la Ecuación~\eqref{eq:transptd} resulta
-\begin{equation*}
-\begin{aligned}
- \left[ \id \right.  \left.+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  
- u^{n+1}_j  = \sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
- \sum_{i=1}^{M} w_i \tilde{u}_i^{n+1} + \beta\Delta t q^{n+1},
-\end{aligned}
-\label{eq:transptd1disc}
-\end{equation*}
-donde $u^{n+1}_j=u(v,\xi_j,t^{n+1})$, $t^{n+1}=n\Delta t$, siendo $\alpha_k$ y $\beta$ 
-los coeficientes BDF, con $s=3$. 
-El término extrapolado 
-a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa {3 \choose \kappa+1} u_j^{n-\kappa}$.
-
 \begin{wrapfigure}{r}{0.45\textwidth}
   \includegraphics[width=0.45\textwidth]{figuras/errdt.pdf}\\
   \vspace{2mm}
@@ -1440,12 +1422,31 @@ a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa 
   propuesto. Diamantes: orden de convergencia.}
  \label{fig:conv}
 \end{wrapfigure}
+esquema implícito BDF ({\em backward differentiation formula}) de evolución temporal de tercer orden. 
+Para evitar el alto costo en la inversión de matrices grandes a 
+cada paso 
+temporal, el término 
+colisional se obtiene por extrapolación polinomial. La versión discreta con propagación temporal 
+implícita de la Ecuación~\eqref{eq:transptd} resulta
+\begin{equation*}
+\begin{aligned}
+& \left[ \id \right.  \left.+ \beta\Delta t\xi_j (2+2\cosh(v)) \ide + \beta\Delta t \mu_t \id \right]  
+ u^{n+1}_j &\\ = & \sum_{k=0}^{s-1}\alpha_k u_j^{n-k} + \beta\Delta t \sct
+ \sum_{i=1}^{M} w_i \tilde{u}_i^{n+1} + \beta\Delta t q^{n+1},
+\end{aligned}
+\label{eq:transptd1disc}
+\end{equation*}
+donde $u^{n+1}_j=u(v,\xi_j,t^{n+1})$, $t^{n+1}=n\Delta t$, siendo $\alpha_k$ y $\beta$ 
+los coeficientes BDF, con $s=3$. 
+El término extrapolado 
+a tercer orden viene dado por $\tilde{u}_j^{n+1}=\sum_{\kappa=0}^{2}(-1)^\kappa {3 \choose \kappa+1} u_j^{n-\kappa}$.
+
 
  Nuevamente, 
 $\id$ es  el operador identidad, mientras que $\ide$ representa al operador 
 de diferenciación espectral obtenido mediante el método de continuación de Fourier. 
 
-La Fig.~\eqref{fig:conv} muestra las excelentes propiedades de convergencia 
+La Fig.~\ref{fig:conv} muestra las excelentes propiedades de convergencia 
 obtenidas mediante el algoritmo propuesto para $\mu_s=\mu_a=q=1$. Dado 
 que no se conoce una solución analítica para este problema, calculamos 
 el error comparando las soluciones en diferentes grillas, tomando 
@@ -1476,7 +1477,7 @@ a~\ref{fig:DDlayer}.
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/xilay.pdf}
   \caption{Capas límite obtenidas como solución 
-  de la ecuación~\eqref{eq:transptd} para un entorno de $x=0$ y $\xi=0$, 
+  de la Ecuación~\eqref{eq:transptd} para un entorno de $x=0$ y $\xi=0$, 
   con $\mu_a=\mu_s=q=1$ para distintos valores de $\xi$ y de $x$, 
   con $\xi_i>\xi_{i+1}>0$ y $x_i>x_{i+1}$.}
  \label{fig:blayers1}
@@ -1488,7 +1489,7 @@ los valores más chicos de $\xi$
 originan capas límite que se comprimen en regiones espaciales más 
 pequeñas, tal como sugiere el análisis realizado. 
 La Fig.~\ref{fig:blayers} muestra la existencia de 
-de capas límite incluso para medios altamente difusivos, con 
+capas límite incluso para medios altamente difusivos, con 
 $\mu_a=q=1$ fijo. En esta figura, 
 $\xi=\xi_{\text{min}}\simeq 10^{-6}$, para los parámetros 
 $N=200$, $M=20$ y $-v_{\text{min}}=v_{\text{max}}=20$. 
@@ -1505,7 +1506,7 @@ de capa límite.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/blayers.pdf}
-  \caption{Capas límite obtenidas resolviendo la ecuación~\eqref{eq:transptd}, 
+  \caption{Capas límite obtenidas resolviendo la Ecuación~\eqref{eq:transptd}, 
   con $\mu_a=q=1$ para distintos valores de $\mu_s$. 
   Se muestran las soluciones para la dirección $\xi=\xi_{\text{min}} \simeq 10^{-6}$. 
   Notar las pendientes elevadas que existen para $x\to 0^+$.}
@@ -1531,7 +1532,7 @@ pequeños, lo cual no fue considerado en ninguno de los trabajos anteriores.
 Por ejemplo, la referencia~\cite{Larsen1987} trata un problema 
 difusivo de transporte (el Problema~1 en dicha referencia). 
 Este es el mismo que plantea la Ecuación~\eqref{eq:transp1d} con $\mu_s=\mu_t=1000$,
- $q=0.1$ y $\mathcal{R}(\xi)=0$. Este es un caso  
+ $q=0.1$ y $\mathcal{R}(\xi)=0$. Se trata de un caso  
  difusivo, con condiciones de borde isótropas, 
  sobre el que dicha referencia afirma~\cite[pp. 317]{Larsen1987} 
  ``\ldots dado que el término de orden dominante en la expansión asintótica 
@@ -1546,12 +1547,12 @@ Este es el mismo que plantea la Ecuación~\eqref{eq:transp1d} con $\mu_s=\mu_t=1
  con $M=40$ direcciones discretas y $N=400$ puntos 
  en la variable espacial. En comparación, en la implementación del esquema DD 
  se utilizaron $N=10000$ puntos. Aún teniendo en cuenta 
- el alto costo computacional que requiere este esquema, no logra 
+ el alto costo computacional que requiere este grillado, no logra 
  evitar las oscilaciones espurias.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/layerlar.pdf}
-  \caption{Solución $u(x,\xi_{15})$ de la ec.~\eqref{eq:transp1d} 
+  \caption{Solución $u(x,\xi_{15})$ de la Ec.~\eqref{eq:transp1d} 
   con $\mu_t=\mu_s=1000$, $q=0.1$ y $\xi_{\text{15}} \simeq 10^{-3}$
   donde pueden apreciarse las oscilaciones espurias originadas 
   por el esquema DD. Se utilizaron $N=10000$ puntos espaciales para el método DD y 
@@ -1575,7 +1576,7 @@ se propagan hacia todo el dominio espacial.
  \label{fig:DDlayer2}
 \end{figure}
 
-Cerraremos la sección con un breve resumen de los reultados de
+Cerraremos la sección con un breve resumen de los resultados de
 nuestra investigación.
 Hemos encontrado una región particular, en la cual aparecen gradientes
 muy abruptos, que no pueden ser resueltos con los métodos numéricos
