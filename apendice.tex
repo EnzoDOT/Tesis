@@ -59,9 +59,9 @@ hasta el orden cuadrático, se obtiene la ecuación de difusión.
 
 Las condiciones consideradas son válidas para el interior del dominio espacial $\Omega$.
  En la proximidad de los bordes, las partículas pueden no haber realizado suficientes colisiones 
- como para entrar en el régimen difusivo. Como vimos en la sección~\ref{sec:blayer} en esta región existen capas límite exponenciales. 
+ como para entrar en el régimen difusivo. Como vimos en la Sección~\ref{sec:blayer} en esta región existen capas límite exponenciales. 
 La intensidad específica de radiación saliente difiere 
-de la entrante, debido a que en esta última se imponen 
+de la entrante, ya que en esta última se imponen 
 las condiciones de contorno. 
  Debido a estas rápidas variaciones en la variable direccional, la radiación no será isótropa, 
 aún cuando las condiciones de borde y las fuentes consideradas lo sean (ver fig.~\ref{fig:ansol}). Tampoco será válida esta 
@@ -70,7 +70,7 @@ con grandes variaciones en la variable
 direccional $\hth$.
 
 Existen otras formas de derivar la ecuación de difusión para los fotones. 
-Si se multiplica la Ecuación~\eqref{eq:RTE} ETR por la variable angular $\hth$, y se integra 
+Si se multiplica la ETR~\eqref{eq:RTE} por la variable angular $\hth$, y se integra 
 sobre esa misma variable, se obtiene
 \begin{equation}
 \begin{split}
@@ -159,11 +159,11 @@ Como se mencionó anteriormente, esta ecuación representa la conservación
 de los fotones para cada punto espacial $\x \in \Omega$, independientemente 
 de la dirección. Hasta este punto no hemos realizado ninguna aproximación. 
 Si en la ec.~\eqref{eq:RTEscfluxap} logramos eliminar $\jc$, tendremos una ecuación diferencial 
-para el flujo escalar $\phi(\x,t)$. Buscaremos eliminar $\jc$ aplicando algunas aproximaciones en la ec.~\eqref{eq:RTEjfluxf} que nos permitan obtener una relación entre $\jc$ y $\phi(\x,t)$.
+para el flujo escalar $\phi(\x,t)$. Buscaremos eliminar $\jc$ aplicando algunas aproximaciones en la Ec.~\eqref{eq:RTEjfluxf} que nos permitan obtener una relación entre $\jc$ y $\phi(\x,t)$.
 \subsection{La aproximación $P_1$}
-La ecuación  de transporte se puede resolver expandiendo 
+La ecuación  de transporte puede resolverse expandiendo 
 la parte angular en armónicos esféricos, 
-lo que da lugar a la aproximación $P_N$. Lejos de los bordes la intensidad de radiación se puede expandir
+lo que da lugar a la aproximación $P_N$. Lejos de los bordes la intensidad de radiación puede expandirse como 
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -176,7 +176,7 @@ u_{l,m}(\x,t)&=\int_{0}^{2\pi} d\varphi \int_0^{\pi} d\tilde{\theta} \sin (\tild
 donde $Y_{l,m}(\tilde{\theta},\varphi)$ representa al armónico esférico de grado $l$ y orden $m$~\cite{Sansone1991}.
 
 
- Dado que la dispersión tiende a promediar la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente. En ese caso, se puede 
+ Dado que la dispersión tiende a promediar a la función de distribución $\ut$ con respecto a la variable $\hth$, volviéndola isótropa, es esperable que en el régimen difusivo la función $u(\x,\hth,t)$ varíe suavemente. En ese caso, se puede 
 truncar la expansión~\eqref{eq:PN}. El enfoque utilizado con mayor frecuencia en la literatura 
 para la derivación de la aproximación de difusión consiste 
 en tomar  el primer orden $P_1$ de esta sumatoria~\cite{Arridge2009,Wang2009}.
@@ -260,7 +260,7 @@ Se han
 reportado diferencias significativas entre los resultados obtenidos para el 
 flujo de fotones resultante de la ecuación~\eqref{eq:difusion} y el obtenido 
 mediante uso de la ecuación~\eqref{eq:RTE} aún 
-en el régimen difusivo, y lejos de las fuentes~\cite{Hielscher1998}. El problema surge en las condiciones de contorno. Se han desarrollado diferentes teorías para el tratamiento de las 
+en el régimen difusivo, y lejos de las fuentes~\cite{Hielscher1998}. El problema radica en las condiciones de contorno. Se han desarrollado diferentes teorías para el tratamiento de las 
 mismas. Estas incluyen la utilización de bordes extrapolados como así también flujos que se obtienen integrando la intensidad 
 específica en los bordes. De aquí surgen las condiciones de borde de Robin~\cite{Arridge2009,Haskell1994,Ishimaru1978,Arridge1999,Xu2002}. En ninguna de estas referencias se discute en forma apropiada las capas límite. Dado que en tomografía óptica las fuentes y los detectores 
 se ubican en el contorno del dominio a analizar, es fundamental 
@@ -327,7 +327,7 @@ Para obtener la continuación de Fourier $f_c$ en forma eficiente, el método FC
 evaluando la función $f$ únicamente en unos pocos puntos 
 en los bordes del dominio discretizado. 
 El algoritmo procede mediante la proyección de $f$ en una base de polinomios Gram $\mathcal{B}_r$ 
-(que definiremos mas adelante) en los puntos del extremo 
+(que definiremos más adelante) en los puntos del extremo 
 derecho $\{x_{N+1-d_r},x_{N+2-d_r},\ldots, x_{N+1} \}$, y 
 polinomios $\mathcal{B}_{\ell}$ en los puntos de la izquierda $\{x_{1},x_{2},\ldots, x_{d_{\ell}} \}$. 
 La proyección en los polinomios $p_r \in \mathcal{B}_r$ genera una continuación que 
@@ -435,8 +435,8 @@ donde $\vec{f}_{\ell}=(f_1,f_2,\ldots,f_d)$,
  $\vec{f}_{r}=(f_{N+1-d},f_{N+2-d},\ldots,f_{N+1})$ 
  son los valores de la función discreta utilizados para producir las continuaciones, $\bar{Q}_{\ell} $ y $\bar{Q}_{r}$ son las matrices obtenidas por factorización 
 QR de los polinomios de Vandermonde correspondientes, y donde las matrices $\bar{A}_{\ell}$ 
-y $\bar{A}_{r}$ generan las transiciones a cero a izquierda y derecha respectivamente, en el intervalo de continuación, 
-y se obtienen de resolver un problema de minimización 
+y $\bar{A}_{r}$ generan las transiciones a cero a izquierda y derecha respectivamente, en el intervalo de continuación. 
+Estas se obtienen de resolver un problema de minimización 
 para el polinomio trigonométrico interpolante en la grilla numérica sobresampleada 
 que coincide con los polinomios Gram en los $d$ puntos de la grilla discreta, y 
 que se anula en la región de continuación
@@ -484,7 +484,7 @@ Luego, buscamos los coeficientes $\vec{a}$ que son solución de
 \end{equation}
 la matriz $\bar{B}^s$ se obtiene 
 de evaluar la función~\eqref{eq:fccontint} en los $d$ puntos de ajuste, y en los $Z$ puntos donde se fuerzan los polinomios a anularse, $ \vec{q_j}^s(x)$ son las columnas 
-de la matriz $\bar{Q}^s$ en la ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vector nulo de dimensión $(Z-1)\times N_s +1$. Los coeficientes de Fourier que minimizan la relación~\eqref{eq:SVD} se encuentran mediante descomposición en valores singulares (SVD). 
+de la matriz $\bar{Q}^s$ en la Ecuación~\eqref{eq:qsob} y $\vec{0}$ es el vector nulo de dimensión $(Z-1)\times N_s +1$. Los coeficientes de Fourier que minimizan la relación~\eqref{eq:SVD} se encuentran mediante descomposición en valores singulares (SVD). 
 Las matrices $\bar{A}_{\ell}$ y $\bar{A}_{r}$ se obtienen, finalmente, de evaluar la relación~\eqref{eq:fccontint} con los coeficientes que resuelven~\eqref{eq:SVD} 
 para todo el intervalo $[0,(d+C+Z+E-1)h]$.
 
@@ -498,13 +498,13 @@ Cabe destacar que este procedimiento  solo se usa para obtener un pequeño archi
 Como se vió en la Sección~\ref{sec:blayer}, las soluciones de la ETR presentan 
 estructuras de capa límite tanto en las variables espaciales como en la variable angular, $\xi$. 
 La introducción de un cambio de variable logarítmico (otros cambios 
-de variable también son posibles) generan una densidad de puntos espaciales en la cercanía 
-del borde de forma que la capa límite puede ser resuelta apropiadamente en 
-la variable espacial. Para que la integral colisional sea correctamente 
+de variable también son posibles) genera una densidad de puntos espaciales en la cercanía 
+del borde de modo tal que permita resolver apropiadamente a la capa límite 
+en la variable espacial. Para que la integral colisional sea correctamente 
 resuelta en las proximidades del borde, se propuso el cambio de variable $\xi=r^n$. 
 Esta sección provee una demostración matemática de que la combinación del cambio 
 de variable espacial, en conjunto con el cambio de variable $\xi=r^n$ utilizado 
-en la sección~\ref{sec:blayer} regulariza las derivadas 
+en la Sección~\ref{sec:blayer} regulariza las derivadas 
 del integrando en $\int_0^1 u_0(x,\xi)d\xi = n\int_0^1  u_0(x,r^n) r^{n-1} dr$ (la demostración 
 para la integral complementaria  $\int_{-1}^0 u_0(x,\xi)d\xi$ es análoga). 
 

@@ -13,7 +13,6 @@ En este problema los parámetros ópticos $a(\x)$, $b(\x)$, la función
 de fase $\eta(\hth\cdot \hth')$, la velocidad de la luz en el medio participante 
 $c$, las fuentes internas $s(\x,\hth,t)$ y las condiciones iniciales y de contorno 
 son datos. Se busca encontrar la solución $\ut$ a la Ecuación~\eqref{eq:RTE}.
-
 En el problema {\bf inverso}, alguno de los parámetros son conocidos, 
  y se dispone de mediciones experimentales  
 obtenidas por detectores. 
@@ -34,15 +33,15 @@ En aplicaciones de diagnóstico y monitoreo para el tratamiento de tumores,
 se asume cierta información previa  
 del coeficiente de dispersión 
 $b(\x)$. Esta se obtiene, generalmente, mediante técnicas de 
- imágenes de alta resolución~\cite{Althobaiti2017,Guven2003}, \eg Resonancia Magnética, que poseen ciertas limitaciones.   
+ imágenes de alta resolución~\cite{Althobaiti2017,Guven2003}, \eg resonancia magnética, que poseen ciertas limitaciones.   
  El alto costo y la baja disponibilidad 
 de este tipo de aparatos dificulta el seguimiento de tratamientos  
 asistidos por diagnóstico de imágenes. 
 Por el contrario, los dispositivos 
-utilizados en tomografía óptica son portables, facilitando su disponibilidad. 
-Las imágenes permiten determinar regiones, 
+utilizados en tomografía óptica son portables. 
+Las imágenes que generan permiten determinar regiones, 
 como por ejemplo ciertos tejidos óseos, o 
-el aire en la traquea del cuello humano, en las cuales 
+el aire en la tráquea del cuello humano, en las cuales 
 los coeficientes de absorción toman valores conocidos.  
 Adicionalmente, estas sirven para imponer cotas superiores e inferiores 
 de $a(\x)$, lo que permite restringir el espacio de funciones donde se busca minimizar 
@@ -221,12 +220,12 @@ Una condición física que debe cumplirse siempre es que la cota inferior
 no sea negativa. Las regiones a estudiar que se diferencian del medio 
 conocido se denominan inclusiones. En aquellos tejidos donde se sabe 
 que no habrán inclusiones, el coeficiente de absorción 
-puede fijarse utilizando $a^l(\x) = a^u(\x)=a^0(\x)$, cuyo valor se obtiene de la información preliminar. Si, por la naturaleza del diagnóstico que se está realizando, 
+puede fijarse utilizando $a^l(\x) = a^u(\x)=a^0(\x)$, cuyo valor se obtiene de la información preliminar. Si por la naturaleza del diagnóstico que se está realizando, 
 se espera que una dada inclusión no 
-se encuentre dentro de cierto tipo de tejido 
+se encuentre dentro de cierto tipo de tejido, 
 puede restringirse la minimización para excluirlo 
 del cálculo. 
-Esto ocurre, por ejemplo, en la traquea del cuello humano, que 
+Esto ocurre, por ejemplo, en la tráquea del cuello humano, que 
 al estar llena de aire, no puede contener 
 un tumor en su interior.
 Adicionalmente, se conocen cotas para el tipo de inclusión 
@@ -242,7 +241,7 @@ En esta sección, haremos uso del operador de transporte, el cual definimos
 según
 \begin{equation}
 \begin{split}
-\mathcal{T}[u]=\frac{1}
+\mathcal{T}[u] \equiv \frac{1}
 {c}\frac{\partial \ut}{\partial t} + \hth \cdot \nabla \ut&+a(\x)\ut\\
 &+b(\x)\left[\ut - \int_{S^1}\eta(\hth\cdot\hth ') u(\x,\hth',t) d\theta'\right],
 \end{split}
@@ -263,7 +262,7 @@ de contorno
 \end{split}
 \label{eq:RTEt}
 \end{equation}
-donde todas las cantidades fueron definidas en la sección~\ref{sec:ETR}.
+donde todas las cantidades fueron definidas en la Sección~\ref{sec:ETR}.
 
 
 Introducimos la ``función ventana''~\cite{Bruno2014}
@@ -288,7 +287,7 @@ así como el modelado de la sensibilidad espacial de los fotodetectores.
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.5\linewidth]{figuras/windowed.eps}
-  \caption{Grafico de la función ventana $w(v)$~\eqref{eq:sourcelabwind} utilizada 
+  \caption{Gráfico de la función ventana $w(v)$~\eqref{eq:sourcelabwind} utilizada 
   para modelar los perfiles temporales y angular de las fuentes láser, 
   así como la sensibilidad espacial de los fotodetectores.}
  \label{fig:window}
@@ -314,7 +313,7 @@ una cantidad de fotones despreciables en los detectores
 alejados de las mismas.  
 Esto hace que se pierda una gran cantidad de información, 
 aún incrementando la cantidad de fuentes utilizadas.   
-Esto nos motivó a concebir un método novedoso 
+Esto nos motivó a concebir un método innovador  
 con el que podemos evitar el desperdicio de esfuerzos computacionales. 
 En esta Tesis introducimos el método de Fuentes Múltiples Superpuestas (FMS), que consiste en la utilización de ``fuentes generalizadas''. Estas fuentes representan una o múltiples fuentes láser activadas con ciertos retrasos temporales. 
 Esto conforma un único problema directo en el cual 
@@ -350,7 +349,7 @@ con
   \beta_{k,i}(\theta)& = & \frac{|\theta-\theta_{k,i}|}{\sigma_{\theta}},
 \label{eq:RTEsources2beta}
 \end{eqnarray}
- representa el comportamiento ángular de la radiación para cada láser $(k,i)$, donde $0\leq \theta_{k,i} < 2\pi$  
+ representa el comportamiento angular de la radiación para cada láser $(k,i)$, donde $0\leq \theta_{k,i} < 2\pi$  
 es el ángulo de la dirección $\hth_{k,i}$ en la que apunta 
 y $\sigma_{\theta}$ es su dispersión angular. 
 Similarmente $w(\gamma_{k,i})$, con 
@@ -375,7 +374,7 @@ total para todo el proceso de inversión, sin detrimiento de la precisión.
 
 \section{El método adjunto para el cálculo de gradientes}
 Para resolver el problema inverso es necesario considerar 
-las mediciones registradas por por $N_d\geq 1$ detectores, 
+las mediciones registradas por  $N_d\geq 1$ detectores, 
 donde el detector $j$-ésimo ($1\leq j\leq N_d$) ubicado en el punto 
 $\x_j \in \partial \Omega$, queda caracterizado por el operador 
 de medición $G_j=G_j[u](t)$ definido como 
@@ -418,7 +417,7 @@ donde, para un dado coeficiente de absorción $a$,
 \begin{equation}\label{ui_of_a}
   u_i = u_i[a] = u_i[a](\x,\hth,t)
 \end{equation}
-denota la solución $u=u_i$ de la ecuación~\eqref{eq:RTEt} con $q=q_i$. Para $N_q$ fuentes generalizadas $q_i$, y $N_d$ 
+denota la solución $u=u_i$ de la Ecuación~\eqref{eq:RTEt} con $q=q_i$. Para $N_q$ fuentes generalizadas $q_i$, y $N_d$ 
 detecciones $\tilde{G}_{j,i}$ para cada una de ellas, se obtiene un número 
 total de mediciones $N_q \times N_d$. Los términos 
 de la función objetivo $g_i$ están dados por la funcional 
@@ -514,7 +513,7 @@ y definiendo $\mathcal{G}[a;\delta a] \equiv \frac{d (g_i\circ u_i)}{da}[a;\delt
 \end{split}
 \label{eq:AdjointMEthod2}
 \end{equation}
-En vista de la ecuación~\eqref{eq:AdjointMEthod2}, 
+En vista de la Ecuación~\eqref{eq:AdjointMEthod2}, 
 los gradientes~\eqref{eq:Gradsumq} necesarios para la estrategia 
 de minimización en un contexto discreto podrían generarse 
 evaluando y sustituyendo la derivada 
@@ -600,12 +599,12 @@ la ecuación
 \label{eq:RRTEdet5}
 \end{equation}
 eligiendo una función $\lambda_i$ apropiada, 
-buscamos sustraer este término en la ec.~\eqref{eq:AdjointMEthod2} 
+buscamos sustraer este término en la Ec.~\eqref{eq:AdjointMEthod2} 
 de forma tal de eliminar el término problemático $\frac{\partial u_i}{\partial a}[a;\delta a]$.
 
 Para elegir la función $\lambda_i$ que cumpla la cancelación deseada, 
 utilizamos integración por partes para expresar el segundo 
-sumando en la ec.~\eqref{eq:RRTEdet5} como una integral del producto 
+sumando en la Ec.~\eqref{eq:RRTEdet5} como una integral del producto 
 de dos funciones, una de las cuales es el término $\frac{\partial u_i}{\partial a}$. 
 La integración por partes de este segundo sumando da como resultado 
 la suma de una integral ``volumétrica'' $\mathcal{A}$ 
@@ -735,7 +734,7 @@ Dado que el término $\mathcal{C}-\mathcal{G}=0$ involucra dos integrales
 en $\hth\cdot \hnu >0$, buscamos llevar la integral $\mathcal{C}_-$ en $\hth\cdot \hnu <0$
 al dominio $\hth\cdot \hnu>0$ mediante el cambio de variable $\hth_r=\R \hth$, 
 siendo $\R$ la matriz de reflexión definida en la Sección~\ref{sec:ETR}, y 
-donde, dado que para la matriz de reflexión $\R=\R^{-1}$, vale qué $\hth=\R\hth_r$:
+donde, dado que para la matriz de reflexión $\R=\R^{-1}$, vale que $\hth=\R\hth_r$:
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -746,8 +745,8 @@ donde, dado que para la matriz de reflexión $\R=\R^{-1}$, vale qué $\hth=\R\ht
 \end{split}
 \label{eq:C2m2}
 \end{equation}
-sustituyendo la variable muda $\hth_r$ por $\hth$ y usando nuevamente qué $\hth_r=\R \hth$ 
-y qué $f(\R \hth \cdot \hnu)=f(\hth \cdot \hnu)$:
+sustituyendo la variable muda $\hth_r$ por $\hth$ y usando nuevamente que $\hth_r=\R \hth$ 
+y que $f(\R \hth \cdot \hnu)=f(\hth \cdot \hnu)$:
 \begin{equation}
 \begin{split}
 \begin{aligned}
@@ -824,7 +823,7 @@ se expresa cómo
 Este procedimiento será validado comparando 
 el gradiente funcional con la derivada funcional obtenida por diferencias finitas. 
 
-Nuestra derivación del problema adjunto es independiente de otras, 
+Nuestra derivación del problema adjunto es original, 
 y a saber de los autores, no se ha reportado en la bibliografía ninguna que incluya las condiciones de borde de Fresnel.  
 Sólo existe una interpretación física al 
 problema~\eqref{eq:AdjointProblem} para el caso de condiciones 
@@ -975,14 +974,14 @@ para todas las componentes $(\ell_1,\ell_2)$ del gradiente funcional requiere
 únicamente la resolución de un problema directo de transporte, y de 
 su correspondiente problema adjunto para cada fuente  generalizada $q=q_i$. 
 En cambio, el método de diferencias finitas hace uso de la Ecuación~\eqref{eq:ObjFD}, que demanda la resolución de 
-un número mucho más grande de problemas directos. En este último caso  deben evaluarse $(N_x+1) \times (N_y+1)$ problemas de transporte (uno por cada perturbación del coeficiente $a(\x)$ en el dominio discretizado). En el ejemplo que estamos analizando en esta sección $N_x=N_y=200$ por lo cual 
+un número mucho más grande de problemas directos. En este último caso  deben evaluarse $(N_x+1) \times (N_y+1)$ problemas de transporte (uno por cada perturbación del coeficiente $a(\x)$ en el dominio discretizado). En el ejemplo que estamos analizando en esta sección, $N_x=N_y=200$, por lo cual 
 el método adjunto reduce el tiempo computacional 
 en un factor $40401$.
 Cabe mencionar también que el método adjunto requiere el almacenamiento 
 en memoria de las soluciones completas de los problemas directos y adjunto de transporte 
 para varios pasos temporales~\eqref{eq:FDwin22}. 
 El algoritmo paralelo propuesto en esta Tesis es apropiado para este problema, ya que no solo permite 
-reducir el tiempo computacional, si no que también distribuye los requerimientos de memoria en los diferentes nodos. 
+reducir el tiempo computacional, sino que también distribuye los requerimientos de memoria en los diferentes nodos. 
  
 Como ilustración, en la Figura~\ref{fig:gradient} se muestra 
 el gradiente completo $\nabla_a g(\x_{\ell_1,\ell_2})$ para 
@@ -1058,7 +1057,7 @@ se introducen diversas fuentes pulsadas que se encienden en distintos tiempos.
 Mostramos la resolución de este tipo de problemas, ya que constituye 
 una simulación típica utilizada en la estrategia FMS. 
 En este ejemplo se inyecta radiación en la dirección normal a 
-la superficie por cuatro láseres ubicados en el centro de las caras. 
+la superficie desde cuatro láseres ubicados en el centro de las caras. 
 Cada uno de estos pulsos tiene una duración de $60$ ps, 
 y se encienden con una separación temporal de $\tau=200$ps. 
 El orden de encendido es: primero la fuente ubicada en $y_{\text{min}}$, seguida de la fuente 
@@ -1114,23 +1113,23 @@ donde la información de cada fuente está desacoplada del resto.
 \section{Algoritmo para la resolución de problemas inversos}
 \label{sec:inversesolv}
 
-Como se indicó anteriormente, proponemos en esta Tesis para la utilización de un algoritmo novedoso para el tratamiento de  
+Como se indicó anteriormente, proponemos en esta Tesis la utilización de un algoritmo novedoso para el tratamiento de  
 problemas inversos. Esta estrategia se basa en el uso 
-de multiples fuentes escalonadas en el tiempo (FMS), 
+de múltiples fuentes escalonadas en el tiempo (FMS), 
 en lugar de la estrategia de barrido (MB) que subyace 
 en los métodos tradicionalmente presentados en la literatura. 
 En estos métodos previos,  por cada fuente láser deben realizarse simulaciones separadas para el par de problemas directo--adjunto, y luego combinar los resultados para obtener el gradiente utilizado en el método de minimización.
  Por el contrario, en el método FMS que proponemos en nuestro trabajo,
 se construye la función objetivo utilizado una única fuente 
 generalizada que contiene a todas las fuentes láser, de forma tal 
-que se utiliza {\em una única simulacion del par directo--adjunto}. Como se demuestra en la sección~\ref{sec:inverseres} 
+que se utiliza {\em una única simulacion del par directo--adjunto}. Como se demuestra en la Sección~\ref{sec:inverseres} 
 (de manera cualitativa en las Figuras~\ref{fig:itdet} y~\ref{fig:ithead} 
 y de forma cuantitativa en las Figuras~\ref{fig:reconst} y~\ref{fig:rechead}), nuestro método  
 reduce los tiempos de cómputo de manera significativa 
 (\eg en un factor de seis), sin que se 
 produzca ningún deterioro en la calidad de la imagen obtenida. 
 
-Resolvemos los problemas inversos basandonos en el método 
+Resolvemos los problemas inversos basándonos en el método 
 iterativo cuasi--Newton de descenso de gradiente lm--BFGS. 
 En detalle, este método busca el coeficiente de absorción que minimiza la Ec.~\eqref{eq:FObjpr}  
 sujeto a las restricciones $a^l(\x) \leq a(\x) \leq a^u(\x) ~\forall \x$, o sea, buscamos 
@@ -1145,11 +1144,11 @@ a(\x)=\text{argmin}_{a^l \leq \widetilde a(\x) \leq a^u} \Lambda[a].
 \end{equation}
 Las restricciones de los valores admisibles de la función 
 $\widetilde a(\x)$ es un conocimiento previo dado por las  propiedades de absorción generales del medio considerado. Una propiedad física que siempre debe cumplirse es que   
-$a^l(\x)\ge 0$. Información adicional adquirida por 
-técnicas de imagenes 
-puede incorporarse para reducir el espacio de soluciones admisibles. 
+$a^l(\x)\ge 0$. 
+Puede incorporarse información adicional adquirida por 
+técnicas de imágenes para reducir aún más el espacio de soluciones admisibles. 
 
-El algoritmo para la resolución del problema inverso~\ref{algfcinv},
+El algoritmo para la resolución del problema inverso~(Alg.~\ref{algfcinv}),
 procede de la siguiente manera. A partir de una estimación inicial $a^0(\x)$ para el
 coeficiente de absorción y utilizando las lecturas de los detectores experimentales
 $\widetilde{G}_{j,i}$, con $j=1, \ldots,N_d$ y $i=1,\ldots,N_q$, se resuelven
@@ -1189,7 +1188,7 @@ de la función objetivo esté por encima de dicho criterio de convergencia.
 \label{sec:inverseres}
 En esta sección demostraremos las notables 
 ventajas que se obtienen utilizando nuestros métodos 
-aplicandolos a la solución de dos problemas de sumo 
+aplicándolos a la solución de dos problemas de sumo 
 interés en tomografía óptica y diagnostico médico: 
 1) Imagen de tejidos cancerosos en un cuello humano; 
 2) Respuesta hemodinámica en un modelo de cabeza humana.
@@ -1197,7 +1196,8 @@ En ambos, los problemas inversos de tomografía óptica que consideramos
 conciernen configuraciones en las cuales se buscan inclusiones 
 sobre un tejido de ``fondo'' que se asume conocido. 
 Estas inclusiones están caracterizadas por un índice 
-de absorción que la del tejido que la rodea. Los excesos en la absorción son originados 
+de absorción diferente al del tejido que la rodea. 
+Los excesos en la absorción son originados 
 por el aumento de la hemoglobina oxigenada. 
 Este aumento se puede producir por la presencia de un tumor (angiogénesis tumoral) en el tejido 
 (de gran importancia en diagnósticos médicos~\cite{Althobaiti2017,Guven2003,Zhu2005,Zhu2010,Fujii2016b}).
@@ -1229,7 +1229,7 @@ es el coeficiente de absorción obtenido por el algoritmo~\ref{algfcinv}.
 
 El primer caso de prueba concierne a la aplicación potencial 
 de la técnica de tomografía óptica en el diagnóstico 
-de pacientes para los cuales se dispone de imagenes por resonancia magnética (MRI)
+de pacientes para los cuales se dispone de imágenes por resonancia magnética (MRI)
 del cuello (Fig.~\ref{fig:mriim}). 
 Describimos una situación teniendo 
 en mente la posible evolución de la metástasis 
@@ -1237,7 +1237,7 @@ en una región específica del cuerpo (el cuello), tiempo después
 de haber adquirido la imagen MRI. Similarmente, el procedimiento 
 podría utilizarse para seguir la evolución del tratamiento de un tumor en esta región. 
 La portabilidad y el bajo costo de los sistema de tomografía óptica 
-hace que estos dispositivos sean mucho mas accesibles para el diagnóstico 
+hacen que estos dispositivos sean mucho mas accesibles para el diagnóstico 
 que las imágenes obtenidas por sistemas MRI, para monitorear 
 la evolución del tratamiento y el avance de un tumor de forma regular. 
 
@@ -1278,8 +1278,8 @@ Médula espinal & ~$0.17$ & ~ & $882$ ~ &$0.9$  ~ &  $1.4$ \\
 \end{center}
 \end{table}
 Para simplificar el modelo, tomamos el coeficiente de refracción 
-de la traquea cómo $n_{\Omega}=1.4$. Esto evita las dificultades 
-encontradas para el modelado de la interfase entre la traquea y el tejido blando. Para mayor precisión se requiere tener en cuenta la reflexión 
+de la tráquea cómo $n_{\Omega}=1.4$. Esto evita las dificultades 
+encontradas para el modelado de la interfase entre la tráquea y el tejido blando. Para mayor precisión se requiere tener en cuenta la reflexión 
 de Fresnel en esta interfase geométricamente compleja. Otras simplificaciones 
 adicionales utilizadas consistieron en no considerar los vasos sanguíneos, y en la geometría del cuello, que se asumió cuadrado.
 
@@ -1287,7 +1287,7 @@ Restringimos la presencia de las inclusiones (tumores)
 a regiones levemente alejadas de la superficie del cuello.  Este procedimiento permite una mejor 
 convergencia en el problema de reconstrucción, y previene 
 la amplificación de los errores numéricos, originados por la existencia 
-de las capa límite~\cite{Gaggioli2021} discutidas en la Sección~\ref{sec:blayer}. En consecuencia fijamos el valor  $a(\x)=a^0(\x)$ 
+de las capa límite~\cite{Gaggioli2021} discutidas en la Sección~\ref{sec:blayer}. En consecuencia, fijamos el valor  $a(\x)=a^0(\x)$ 
 al valor del fondo en las proximidades de los bordes, para puntos a una distancia menor a $0.5$ cm.
 El mínimo $a^l$ para el coeficiente de absorción vendrá dado 
 por los valores del ``fondo'' del tejido analizado (que se asume conocido \textit{a priori}). 
@@ -1312,18 +1312,19 @@ a la izquierda y derecha, respectivamente.
   \includegraphics[width=0.48\linewidth]{figuras/neckmss_scatt.png} 
   \caption{Izquierda: coeficiente de absorción 
   generado a partir de la imagen~\ref{fig:mriim}, el cual fue utilizado como el coeficiente 
-  inicial $a^0(\x)$ en las reconstrucciones del coeficiente de absorción para éste modelo. 
+  inicial $a^0(\x)$ en las reconstrucciones del coeficiente de absorción para este modelo. 
   Derecha: coeficiente de dispersión para el modelo de cuello humano.
   Los coeficientes de absorción y dispersión 
   para los distintos órganos fueron tomados de las referencias\cite{Bashkatov2011,Dehaes2011,Fujii2016}. } 
  \label{fig:mriimc}
 \end{figure}
 
-En esta demostración, para el método FMS empleamos una única fuente generalizada 
-la cual contiene multiples fuentes láser. Las diferentes fuentes láser 
+En esta simulación, para el método FMS empleamos una única fuente generalizada, 
+la cual contiene múltiples fuentes láser. Las diferentes fuentes láser 
 contenidas en esta única fuente generalizada iluminan el borde del dominio $\partial \Omega$ 
 en la dirección normal al mismo, inyectando la radiación que atraviesa 
-el medio participante, sensándolo, y luego es recolectada por los detectores. 
+el medio participante, sensándolo. Luego, la radiación es recolectada 
+por los detectores. 
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.48\linewidth]{figuras/neck_srcs.png}
@@ -1336,10 +1337,10 @@ el medio participante, sensándolo, y luego es recolectada por los detectores.
 La configuración que elegimos para la activación de las fuentes es tal 
 que se activan de manera simultánea una fuente por cara, 
 como se indica en la Figura~\ref{fig:necksrcs}. 
-Utilizamos un retraso temporal de $300$ps para fuentes vecinas ubicadas 
-en una misma cara. Emplamos la notación $\x_{k,1}$ para 
+Utilizamos un retraso temporal de $300$ ps para fuentes vecinas ubicadas 
+en una misma cara. Empleamos la notación $\x_{k,1}$ para 
 indicar la posición de cada fuente láser activada a tiempo $\tau_{k,1}$ ($k=1,\ldots,16$).
-En la Tabla~\ref{tab:necksrc} se muestran los tiempos de activación para cada fuentes 
+En la Tabla~\ref{tab:necksrc} se muestran los tiempos de activación para cada fuente 
 láser en el método FMS (ver Ecuaciones~\eqref{eq:RTEsources}~a~\eqref{eq:RTEsources2gamma}).
 \begin{table}[h!]
 \caption{Configuración de activación FMS: modelo de cuello humano}
@@ -1373,13 +1374,13 @@ láser en el método FMS (ver Ecuaciones~\eqref{eq:RTEsources}~a~\eqref{eq:RTEso
   para un número variable de detectores (arriba) y de fuentes láser (abajo), para los métodos 
   MB y FMS. 
    A la izquierda: 
-  error en la norma $L^2$ ec.~\eqref{eq:errl2} para 100 iteraciones del método MB. 
-  Derecha:error en la norma $L^2$ ec.~\eqref{eq:errl2} para 100 iteraciones del método FMS. 
+  error en la norma $L^2$ Ec.~\eqref{eq:errl2} para 100 iteraciones del método MB. 
+  Derecha:error en la norma $L^2$ Ec.~\eqref{eq:errl2} para 100 iteraciones del método FMS. 
   Para las simulaciones en el panel superior se utilizaron 16 fuentes láser. Para 
   las simulaciones en el panel inferior, se utilizaron 36 detectores.}
  \label{fig:itdet}
 \end{figure*}
-El diseño de esta configuración logra que se enciendan de manera simultánea
+El diseño de esta configuración determina que se enciendan de manera simultánea
 aquellas fuentes que están más alejadas unas de otras. Debido 
 al decaimiento exponencial del flujo de fotones, sólo los detectores 
 ubicados en la cercanía de una fuente registraran información de la misma. 
@@ -1437,8 +1438,8 @@ En resumen, nuestras simulaciones demuestran la importancia de tener una cantida
 de fuentes suficiente como para sensar el medio en las distintas regiones de interés. 
 Dado que ambos métodos emplean idénticas fuentes, 
 la cantidad total de fotones emitidos es la misma. Para una correcta 
-resolución del problema inverso se requiere un número suficiente 
-de fuentes, pero no es relevante si el problema directo 
+resolución del problema inverso se requiere de un número suficiente 
+de fuentes, pero no tiene relevancia si en el problema directo 
 se asumen fuentes independientes, o la superposición 
 de las mismas. El método MB requiere la resolución del problema 
 directo--adjunto por cada fuente, lo que resulta sumamente costoso 
@@ -1470,7 +1471,7 @@ despreciables, la ecuación de difusión no es físicamente precisa para modelar
 el transporte de fotones en esta región, por lo cual debe emplearse la ecuación de transporte.
 
 En la referencia~\cite{Prieto2017} se utilizan 16 fuentes, 4 por cara, para 
-un modelo de cabeza similar. En nuestros cálculos empleamos 16 fuentes y 32 detectores, 
+un modelo similar de cabeza. En nuestros cálculos empleamos 16 fuentes y 32 detectores, 
 con 8 detectores por cara. 
 Reconstruimos el coeficiente de absorción utilizando el método MB 
 con 50 iteraciones. Luego repetimos el cálculo utilizando el método 

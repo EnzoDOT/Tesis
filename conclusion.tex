@@ -33,7 +33,7 @@ Hemos abordado este problema combinando tres estrategias principales,
 desarrolladas a lo largo de nuestro trabajo:
 
 \begin{enumerate}
-\item El uso de un método espectral novedoso de alto orden
+\item El uso de un método espectral innovador de alto orden
 para el tratamiento del problema directo, que permite resolver la 
 ecuación de transporte con gran precisión y con reducido esfuerzo 
 computacional. La novedad del método se basa en la incorporación 
@@ -133,7 +133,7 @@ soluciones plagadas de oscilaciones espurias).
 
 Dedicamos una sección para explicar la 
 estrategia de paralelización propuesta, demostrando sus ventajas.
-Si bien los problemas inversos se resuelven mayormente basandose 
+Si bien los problemas inversos se resuelven mayormente basándose 
 en arquitecturas de GPU~\cite{Doulgerakis2017}, estos métodos 
 utilizan la aproximación de difusión, que sólo puede asumirse 
 válida en escenarios particulares. 
@@ -147,6 +147,7 @@ En los ejemplos que presentamos, obtuvimos una escalabilidad de
 140\% empleando 256 procesadores. Logramos resolver, por ejemplo, 
 un problema modelo que requiere 2 días de cálculo, en menos de 30 minutos, 
 utilizando 64 procesadores.
+
 Una reducción adicional significativa se obtuvo mediante el uso 
 del método de múltiples fuentes, desarrollado en nuestra investigación.
 Con el mismo, podemos lograr factores de aceleración cercanos a la 
@@ -206,8 +207,8 @@ Si bien en esta Tesis el desarrollo de algoritmos
 para la resolución de la ecuación de transporte en forma eficiente 
 ha tenido un enfoque principal en el campo de tomografía óptica, 
 nuestros algoritmos pueden ser aplicados, con alto impacto, 
-en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010, Thynell1998,Duderstadt1979,Qin2015,Dymond1997,Chandrasekhar1960,Zhu2005,Zhu2010,
-Vassiliev2010,Bedford2019,Larsen2006,Sanchez1982,Anli2006,Mishchenko1999,Prasher2003}
+en otras áreas de la ciencia y la tecnología de gran interés~\cite{Howell2010, Thynell1998,Duderstadt1979,Qin2015,Dymond1997,Chandrasekhar1960,
+Zhu2005,Zhu2010,Vassiliev2010,Bedford2019,Larsen2006, Sanchez1982, Anli2006,Mishchenko1999, Prasher2003}
 
  
 \pagestyle{empty}
