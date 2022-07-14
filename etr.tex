@@ -313,7 +313,7 @@ Ecuación~\eqref{eq:RTE} en el dominio de la velocidad resulta
  + \hth_m
 \cdot  \nabla u_m + (a+b) u_m
 -b\sum_{m'=1}^M w_{m'}
-p_{m,m'} \, u_{m'}+\mathcal{O}(e^{-hM}) =0, \; \; m=1,2,\ldots,M.
+\eta_{m,m'} \, u_{m'}+\mathcal{O}(e^{-hM}) =0, \; \; m=1,2,\ldots,M.
 \label{eq:RTEdom}
 \end{equation*}
 siendo $h$ una constante y donde el término exponencial expresa el tipo de convergencia.
@@ -333,7 +333,7 @@ u_m^{k+1} =  u_m^k + c\Delta t \sum_{\ell=0}^3 \chi_{\ell} \mathcal{L} ( u^{k-\e
 \end{equation}
 donde
 \begin{equation}
-\mathcal{L} ( u_m^k) = b\sum_{m'=1}^{M} w_{m'} p_{m,m'} u_{m'}^k-(b+a)u_m^k-\hth_m \cdot \nabla u_m^k \notag
+\mathcal{L} ( u_m^k) = b\sum_{m'=1}^{M} w_{m'} \eta_{m,m'} u_{m'}^k-(b+a)u_m^k-\hth_m \cdot \nabla u_m^k \notag
 \label{eq:RTEAB4L}
 \end{equation}
 con los coeficientes $\chi_0=55/44$, 
@@ -1494,7 +1494,7 @@ $\mu_a=q=1$ fijo. En esta figura,
 $\xi=\xi_{\text{min}}\simeq 10^{-6}$, para los parámetros 
 $N=200$, $M=20$ y $-v_{\text{min}}=v_{\text{max}}=20$. 
 En general, en problemas difusivos 
-(donde $\mu_s>>\mu_a$ y $\mu_s>>q$ y $\mu_s>>|x_{\text{max}}-x_{\text{min}}|$) 
+(donde $\mu_s>>\mu_a$, $\mu_su>>q$ y $\mu_s^{-1}<<|x_{\text{max}}-x_{\text{min}}|$) 
 las funciones tienden a ser mas regulares en la variable $\xi$~\cite{Larsen1987}. 
 Siendo la dispersión el fenómeno dominante, 
 la solución resulta fuertemente ``promediada'' entre las direcciones.  
