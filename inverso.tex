@@ -61,20 +61,20 @@ tratados en esta Tesis.
 Grafico esquemático de los problemas directo e inverso.}
  \label{fig:esquemainv}
 \end{figure}
-Para la resolución del problema inverso, utilizamos el esquema \textit{MOBIR}, 
+Para la resolución del problema inverso, utilizamos el esquema \textit{MOBIIR}, 
 presentado en la sección siguiente. 
 
 \pagebreak
 
-\section{El esquma \textit{MOBIR}}
+\section{El esquma \textit{MOBIIR}}
 
 \begin{wrapfigure}{l}{0.48\textwidth}
   \includegraphics[width=0.48\textwidth]{figuras/mobir.eps}\\
-  \caption{Esquema  MOBIR.}
+  \caption{Esquema  MOBIIR.}
  \label{fig:mobir}
 \end{wrapfigure}
 
-En este trabajo desarrollamos un algoritmo tipo MOBIR~\cite{Hielscher1999,Kim2010} (del inglés, {\em Model Based Iterative Image  
+En este trabajo desarrollamos un algoritmo tipo MOBIIR~\cite{Hielscher1999,Kim2010} (del inglés, {\em Model Based Iterative Image  
 Reconstruction}). Este esquema se basa en un modelo físico, y un método de minimización 
 iterativo para la reconstrucción del parámetro deseado en el problema inverso. 
 Como se muestra en la Figura~\ref{fig:mobir}, en este esquema, el modelo directo es utilizado para obtener los observables simulados. Luego se evalúa el error entre los datos experimentales y los simulados por medio de la función objetivo. A continuación, utilizando un método de minimización, se actualiza el coeficiente $a^{i+1}(\x)$ a 
